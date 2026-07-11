@@ -8,9 +8,9 @@ export const anggotaData = [
     avatar: 'https://ui-avatars.com/api/?name=Hamdi+Gustiawan&background=14532d&color=c9a227&size=200&bold=true',
     bio: 'Memimpin koordinasi seluruh program kerja KKN UIN Suska Riau 2026 di Kelurahan Tanjung Gading agar berjalan selaras dan berdampak nyata.',
     socials: {
-      instagram: 'https://instagram.com/dummy_account',
+      instagram: 'https://www.instagram.com/ohmyhamd?igsh=OG9tenM3Mm92M2dv',
       linkedin: 'https://linkedin.com/in/dummy_account',
-      email: 'mailto:hamdi.gustiawan@example.com',
+      email: 'hamdigustiawan00@gmail.com ',
     }
   },
   {
@@ -64,9 +64,9 @@ export const anggotaData = [
     avatar: 'https://ui-avatars.com/api/?name=Rifky+Naufal+Athaya&background=14532d&color=c9a227&size=200&bold=true',
     bio: 'Menjembatani komunikasi antara mahasiswa KKN dengan aparatur kelurahan, tokoh pemuda, dan tokoh masyarakat Tanjung Gading.',
     socials: {
-      instagram: 'https://instagram.com/dummy_account',
-      linkedin: 'https://linkedin.com/in/dummy_account',
-      email: 'mailto:rifky.naufal@example.com',
+      instagram: 'https://www.instagram.com/rifkypli?igsh=d3IwcXlpczN5Z3Rx',
+      linkedin: 'www.linkedin.com/in/rifky-naufal-athaya-868990378',
+      email: 'mailto:rifkynaufalat471@gmail.com',
     }
   },
   {
