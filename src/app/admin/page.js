@@ -180,7 +180,7 @@ export default function AdminPage() {
     if (file) {
       // 2 MB limit (2097152 bytes)
       if (file.size > 2097152) {
-        alert('Ukuran foto terlalu besar! Maksimal ukuran foto adalah 2 MB agar menghemat kuota penyimpanan Vercel Blob Anda. Silakan kompres foto Anda terlebih dahulu.');
+        alert('Ukuran foto terlalu besar! Maksimal ukuran foto adalah 2 MB agar menghemat kuota penyimpanan Vercel Blob Anda. Silakan kompres foto Anda terlebih dahulu di situs gratis seperti https://tinypng.com');
         e.target.value = ''; // Reset file input
         return;
       }
