@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { Calendar, Tag, X, ChevronLeft, ChevronRight, Image as ImageIcon } from 'lucide-react';
+import { Calendar, Tag, X, ChevronLeft, ChevronRight, Image as ImageIcon, Loader2 } from 'lucide-react';
 import BackgroundDecor from './BackgroundDecor';
 
 const Galeri = () => {
@@ -10,74 +10,27 @@ const Galeri = () => {
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const shouldReduce = useReducedMotion();
 
+  const [photos, setPhotos] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const categories = ['Semua', 'Edukasi', 'Sosialisasi', 'Gotong Royong', 'Sosial & Budaya'];
 
-  const photos = [
-    {
-      id: 1,
-      title: 'Sosialisasi Administrasi Kelurahan Digital',
-      category: 'Sosialisasi',
-      date: '15 Juli 2026',
-      desc: 'Pemaparan aplikasi pengelolaan arsip digital kepada perangkat Kelurahan Tanjung Gading guna mempermudah pelayanan warga.',
-      url: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&h=600&q=80',
-    },
-    {
-      id: 2,
-      title: 'Bimbingan Belajar Ceria Sekolah Dasar',
-      category: 'Edukasi',
-      date: '17 Juli 2026',
-      desc: 'Membimbing adik-adik tingkat SD belajar matematika dengan metode permainan kreatif di posko KKN.',
-      url: 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=800&h=600&q=80',
-    },
-    {
-      id: 3,
-      title: 'Gotong Royong Kebersihan Lingkungan Dusun II',
-      category: 'Gotong Royong',
-      date: '19 Juli 2026',
-      desc: 'Bahu-membahu bersama pemuda setempat membersihkan parit saluran air dan memasang tempat sampah pilah.',
-      url: 'https://images.unsplash.com/photo-1544027993-37dbfe43562a?auto=format&fit=crop&w=800&h=600&q=80',
-    },
-    {
-      id: 4,
-      title: 'Mengajar Mengaji di TPA Masjid Al-Ikhlas',
-      category: 'Edukasi',
-      date: '20 Juli 2026',
-      desc: 'Pendampingan belajar tajwid dan membaca Iqra untuk anak-anak Kelurahan Tanjung Gading seusai ibadah shalat ashar.',
-      url: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&h=600&q=80',
-    },
-    {
-      id: 5,
-      title: 'Pelatihan Pemasaran Digital bagi UMKM Sawit',
-      category: 'Sosialisasi',
-      date: '22 Juli 2026',
-      desc: 'Edukasi mengenai cara pengemasan menarik dan pemasaran lewat platform e-commerce bagi ibu-ibu pengrajin minyak sapu lidi.',
-      url: 'https://images.unsplash.com/photo-1431540015161-0bf868a2d407?auto=format&fit=crop&w=800&h=600&q=80',
-    },
-    {
-      id: 6,
-      title: 'Pemasangan Plang Batas Wilayah Dusun',
-      category: 'Gotong Royong',
-      date: '24 Juli 2026',
-      desc: 'Pemasangan plang nama jalan dan batas dusun hasil karya mahasiswa teknik sipil KKN di perbatasan kelurahan.',
-      url: 'https://images.unsplash.com/photo-1590402421685-65d12a64564c?auto=format&fit=crop&w=800&h=600&q=80',
-    },
-    {
-      id: 7,
-      title: 'Malam Keakraban dengan Warga & Tokoh Masyarakat',
-      category: 'Sosial & Budaya',
-      date: '26 Juli 2026',
-      desc: 'Acara ramah tamah bersama kepala lurah, BPD, dan tokoh adat yang diisi dengan penampilan seni melayu dari anak-anak kelurahan.',
-      url: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=800&h=600&q=80',
-    },
-    {
-      id: 8,
-      title: 'Eksplorasi Perkebunan Kelapa Sawit Pasir Penyu',
-      category: 'Sosial & Budaya',
-      date: '28 Juli 2026',
-      desc: 'Dokumentasi potensi alam dan geografi Kelurahan Tanjung Gading yang kaya akan perkebunan kelapa sawit produktif.',
-      url: 'https://images.unsplash.com/photo-1596436889106-be35e843f974?auto=format&fit=crop&w=800&h=600&q=80',
-    }
-  ];
+  useEffect(() => {
+    const fetchGaleri = async () => {
+      try {
+        const res = await fetch('/api/galeri');
+        if (res.ok) {
+          const data = await res.json();
+          setPhotos(data);
+        }
+      } catch (e) {
+        console.error("Gagal memuat galeri foto", e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchGaleri();
+  }, []);
 
   const filteredPhotos = photos.filter(
     (photo) => activeCategory === 'Semua' || photo.category === activeCategory
@@ -175,60 +128,71 @@ const Galeri = () => {
           </div>
         </div>
 
-        {/* Bento Grid with layout transition & stagger reveal */}
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-          layout 
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:auto-rows-[228px] relative z-10"
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredPhotos.map((photo, index) => (
-              <motion.div
-                key={photo.id}
-                variants={itemVariants}
-                layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.4 }}
-                onClick={() => openLightbox(index)}
-                className={`bg-white border border-brand-gold/15 rounded-[32px] overflow-hidden cursor-pointer relative flex flex-col group shadow-sm hover:border-brand-gold/30 ${getBentoClasses(index)}`}
-              >
-                {/* Image (with slight zoom-in on hover) */}
-                <img
-                  src={photo.url}
-                  alt={photo.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none pointer-events-none"
-                />
-                
-                {/* Overlay description on hover (with subtle backdrop blur) */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/75 to-transparent opacity-0 group-hover:opacity-100 backdrop-blur-[2px] transition-all duration-300 flex flex-col justify-end p-8">
-                  <span className="font-sans text-[10px] font-bold text-brand-gold uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
-                    <Tag size={10} className="text-brand-gold" />
-                    {photo.category}
-                  </span>
-                  <h4 className="font-serif font-bold text-base md:text-lg text-white leading-tight mb-2">
-                    {photo.title}
-                  </h4>
-                  <p className="font-sans text-xs md:text-sm text-white/80 leading-relaxed mb-4 line-clamp-3">
-                    {photo.desc}
-                  </p>
-                  <div className="flex items-center gap-1.5 text-[10px] text-white/50 font-bold uppercase tracking-wider">
-                    <Calendar size={12} className="text-white/50" />
-                    {photo.date}
+        {loading ? (
+          <div className="py-20 flex flex-col items-center justify-center">
+            <Loader2 className="w-10 h-10 text-brand-gold animate-spin mb-4" />
+            <p className="font-sans text-brand-green-dark/65 text-sm">Memuat galeri foto...</p>
+          </div>
+        ) : filteredPhotos.length === 0 ? (
+          <div className="py-20 text-center bg-brand-cream/5 rounded-3xl border border-brand-gold/10 max-w-2xl mx-auto">
+            <p className="font-sans text-sm text-brand-green-dark/60">Tidak ada foto kegiatan untuk kategori ini.</p>
+          </div>
+        ) : (
+          /* Bento Grid with layout transition & stagger reveal */
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            layout 
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:auto-rows-[228px] relative z-10"
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredPhotos.map((photo, index) => (
+                <motion.div
+                  key={photo.id}
+                  variants={itemVariants}
+                  layout
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.4 }}
+                  onClick={() => openLightbox(index)}
+                  className={`bg-white border border-brand-gold/15 rounded-[32px] overflow-hidden cursor-pointer relative flex flex-col group shadow-sm hover:border-brand-gold/30 ${getBentoClasses(index)}`}
+                >
+                  {/* Image (with slight zoom-in on hover) */}
+                  <img
+                    src={photo.url}
+                    alt={photo.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none pointer-events-none"
+                  />
+                  
+                  {/* Overlay description on hover (with subtle backdrop blur) */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/75 to-transparent opacity-0 group-hover:opacity-100 backdrop-blur-[2px] transition-all duration-300 flex flex-col justify-end p-8">
+                    <span className="font-sans text-[10px] font-bold text-brand-gold uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
+                      <Tag size={10} className="text-brand-gold" />
+                      {photo.category}
+                    </span>
+                    <h4 className="font-serif font-bold text-base md:text-lg text-white leading-tight mb-2">
+                      {photo.title}
+                    </h4>
+                    <p className="font-sans text-xs md:text-sm text-white/80 leading-relaxed mb-4 line-clamp-3">
+                      {photo.desc}
+                    </p>
+                    <div className="flex items-center gap-1.5 text-[10px] text-white/50 font-bold uppercase tracking-wider">
+                      <Calendar size={12} className="text-white/50" />
+                      {photo.date}
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        )}
 
         {/* Lightbox Modal */}
         <AnimatePresence>
-          {lightboxIndex !== null && (
+          {lightboxIndex !== null && filteredPhotos[lightboxIndex] && (
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
