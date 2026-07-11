@@ -10,7 +10,7 @@ export const anggotaData = [
     socials: {
       instagram: 'https://www.instagram.com/ohmyhamd?igsh=OG9tenM3Mm92M2dv',
       linkedin: 'https://linkedin.com/in/dummy_account',
-      email: 'hamdigustiawan00@gmail.com ',
+      email: 'mailto:hamdigustiawan00@gmail.com ',
     }
   },
   {
