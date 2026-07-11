@@ -175,10 +175,15 @@ export default function AdminPage() {
     setProkerDesc('');
   };
 
-  // Galeri actions
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      // 2 MB limit (2097152 bytes)
+      if (file.size > 2097152) {
+        alert('Ukuran foto terlalu besar! Maksimal ukuran foto adalah 2 MB agar menghemat kuota penyimpanan Vercel Blob Anda. Silakan kompres foto Anda terlebih dahulu.');
+        e.target.value = ''; // Reset file input
+        return;
+      }
       setGaleriFile(file);
       setGaleriPreview(URL.createObjectURL(file));
     }
@@ -592,7 +597,7 @@ export default function AdminPage() {
                       <div className="flex flex-col items-center py-4">
                         <Upload className="w-8 h-8 text-brand-gold mb-2" />
                         <span className="font-sans text-xs font-bold text-brand-green-dark">Pilih / Drag Foto Kelompok</span>
-                        <span className="font-sans text-[9px] text-brand-green-dark/50 mt-1">Format JPG, PNG, WEBP (Maksimal 4MB)</span>
+                        <span className="font-sans text-[9px] text-brand-green-dark/50 mt-1">Format JPG, PNG, WEBP (Maksimal 2MB)</span>
                       </div>
                     )}
                   </div>
