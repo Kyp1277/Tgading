@@ -17,22 +17,22 @@ const Struktur = () => {
   // Division mappings (Coordinator + Staff)
   const divisions = [
     {
-      name: 'Divisi Humas & Kemitraan',
+      name: 'Divisi Humas',
       kordiv: anggotaData.find(m => m.id === 5), // Rifky
       staff: [anggotaData.find(m => m.id === 6)] // Wardi
     },
     {
-      name: 'Divisi Dokumentasi & Publikasi',
+      name: 'Divisi PDD',
       kordiv: anggotaData.find(m => m.id === 7), // Walfajri
       staff: [anggotaData.find(m => m.id === 8)] // Nadira
     },
     {
-      name: 'Divisi Pendidikan & Keagamaan',
+      name: 'Divisi Acara',
       kordiv: anggotaData.find(m => m.id === 9), // Anisa
       staff: [anggotaData.find(m => m.id === 10)] // Namira
     },
     {
-      name: 'Divisi Infrastruktur & Lingkungan',
+      name: 'Divisi Logistik',
       kordiv: anggotaData.find(m => m.id === 11), // Dian
       staff: [] // No staff
     }

@@ -14,10 +14,10 @@ const Anggota = () => {
   const filters = [
     'Semua',
     'BPH (Badan Pengurus Harian)',
-    'Divisi Humas & Kemitraan',
-    'Divisi Pendidikan & Keagamaan',
-    'Divisi Dokumentasi & Publikasi',
-    'Divisi Infrastruktur & Lingkungan',
+    'Divisi Humas',
+    'Divisi PDD',
+    'Divisi Acara',
+    'Divisi Logistik',
   ];
 
   const filteredMembers = anggotaData.filter((member) => {
