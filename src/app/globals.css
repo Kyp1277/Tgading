@@ -1,26 +1,118 @@
 @import "tailwindcss";
 
+@theme inline {
+  --color-brand-green-dark: #1b4332;
+  --color-brand-green: #14532d;
+  --color-brand-gold: #c9a227;
+  --color-brand-gold-dark: #96700f;
+  --color-brand-sand: #f8faf7;
+  --color-brand-cream: #f4f7f5;
+  
+  --font-sans: var(--font-inter), sans-serif;
+  --font-serif: var(--font-playfair), serif;
+}
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --foreground: #111e16;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+::-webkit-scrollbar-thumb {
+  background: #14532d;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c9a227;
+}
+
+/* Custom styles for waves and animations */
+.wave-divider {
+  display: block;
+  width: 100%;
+  height: 40px;
+  fill: #14532d;
+}
+
+/* Loop wave animation */
+@keyframes waveMove {
+  0% {
+    transform: translateX(0) translateZ(0) scaleY(1);
+  }
+  50% {
+    transform: translateX(-25%) translateZ(0) scaleY(0.85);
+  }
+  100% {
+    transform: translateX(-50%) translateZ(0) scaleY(1);
+  }
+}
+
+.animated-wave {
+  animation: waveMove 15s linear infinite;
+  transform-origin: center bottom;
+}
+
+.animated-wave-delayed {
+  animation: waveMove 20s linear infinite;
+  animation-delay: -5s;
+  transform-origin: center bottom;
+  opacity: 0.5;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 8s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+/* Paddle animation for Penyu */
+@keyframes paddleLeft {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-25deg); }
+}
+
+@keyframes paddleRight {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(25deg); }
+}
+
+.turtle-left-paddle {
+  transform-origin: 40px 45px;
+  animation: paddleLeft 1.2s ease-in-out infinite;
+}
+
+.turtle-right-paddle {
+  transform-origin: 60px 45px;
+  animation: paddleRight 1.2s ease-in-out infinite;
+}
+
+/* Dotted Grid Canvas Texture */
+.dotted-canvas {
+  background-image: radial-gradient(rgba(20, 83, 45, 0.08) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
 }
