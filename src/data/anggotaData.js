@@ -92,7 +92,7 @@ export const anggotaData = [
     avatar: 'https://ui-avatars.com/api/?name=Walfajri&background=14532d&color=c9a227&size=200&bold=true',
     bio: 'Mengonsep dokumentasi publikasi visual, memelihara website portfolio KKN, serta mempublikasikan progres pengabdian.',
     socials: {
-      instagram: 'https://instagram.com/dummy_account',
+      instagram: 'https://www.instagram.com/wlfjri_?igsh=MW1uaWRramI1aGJjbA==',
       linkedin: 'https://linkedin.com/in/dummy_account',
       email: 'mailto:walfajri@example.com',
     }
