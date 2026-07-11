@@ -16,7 +16,6 @@ const Anggota = () => {
     'BPH (Badan Pengurus Harian)',
     'Divisi Humas & Kemitraan',
     'Divisi Pendidikan & Keagamaan',
-    'Divisi UMKM & Ekonomi Kreatif',
     'Divisi Dokumentasi & Publikasi',
     'Divisi Infrastruktur & Lingkungan',
   ];
