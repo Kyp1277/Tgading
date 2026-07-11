@@ -92,9 +92,8 @@ const Anggota = () => {
           </div>
 
           {/* Filters Select */}
-          <div className="w-full lg:w-auto flex items-center gap-2 overflow-x-auto py-1 scrollbar-none">
-            <Filter size={14} className="text-brand-gold shrink-0 hidden md:block" />
-            <div className="flex gap-2">
+          <div className="w-full lg:w-auto overflow-x-auto lg:overflow-x-visible py-1 scrollbar-none">
+            <div className="flex gap-2 flex-nowrap lg:flex-wrap">
               {filters.map((filter) => {
                 const isSelected = activeFilter === filter;
                 return (
