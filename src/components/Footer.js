@@ -79,7 +79,7 @@ const Footer = ({ navigateTo }) => {
           </div>
           <div className="flex gap-4 mt-2">
             <a 
-              href="https://instagram.com/dummy_account" 
+              href="https://www.instagram.com/kkntanjunggading2026?igsh=ZmNjdWM1dmIzODBw" 
               target="_blank" 
               rel="noopener noreferrer"
               className="w-9 h-9 rounded-full border border-brand-gold/25 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/75 hover:text-brand-gold bg-white transition-all duration-300 hover:-translate-y-1 shadow-sm"
