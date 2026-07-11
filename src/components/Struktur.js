@@ -333,7 +333,7 @@ const Struktur = () => {
                     <Linkedin size={16} />
                   </a>
                   <a 
-                    href={selectedMember.socials.email}
+                    href={selectedMember.socials.email.startsWith('mailto:') ? selectedMember.socials.email.trim() : `mailto:${selectedMember.socials.email.trim()}`}
                     className="w-10 h-10 rounded-full border border-brand-gold/25 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream transition-all duration-300 shadow-sm"
                   >
                     <Mail size={16} />

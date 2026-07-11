@@ -188,7 +188,7 @@ const Anggota = () => {
                         <Linkedin size={14} />
                       </a>
                       <a
-                        href={member.socials.email}
+                        href={member.socials.email.startsWith('mailto:') ? member.socials.email.trim() : `mailto:${member.socials.email.trim()}`}
                         className="w-9 h-9 rounded-full border border-brand-gold/20 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream transition-all duration-300"
                       >
                         <Mail size={14} />
