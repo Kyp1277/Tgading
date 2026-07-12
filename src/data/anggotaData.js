@@ -54,7 +54,7 @@ export const anggotaData = [
     division: 'BPH (Badan Pengurus Harian)',
     major: 'Ilmu Al Qur\'an Dan Tafsir S1',
     avatar: 'https://ui-avatars.com/api/?name=Tasya+Salsabilla&background=14532d&color=c9a227&size=200&bold=true',
-    fotoStruktur: '/images/struktur/tasya.jpg',
+    fotoStruktur: '/images/struktur/bendahara.jpeg',
     fotoAnggota: '/images/anggota/tasya.jpg',
     bio: 'Mengelola keuangan kelompok, menyusun anggaran program kerja, serta memantau pengeluaran dana KKN agar transparan dan efisien.',
     socials: {
