@@ -16,12 +16,12 @@ const Struktur = () => {
   const bphGroups = [
     {
       name: 'Sekretaris',
-      image: '/images/struktur/sekretaris.jpg',
+      image: anggotaData.find(m => m.id === 2)?.fotoStruktur || '/images/struktur/sekretaris.jpg',
       members: anggotaData.filter(m => [2, 3].includes(m.id)) // Lisa Nopitasari & Nur Annisa
     },
     {
       name: 'Bendahara',
-      image: '/images/struktur/bendahara.jpg',
+      image: anggotaData.find(m => m.id === 4)?.fotoStruktur || '/images/struktur/bendahara.jpg',
       members: [anggotaData.find(m => m.id === 4)] // Tasya Salsabilla
     }
   ];
@@ -30,22 +30,22 @@ const Struktur = () => {
   const divisions = [
     {
       name: 'Divisi Humas',
-      image: '/images/struktur/divisi_humas.jpg',
+      image: anggotaData.find(m => m.division === 'Divisi Humas')?.fotoStruktur || '/images/struktur/divisi_humas.jpg',
       members: anggotaData.filter(m => m.division === 'Divisi Humas')
     },
     {
       name: 'Divisi PDD',
-      image: '/images/struktur/divisi_pdd.jpg',
+      image: anggotaData.find(m => m.division === 'Divisi PDD')?.fotoStruktur || '/images/struktur/divisi_pdd.jpg',
       members: anggotaData.filter(m => m.division === 'Divisi PDD')
     },
     {
       name: 'Divisi Acara',
-      image: '/images/struktur/divisi_acara.jpg',
+      image: anggotaData.find(m => m.division === 'Divisi Acara')?.fotoStruktur || '/images/struktur/divisi_acara.jpg',
       members: anggotaData.filter(m => m.division === 'Divisi Acara')
     },
     {
       name: 'Divisi Logistik',
-      image: '/images/struktur/dian.jpg', // Dian is the only member, so her photo is the division photo
+      image: anggotaData.find(m => m.division === 'Divisi Logistik')?.fotoStruktur || '/images/struktur/dian.jpg', // Dian is the only member, so her photo is the division photo
       members: anggotaData.filter(m => m.division === 'Divisi Logistik')
     }
   ];
