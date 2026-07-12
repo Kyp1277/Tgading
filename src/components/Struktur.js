@@ -13,7 +13,18 @@ const Struktur = () => {
 
   // BPH mapping
   const ketua = anggotaData.find(m => m.id === 1);
-  const bphMembers = anggotaData.filter(m => [2, 3, 4].includes(m.id)); // Lisa, Nur Annisa, Tasya
+  const bphGroups = [
+    {
+      name: 'Sekretaris',
+      image: '/images/struktur/sekretaris.jpg',
+      members: anggotaData.filter(m => [2, 3].includes(m.id)) // Lisa Nopitasari & Nur Annisa
+    },
+    {
+      name: 'Bendahara',
+      image: '/images/struktur/bendahara.jpg',
+      members: [anggotaData.find(m => m.id === 4)] // Tasya Salsabilla
+    }
+  ];
 
   // Division mappings (grouped by division name with division photos)
   const divisions = [
@@ -73,14 +84,14 @@ const Struktur = () => {
     );
   };
 
-  const DivisionNode = ({ div }) => {
+  const GroupNode = ({ group }) => {
     const [imageError, setImageError] = useState(false);
 
-    if (!div) return null;
+    if (!group) return null;
 
     return (
       <motion.div 
-        onClick={() => setSelectedDivision(div)}
+        onClick={() => setSelectedDivision(group)}
         whileHover={shouldReduce ? {} : { y: -6, scale: 1.02, boxShadow: "0 15px 35px rgba(20,83,45,0.08)" }}
         whileTap={{ scale: 0.98 }}
         className="relative bg-white border-2 border-brand-gold/15 hover:border-brand-gold p-6 rounded-3xl w-64 sm:w-72 text-center flex flex-col items-center cursor-pointer shadow-sm group select-none transition-all duration-300 z-10"
@@ -89,18 +100,18 @@ const Struktur = () => {
           Detail
         </span>
         
-        {/* Division Image Container */}
+        {/* Group Image Container */}
         <div className="w-full aspect-[4/5] rounded-2xl overflow-hidden border-2 border-brand-gold/10 bg-brand-cream mb-4 relative shadow-sm group-hover:scale-[1.01] transition-transform duration-300">
           {imageError ? (
             <div className="w-full h-full bg-gradient-to-br from-brand-green-dark to-brand-green flex flex-col items-center justify-center p-6 text-white">
               <Users size={32} className="text-brand-gold mb-2 opacity-80" />
-              <span className="font-serif font-bold text-sm tracking-wider uppercase">{div.name.replace('Divisi ', '')}</span>
+              <span className="font-serif font-bold text-sm tracking-wider uppercase">{group.name.replace('Divisi ', '')}</span>
               <span className="font-sans text-[9px] text-white/60 mt-1 font-semibold uppercase tracking-wide">Belum ada foto</span>
             </div>
           ) : (
             <img 
-              src={div.image} 
-              alt={div.name} 
+              src={group.image} 
+              alt={group.name} 
               onError={() => setImageError(true)}
               className="w-full h-full object-cover"
             />
@@ -108,13 +119,13 @@ const Struktur = () => {
         </div>
 
         <h4 className="font-serif font-bold text-sm md:text-base text-brand-green-dark leading-tight mb-1 truncate w-full">
-          {div.name}
+          {group.name}
         </h4>
         <p className="font-sans text-[10px] md:text-xs text-brand-gold font-bold tracking-wide uppercase">
-          {div.members.map(m => m.name.split(' ')[0]).join(' & ')}
+          {group.members.map(m => m.name.split(' ')[0]).join(' & ')}
         </p>
         <p className="font-sans text-[10px] text-brand-green-dark/50 mt-1">
-          {div.members.length} Anggota
+          {group.members.length} Anggota
         </p>
       </motion.div>
     );
@@ -186,10 +197,10 @@ const Struktur = () => {
             transition={{ duration: 0.6, delay: shouldReduce ? 0 : 0.2 }}
             className="pt-8 relative w-full flex flex-col items-center"
           >
-            {/* Thicker Horizontal connecting bridge across 3 cards */}
+            {/* Thicker Horizontal connecting bridge across 2 cards */}
             {!shouldReduce && (
               <>
-                <svg className="hidden md:block absolute top-0 left-[20%] right-[20%] h-[3px] w-[60%] overflow-visible pointer-events-none">
+                <svg className="hidden md:block absolute top-0 left-[25%] right-[25%] h-[3px] w-[50%] overflow-visible pointer-events-none">
                   <motion.line 
                     x1="0" y1="1.5" x2="100%" y2="1.5" 
                     stroke="#c9a227" strokeWidth="3" opacity="0.35"
@@ -199,28 +210,23 @@ const Struktur = () => {
                     transition={{ duration: 0.6, ease: "easeInOut" }}
                   />
                 </svg>
-                {/* 3 drops: Left drop */}
-                <svg className="hidden md:block absolute top-0 left-[20%] w-1 h-8 overflow-visible pointer-events-none">
+                {/* Left drop to Sekretaris */}
+                <svg className="hidden md:block absolute top-0 left-[25%] w-1 h-8 overflow-visible pointer-events-none">
                   <motion.line x1="2" y1="0" x2="2" y2="32" stroke="#c9a227" strokeWidth="3" opacity="0.35"
                     initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.4 }} />
                 </svg>
-                {/* Center drop */}
-                <svg className="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 w-1 h-8 overflow-visible pointer-events-none">
-                  <motion.line x1="2" y1="0" x2="2" y2="32" stroke="#c9a227" strokeWidth="3" opacity="0.35"
-                    initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.4 }} />
-                </svg>
-                {/* Right drop */}
-                <svg className="hidden md:block absolute top-0 right-[20%] w-1 h-8 overflow-visible pointer-events-none">
+                {/* Right drop to Bendahara */}
+                <svg className="hidden md:block absolute top-0 right-[25%] w-1 h-8 overflow-visible pointer-events-none">
                   <motion.line x1="2" y1="0" x2="2" y2="32" stroke="#c9a227" strokeWidth="3" opacity="0.35"
                     initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.4 }} />
                 </svg>
               </>
             )}
 
-            <div className="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 pt-4 md:pt-8">
-              {bphMembers.map((member) => (
-                <div key={member.id} className="flex flex-col items-center">
-                  <MemberNode member={member} />
+            <div className="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 pt-4 md:pt-8 w-full max-w-max mx-auto">
+              {bphGroups.map((group, idx) => (
+                <div key={idx} className="flex flex-col items-center">
+                  <GroupNode group={group} />
                 </div>
               ))}
             </div>
