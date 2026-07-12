@@ -129,7 +129,7 @@ const Struktur = () => {
         <p className="font-sans text-[10px] md:text-xs text-brand-gold font-bold tracking-wide uppercase">
           {group.members.length === 1 
             ? group.members[0].name 
-            : group.members.map(m => m.name.split(' ')[0]).join(' & ')}
+            : group.members.map(m => m.nickname || m.name.split(' ')[0]).join(' & ')}
         </p>
         <p className="font-sans text-[10px] text-brand-green-dark/50 mt-1">
           {group.members.length} Anggota

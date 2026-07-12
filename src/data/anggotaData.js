@@ -2,6 +2,7 @@ export const anggotaData = [
   {
     id: 1,
     name: 'Hamdi Gustiawan',
+    nickname: 'Hamdi',
     role: 'Koordinator Desa (Ketua)',
     division: 'BPH (Badan Pengurus Harian)',
     major: 'Tadris Ilmu Pengetahuan Sosial',
@@ -18,6 +19,7 @@ export const anggotaData = [
   {
     id: 2,
     name: 'Lisa Nopitasari',
+    nickname: 'Lisa',
     role: 'Sekretaris I',
     division: 'BPH (Badan Pengurus Harian)',
     major: 'Akuntansi S1',
@@ -34,6 +36,7 @@ export const anggotaData = [
   {
     id: 3,
     name: 'Nur Annisa',
+    nickname: 'Nisa',
     role: 'Sekretaris II',
     division: 'BPH (Badan Pengurus Harian)',
     major: 'Manajemen Dakwah',
@@ -50,6 +53,7 @@ export const anggotaData = [
   {
     id: 4,
     name: 'Tasya Salsabilla',
+    nickname: 'Tasya',
     role: 'Bendahara',
     division: 'BPH (Badan Pengurus Harian)',
     major: 'Ilmu Al Qur\'an Dan Tafsir S1',
@@ -66,6 +70,7 @@ export const anggotaData = [
   {
     id: 5,
     name: 'Rifky Naufal Athaya',
+    nickname: 'Rifky',
     role: 'Anggota',
     division: 'Divisi Humas',
     major: 'Sistem Informasi',
@@ -82,6 +87,7 @@ export const anggotaData = [
   {
     id: 6,
     name: 'Wardi Siregar',
+    nickname: 'Wardi',
     role: 'Anggota',
     division: 'Divisi Humas',
     major: 'Pendidikan Bahasa Arab S1',
@@ -98,6 +104,7 @@ export const anggotaData = [
   {
     id: 7,
     name: 'Walfajri',
+    nickname: 'Walfajri',
     role: 'Anggota',
     division: 'Divisi PDD',
     major: 'Administrasi Negara',
@@ -114,6 +121,7 @@ export const anggotaData = [
   {
     id: 8,
     name: 'Nadira Solekha',
+    nickname: 'Nadira',
     role: 'Anggota',
     division: 'Divisi PDD',
     major: 'Perbankan Syariah S1',
@@ -130,6 +138,7 @@ export const anggotaData = [
   {
     id: 9,
     name: 'Anisa Febrianti',
+    nickname: 'Anisa',
     role: 'Anggota',
     division: 'Divisi Acara',
     major: 'Pendidikan Ekonomi',
@@ -146,6 +155,7 @@ export const anggotaData = [
   {
     id: 10,
     name: 'Namira Sahida',
+    nickname: 'Namira',
     role: 'Anggota',
     division: 'Divisi Acara',
     major: 'Perbankan Syariah S1',
@@ -162,6 +172,7 @@ export const anggotaData = [
   {
     id: 11,
     name: 'Dian Purwati',
+    nickname: 'Dian',
     role: 'Anggota',
     division: 'Divisi Logistik',
     major: 'Pendidikan Bahasa Inggris',
