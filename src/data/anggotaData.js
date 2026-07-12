@@ -38,7 +38,7 @@ export const anggotaData = [
     division: 'BPH (Badan Pengurus Harian)',
     major: 'Manajemen Dakwah',
     avatar: 'https://ui-avatars.com/api/?name=Nur+Annisa&background=14532d&color=c9a227&size=200&bold=true',
-    fotoStruktur: '/images/struktur/nur_annisa.jpg',
+    fotoStruktur: '/images/struktur/sekre.jpeg',
     fotoAnggota: '/images/anggota/nur_annisa.jpg',
     bio: 'Membantu pengelolaan administrasi, surat menyurat, dokumentasi berkas kearsipan, serta notulensi rapat koordinasi KKN.',
     socials: {
