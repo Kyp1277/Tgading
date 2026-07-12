@@ -144,8 +144,12 @@ const Anggota = () => {
                   {/* Avatar position overlaps banner */}
                   <div className="px-8 pb-8 flex-grow flex flex-col items-center -mt-12 relative text-center">
                     <img
-                      src={member.avatar}
+                      src={member.fotoAnggota || member.avatar}
                       alt={member.name}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = member.avatar;
+                      }}
                       className="w-24 h-24 rounded-full border-4 border-white bg-brand-cream shadow-md mb-4 group-hover:scale-105 transition-transform duration-300"
                     />
 

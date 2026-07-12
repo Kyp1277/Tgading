@@ -51,8 +51,12 @@ const Struktur = () => {
           Detail
         </span>
         <img 
-          src={member.avatar} 
+          src={member.fotoStruktur || member.avatar} 
           alt={member.name} 
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = member.avatar;
+          }}
           className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-brand-gold bg-brand-cream mb-4 shadow-sm group-hover:scale-105 transition-transform duration-300"
         />
         <h4 className="font-serif font-bold text-sm md:text-base text-brand-green-dark leading-tight mb-1.5 truncate w-full">
@@ -291,8 +295,12 @@ const Struktur = () => {
               {/* Profile Info */}
               <div className="p-8 flex flex-col items-center text-center">
                 <img 
-                  src={selectedMember.avatar} 
+                  src={selectedMember.fotoStruktur || selectedMember.avatar} 
                   alt={selectedMember.name} 
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = selectedMember.avatar;
+                  }}
                   className="w-24 h-24 rounded-full border-2 border-brand-gold bg-brand-cream mb-4 shadow-sm"
                 />
                 <span className="font-sans text-[10px] font-bold tracking-widest text-brand-gold uppercase px-3.5 py-1.5 rounded-full border border-brand-gold/15 bg-brand-gold/5 mb-2">
