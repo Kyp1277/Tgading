@@ -22,7 +22,7 @@ export const anggotaData = [
     division: 'BPH (Badan Pengurus Harian)',
     major: 'Akuntansi S1',
     avatar: 'https://ui-avatars.com/api/?name=Lisa+Nopitasari&background=14532d&color=c9a227&size=200&bold=true',
-    fotoStruktur: '/images/struktur/lisa.jpg',
+    fotoStruktur: '/images/struktur/sekre.jpeg',
     fotoAnggota: '/images/anggota/lisa.jpg',
     bio: 'Bertanggung jawab atas administrasi kelompok, persuratan, perizinan, dan penyusunan proposal serta laporan berkala KKN.',
     socials: {
