@@ -13,6 +13,11 @@ const Struktur = () => {
 
   // BPH mapping
   const ketua = anggotaData.find(m => m.id === 1);
+  const ketuaGroup = {
+    name: 'Koordinator Desa (Ketua)',
+    image: anggotaData.find(m => m.id === 1)?.fotoStruktur || '/images/struktur/kordes.jpeg',
+    members: [ketua]
+  };
   const bphGroups = [
     {
       name: 'Sekretaris',
@@ -122,7 +127,9 @@ const Struktur = () => {
           {group.name}
         </h4>
         <p className="font-sans text-[10px] md:text-xs text-brand-gold font-bold tracking-wide uppercase">
-          {group.members.map(m => m.name.split(' ')[0]).join(' & ')}
+          {group.members.length === 1 
+            ? group.members[0].name 
+            : group.members.map(m => m.name.split(' ')[0]).join(' & ')}
         </p>
         <p className="font-sans text-[10px] text-brand-green-dark/50 mt-1">
           {group.members.length} Anggota
@@ -173,7 +180,7 @@ const Struktur = () => {
             transition={{ duration: 0.6 }}
             className="flex flex-col items-center relative"
           >
-            <MemberNode member={ketua} />
+            <GroupNode group={ketuaGroup} />
             {/* Animated Connector Line going straight down */}
             {!shouldReduce && (
               <svg className="w-1 h-8 absolute -bottom-8 left-1/2 -translate-x-1/2 overflow-visible pointer-events-none">
