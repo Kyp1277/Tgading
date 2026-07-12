@@ -14,27 +14,23 @@ const Struktur = () => {
   const ketua = anggotaData.find(m => m.id === 1);
   const bphMembers = anggotaData.filter(m => [2, 3, 4].includes(m.id)); // Lisa, Nur Annisa, Tasya
 
-  // Division mappings (Coordinator + Staff)
+  // Division mappings (grouped by division name)
   const divisions = [
     {
       name: 'Divisi Humas',
-      kordiv: anggotaData.find(m => m.id === 5), // Rifky
-      staff: [anggotaData.find(m => m.id === 6)] // Wardi
+      members: anggotaData.filter(m => m.division === 'Divisi Humas')
     },
     {
       name: 'Divisi PDD',
-      kordiv: anggotaData.find(m => m.id === 7), // Walfajri
-      staff: [anggotaData.find(m => m.id === 8)] // Nadira
+      members: anggotaData.filter(m => m.division === 'Divisi PDD')
     },
     {
       name: 'Divisi Acara',
-      kordiv: anggotaData.find(m => m.id === 9), // Anisa
-      staff: [anggotaData.find(m => m.id === 10)] // Namira
+      members: anggotaData.filter(m => m.division === 'Divisi Acara')
     },
     {
       name: 'Divisi Logistik',
-      kordiv: anggotaData.find(m => m.id === 11), // Dian
-      staff: [] // No staff
+      members: anggotaData.filter(m => m.division === 'Divisi Logistik')
     }
   ];
 
@@ -214,53 +210,75 @@ const Struktur = () => {
               </svg>
             )}
             
-            <div className="flex flex-col lg:flex-row justify-center items-start gap-12 lg:gap-6 w-full">
-              {divisions.map((div, idx) => (
-                <div key={idx} className="flex flex-col items-center relative pt-4 lg:pt-8 w-full lg:w-auto">
-                  
-                  {/* Top-bridge drop to Coordinator */}
-                  {!shouldReduce && (
-                    <svg className="hidden lg:block absolute top-0 left-1/2 -translate-x-1/2 w-1 h-8 overflow-visible pointer-events-none">
-                      <motion.line 
-                        x1="2" y1="0" x2="2" y2="32" 
-                        stroke="#c9a227" strokeWidth="3" opacity="0.25"
-                        initial={{ pathLength: 0 }}
-                        whileInView={{ pathLength: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
-                      />
-                    </svg>
-                  )}
-
-                  {/* Division Column Content */}
-                  <div className="flex flex-col items-center">
-                    {/* Coordinator Node */}
-                    <MemberNode member={div.kordiv} />
-                    
-                    {/* Staff Nodes if available */}
-                    {div.staff.map((staffMember, staffIdx) => (
-                      <React.Fragment key={staffMember.id}>
-                        {/* Connector Line between Coordinator and Staff */}
-                        {!shouldReduce && (
-                          <svg className="w-1 h-8 overflow-visible pointer-events-none my-1">
-                            <motion.line 
-                              x1="2" y1="0" x2="2" y2="32" 
-                              stroke="#c9a227" strokeWidth="3" opacity="0.35"
-                              initial={{ pathLength: 0 }}
-                              whileInView={{ pathLength: 1 }}
-                              viewport={{ once: true }}
-                              transition={{ duration: 0.4, ease: "easeOut" }}
-                            />
-                          </svg>
-                        )}
-                        <MemberNode member={staffMember} />
-                      </React.Fragment>
-                    ))}
-                  </div>
-
-                </div>
-              ))}
-            </div>
+             <div className="flex flex-col lg:flex-row justify-center items-start gap-12 lg:gap-6 w-full">
+               {divisions.map((div, idx) => (
+                 <div key={idx} className="flex flex-col items-center relative pt-4 lg:pt-8 w-full lg:w-auto">
+                   
+                   {/* Top-bridge drop to Division Header */}
+                   {!shouldReduce && (
+                     <svg className="hidden lg:block absolute top-0 left-1/2 -translate-x-1/2 w-1 h-8 overflow-visible pointer-events-none">
+                       <motion.line 
+                         x1="2" y1="0" x2="2" y2="32" 
+                         stroke="#c9a227" strokeWidth="3" opacity="0.25"
+                         initial={{ pathLength: 0 }}
+                         whileInView={{ pathLength: 1 }}
+                         viewport={{ once: true }}
+                         transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
+                       />
+                     </svg>
+                   )}
+ 
+                   {/* Division Badge */}
+                   <div className="bg-brand-green-dark text-white border-2 border-brand-gold/25 px-5 py-2.5 rounded-2xl font-sans font-bold text-xs uppercase tracking-widest mb-6 relative z-10 shadow-md">
+                     {div.name}
+                   </div>
+ 
+                   {/* Division Members Area */}
+                   <div className="relative flex flex-col items-center w-full">
+                     {/* Lines for 2 members */}
+                     {div.members.length === 2 && !shouldReduce && (
+                       <div className="absolute top-0 left-0 w-full h-8 pointer-events-none hidden md:block">
+                         {/* Vertical line from badge to bridge */}
+                         <svg className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-4 overflow-visible">
+                           <line x1="2" y1="0" x2="2" y2="16" stroke="#c9a227" strokeWidth="3" opacity="0.35" />
+                         </svg>
+                         {/* Horizontal bridge line */}
+                         <svg className="absolute top-4 left-[25%] right-[25%] h-[3px] w-[50%] overflow-visible">
+                           <line x1="0" y1="1.5" x2="100%" y2="1.5" stroke="#c9a227" strokeWidth="3" opacity="0.35" />
+                         </svg>
+                         {/* Vertical drop line to left card */}
+                         <svg className="absolute top-4 left-[25%] w-1 h-4 overflow-visible">
+                           <line x1="2" y1="0" x2="2" y2="16" stroke="#c9a227" strokeWidth="3" opacity="0.35" />
+                         </svg>
+                         {/* Vertical drop line to right card */}
+                         <svg className="absolute top-4 right-[25%] w-1 h-4 overflow-visible">
+                           <line x1="2" y1="0" x2="2" y2="16" stroke="#c9a227" strokeWidth="3" opacity="0.35" />
+                         </svg>
+                       </div>
+                     )}
+                     
+                     {/* Line for 1 member */}
+                     {div.members.length === 1 && !shouldReduce && (
+                       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-8 pointer-events-none hidden md:block">
+                         <svg className="w-1 h-8 overflow-visible">
+                           <line x1="2" y1="0" x2="2" y2="32" stroke="#c9a227" strokeWidth="3" opacity="0.35" />
+                         </svg>
+                       </div>
+                     )}
+ 
+                     {/* Member Cards Row */}
+                     <div className={`flex flex-col md:flex-row justify-center items-center gap-6 w-full ${div.members.length > 1 ? 'pt-8 md:pt-8' : 'pt-4 md:pt-8'}`}>
+                       {div.members.map((member) => (
+                         <div key={member.id} className="flex flex-col items-center">
+                           <MemberNode member={member} />
+                         </div>
+                       ))}
+                     </div>
+                   </div>
+ 
+                 </div>
+               ))}
+             </div>
           </motion.div>
 
         </div>
