@@ -6,7 +6,7 @@ export const anggotaData = [
     division: 'BPH (Badan Pengurus Harian)',
     major: 'Tadris Ilmu Pengetahuan Sosial',
     avatar: 'https://ui-avatars.com/api/?name=Hamdi+Gustiawan&background=14532d&color=c9a227&size=200&bold=true',
-    fotoStruktur: '/images/struktur/hamdi.jpg',
+    fotoStruktur: '/images/struktur/kordes.jpeg',
     fotoAnggota: '/images/anggota/hamdi.jpg',
     bio: 'Memimpin koordinasi seluruh program kerja KKN UIN Suska Riau 2026 di Kelurahan Tanjung Gading agar berjalan selaras dan berdampak nyata.',
     socials: {
