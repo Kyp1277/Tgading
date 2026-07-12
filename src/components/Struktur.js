@@ -286,7 +286,7 @@ const Struktur = () => {
                      </svg>
                    )}
  
-                   <DivisionNode div={div} />
+                   <GroupNode group={div} />
                  </div>
                ))}
              </div>
