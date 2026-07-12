@@ -70,7 +70,7 @@ export const anggotaData = [
     division: 'Divisi Humas',
     major: 'Sistem Informasi',
     avatar: 'https://ui-avatars.com/api/?name=Rifky+Naufal+Athaya&background=14532d&color=c9a227&size=200&bold=true',
-    fotoStruktur: '/images/struktur/rifky.jpg',
+    fotoStruktur: '/images/struktur/humas.jpeg',
     fotoAnggota: '/images/anggota/rifky.jpg',
     bio: 'Menjembatani komunikasi antara mahasiswa KKN dengan aparatur kelurahan, tokoh pemuda, dan tokoh masyarakat Tanjung Gading.',
     socials: {
@@ -86,7 +86,7 @@ export const anggotaData = [
     division: 'Divisi Humas',
     major: 'Pendidikan Bahasa Arab S1',
     avatar: 'https://ui-avatars.com/api/?name=Wardi+Siregar&background=14532d&color=c9a227&size=200&bold=true',
-    fotoStruktur: '/images/struktur/wardi.jpg',
+    fotoStruktur: '/images/struktur/humas.jpeg',
     fotoAnggota: '/images/anggota/wardi.jpg',
     bio: 'Membantu menjalin komunikasi eksternal and mempererat jalinan kerjasama dengan berbagai organisasi kemasyarakatan setempat.',
     socials: {
@@ -102,7 +102,7 @@ export const anggotaData = [
     division: 'Divisi PDD',
     major: 'Administrasi Negara',
     avatar: 'https://ui-avatars.com/api/?name=Walfajri&background=14532d&color=c9a227&size=200&bold=true',
-    fotoStruktur: '/images/struktur/walfajri.jpg',
+    fotoStruktur: '/images/struktur/pdd.jpeg',
     fotoAnggota: '/images/anggota/walfajri.jpg',
     bio: 'Mengonsep dokumentasi publikasi visual, memelihara website portfolio KKN, serta mempublikasikan progres pengabdian.',
     socials: {
@@ -118,7 +118,7 @@ export const anggotaData = [
     division: 'Divisi PDD',
     major: 'Perbankan Syariah S1',
     avatar: 'https://ui-avatars.com/api/?name=Nadira+Solekha&background=14532d&color=c9a227&size=200&bold=true',
-    fotoStruktur: '/images/struktur/nadira.jpg',
+    fotoStruktur: '/images/struktur/pdd.jpeg',
     fotoAnggota: '/images/anggota/nadira.jpg',
     bio: 'Membantu mengonsep materi publikasi digital, mendesain pamflet kegiatan, serta mengelola dokumentasi media sosial KKN.',
     socials: {
@@ -134,7 +134,7 @@ export const anggotaData = [
     division: 'Divisi Acara',
     major: 'Pendidikan Ekonomi',
     avatar: 'https://ui-avatars.com/api/?name=Anisa+Febrianti&background=14532d&color=c9a227&size=200&bold=true',
-    fotoStruktur: '/images/struktur/anisa_febrianti.jpg',
+    fotoStruktur: '/images/struktur/acara.jpeg',
     fotoAnggota: '/images/anggota/anisa_febrianti.jpg',
     bio: 'Mengonsep kelas bimbingan belajar tambahan untuk anak-anak sekolah dasar serta memimpin rangkaian acara festival keagamaan.',
     socials: {
@@ -150,7 +150,7 @@ export const anggotaData = [
     division: 'Divisi Acara',
     major: 'Perbankan Syariah S1',
     avatar: 'https://ui-avatars.com/api/?name=Namira+Sahida&background=14532d&color=c9a227&size=200&bold=true',
-    fotoStruktur: '/images/struktur/namira.jpg',
+    fotoStruktur: '/images/struktur/acara.jpeg',
     fotoAnggota: '/images/anggota/namira.jpg',
     bio: 'Membantu jalannya bimbingan belajar menyenangkan bagi siswa sekolah dasar serta menyusun agenda kepanitiaan sosial budaya.',
     socials: {
@@ -166,7 +166,7 @@ export const anggotaData = [
     division: 'Divisi Logistik',
     major: 'Pendidikan Bahasa Inggris',
     avatar: 'https://ui-avatars.com/api/?name=Dian+Purwati&background=14532d&color=c9a227&size=200&bold=true',
-    fotoStruktur: '/images/struktur/dian.jpg',
+    fotoStruktur: '/images/struktur/logistik.jpeg',
     fotoAnggota: '/images/anggota/dian.jpg',
     bio: 'Mengelola pengadaan logistik kelompok KKN, menyusun inventarisasi perlengkapan, serta merancang fasilitas gotong royong warga.',
     socials: {
