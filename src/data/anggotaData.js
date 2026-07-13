@@ -45,9 +45,7 @@ export const anggotaData = [
     fotoAnggota: '/images/anggota/nur_annisa.jpg',
     bio: 'Membantu pengelolaan administrasi, surat menyurat, dokumentasi berkas kearsipan, serta notulensi rapat koordinasi KKN.',
     socials: {
-      instagram: 'https://instagram.com/dummy_account',
-      linkedin: 'https://linkedin.com/in/dummy_account',
-      email: 'mailto:nur.annisa@example.com',
+      instagram: 'https://www.instagram.com/nranniisa29_?igsh=MTlrdmZrZDQweHloOA==',
     }
   },
   {
@@ -164,9 +162,7 @@ export const anggotaData = [
     fotoAnggota: '/images/anggota/namira.jpg',
     bio: 'Membantu jalannya bimbingan belajar menyenangkan bagi siswa sekolah dasar serta menyusun agenda kepanitiaan sosial budaya.',
     socials: {
-      instagram: 'https://instagram.com/dummy_account',
-      linkedin: 'https://linkedin.com/in/dummy_account',
-      email: 'mailto:namira.sahida@example.com',
+      instagram: 'https://www.instagram.com/nmrashda?igsh=MWNkNTYwMnRoMjFhNg%3D%3D&utm_source=qr',
     }
   },
   {
