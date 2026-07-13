@@ -3,8 +3,24 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { anggotaData } from '../data/anggotaData';
-import { Instagram, Linkedin, Mail, X, Award, Users } from 'lucide-react';
+import { Instagram, Linkedin, Mail, X, Award, Users, Github, Facebook, Globe } from 'lucide-react';
 import BackgroundDecor from './BackgroundDecor';
+
+const Tiktok = ({ size = 16, className }) => (
+  <svg 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+  </svg>
+);
 
 const Struktur = () => {
   const [selectedMember, setSelectedMember] = useState(null);
@@ -359,29 +375,75 @@ const Struktur = () => {
                 </p>
 
                 {/* Social links */}
-                <div className="flex gap-4">
-                  <a 
-                    href={selectedMember.socials.instagram} 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="w-10 h-10 rounded-full border border-brand-gold/25 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream transition-all duration-300 shadow-sm"
-                  >
-                    <Instagram size={16} />
-                  </a>
-                  <a 
-                    href={selectedMember.socials.linkedin} 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="w-10 h-10 rounded-full border border-brand-gold/25 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream transition-all duration-300 shadow-sm"
-                  >
-                    <Linkedin size={16} />
-                  </a>
-                  <a 
-                    href={selectedMember.socials.email.startsWith('mailto:') ? selectedMember.socials.email.trim() : `mailto:${selectedMember.socials.email.trim()}`}
-                    className="w-10 h-10 rounded-full border border-brand-gold/25 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream transition-all duration-300 shadow-sm"
-                  >
-                    <Mail size={16} />
-                  </a>
+                <div className="flex flex-wrap gap-3">
+                  {selectedMember.socials?.instagram && (
+                    <a 
+                      href={selectedMember.socials.instagram} 
+                      target="_blank" 
+                      rel="noreferrer"
+                      className="w-10 h-10 rounded-full border border-brand-gold/25 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream transition-all duration-300 shadow-sm"
+                    >
+                      <Instagram size={16} />
+                    </a>
+                  )}
+                  {selectedMember.socials?.tiktok && (
+                    <a 
+                      href={selectedMember.socials.tiktok} 
+                      target="_blank" 
+                      rel="noreferrer"
+                      className="w-10 h-10 rounded-full border border-brand-gold/25 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream transition-all duration-300 shadow-sm"
+                    >
+                      <Tiktok size={16} />
+                    </a>
+                  )}
+                  {selectedMember.socials?.linkedin && (
+                    <a 
+                      href={selectedMember.socials.linkedin} 
+                      target="_blank" 
+                      rel="noreferrer"
+                      className="w-10 h-10 rounded-full border border-brand-gold/25 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream transition-all duration-300 shadow-sm"
+                    >
+                      <Linkedin size={16} />
+                    </a>
+                  )}
+                  {selectedMember.socials?.github && (
+                    <a 
+                      href={selectedMember.socials.github} 
+                      target="_blank" 
+                      rel="noreferrer"
+                      className="w-10 h-10 rounded-full border border-brand-gold/25 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream transition-all duration-300 shadow-sm"
+                    >
+                      <Github size={16} />
+                    </a>
+                  )}
+                  {selectedMember.socials?.facebook && (
+                    <a 
+                      href={selectedMember.socials.facebook} 
+                      target="_blank" 
+                      rel="noreferrer"
+                      className="w-10 h-10 rounded-full border border-brand-gold/25 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream transition-all duration-300 shadow-sm"
+                    >
+                      <Facebook size={16} />
+                    </a>
+                  )}
+                  {selectedMember.socials?.website && (
+                    <a 
+                      href={selectedMember.socials.website} 
+                      target="_blank" 
+                      rel="noreferrer"
+                      className="w-10 h-10 rounded-full border border-brand-gold/25 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream transition-all duration-300 shadow-sm"
+                    >
+                      <Globe size={16} />
+                    </a>
+                  )}
+                  {selectedMember.socials?.email && (
+                    <a 
+                      href={selectedMember.socials.email.startsWith('mailto:') ? selectedMember.socials.email.trim() : `mailto:${selectedMember.socials.email.trim()}`}
+                      className="w-10 h-10 rounded-full border border-brand-gold/25 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream transition-all duration-300 shadow-sm"
+                    >
+                      <Mail size={16} />
+                    </a>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -471,29 +533,75 @@ const Struktur = () => {
                         </p>
                         
                         {/* Individual Social Links */}
-                        <div className="flex gap-2 mt-3">
-                          <a 
-                            href={member.socials.instagram} 
-                            target="_blank" 
-                            rel="noreferrer"
-                            className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream transition-colors duration-200"
-                          >
-                            <Instagram size={11} />
-                          </a>
-                          <a 
-                            href={member.socials.linkedin} 
-                            target="_blank" 
-                            rel="noreferrer"
-                            className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream transition-colors duration-200"
-                          >
-                            <Linkedin size={11} />
-                          </a>
-                          <a 
-                            href={member.socials.email.startsWith('mailto:') ? member.socials.email.trim() : `mailto:${member.socials.email.trim()}`}
-                            className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream transition-colors duration-200"
-                          >
-                            <Mail size={11} />
-                          </a>
+                        <div className="flex flex-wrap gap-1.5 mt-3">
+                          {member.socials?.instagram && (
+                            <a 
+                              href={member.socials.instagram} 
+                              target="_blank" 
+                              rel="noreferrer"
+                              className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream transition-colors duration-200"
+                            >
+                              <Instagram size={11} />
+                            </a>
+                          )}
+                          {member.socials?.tiktok && (
+                            <a 
+                              href={member.socials.tiktok} 
+                              target="_blank" 
+                              rel="noreferrer"
+                              className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream transition-colors duration-200"
+                            >
+                              <Tiktok size={11} />
+                            </a>
+                          )}
+                          {member.socials?.linkedin && (
+                            <a 
+                              href={member.socials.linkedin} 
+                              target="_blank" 
+                              rel="noreferrer"
+                              className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream transition-colors duration-200"
+                            >
+                              <Linkedin size={11} />
+                            </a>
+                          )}
+                          {member.socials?.github && (
+                            <a 
+                              href={member.socials.github} 
+                              target="_blank" 
+                              rel="noreferrer"
+                              className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream transition-colors duration-200"
+                            >
+                              <Github size={11} />
+                            </a>
+                          )}
+                          {member.socials?.facebook && (
+                            <a 
+                              href={member.socials.facebook} 
+                              target="_blank" 
+                              rel="noreferrer"
+                              className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream transition-colors duration-200"
+                            >
+                              <Facebook size={11} />
+                            </a>
+                          )}
+                          {member.socials?.website && (
+                            <a 
+                              href={member.socials.website} 
+                              target="_blank" 
+                              rel="noreferrer"
+                              className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream transition-colors duration-200"
+                            >
+                              <Globe size={11} />
+                            </a>
+                          )}
+                          {member.socials?.email && (
+                            <a 
+                              href={member.socials.email.startsWith('mailto:') ? member.socials.email.trim() : `mailto:${member.socials.email.trim()}`}
+                              className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream transition-colors duration-200"
+                            >
+                              <Mail size={11} />
+                            </a>
+                          )}
                         </div>
                       </div>
                     </div>
