@@ -200,7 +200,7 @@ const Galeri = () => {
   };
 
   return (
-    <section className="relative pt-28 pb-20 md:pt-24 md:pb-24 w-full bg-[#F5F8F5] min-h-screen overflow-hidden">
+    <section className="relative pt-28 pb-20 md:pt-24 md:pb-24 w-full bg-brand-sand min-h-screen overflow-hidden">
       
       {/* Reusable background decorations */}
       <BackgroundDecor variant="galeri" />
@@ -216,12 +216,12 @@ const Galeri = () => {
 
           {/* Dual Toggle for Grid vs Scrapbook */}
           <div className="bg-white border border-brand-gold/15 p-1 flex rounded-full shadow-sm relative z-20 mb-8">
-            <button
+             <button
               onClick={() => setLayoutMode('scrapbook')}
               className={`font-sans text-xs font-bold px-5 py-2.5 rounded-full transition-all duration-300 flex items-center gap-2 cursor-pointer ${
                 layoutMode === 'scrapbook'
                   ? 'bg-brand-gold text-white shadow-[0_3px_8px_rgba(201,162,39,0.25)]'
-                  : 'bg-transparent text-brand-green-dark/70 hover:text-brand-green-dark'
+                  : 'bg-transparent text-slate-500 hover:text-brand-green-dark'
               }`}
             >
               <Layers size={14} />
@@ -232,7 +232,7 @@ const Galeri = () => {
               className={`font-sans text-xs font-bold px-5 py-2.5 rounded-full transition-all duration-300 flex items-center gap-2 cursor-pointer ${
                 layoutMode === 'grid'
                   ? 'bg-brand-gold text-white shadow-[0_3px_8px_rgba(201,162,39,0.25)]'
-                  : 'bg-transparent text-brand-green-dark/70 hover:text-brand-green-dark'
+                  : 'bg-transparent text-slate-500 hover:text-brand-green-dark'
               }`}
             >
               <Grid size={14} />
@@ -273,7 +273,7 @@ const Galeri = () => {
                     Kelurahan Tanjung Gading
                   </span>
                 </h2>
-                <p className="font-sans text-brand-green-dark/70 max-w-2xl mx-auto leading-relaxed text-sm md:text-base">
+                <p className="font-sans text-slate-600 max-w-2xl mx-auto leading-relaxed text-sm md:text-base">
                   Kumpulan momen kebersamaan, kerja keras, dan dedikasi tim KKN UIN Suska Riau dalam menjalankan program kerja di Kelurahan Tanjung Gading.
                 </p>
               </motion.div>
@@ -293,7 +293,7 @@ const Galeri = () => {
                   className={`font-sans text-[11px] md:text-xs font-bold px-5 py-2.5 rounded-full transition-all duration-300 whitespace-nowrap cursor-pointer ${
                     isSelected
                       ? 'bg-brand-gold text-white shadow-[0_4px_12px_rgba(201,162,39,0.2)]'
-                      : 'bg-transparent text-brand-green-dark/70 hover:text-brand-green-dark'
+                      : 'bg-transparent text-slate-500 hover:text-brand-green-dark'
                   }`}
                 >
                   {category}
@@ -311,7 +311,7 @@ const Galeri = () => {
           </div>
         ) : filteredPhotos.length === 0 ? (
           <div className="py-20 text-center bg-brand-cream/5 rounded-3xl border border-brand-gold/10 max-w-2xl mx-auto">
-            <p className="font-sans text-sm text-brand-green-dark/60">Tidak ada foto kegiatan untuk kategori ini.</p>
+            <p className="font-sans text-sm text-slate-500">Tidak ada foto kegiatan untuk kategori ini.</p>
           </div>
         ) : (
           <AnimatePresence mode="wait">

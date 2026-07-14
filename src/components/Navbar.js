@@ -71,7 +71,7 @@ const Navbar = ({ currentPage, navigateTo }) => {
                 className={`font-sans text-[15px] font-medium tracking-normal flex items-center gap-2 transition-all duration-300 py-2 px-4 rounded-full relative cursor-pointer ${
                   isSelfActive
                     ? 'text-brand-gold-dark bg-brand-cream font-bold'
-                    : 'text-brand-green-dark/85 hover:text-brand-gold-dark hover:bg-brand-cream/50'
+                    : 'text-slate-600 hover:text-brand-gold-dark hover:bg-brand-cream/50'
                 }`}
               >
                 <Icon size={14} />
@@ -128,7 +128,7 @@ const Navbar = ({ currentPage, navigateTo }) => {
                   className={`font-sans text-left text-[15px] font-medium tracking-normal flex items-center gap-3 transition-all duration-300 py-3 px-4 rounded-xl cursor-pointer ${
                     isSelfActive
                       ? 'text-brand-gold-dark bg-brand-cream border-l-[3px] border-brand-gold-dark font-bold'
-                      : 'text-brand-green-dark/85 hover:text-brand-gold-dark hover:bg-brand-cream/50'
+                      : 'text-slate-600 hover:text-brand-gold-dark hover:bg-brand-cream/50'
                   }`}
                 >
                   <Icon size={16} />

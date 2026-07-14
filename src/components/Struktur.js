@@ -151,7 +151,7 @@ const Struktur = () => {
         <p className="font-sans text-[10px] md:text-xs text-brand-gold font-bold tracking-wide uppercase">
           {member.division.startsWith('Divisi') ? member.division : member.role}
         </p>
-        <p className="font-sans text-[10px] md:text-xs text-brand-green-dark/50 mt-1">
+        <p className="font-sans text-[10px] md:text-xs text-slate-500 mt-1">
           {member.major}
         </p>
       </TiltCard>
@@ -199,7 +199,7 @@ const Struktur = () => {
             ? group.members[0].name 
             : group.members.map(m => m.nickname || m.name.split(' ')[0]).join(' & ')}
         </p>
-        <p className="font-sans text-[10px] text-brand-green-dark/50 mt-1">
+        <p className="font-sans text-[10px] text-slate-500 mt-1">
           {group.members.length} Anggota
         </p>
       </TiltCard>
@@ -207,7 +207,7 @@ const Struktur = () => {
   };
 
   return (
-    <section className="relative pt-28 pb-20 md:pt-24 md:pb-24 w-full bg-[#F5F8F5] min-h-screen overflow-hidden">
+    <section className="relative pt-28 pb-20 md:pt-24 md:pb-24 w-full bg-brand-sand min-h-screen overflow-hidden">
       
       {/* Background decorations */}
       <BackgroundDecor variant="struktur" />
@@ -232,7 +232,7 @@ const Struktur = () => {
               Kelurahan Tanjung Gading
             </span>
           </h2>
-          <p className="font-sans text-brand-green-dark/70 max-w-2xl mx-auto leading-relaxed text-sm md:text-base">
+          <p className="font-sans text-slate-600 max-w-2xl mx-auto leading-relaxed text-sm md:text-base">
             Sinergi antar divisi dalam Badan Pengurus Harian dan unit divisi teknis di lapangan untuk memastikan keberhasilan seluruh program pengabdian. Klik pada kartu anggota untuk melihat profil lengkap.
           </p>
         </motion.div>

@@ -142,7 +142,7 @@ const Anggota = () => {
               UIN Suska Riau
             </span>
           </h2>
-          <p className="font-sans text-brand-green-dark/70 max-w-2xl mx-auto leading-relaxed text-sm md:text-base">
+          <p className="font-sans text-slate-600 max-w-2xl mx-auto leading-relaxed text-sm md:text-base">
             11 mahasiswa penuh semangat dari UIN Suska Riau dengan latar belakang keilmuan yang beragam, berkolaborasi membaktikan diri untuk kemajuan Kelurahan Tanjung Gading.
           </p>
         </motion.div>
@@ -173,7 +173,7 @@ const Anggota = () => {
                     className={`font-sans text-xs font-semibold px-4 py-2.5 rounded-full border transition-all duration-300 shrink-0 whitespace-nowrap cursor-pointer ${
                       isSelected
                         ? 'bg-brand-gold text-white border-brand-gold font-bold shadow-[0_4px_12px_rgba(201,162,39,0.2)]'
-                        : 'bg-transparent text-brand-green-dark/70 border-brand-gold/10 hover:border-brand-gold hover:text-brand-green-dark'
+                        : 'bg-transparent text-slate-600 border-brand-gold/10 hover:border-brand-gold hover:text-brand-green-dark'
                     }`}
                   >
                     {filter.replace('Divisi ', '')}
@@ -254,7 +254,7 @@ const Anggota = () => {
                         style={{ transform: "translateZ(10px)" }}
                       />
 
-                      <span className={`font-sans text-[9px] font-bold tracking-widest uppercase mb-1.5 ${isBPH ? 'text-brand-gold-dark' : 'text-brand-green-dark/60'}`}>
+                      <span className={`font-sans text-[9px] font-bold tracking-widest uppercase mb-1.5 ${isBPH ? 'text-brand-gold-dark' : 'text-slate-500'}`}>
                         {member.role}
                       </span>
 
@@ -262,11 +262,11 @@ const Anggota = () => {
                         {member.name}
                       </h3>
 
-                      <p className="font-sans text-[10px] text-brand-green-dark/45 font-bold uppercase tracking-wider mb-4">
+                      <p className="font-sans text-[10px] text-slate-500 font-bold uppercase tracking-wider mb-4">
                         {member.major}
                       </p>
 
-                      <p className="font-sans text-sm text-brand-green-dark/70 leading-relaxed line-clamp-3 mb-4">
+                      <p className="font-sans text-sm text-slate-600 leading-relaxed line-clamp-3 mb-4">
                         {member.bio}
                       </p>
                       
@@ -285,7 +285,7 @@ const Anggota = () => {
                 exit={{ opacity: 0 }}
                 className="col-span-full bg-white p-12 text-center border border-brand-gold/15 rounded-2xl shadow-sm"
               >
-                <p className="font-sans text-sm text-brand-green-dark/70">
+                <p className="font-sans text-sm text-slate-600">
                   Tidak ada anggota yang cocok dengan pencarian atau filter Anda.
                 </p>
                 <button
@@ -365,17 +365,17 @@ const Anggota = () => {
                   {selectedMember.name}
                 </h3>
                 
-                <p className="font-sans text-sm text-brand-green-dark/70 font-semibold mb-1">
+                <p className="font-sans text-sm text-slate-600 font-semibold mb-1">
                   {selectedMember.role}
                 </p>
                 
-                <p className="font-sans text-xs text-brand-green-dark/50 mb-6 italic font-medium">
+                <p className="font-sans text-xs text-slate-500 mb-6 italic font-medium">
                   Program Studi: {selectedMember.major}
                 </p>
                 
                 <div className="h-0.5 w-24 bg-brand-gold/20 mb-6 shrink-0" />
                 
-                <p className="font-sans text-sm text-brand-green-dark/75 leading-relaxed mb-8 flex-grow">
+                <p className="font-sans text-sm text-slate-600 leading-relaxed mb-8 flex-grow">
                   {selectedMember.bio}
                 </p>
 

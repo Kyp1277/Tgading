@@ -200,7 +200,7 @@ const Hero = ({ navigateTo }) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.8 }}
-        className="font-sans text-sm md:text-base text-brand-green-dark/70 max-w-2xl mb-10 leading-relaxed z-10"
+        className="font-sans text-sm md:text-base text-slate-600 max-w-2xl mb-10 leading-relaxed z-10"
       >
         Selamat datang di gerbang informasi dan karya mahasiswa KKN UIN Suska Riau 2026. Bersama warga Pasir Penyu mewujudkan kolaborasi sosial, pengembangan UMKM sawit-karet, serta digitalisasi administrasi kelurahan.
       </motion.p>

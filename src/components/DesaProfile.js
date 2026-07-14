@@ -116,7 +116,7 @@ const DesaProfile = () => {
               Kelurahan Tanjung Gading
             </span>
           </h2>
-          <p className="font-sans text-brand-green-dark/70 max-w-3xl mx-auto leading-relaxed text-sm md:text-base">
+          <p className="font-sans text-slate-600 max-w-3xl mx-auto leading-relaxed text-sm md:text-base">
             Kelurahan Tanjung Gading terletak di Kecamatan Pasir Penyu, Kabupaten Indragiri Hulu, Riau. Sebuah kawasan yang asri dengan kehangatan warganya, semangat gotong royong yang tinggi, serta alam perkebunan yang subur.
           </p>
         </motion.div>
@@ -143,7 +143,7 @@ const DesaProfile = () => {
                   <div className="w-10 h-10 mx-auto rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold mb-3 transition-colors group-hover:bg-brand-gold group-hover:text-white duration-300">
                     <Icon size={18} />
                   </div>
-                  <p className="font-sans text-[10px] text-brand-green-dark/50 uppercase tracking-wider mb-1 font-bold">{stat.label}</p>
+                  <p className="font-sans text-[10px] text-slate-500 uppercase tracking-wider mb-1 font-bold">{stat.label}</p>
                   <p className="font-serif font-bold text-base md:text-lg text-brand-green-dark transition-colors group-hover:text-brand-gold duration-200">{stat.value}</p>
                 </TiltCard>
               </motion.div>
@@ -164,10 +164,10 @@ const DesaProfile = () => {
             <h3 className="font-serif font-bold text-2xl text-brand-green-dark">
               Geografi & Kehidupan Sosial
             </h3>
-            <p className="font-sans text-sm md:text-base text-brand-green-dark/70 leading-relaxed">
+            <p className="font-sans text-sm md:text-base text-slate-600 leading-relaxed">
               Secara geografis, Tanjung Gading dikelilingi oleh lanskap alam yang hijau khas Sumatra Tengah. Kecamatan Pasir Penyu sendiri memiliki nilai historis yang kaya di Kabupaten Indragiri Hulu (Inhu), menjadi hub perdagangan serta pusat aktivitas masyarakat di sepanjang aliran Sungai Indragiri.
             </p>
-            <p className="font-sans text-sm md:text-base text-brand-green-dark/70 leading-relaxed">
+            <p className="font-sans text-sm md:text-base text-slate-600 leading-relaxed">
               Masyarakat kelurahan didominasi oleh suku Melayu, Jawa, dan Minang yang hidup berdampingan secara damai. Kegiatan adat istiadat, pengajian mingguan, dan kerja bakti kebersihan lingkungan merupakan rutinitas yang mempererat tali kekeluargaan antar dusun di Tanjung Gading.
             </p>
             <div className="p-5 rounded-2xl border border-brand-gold/20 bg-brand-gold/5 text-xs md:text-sm text-brand-gold flex items-start gap-3">
@@ -228,7 +228,7 @@ const DesaProfile = () => {
               </svg>
             </div>
 
-            <div className="text-center z-10 font-sans text-xs text-brand-green-dark/70 font-bold tracking-wide">
+            <div className="text-center z-10 font-sans text-xs text-slate-500 font-bold tracking-wide">
               Kelurahan Tanjung Gading, Kec. Pasir Penyu
             </div>
           </motion.a>
@@ -269,7 +269,7 @@ const DesaProfile = () => {
                     <h4 className="font-serif font-bold text-lg mb-3 text-brand-green-dark transition-colors group-hover:text-brand-gold duration-200">
                       {item.title}
                     </h4>
-                    <p className="font-sans text-sm text-brand-green-dark/70 leading-relaxed">
+                    <p className="font-sans text-sm text-slate-600 leading-relaxed">
                       {item.desc}
                     </p>
                   </TiltCard>

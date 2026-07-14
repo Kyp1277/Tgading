@@ -132,7 +132,7 @@ const Proker = () => {
               Kelurahan Tanjung Gading
             </span>
           </h2>
-          <p className="font-sans text-brand-green-dark/70 max-w-2xl mx-auto leading-relaxed text-sm md:text-base">
+          <p className="font-sans text-slate-600 max-w-2xl mx-auto leading-relaxed text-sm md:text-base">
             Rangkaian timeline kegiatan KKN UIN Suska Riau 2026 di Kelurahan Tanjung Gading. Dirancang secara terukur untuk mewujudkan keberlanjutan potensi wilayah.
           </p>
         </motion.div>
@@ -140,11 +140,11 @@ const Proker = () => {
         {loading ? (
           <div className="py-20 flex flex-col items-center justify-center">
             <Loader2 className="w-10 h-10 text-brand-gold animate-spin mb-4" />
-            <p className="font-sans text-brand-green-dark/65 text-sm">Memuat linimasa program...</p>
+            <p className="font-sans text-slate-500 text-sm">Memuat linimasa program...</p>
           </div>
         ) : events.length === 0 ? (
           <div className="py-20 text-center bg-brand-cream/5 rounded-3xl border border-brand-gold/10 max-w-2xl mx-auto">
-            <p className="font-sans text-sm text-brand-green-dark/60">Belum ada program kerja yang terdaftar saat ini.</p>
+            <p className="font-sans text-sm text-slate-500">Belum ada program kerja yang terdaftar saat ini.</p>
           </div>
         ) : (
           /* Timeline Layout Container */
@@ -227,7 +227,7 @@ const Proker = () => {
                             {event.title}
                           </h3>
                           
-                          <p className="font-sans text-sm md:text-[15px] text-brand-green-dark/70 leading-relaxed relative z-10">
+                          <p className="font-sans text-sm md:text-[15px] text-slate-600 leading-relaxed relative z-10">
                             {event.desc}
                           </p>
                         </TiltCard>
@@ -272,7 +272,7 @@ const Proker = () => {
                             {event.title}
                           </h3>
                           
-                          <p className="font-sans text-sm md:text-[15px] text-brand-green-dark/70 leading-relaxed relative z-10">
+                          <p className="font-sans text-sm md:text-[15px] text-slate-600 leading-relaxed relative z-10">
                             {event.desc}
                           </p>
                         </TiltCard>
