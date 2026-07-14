@@ -122,10 +122,16 @@ export default function Home() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentPage}
-                initial={{ opacity: 0, y: shouldReduce ? 0 : 20 }}
+                initial={{ opacity: 0, y: shouldReduce ? 0 : 40 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: shouldReduce ? 0 : -20 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
+                exit={{ opacity: 0, y: shouldReduce ? 0 : -30 }}
+                transition={{ 
+                  type: "spring",
+                  stiffness: 120,
+                  damping: 17,
+                  mass: 0.7,
+                  opacity: { duration: 0.35, ease: "easeOut" }
+                }}
               >
                 {renderPage()}
               </motion.div>
