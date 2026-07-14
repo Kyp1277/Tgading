@@ -13,7 +13,8 @@ import {
   Sparkles, 
   Grid, 
   Layers,
-  Maximize2 
+  Maximize2,
+  RotateCw
 } from 'lucide-react';
 import BackgroundDecor from './BackgroundDecor';
 
@@ -74,6 +75,14 @@ const Galeri = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // 3D Coverflow Carousel active slide index
+  const [carouselIndex, setCarouselIndex] = useState(0);
+
+  // Reset carousel slide index on category change
+  useEffect(() => {
+    setCarouselIndex(0);
+  }, [activeCategory]);
 
   const categories = ['Semua', 'Edukasi', 'Sosialisasi', 'Gotong Royong', 'Sosial & Budaya'];
 
@@ -214,8 +223,8 @@ const Galeri = () => {
             Galeri Interaktif
           </span>
 
-          {/* Dual Toggle for Grid vs Scrapbook */}
-          <div className="bg-white border border-brand-gold/15 p-1 flex rounded-full shadow-sm relative z-20 mb-8">
+          {/* Triple Toggle for Scrapbook vs Grid vs 3D Carousel */}
+          <div className="bg-white border border-brand-gold/15 p-1 flex rounded-full shadow-sm relative z-20 mb-8 w-fit mx-auto overflow-hidden">
              <button
               onClick={() => setLayoutMode('scrapbook')}
               className={`font-sans text-xs font-bold px-5 py-2.5 rounded-full transition-all duration-300 flex items-center gap-2 cursor-pointer ${
@@ -225,7 +234,7 @@ const Galeri = () => {
               }`}
             >
               <Layers size={14} />
-              Buku Tempel (Aesthetic)
+              Buku Tempel
             </button>
             <button
               onClick={() => setLayoutMode('grid')}
@@ -237,6 +246,17 @@ const Galeri = () => {
             >
               <Grid size={14} />
               Grid Modern
+            </button>
+            <button
+              onClick={() => setLayoutMode('carousel')}
+              className={`font-sans text-xs font-bold px-5 py-2.5 rounded-full transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+                layoutMode === 'carousel'
+                  ? 'bg-brand-gold text-white shadow-[0_3px_8px_rgba(201,162,39,0.25)]'
+                  : 'bg-transparent text-slate-500 hover:text-brand-green-dark'
+              }`}
+            >
+              <RotateCw size={14} />
+              3D Carousel
             </button>
           </div>
 
@@ -466,7 +486,7 @@ const Galeri = () => {
                   </AnimatePresence>
                 </motion.div>
               </motion.div>
-            ) : (
+            ) : layoutMode === 'grid' ? (
               /* =================== CLASSIC BENTO GRID LAYOUT =================== */
               <motion.div 
                 key="grid-view"
@@ -517,6 +537,149 @@ const Galeri = () => {
                     </motion.div>
                   ))}
                 </AnimatePresence>
+              </motion.div>
+            ) : (
+              /* =================== 3D COVERFLOW CAROUSEL LAYOUT (Opsi A) =================== */
+              <motion.div
+                key="carousel-view"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                className="relative w-full h-[540px] md:h-[620px] flex flex-col items-center justify-center overflow-hidden bg-white/40 backdrop-blur-sm rounded-[36px] border-2 border-brand-gold/15 shadow-inner px-4"
+                style={{ perspective: "1000px" }}
+              >
+                {/* 3D Container */}
+                <div className="relative w-full max-w-sm h-[320px] md:h-[390px] flex items-center justify-center">
+                  {filteredPhotos.map((photo, index) => {
+                    const diff = index - carouselIndex;
+                    const isCenter = diff === 0;
+                    const isVisible = Math.abs(diff) <= 2;
+
+                    if (!isVisible) return null;
+
+                    // Calculate transform styles dynamically
+                    let rotateY = 0;
+                    let x = 0;
+                    let scale = 1;
+                    let zIndex = 10;
+                    let opacity = 1;
+
+                    if (diff === -1) {
+                      rotateY = 35;
+                      x = isMobile ? -70 : -180;
+                      scale = 0.82;
+                      zIndex = 5;
+                      opacity = 0.7;
+                    } else if (diff === 1) {
+                      rotateY = -35;
+                      x = isMobile ? 70 : 180;
+                      scale = 0.82;
+                      zIndex = 5;
+                      opacity = 0.7;
+                    } else if (diff === -2) {
+                      rotateY = 45;
+                      x = isMobile ? -120 : -320;
+                      scale = 0.65;
+                      zIndex = 3;
+                      opacity = 0.35;
+                    } else if (diff === 2) {
+                      rotateY = -45;
+                      x = isMobile ? 120 : 320;
+                      scale = 0.65;
+                      zIndex = 3;
+                      opacity = 0.35;
+                    }
+
+                    return (
+                      <motion.div
+                        key={photo.id}
+                        className="absolute w-60 md:w-[275px] bg-white p-3.5 pb-8 rounded-sm border border-stone-200 shadow-xl cursor-pointer flex flex-col"
+                        style={{
+                          transformStyle: "preserve-3d",
+                          backfaceVisibility: "hidden",
+                          WebkitBackfaceVisibility: "hidden",
+                          originX: 0.5,
+                          originY: 0.5
+                        }}
+                        animate={{
+                          x,
+                          scale,
+                          rotateY,
+                          zIndex,
+                          opacity
+                        }}
+                        transition={{ type: "spring", damping: 20, stiffness: 120 }}
+                        onClick={() => {
+                          if (isCenter) {
+                            openLightbox(index);
+                          } else {
+                            setCarouselIndex(index);
+                          }
+                        }}
+                      >
+                        {/* Washi Tape Accent */}
+                        <div 
+                          className="absolute -top-3.5 left-1/2 -translate-x-1/2 w-24 h-6 border-l border-r border-dashed bg-amber-100/60 text-brand-gold/70 border-brand-gold/20 mix-blend-multiply flex items-center justify-center font-handwritten text-[9px] tracking-widest font-bold uppercase select-none z-10"
+                          style={{
+                            clipPath: "polygon(0% 8%, 4% 1%, 10% 8%, 15% 0%, 22% 8%, 28% 1%, 35% 8%, 40% 0%, 47% 8%, 53% 1%, 60% 8%, 66% 0%, 73% 8%, 79% 1%, 86% 8%, 92% 0%, 98% 8%, 100% 2%, 100% 92%, 96% 99%, 90% 92%, 84% 100%, 77% 92%, 71% 100%, 64% 92%, 58% 100%, 52% 92%, 46% 100%, 39% 92%, 33% 100%, 26% 92%, 20% 100%, 13% 92%, 7% 100%, 0% 91%)"
+                          }}
+                        >
+                          {photo.category}
+                        </div>
+
+                        {/* Photo container */}
+                        <div className="relative aspect-[4/3] w-full overflow-hidden bg-stone-100 border border-stone-200 rounded-sm">
+                          {/* Image with layoutId for smooth morphing to lightbox */}
+                          <motion.img 
+                            layoutId={`gallery-img-${photo.id}`}
+                            src={photo.url} 
+                            alt={photo.title} 
+                            className="w-full h-full object-cover select-none pointer-events-none"
+                          />
+                          {isCenter && (
+                            <div className="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+                              <div className="p-2 rounded-full bg-white/85 text-brand-green-dark shadow-md">
+                                <Maximize2 size={15} />
+                              </div>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Polaroid handwritten caption */}
+                        <h4 className="font-handwritten text-lg md:text-xl text-stone-850 text-center mt-4.5 leading-tight tracking-wide select-none">
+                          {photo.title}
+                        </h4>
+
+                        {/* Date info */}
+                        <div className="flex items-center justify-end gap-1 text-[10px] text-stone-400 font-handwritten mt-1.5 px-1 select-none">
+                          <Calendar size={10} />
+                          {photo.date}
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+
+                {/* Controls */}
+                <div className="flex items-center gap-4 mt-8 z-20">
+                  <button
+                    onClick={() => setCarouselIndex(prev => Math.max(0, prev - 1))}
+                    disabled={carouselIndex === 0}
+                    className="p-3 rounded-full bg-white border border-brand-gold/15 text-brand-green hover:bg-brand-cream/50 transition-colors shadow-sm disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                  >
+                    <ChevronLeft size={16} />
+                  </button>
+                  <span className="font-sans text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-widest bg-brand-cream/80 px-4 py-1.5 border border-brand-gold/10 rounded-full shadow-sm">
+                    {carouselIndex + 1} / {filteredPhotos.length}
+                  </span>
+                  <button
+                    onClick={() => setCarouselIndex(prev => Math.min(filteredPhotos.length - 1, prev + 1))}
+                    disabled={carouselIndex === filteredPhotos.length - 1}
+                    className="p-3 rounded-full bg-white border border-brand-gold/15 text-brand-green hover:bg-brand-cream/50 transition-colors shadow-sm disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                  >
+                    <ChevronRight size={16} />
+                  </button>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
