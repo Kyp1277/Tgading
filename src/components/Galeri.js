@@ -58,7 +58,28 @@ const Galeri = () => {
     fetchGaleri();
   }, []);
 
-  const filteredPhotos = photos.filter(
+  const parseIndonesianDate = (dateStr) => {
+    if (!dateStr) return new Date(0);
+    const months = {
+      januari: 0, februari: 1, maret: 2, april: 3, mei: 4, juni: 5,
+      juli: 6, agustus: 7, september: 8, oktober: 9, november: 10, desember: 11
+    };
+    const parts = dateStr.toLowerCase().split(' ');
+    if (parts.length !== 3) {
+      const d = new Date(dateStr);
+      return isNaN(d.getTime()) ? new Date(0) : d;
+    }
+    const day = parseInt(parts[0], 10);
+    const month = months[parts[1]] !== undefined ? months[parts[1]] : 0;
+    const year = parseInt(parts[2], 10);
+    return new Date(year, month, day);
+  };
+
+  const sortedPhotos = [...photos].sort(
+    (a, b) => parseIndonesianDate(a.date) - parseIndonesianDate(b.date)
+  );
+
+  const filteredPhotos = sortedPhotos.filter(
     (photo) => activeCategory === 'Semua' || photo.category === activeCategory
   );
 
@@ -195,7 +216,7 @@ const Galeri = () => {
                 className="text-center"
               >
                 <h2 className="font-serif font-black text-4xl md:text-[54px] text-bevel-green tracking-wide uppercase leading-tight mb-3">
-                  Temenin PDD Jalan-Jalan!
+                  Kisah KKN Tanjung Gading!
                 </h2>
                 <p className="font-handwritten text-2xl text-brand-gold-dark/95 max-w-2xl mx-auto leading-relaxed">
                   "Geser dan tata foto-foto kegiatan kami di papan tulis tempel di bawah..."

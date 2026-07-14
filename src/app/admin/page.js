@@ -7,6 +7,43 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Date translation helpers
+const formatToIndonesianDate = (isoDateStr) => {
+  if (!isoDateStr) return '';
+  const months = [
+    'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+  ];
+  const parts = isoDateStr.split('-');
+  if (parts.length !== 3) return isoDateStr;
+  const year = parts[0];
+  const monthIndex = parseInt(parts[1], 10) - 1;
+  const day = parseInt(parts[2], 10);
+  return `${day} ${months[monthIndex]} ${year}`;
+};
+
+const parseIndonesianToIsoDate = (indoDateStr) => {
+  if (!indoDateStr) return '';
+  const months = {
+    januari: '01', februari: '02', maret: '03', april: '04', mei: '05', juni: '06',
+    juli: '07', agustus: '08', september: '09', oktober: '10', november: '11', desember: '12'
+  };
+  const parts = indoDateStr.toLowerCase().split(' ');
+  if (parts.length !== 3) {
+    try {
+      const d = new Date(indoDateStr);
+      if (!isNaN(d.getTime())) {
+        return d.toISOString().split('T')[0];
+      }
+    } catch {}
+    return '';
+  }
+  const day = parts[0].padStart(2, '0');
+  const month = months[parts[1]] || '01';
+  const year = parts[2];
+  return `${year}-${month}-${day}`;
+};
+
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [authChecking, setAuthChecking] = useState(true);
@@ -124,7 +161,7 @@ export default function AdminPage() {
         body: JSON.stringify({
           id: prokerId,
           title: prokerTitle,
-          date: prokerDate,
+          date: formatToIndonesianDate(prokerDate),
           status: prokerStatus,
           desc: prokerDesc
         })
@@ -161,7 +198,7 @@ export default function AdminPage() {
   const handleProkerEdit = (item) => {
     setProkerId(item.id);
     setProkerTitle(item.title);
-    setProkerDate(item.date);
+    setProkerDate(parseIndonesianToIsoDate(item.date));
     setProkerStatus(item.status);
     setProkerDesc(item.desc);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -226,7 +263,7 @@ export default function AdminPage() {
           id: galeriId,
           title: galeriTitle,
           category: galeriCategory,
-          date: galeriDate,
+          date: formatToIndonesianDate(galeriDate),
           desc: galeriDesc,
           url: finalUrl
         })
@@ -265,7 +302,7 @@ export default function AdminPage() {
     setGaleriId(item.id);
     setGaleriTitle(item.title);
     setGaleriCategory(item.category);
-    setGaleriDate(item.date);
+    setGaleriDate(parseIndonesianToIsoDate(item.date));
     setGaleriDesc(item.desc);
     setGaleriPreview(item.url);
     setGaleriFile(null);
@@ -439,10 +476,9 @@ export default function AdminPage() {
                       Tanggal / Waktu
                     </label>
                     <input
-                      type="text"
+                      type="date"
                       value={prokerDate}
                       onChange={(e) => setProkerDate(e.target.value)}
-                      placeholder="Contoh: 15 Juli 2026"
                       required
                       className="w-full px-3.5 py-2.5 rounded-lg border border-brand-green-dark/15 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold bg-brand-cream/5 outline-none text-brand-green-dark text-sm font-sans"
                     />
@@ -531,10 +567,9 @@ export default function AdminPage() {
                       Tanggal Kegiatan
                     </label>
                     <input
-                      type="text"
+                      type="date"
                       value={galeriDate}
                       onChange={(e) => setGaleriDate(e.target.value)}
-                      placeholder="Contoh: 20 Juli 2026"
                       required
                       className="w-full px-3.5 py-2.5 rounded-lg border border-brand-green-dark/15 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold bg-brand-cream/5 outline-none text-brand-green-dark text-sm font-sans"
                     />
