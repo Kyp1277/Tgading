@@ -8,7 +8,7 @@ export const anggotaData = [
     major: 'Tadris Ilmu Pengetahuan Sosial',
     avatar: 'https://ui-avatars.com/api/?name=Hamdi+Gustiawan&background=14532d&color=c9a227&size=200&bold=true',
     fotoStruktur: '/images/struktur/kordes.jpeg',
-    fotoAnggota: '/images/anggota/hamdi.jpg',
+    fotoAnggota: '/images/anggota/hamdi.jpeg',
     bio: 'Memimpin koordinasi seluruh program kerja KKN UIN Suska Riau 2026 di Kelurahan Tanjung Gading agar berjalan selaras dan berdampak nyata.',
     socials: {
       instagram: 'https://www.instagram.com/ohmyhamd?igsh=OG9tenM3Mm92M2dv',
@@ -25,7 +25,7 @@ export const anggotaData = [
     major: 'Akuntansi S1',
     avatar: 'https://ui-avatars.com/api/?name=Lisa+Nopitasari&background=14532d&color=c9a227&size=200&bold=true',
     fotoStruktur: '/images/struktur/sekre.jpeg',
-    fotoAnggota: '/images/anggota/lisa.jpg',
+    fotoAnggota: '/images/anggota/lisa.jpeg',
     bio: 'Bertanggung jawab atas administrasi kelompok, persuratan, perizinan, dan penyusunan proposal serta laporan berkala KKN.',
     socials: {
       instagram: 'https://instagram.com/dummy_account',
@@ -42,7 +42,7 @@ export const anggotaData = [
     major: 'Manajemen Dakwah',
     avatar: 'https://ui-avatars.com/api/?name=Nur+Annisa&background=14532d&color=c9a227&size=200&bold=true',
     fotoStruktur: '/images/struktur/sekre.jpeg',
-    fotoAnggota: '/images/anggota/nur_annisa.jpg',
+    fotoAnggota: '/images/anggota/nurnisa.jpeg',
     bio: 'Membantu pengelolaan administrasi, surat menyurat, dokumentasi berkas kearsipan, serta notulensi rapat koordinasi KKN.',
     socials: {
       instagram: 'https://www.instagram.com/nranniisa29_?igsh=MTlrdmZrZDQweHloOA==',
@@ -57,7 +57,7 @@ export const anggotaData = [
     major: 'Ilmu Al Qur\'an Dan Tafsir S1',
     avatar: 'https://ui-avatars.com/api/?name=Tasya+Salsabilla&background=14532d&color=c9a227&size=200&bold=true',
     fotoStruktur: '/images/struktur/bendahara.jpeg',
-    fotoAnggota: '/images/anggota/tasya.jpg',
+    fotoAnggota: '/images/anggota/tasya.jpeg',
     bio: 'Mengelola keuangan kelompok, menyusun anggaran program kerja, serta memantau pengeluaran dana KKN agar transparan dan efisien.',
     socials: {
       instagram: 'https://instagram.com/dummy_account',
@@ -74,7 +74,7 @@ export const anggotaData = [
     major: 'Sistem Informasi',
     avatar: 'https://ui-avatars.com/api/?name=Rifky+Naufal+Athaya&background=14532d&color=c9a227&size=200&bold=true',
     fotoStruktur: '/images/struktur/humas.jpeg',
-    fotoAnggota: '/images/anggota/rifky.jpg',
+    fotoAnggota: '/images/anggota/kyp.jpeg',
     bio: 'Menjembatani komunikasi antara mahasiswa KKN dengan aparatur kelurahan, tokoh pemuda, dan tokoh masyarakat Tanjung Gading.',
     socials: {
       instagram: 'https://instagram.com/dummy_account',
@@ -91,7 +91,7 @@ export const anggotaData = [
     major: 'Pendidikan Bahasa Arab S1',
     avatar: 'https://ui-avatars.com/api/?name=Wardi+Siregar&background=14532d&color=c9a227&size=200&bold=true',
     fotoStruktur: '/images/struktur/humas.jpeg',
-    fotoAnggota: '/images/anggota/wardi.jpg',
+    fotoAnggota: '/images/anggota/wardi.jpeg',
     bio: 'Membantu menjalin komunikasi eksternal and mempererat jalinan kerjasama dengan berbagai organisasi kemasyarakatan setempat.',
     socials: {
       instagram: 'https://instagram.com/dummy_account',
@@ -108,7 +108,7 @@ export const anggotaData = [
     major: 'Administrasi Negara',
     avatar: 'https://ui-avatars.com/api/?name=Walfajri&background=14532d&color=c9a227&size=200&bold=true',
     fotoStruktur: '/images/struktur/pdd.jpeg',
-    fotoAnggota: '/images/anggota/walfajri.jpg',
+    fotoAnggota: '/images/anggota/fajri.jpeg',
     bio: 'Mengonsep dokumentasi publikasi visual, memelihara website portfolio KKN, serta mempublikasikan progres pengabdian.',
     socials: {
       instagram: 'https://www.instagram.com/wlfjri_?igsh=MW1uaWRramI1aGJjbA==',
@@ -125,7 +125,7 @@ export const anggotaData = [
     major: 'Perbankan Syariah S1',
     avatar: 'https://ui-avatars.com/api/?name=Nadira+Solekha&background=14532d&color=c9a227&size=200&bold=true',
     fotoStruktur: '/images/struktur/pdd.jpeg',
-    fotoAnggota: '/images/anggota/nadira.jpg',
+    fotoAnggota: '/images/anggota/nadira.jpeg',
     bio: 'Membantu mengonsep materi publikasi digital, mendesain pamflet kegiatan, serta mengelola dokumentasi media sosial KKN.',
     socials: {
       instagram: 'https://instagram.com/dummy_account',
@@ -142,7 +142,7 @@ export const anggotaData = [
     major: 'Pendidikan Ekonomi',
     avatar: 'https://ui-avatars.com/api/?name=Anisa+Febrianti&background=14532d&color=c9a227&size=200&bold=true',
     fotoStruktur: '/images/struktur/acara.jpeg',
-    fotoAnggota: '/images/anggota/anisa_febrianti.jpg',
+    fotoAnggota: '/images/anggota/anisa.jpeg',
     bio: 'Mengonsep kelas bimbingan belajar tambahan untuk anak-anak sekolah dasar serta memimpin rangkaian acara festival keagamaan.',
     socials: {
       instagram: 'https://instagram.com/dummy_account',
@@ -159,7 +159,7 @@ export const anggotaData = [
     major: 'Perbankan Syariah S1',
     avatar: 'https://ui-avatars.com/api/?name=Namira+Sahida&background=14532d&color=c9a227&size=200&bold=true',
     fotoStruktur: '/images/struktur/acara.jpeg',
-    fotoAnggota: '/images/anggota/namira.jpg',
+    fotoAnggota: '/images/anggota/namira.jpeg',
     bio: 'Membantu jalannya bimbingan belajar menyenangkan bagi siswa sekolah dasar serta menyusun agenda kepanitiaan sosial budaya.',
     socials: {
       instagram: 'https://www.instagram.com/nmrashda?igsh=MWNkNTYwMnRoMjFhNg%3D%3D&utm_source=qr',
@@ -174,7 +174,7 @@ export const anggotaData = [
     major: 'Pendidikan Bahasa Inggris',
     avatar: 'https://ui-avatars.com/api/?name=Dian+Purwati&background=14532d&color=c9a227&size=200&bold=true',
     fotoStruktur: '/images/struktur/logistik.jpeg',
-    fotoAnggota: '/images/anggota/dian.jpg',
+    fotoAnggota: '/images/anggota/dian.jpeg',
     bio: 'Mengelola pengadaan logistik kelompok KKN, menyusun inventarisasi perlengkapan, serta merancang fasilitas gotong royong warga.',
     socials: {
       instagram: 'https://instagram.com/dummy_account',
