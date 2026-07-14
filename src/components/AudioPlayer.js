@@ -11,13 +11,13 @@ const AudioPlayer = () => {
   const [showTooltip, setShowTooltip] = useState(false);
   const audioRef = useRef(null);
 
-  // Menggunakan lagu piano yang hangat dan menginspirasi dari Chosic (Royalty-free)
-  const audioUrl = "https://www.chosic.com/wp-content/uploads/2021/04/Warm-Memories-Emotional-Inspiring-Piano.mp3";
+  // Menggunakan lagu instrumen yang di-host secara lokal (bebas CORS & Hotlinking block)
+  const audioUrl = "/audio/warm-memories.mp3";
 
   useEffect(() => {
-    // Set volume awal agar tidak terlalu keras (25%)
+    // Set volume awal agar tidak terlalu keras (20%)
     if (audioRef.current) {
-      audioRef.current.volume = 0.25;
+      audioRef.current.volume = 0.20;
     }
   }, []);
 
@@ -151,7 +151,7 @@ const AudioPlayer = () => {
               className="absolute bottom-full left-0 mb-3 bg-[#111e16] text-white py-2 px-3.5 rounded-xl text-[9px] font-sans font-medium tracking-wide shadow-lg border border-white/5 pointer-events-none select-none z-50 flex items-center gap-2 whitespace-nowrap"
             >
               <Music size={10} className="text-brand-gold" />
-              <span>Keys of Moon — <strong>Warm Memories</strong></span>
+              <span>SoundHelix — <strong>Chill Instrumental</strong></span>
             </motion.div>
           )}
         </AnimatePresence>
