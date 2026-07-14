@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Plus, Trash2, Edit2, LogOut, Upload, Calendar, 
-  Tag, Loader2, Lock, PlusCircle, Check, X, FileText, Image as ImageIcon
+  Tag, Loader2, Lock, PlusCircle, Check, X, FileText, Image as ImageIcon,
+  Home, Search, AlertTriangle, Info, ShieldAlert
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -57,6 +58,16 @@ export default function AdminPage() {
   const [activeTab, setActiveTab] = useState('proker');
   const [loadingData, setLoadingData] = useState(false);
 
+  // Search filter states
+  const [prokerSearch, setProkerSearch] = useState('');
+  const [galeriSearch, setGaleriSearch] = useState('');
+
+  // Toast notification state
+  const [toast, setToast] = useState({ message: '', type: 'success', visible: false });
+
+  // Custom confirm delete modal state
+  const [deleteConfirm, setDeleteConfirm] = useState({ isOpen: false, id: null, type: '' });
+
   // Form states - Proker
   const [prokerId, setProkerId] = useState(null);
   const [prokerTitle, setProkerTitle] = useState('');
@@ -74,6 +85,22 @@ export default function AdminPage() {
   const [galeriFile, setGaleriFile] = useState(null);
   const [galeriPreview, setGaleriPreview] = useState('');
   const [galeriSubmitLoading, setGaleriSubmitLoading] = useState(false);
+
+  // Toast Helper
+  const showToast = (message, type = 'success') => {
+    setToast({ message, type, visible: true });
+  };
+  const closeToast = () => setToast(prev => ({ ...prev, visible: false }));
+
+  // Auto hide toast
+  useEffect(() => {
+    if (toast.visible) {
+      const timer = setTimeout(() => {
+        setToast(prev => ({ ...prev, visible: false }));
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [toast.visible]);
 
   // Check auth session on load
   useEffect(() => {
@@ -111,6 +138,7 @@ export default function AdminPage() {
       }
     } catch (e) {
       console.error("Gagal mengambil data", e);
+      showToast('Gagal memuat data dari database.', 'error');
     } finally {
       setLoadingData(false);
     }
@@ -128,13 +156,16 @@ export default function AdminPage() {
       });
       if (res.ok) {
         setIsAuthenticated(true);
+        showToast('Berhasil masuk dashboard admin.', 'success');
         fetchData();
       } else {
         const err = await res.json();
         setLoginError(err.message || 'Password salah!');
+        showToast(err.message || 'Password salah!', 'error');
       }
     } catch (err) {
       setLoginError('Terjadi kesalahan jaringan.');
+      showToast('Terjadi kesalahan jaringan.', 'error');
     } finally {
       setLoginLoading(false);
     }
@@ -145,8 +176,10 @@ export default function AdminPage() {
       await fetch('/api/auth', { method: 'DELETE' });
       setIsAuthenticated(false);
       setPassword('');
+      showToast('Berhasil keluar sesi admin.', 'info');
     } catch (e) {
       console.error(e);
+      showToast('Gagal keluar sesi.', 'error');
     }
   };
 
@@ -167,31 +200,50 @@ export default function AdminPage() {
         })
       });
       if (res.ok) {
+        showToast(prokerId ? 'Program kerja berhasil diperbarui.' : 'Program kerja berhasil dipublish.', 'success');
         resetProkerForm();
         fetchData();
       } else {
         const err = await res.json();
-        alert(err.error || 'Gagal menyimpan program kerja.');
+        showToast(err.error || 'Gagal menyimpan program kerja.', 'error');
       }
     } catch (e) {
-      alert('Terjadi kesalahan jaringan.');
+      showToast('Terjadi kesalahan jaringan.', 'error');
     } finally {
       setProkerSubmitLoading(false);
     }
   };
 
-  const handleProkerDelete = async (id) => {
-    if (!confirm('Apakah Anda yakin ingin menghapus program kerja ini?')) return;
+  const triggerDeleteConfirm = (id, type) => {
+    setDeleteConfirm({ isOpen: true, id, type });
+  };
+
+  const executeDelete = async () => {
+    const { id, type } = deleteConfirm;
+    setDeleteConfirm({ isOpen: false, id: null, type: '' });
+    
     try {
-      const res = await fetch(`/api/proker?id=${id}`, { method: 'DELETE' });
-      if (res.ok) {
-        fetchData();
-      } else {
-        const err = await res.json();
-        alert(err.error || 'Gagal menghapus.');
+      if (type === 'proker') {
+        const res = await fetch(`/api/proker?id=${id}`, { method: 'DELETE' });
+        if (res.ok) {
+          showToast('Program kerja berhasil dihapus.', 'success');
+          fetchData();
+        } else {
+          const err = await res.json();
+          showToast(err.error || 'Gagal menghapus program kerja.', 'error');
+        }
+      } else if (type === 'galeri') {
+        const res = await fetch(`/api/galeri?id=${id}`, { method: 'DELETE' });
+        if (res.ok) {
+          showToast('Foto galeri berhasil dihapus.', 'success');
+          fetchData();
+        } else {
+          const err = await res.json();
+          showToast(err.error || 'Gagal menghapus foto.', 'error');
+        }
       }
     } catch (e) {
-      alert('Gagal menghapus.');
+      showToast('Terjadi kesalahan jaringan.', 'error');
     }
   };
 
@@ -202,6 +254,7 @@ export default function AdminPage() {
     setProkerStatus(item.status);
     setProkerDesc(item.desc);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    showToast('Mode Edit: Silakan sesuaikan form program kerja.', 'info');
   };
 
   const resetProkerForm = () => {
@@ -217,19 +270,20 @@ export default function AdminPage() {
     if (file) {
       // 2 MB limit (2097152 bytes)
       if (file.size > 2097152) {
-        alert('Ukuran foto terlalu besar! Maksimal ukuran foto adalah 2 MB agar menghemat kuota penyimpanan Vercel Blob Anda. Silakan kompres foto Anda terlebih dahulu di situs gratis seperti https://tinypng.com');
+        showToast('Ukuran foto terlalu besar! Maksimal 2 MB agar hemat kuota. Silakan kompres foto dahulu di tinypng.com', 'error');
         e.target.value = ''; // Reset file input
         return;
       }
       setGaleriFile(file);
       setGaleriPreview(URL.createObjectURL(file));
+      showToast('Foto berhasil dimuat. Siap diunggah.', 'success');
     }
   };
 
   const handleGaleriSubmit = async (e) => {
     e.preventDefault();
     if (!galeriId && !galeriFile) {
-      alert('Silakan pilih foto terlebih dahulu!');
+      showToast('Silakan pilih foto terlebih dahulu!', 'error');
       return;
     }
     setGaleriSubmitLoading(true);
@@ -255,7 +309,7 @@ export default function AdminPage() {
         finalUrl = existing ? existing.url : '';
       }
 
-      // Step 2: Save metadata to Vercel KV
+      // Step 2: Save metadata to Vercel KV / Local JSON
       const res = await fetch('/api/galeri', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -270,31 +324,17 @@ export default function AdminPage() {
       });
 
       if (res.ok) {
+        showToast(galeriId ? 'Informasi foto berhasil diperbarui.' : 'Foto berhasil diunggah dan dipublish.', 'success');
         resetGaleriForm();
         fetchData();
       } else {
         const err = await res.json();
-        alert(err.error || 'Gagal menyimpan galeri.');
+        showToast(err.error || 'Gagal menyimpan data galeri.', 'error');
       }
     } catch (e) {
-      alert(e.message || 'Terjadi kesalahan jaringan.');
+      showToast(e.message || 'Terjadi kesalahan jaringan.', 'error');
     } finally {
       setGaleriSubmitLoading(false);
-    }
-  };
-
-  const handleGaleriDelete = async (id) => {
-    if (!confirm('Apakah Anda yakin ingin menghapus foto ini?')) return;
-    try {
-      const res = await fetch(`/api/galeri?id=${id}`, { method: 'DELETE' });
-      if (res.ok) {
-        fetchData();
-      } else {
-        const err = await res.json();
-        alert(err.error || 'Gagal menghapus.');
-      }
-    } catch (e) {
-      alert('Gagal menghapus.');
     }
   };
 
@@ -307,6 +347,7 @@ export default function AdminPage() {
     setGaleriPreview(item.url);
     setGaleriFile(null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    showToast('Mode Edit: Silakan sesuaikan detail info foto.', 'info');
   };
 
   const resetGaleriForm = () => {
@@ -319,18 +360,31 @@ export default function AdminPage() {
     setGaleriPreview('');
   };
 
+  // Filtered List computations
+  const filteredProker = proker.filter(item => 
+    item.title.toLowerCase().includes(prokerSearch.toLowerCase()) ||
+    item.desc.toLowerCase().includes(prokerSearch.toLowerCase()) ||
+    item.status.toLowerCase().includes(prokerSearch.toLowerCase())
+  );
+
+  const filteredGaleri = galeri.filter(item => 
+    item.title.toLowerCase().includes(galeriSearch.toLowerCase()) ||
+    item.desc.toLowerCase().includes(galeriSearch.toLowerCase()) ||
+    item.category.toLowerCase().includes(galeriSearch.toLowerCase())
+  );
+
   if (authChecking) {
     return (
-      <div className="min-h-screen bg-[#FDFBF5] flex flex-col items-center justify-center">
+      <div className="min-h-screen bg-brand-sand flex flex-col items-center justify-center">
         <Loader2 className="w-10 h-10 text-brand-gold animate-spin mb-4" />
-        <p className="font-sans text-brand-green-dark/70 text-sm">Memeriksa sesi admin...</p>
+        <p className="font-sans text-slate-500 text-sm">Memeriksa sesi admin...</p>
       </div>
     );
   }
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-[#FDFBF5] flex items-center justify-center px-6">
+      <div className="min-h-screen bg-brand-sand flex items-center justify-center px-6">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -343,7 +397,7 @@ export default function AdminPage() {
             <h1 className="font-serif font-bold text-2xl text-brand-green-dark mb-1">
               Admin KKN
             </h1>
-            <p className="font-sans text-brand-green-dark/65 text-xs">
+            <p className="font-sans text-slate-500 text-xs">
               Portal Kelola Program Kerja & Galeri Kelurahan Tanjung Gading
             </p>
           </div>
@@ -362,7 +416,8 @@ export default function AdminPage() {
                 className="w-full px-4 py-3 rounded-xl border border-brand-green-dark/15 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold bg-brand-cream/10 outline-none text-brand-green-dark transition-all duration-300 font-sans"
               />
               {loginError && (
-                <p className="text-red-500 font-sans text-xs mt-2 font-semibold">
+                <p className="text-red-500 font-sans text-xs mt-2 font-semibold flex items-center gap-1">
+                  <AlertTriangle size={12} />
                   {loginError}
                 </p>
               )}
@@ -371,7 +426,7 @@ export default function AdminPage() {
             <button
               type="submit"
               disabled={loginLoading}
-              className="w-full py-3.5 bg-brand-green hover:bg-brand-green-dark text-white font-sans text-sm font-bold uppercase tracking-wider rounded-xl transition-all duration-300 shadow-md flex items-center justify-center"
+              className="w-full py-3.5 bg-brand-green hover:bg-brand-green-dark text-white font-sans text-sm font-bold uppercase tracking-wider rounded-xl transition-all duration-300 shadow-md flex items-center justify-center cursor-pointer"
             >
               {loginLoading ? (
                 <Loader2 className="w-4 h-4 animate-spin" />
@@ -386,35 +441,45 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FDFBF5] py-12 px-6">
+    <div className="min-h-screen bg-brand-sand py-12 px-6">
       <div className="max-w-6xl mx-auto">
+        
         {/* Top Header */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-10 pb-6 border-b border-brand-gold/15 gap-4">
           <div>
             <h1 className="font-serif font-bold text-3xl text-brand-green-dark mb-1.5">
               Dashboard Kelola Website
             </h1>
-            <p className="font-sans text-brand-green-dark/65 text-sm">
-              Kelola berita kegiatan, progres Program Kerja, dan dokumentasi Galeri Foto.
+            <p className="font-sans text-slate-500 text-sm">
+              Kelola kemajuan Program Kerja, dan dokumentasi Galeri Foto.
             </p>
           </div>
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 font-sans text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-sm border border-red-200"
-          >
-            <LogOut size={14} />
-            Keluar Sesi
-          </button>
+          <div className="flex items-center gap-3 w-full md:w-auto">
+            <a
+              href="/"
+              className="flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-600 font-sans text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-sm border border-slate-200 w-1/2 md:w-auto text-center"
+            >
+              <Home size={14} />
+              Lihat Website
+            </a>
+            <button
+              onClick={handleLogout}
+              className="flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 font-sans text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-sm border border-red-200 w-1/2 md:w-auto cursor-pointer"
+            >
+              <LogOut size={14} />
+              Keluar Sesi
+            </button>
+          </div>
         </div>
 
         {/* Tab Selection */}
         <div className="flex items-center gap-2 p-1.5 bg-white rounded-xl border border-brand-gold/10 shadow-sm mb-8 w-fit">
           <button
             onClick={() => setActiveTab('proker')}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-sans text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-sans text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
               activeTab === 'proker' 
                 ? 'bg-brand-green text-white shadow-sm' 
-                : 'text-brand-green-dark/60 hover:text-brand-green-dark hover:bg-brand-cream/30'
+                : 'text-slate-500 hover:text-brand-green-dark hover:bg-brand-cream/30'
             }`}
           >
             <FileText size={14} />
@@ -422,10 +487,10 @@ export default function AdminPage() {
           </button>
           <button
             onClick={() => setActiveTab('galeri')}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-sans text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-sans text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
               activeTab === 'galeri' 
                 ? 'bg-brand-green text-white shadow-sm' 
-                : 'text-brand-green-dark/60 hover:text-brand-green-dark hover:bg-brand-cream/30'
+                : 'text-slate-500 hover:text-brand-green-dark hover:bg-brand-cream/30'
             }`}
           >
             <ImageIcon size={14} />
@@ -449,7 +514,7 @@ export default function AdminPage() {
                     <button 
                       type="button" 
                       onClick={resetProkerForm}
-                      className="text-xs text-brand-gold font-bold hover:underline"
+                      className="text-xs text-brand-gold font-bold hover:underline cursor-pointer"
                     >
                       Batal Edit
                     </button>
@@ -460,14 +525,17 @@ export default function AdminPage() {
                   <label className="block font-sans text-[10px] font-bold text-brand-green-dark uppercase tracking-wider mb-1.5">
                     Nama Program Kerja
                   </label>
-                  <input
-                    type="text"
-                    value={prokerTitle}
-                    onChange={(e) => setProkerTitle(e.target.value)}
-                    placeholder="Contoh: Bimbingan Belajar Ceria"
-                    required
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-brand-green-dark/15 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold bg-brand-cream/5 outline-none text-brand-green-dark text-sm font-sans"
-                  />
+                  <div className="relative">
+                    <FileText size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <input
+                      type="text"
+                      value={prokerTitle}
+                      onChange={(e) => setProkerTitle(e.target.value)}
+                      placeholder="Contoh: Bimbingan Belajar Ceria"
+                      required
+                      className="w-full pl-10 pr-3.5 py-2.5 rounded-lg border border-brand-green-dark/15 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold bg-brand-cream/5 outline-none text-brand-green-dark text-sm font-sans"
+                    />
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
@@ -475,28 +543,34 @@ export default function AdminPage() {
                     <label className="block font-sans text-[10px] font-bold text-brand-green-dark uppercase tracking-wider mb-1.5">
                       Tanggal / Waktu
                     </label>
-                    <input
-                      type="date"
-                      value={prokerDate}
-                      onChange={(e) => setProkerDate(e.target.value)}
-                      required
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-brand-green-dark/15 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold bg-brand-cream/5 outline-none text-brand-green-dark text-sm font-sans"
-                    />
+                    <div className="relative">
+                      <Calendar size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                      <input
+                        type="date"
+                        value={prokerDate}
+                        onChange={(e) => setProkerDate(e.target.value)}
+                        required
+                        className="w-full pl-10 pr-3 py-2.5 rounded-lg border border-brand-green-dark/15 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold bg-brand-cream/5 outline-none text-brand-green-dark text-xs font-sans"
+                      />
+                    </div>
                   </div>
 
                   <div>
                     <label className="block font-sans text-[10px] font-bold text-brand-green-dark uppercase tracking-wider mb-1.5">
                       Status Progres
                     </label>
-                    <select
-                      value={prokerStatus}
-                      onChange={(e) => setProkerStatus(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-brand-green-dark/15 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold bg-brand-cream/5 outline-none text-brand-green-dark text-sm font-sans"
-                    >
-                      <option value="Selesai">Selesai</option>
-                      <option value="Berlangsung">Berlangsung</option>
-                      <option value="Direncanakan">Direncanakan</option>
-                    </select>
+                    <div className="relative">
+                      <Tag size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                      <select
+                        value={prokerStatus}
+                        onChange={(e) => setProkerStatus(e.target.value)}
+                        className="w-full pl-10 pr-3 py-2.5 rounded-lg border border-brand-green-dark/15 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold bg-brand-cream/5 outline-none text-brand-green-dark text-xs font-sans"
+                      >
+                        <option value="Selesai">Selesai</option>
+                        <option value="Berlangsung">Berlangsung</option>
+                        <option value="Direncanakan">Direncanakan</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
 
@@ -517,7 +591,7 @@ export default function AdminPage() {
                 <button
                   type="submit"
                   disabled={prokerSubmitLoading}
-                  className="w-full py-3 bg-brand-gold hover:bg-brand-gold-dark text-white font-sans text-xs font-bold uppercase tracking-wider rounded-lg transition-all duration-300 shadow-sm flex items-center justify-center gap-2"
+                  className="w-full py-3 bg-brand-gold hover:bg-brand-gold-dark text-white font-sans text-xs font-bold uppercase tracking-wider rounded-lg transition-all duration-300 shadow-sm flex items-center justify-center gap-2 cursor-pointer"
                 >
                   {prokerSubmitLoading ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
@@ -540,7 +614,7 @@ export default function AdminPage() {
                     <button 
                       type="button" 
                       onClick={resetGaleriForm}
-                      className="text-xs text-brand-gold font-bold hover:underline"
+                      className="text-xs text-brand-gold font-bold hover:underline cursor-pointer"
                     >
                       Batal Edit
                     </button>
@@ -551,14 +625,17 @@ export default function AdminPage() {
                   <label className="block font-sans text-[10px] font-bold text-brand-green-dark uppercase tracking-wider mb-1.5">
                     Judul Kegiatan Foto
                   </label>
-                  <input
-                    type="text"
-                    value={galeriTitle}
-                    onChange={(e) => setGaleriTitle(e.target.value)}
-                    placeholder="Contoh: Mengajar Mengaji di Masjid"
-                    required
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-brand-green-dark/15 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold bg-brand-cream/5 outline-none text-brand-green-dark text-sm font-sans"
-                  />
+                  <div className="relative">
+                    <FileText size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <input
+                      type="text"
+                      value={galeriTitle}
+                      onChange={(e) => setGaleriTitle(e.target.value)}
+                      placeholder="Contoh: Mengajar Mengaji di Masjid"
+                      required
+                      className="w-full pl-10 pr-3.5 py-2.5 rounded-lg border border-brand-green-dark/15 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold bg-brand-cream/5 outline-none text-brand-green-dark text-sm font-sans"
+                    />
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
@@ -566,29 +643,35 @@ export default function AdminPage() {
                     <label className="block font-sans text-[10px] font-bold text-brand-green-dark uppercase tracking-wider mb-1.5">
                       Tanggal Kegiatan
                     </label>
-                    <input
-                      type="date"
-                      value={galeriDate}
-                      onChange={(e) => setGaleriDate(e.target.value)}
-                      required
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-brand-green-dark/15 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold bg-brand-cream/5 outline-none text-brand-green-dark text-sm font-sans"
-                    />
+                    <div className="relative">
+                      <Calendar size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                      <input
+                        type="date"
+                        value={galeriDate}
+                        onChange={(e) => setGaleriDate(e.target.value)}
+                        required
+                        className="w-full pl-10 pr-3.5 py-2.5 rounded-lg border border-brand-green-dark/15 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold bg-brand-cream/5 outline-none text-brand-green-dark text-xs font-sans"
+                      />
+                    </div>
                   </div>
 
                   <div>
                     <label className="block font-sans text-[10px] font-bold text-brand-green-dark uppercase tracking-wider mb-1.5">
                       Kategori Kegiatan
                     </label>
-                    <select
-                      value={galeriCategory}
-                      onChange={(e) => setGaleriCategory(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-brand-green-dark/15 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold bg-brand-cream/5 outline-none text-brand-green-dark text-sm font-sans"
-                    >
-                      <option value="Sosialisasi">Sosialisasi</option>
-                      <option value="Edukasi">Edukasi</option>
-                      <option value="Gotong Royong">Gotong Royong</option>
-                      <option value="Sosial & Budaya">Sosial & Budaya</option>
-                    </select>
+                    <div className="relative">
+                      <Tag size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                      <select
+                        value={galeriCategory}
+                        onChange={(e) => setGaleriCategory(e.target.value)}
+                        className="w-full pl-10 pr-3.5 py-2.5 rounded-lg border border-brand-green-dark/15 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold bg-brand-cream/5 outline-none text-brand-green-dark text-xs font-sans"
+                      >
+                        <option value="Sosialisasi">Sosialisasi</option>
+                        <option value="Edukasi">Edukasi</option>
+                        <option value="Gotong Royong">Gotong Royong</option>
+                        <option value="Sosial & Budaya">Sosial & Budaya</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
 
@@ -596,13 +679,13 @@ export default function AdminPage() {
                   <label className="block font-sans text-[10px] font-bold text-brand-green-dark uppercase tracking-wider mb-1.5">
                     Keterangan Foto
                   </label>
-                  <input
-                    type="text"
+                  <textarea
                     value={galeriDesc}
                     onChange={(e) => setGaleriDesc(e.target.value)}
+                    rows={2}
                     placeholder="Contoh: Adik-adik antusias menyimak dongeng..."
                     required
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-brand-green-dark/15 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold bg-brand-cream/5 outline-none text-brand-green-dark text-sm font-sans"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-brand-green-dark/15 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold bg-brand-cream/5 outline-none text-brand-green-dark text-sm font-sans resize-none"
                   />
                 </div>
 
@@ -624,7 +707,7 @@ export default function AdminPage() {
                           alt="Preview" 
                           className="h-32 object-cover rounded-lg mb-2 shadow-sm"
                         />
-                        <p className="font-sans text-[10px] text-brand-green-dark/60">
+                        <p className="font-sans text-[10px] text-slate-500">
                           Klik untuk mengganti foto
                         </p>
                       </div>
@@ -632,7 +715,7 @@ export default function AdminPage() {
                       <div className="flex flex-col items-center py-4">
                         <Upload className="w-8 h-8 text-brand-gold mb-2" />
                         <span className="font-sans text-xs font-bold text-brand-green-dark">Pilih / Drag Foto Kelompok</span>
-                        <span className="font-sans text-[9px] text-brand-green-dark/50 mt-1">Format JPG, PNG, WEBP (Maksimal 2MB)</span>
+                        <span className="font-sans text-[9px] text-slate-400 mt-1">Format JPG, PNG, WEBP (Maksimal 2MB)</span>
                       </div>
                     )}
                   </div>
@@ -641,7 +724,7 @@ export default function AdminPage() {
                 <button
                   type="submit"
                   disabled={galeriSubmitLoading}
-                  className="w-full py-3 bg-brand-gold hover:bg-brand-gold-dark text-white font-sans text-xs font-bold uppercase tracking-wider rounded-lg transition-all duration-300 shadow-sm flex items-center justify-center gap-2"
+                  className="w-full py-3 bg-brand-gold hover:bg-brand-gold-dark text-white font-sans text-xs font-bold uppercase tracking-wider rounded-lg transition-all duration-300 shadow-sm flex items-center justify-center gap-2 cursor-pointer"
                 >
                   {galeriSubmitLoading ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
@@ -658,23 +741,44 @@ export default function AdminPage() {
 
           {/* Right List Area */}
           <div className="lg:col-span-7 space-y-4">
+            
+            {/* Search filter input */}
+            <div className="relative w-full">
+              <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+              <input
+                type="text"
+                placeholder={activeTab === 'proker' ? 'Cari judul, deskripsi, atau status program kerja...' : 'Cari judul, keterangan, atau kategori foto...'}
+                value={activeTab === 'proker' ? prokerSearch : galeriSearch}
+                onChange={(e) => activeTab === 'proker' ? setProkerSearch(e.target.value) : setGaleriSearch(e.target.value)}
+                className="w-full pl-11 pr-4 py-3 rounded-xl border border-brand-gold/15 focus:border-brand-gold bg-white outline-none text-brand-green-dark font-sans text-sm shadow-sm transition-all"
+              />
+              {(activeTab === 'proker' ? prokerSearch : galeriSearch) && (
+                <button
+                  onClick={() => activeTab === 'proker' ? setProkerSearch('') : setGaleriSearch('')}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                >
+                  <X size={16} />
+                </button>
+              )}
+            </div>
+
             <h2 className="font-serif font-bold text-lg text-brand-green-dark pb-2 border-b border-brand-gold/10">
-              Daftar Konten Terbit ({activeTab === 'proker' ? proker.length : galeri.length})
+              Daftar Konten Terbit ({activeTab === 'proker' ? filteredProker.length : filteredGaleri.length})
             </h2>
 
             {loadingData ? (
               <div className="py-20 flex flex-col items-center justify-center bg-white rounded-3xl border border-brand-gold/15">
                 <Loader2 className="w-8 h-8 text-brand-gold animate-spin mb-2" />
-                <p className="font-sans text-xs text-brand-green-dark/60">Memuat konten...</p>
+                <p className="font-sans text-xs text-slate-500">Memuat konten...</p>
               </div>
             ) : activeTab === 'proker' ? (
-              proker.length === 0 ? (
+              filteredProker.length === 0 ? (
                 <div className="py-20 text-center bg-white rounded-3xl border border-brand-gold/15">
-                  <p className="font-sans text-sm text-brand-green-dark/60">Belum ada program kerja yang terdaftar.</p>
+                  <p className="font-sans text-sm text-slate-500">Tidak ada program kerja yang ditemukan.</p>
                 </div>
               ) : (
-                <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
-                  {proker.map((item) => (
+                <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2 scrollbar-thin">
+                  {filteredProker.map((item) => (
                     <div 
                       key={item.id}
                       className="bg-white p-5 rounded-2xl border border-brand-gold/10 hover:border-brand-gold/20 shadow-sm flex items-start justify-between gap-4 transition-all duration-300"
@@ -693,15 +797,15 @@ export default function AdminPage() {
                           }`}>
                             {item.status}
                           </span>
-                          <span className="font-sans text-[10px] text-brand-green-dark/50 flex items-center gap-1">
-                            <Calendar size={11} />
+                          <span className="font-sans text-[10px] text-slate-500 flex items-center gap-1">
+                            <Calendar size={11} className="text-slate-400" />
                             {item.date}
                           </span>
                         </div>
                         <h3 className="font-serif font-bold text-base text-brand-green-dark">
                           {item.title}
                         </h3>
-                        <p className="font-sans text-xs text-brand-green-dark/70 leading-relaxed">
+                        <p className="font-sans text-xs text-slate-600 leading-relaxed">
                           {item.desc}
                         </p>
                       </div>
@@ -709,14 +813,14 @@ export default function AdminPage() {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => handleProkerEdit(item)}
-                          className="p-2 hover:bg-brand-cream/50 text-brand-green-dark/60 hover:text-brand-gold rounded-lg transition-colors duration-300"
+                          className="p-2 hover:bg-brand-cream/50 text-slate-400 hover:text-brand-gold rounded-lg transition-colors duration-300 cursor-pointer"
                           title="Edit"
                         >
                           <Edit2 size={15} />
                         </button>
                         <button
-                          onClick={() => handleProkerDelete(item.id)}
-                          className="p-2 hover:bg-red-50 text-red-600/60 hover:text-red-600 rounded-lg transition-colors duration-300"
+                          onClick={() => triggerDeleteConfirm(item.id, 'proker')}
+                          className="p-2 hover:bg-red-50 text-red-400 hover:text-red-655 hover:text-red-600 rounded-lg transition-colors duration-300 cursor-pointer"
                           title="Hapus"
                         >
                           <Trash2 size={15} />
@@ -727,13 +831,13 @@ export default function AdminPage() {
                 </div>
               )
             ) : (
-              galeri.length === 0 ? (
+              filteredGaleri.length === 0 ? (
                 <div className="py-20 text-center bg-white rounded-3xl border border-brand-gold/15">
-                  <p className="font-sans text-sm text-brand-green-dark/60">Belum ada foto galeri yang diunggah.</p>
+                  <p className="font-sans text-sm text-slate-500">Tidak ada foto galeri yang ditemukan.</p>
                 </div>
               ) : (
-                <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
-                  {galeri.map((item) => (
+                <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2 scrollbar-thin">
+                  {filteredGaleri.map((item) => (
                     <div 
                       key={item.id}
                       className="bg-white p-4 rounded-2xl border border-brand-gold/10 hover:border-brand-gold/20 shadow-sm flex items-center justify-between gap-4 transition-all duration-300"
@@ -752,14 +856,14 @@ export default function AdminPage() {
                             <span className="font-sans text-[8px] font-bold bg-brand-green/10 text-brand-green border border-brand-green/20 px-1.5 py-0.5 rounded-full uppercase tracking-wider">
                               {item.category}
                             </span>
-                            <span className="font-sans text-[9px] text-brand-green-dark/50">
+                            <span className="font-sans text-[9px] text-slate-500">
                               {item.date}
                             </span>
                           </div>
                           <h3 className="font-serif font-bold text-sm text-brand-green-dark leading-tight">
                             {item.title}
                           </h3>
-                          <p className="font-sans text-[11px] text-brand-green-dark/60 line-clamp-1">
+                          <p className="font-sans text-[11px] text-slate-500 line-clamp-1">
                             {item.desc}
                           </p>
                         </div>
@@ -768,14 +872,14 @@ export default function AdminPage() {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => handleGaleriEdit(item)}
-                          className="p-2 hover:bg-brand-cream/50 text-brand-green-dark/60 hover:text-brand-gold rounded-lg transition-colors duration-300"
+                          className="p-2 hover:bg-brand-cream/50 text-slate-400 hover:text-brand-gold rounded-lg transition-colors duration-300 cursor-pointer"
                           title="Edit Info"
                         >
                           <Edit2 size={15} />
                         </button>
                         <button
-                          onClick={() => handleGaleriDelete(item.id)}
-                          className="p-2 hover:bg-red-50 text-red-600/60 hover:text-red-600 rounded-lg transition-colors duration-300"
+                          onClick={() => triggerDeleteConfirm(item.id, 'galeri')}
+                          className="p-2 hover:bg-red-50 text-red-400 hover:text-red-655 hover:text-red-600 rounded-lg transition-colors duration-300 cursor-pointer"
                           title="Hapus"
                         >
                           <Trash2 size={15} />
@@ -790,6 +894,76 @@ export default function AdminPage() {
 
         </div>
       </div>
+
+      {/* Toast Notification System */}
+      <AnimatePresence>
+        {toast.visible && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.9 }}
+            className={`fixed bottom-6 right-6 z-[100] flex items-center gap-3 px-5 py-4 rounded-2xl shadow-xl border font-sans text-sm font-semibold ${
+              toast.type === 'success' 
+                ? 'bg-emerald-50 border-emerald-200 text-emerald-800' 
+                : toast.type === 'error'
+                ? 'bg-red-50 border-red-200 text-red-800'
+                : 'bg-blue-50 border-blue-200 text-blue-800'
+            }`}
+          >
+            {toast.type === 'success' && <Check size={18} className="text-emerald-600 shrink-0" />}
+            {toast.type === 'error' && <AlertTriangle size={18} className="text-red-600 shrink-0" />}
+            {toast.type === 'info' && <Info size={18} className="text-blue-600 shrink-0" />}
+            <span>{toast.message}</span>
+            <button 
+              onClick={closeToast}
+              className="ml-2 hover:opacity-75 transition-opacity cursor-pointer"
+            >
+              <X size={14} />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Custom Confirm Delete Dialog */}
+      <AnimatePresence>
+        {deleteConfirm.isOpen && (
+          <div className="fixed inset-0 z-[90] flex items-center justify-center p-6 bg-slate-900/60 backdrop-blur-sm">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: -10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              className="w-full max-w-md bg-white rounded-3xl p-6 border border-brand-gold/15 shadow-2xl relative"
+            >
+              <div className="flex items-center gap-3 mb-4 text-red-600">
+                <div className="w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center shrink-0">
+                  <ShieldAlert size={20} />
+                </div>
+                <h3 className="font-serif font-bold text-lg text-brand-green-dark">
+                  Konfirmasi Hapus Konten
+                </h3>
+              </div>
+              <p className="font-sans text-sm text-slate-600 leading-relaxed mb-6">
+                Apakah Anda yakin ingin menghapus {deleteConfirm.type === 'proker' ? 'program kerja' : 'foto galeri'} ini? Tindakan ini bersifat permanen dan data yang dihapus tidak dapat dipulihkan.
+              </p>
+              <div className="flex items-center justify-end gap-3">
+                <button
+                  onClick={() => setDeleteConfirm({ isOpen: false, id: null, type: '' })}
+                  className="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-sans text-xs font-bold uppercase tracking-wider hover:bg-slate-50 transition-colors cursor-pointer"
+                >
+                  Batal
+                </button>
+                <button
+                  onClick={executeDelete}
+                  className="px-4 py-2.5 rounded-xl bg-red-600 text-white font-sans text-xs font-bold uppercase tracking-wider hover:bg-red-700 transition-colors shadow-sm cursor-pointer"
+                >
+                  Hapus Permanen
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
     </div>
   );
 }
