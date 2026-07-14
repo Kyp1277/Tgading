@@ -12,7 +12,7 @@ const AudioPlayer = () => {
   const audioRef = useRef(null);
 
   // Menggunakan lagu instrumen yang di-host secara lokal (bebas CORS & Hotlinking block)
-  const audioUrl = "/audio/warm-memories.mp3";
+  const audioUrl = "/audio/warm-memories.m4a";
 
   useEffect(() => {
     // Set volume awal agar tidak terlalu keras (20%)
@@ -151,7 +151,7 @@ const AudioPlayer = () => {
               className="absolute bottom-full left-0 mb-3 bg-[#111e16] text-white py-2 px-3.5 rounded-xl text-[9px] font-sans font-medium tracking-wide shadow-lg border border-white/5 pointer-events-none select-none z-50 flex items-center gap-2 whitespace-nowrap"
             >
               <Music size={10} className="text-brand-gold" />
-              <span>SoundHelix — <strong>Chill Instrumental</strong></span>
+              <span>LesFM — <strong>In The Forest</strong></span>
             </motion.div>
           )}
         </AnimatePresence>
