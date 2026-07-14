@@ -166,7 +166,7 @@ const Anggota = () => {
                         e.target.onerror = null;
                         e.target.src = member.avatar;
                       }}
-                      className="w-24 h-24 rounded-full border-4 border-white bg-brand-cream shadow-md mb-4 group-hover:scale-105 transition-transform duration-300"
+                      className="w-24 h-24 rounded-full border-4 border-white bg-brand-cream shadow-md mb-4 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
 
                     <span className="font-sans text-[9px] font-bold tracking-widest text-brand-gold uppercase mb-1.5">
