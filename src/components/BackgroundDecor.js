@@ -238,6 +238,41 @@ const BackgroundDecor = ({ variant = 'home' }) => {
           </svg>
         </motion.div>
       )}
+
+      {/* 6. Premium Golden Floating Dust Particles (Opsi J) */}
+      {!shouldReduce && [
+        { top: '10%', left: '15%', size: 'w-1 h-1', duration: 12, delay: 0 },
+        { top: '25%', left: '80%', size: 'w-1.5 h-1.5', duration: 15, delay: 1.5 },
+        { top: '40%', left: '30%', size: 'w-1 h-1', duration: 18, delay: 0.5 },
+        { top: '55%', left: '70%', size: 'w-1.5 h-1.5', duration: 14, delay: 2.2 },
+        { top: '70%', left: '20%', size: 'w-1 h-1', duration: 16, delay: 0.8 },
+        { top: '85%', left: '85%', size: 'w-1.2 h-1.2', duration: 20, delay: 1.0 },
+        { top: '30%', left: '60%', size: 'w-1 h-1', duration: 13, delay: 2.8 },
+        { top: '65%', left: '45%', size: 'w-1.5 h-1.5', duration: 17, delay: 0.3 },
+        { top: '80%', left: '55%', size: 'w-1 h-1', duration: 15, delay: 1.9 },
+        { top: '92%', left: '12%', size: 'w-1.2 h-1.2', duration: 19, delay: 2.5 },
+      ].map((p, idx) => (
+        <motion.div
+          key={`particle-${idx}`}
+          style={{
+            position: 'absolute',
+            top: p.top,
+            left: p.left,
+          }}
+          animate={{ 
+            y: [0, -80, 0],
+            x: [0, 20, 0],
+            opacity: [0.15, 0.45, 0.15]
+          }}
+          transition={{
+            duration: p.duration,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: p.delay
+          }}
+          className={`${p.size} bg-brand-gold/40 rounded-full blur-[0.5px] z-0`}
+        />
+      ))}
     </div>
   );
 };

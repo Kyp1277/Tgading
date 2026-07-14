@@ -260,6 +260,14 @@ const Struktur = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
                 />
+                <motion.line 
+                  x1="2" y1="0" x2="2" y2="32" 
+                  stroke="#ffffff" strokeWidth="1.5"
+                  strokeDasharray="6 6"
+                  animate={{ strokeDashoffset: [0, -12] }}
+                  transition={{ repeat: Infinity, duration: 1.2, ease: "linear" }}
+                  className="opacity-80"
+                />
               </svg>
             )}
           </motion.div>
@@ -283,6 +291,14 @@ const Struktur = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, ease: "easeInOut" }}
                 />
+                <motion.line 
+                  x1="0" y1="1.5" x2="100%" y2="1.5" 
+                  stroke="#ffffff" strokeWidth="1.5"
+                  strokeDasharray="8 8"
+                  animate={{ strokeDashoffset: [0, -16] }}
+                  transition={{ repeat: Infinity, duration: 1.6, ease: "linear" }}
+                  className="opacity-80"
+                />
               </svg>
             )}
 
@@ -297,6 +313,14 @@ const Struktur = () => {
                     whileInView={{ pathLength: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.1, duration: 0.3 }}
+                  />
+                  <motion.line 
+                    x1="2" y1="0" x2="2" y2="32" 
+                    stroke="#ffffff" strokeWidth="1.5"
+                    strokeDasharray="6 6"
+                    animate={{ strokeDashoffset: [0, -12] }}
+                    transition={{ repeat: Infinity, duration: 1.2, ease: "linear", delay: 0.1 }}
+                    className="opacity-80"
                   />
                 </svg>
               ))}
@@ -318,6 +342,14 @@ const Struktur = () => {
                   whileInView={{ pathLength: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
+                />
+                <motion.line 
+                  x1="2" y1="0" x2="2" y2="32" 
+                  stroke="#ffffff" strokeWidth="1.5"
+                  strokeDasharray="6 6"
+                  animate={{ strokeDashoffset: [0, -12] }}
+                  transition={{ repeat: Infinity, duration: 1.2, ease: "linear" }}
+                  className="opacity-80"
                 />
               </svg>
             )}
@@ -342,6 +374,13 @@ const Struktur = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.7, ease: "easeInOut" }}
                 />
+                <motion.line 
+                  x1="0" y1="1.5" x2="100%" y2="1.5" 
+                  stroke="#ffffff" strokeWidth="1.5" opacity="0.2"
+                  strokeDasharray="8 8"
+                  animate={{ strokeDashoffset: [0, -16] }}
+                  transition={{ repeat: Infinity, duration: 1.8, ease: "linear" }}
+                />
               </svg>
             )}
             
@@ -360,6 +399,13 @@ const Struktur = () => {
                          viewport={{ once: true }}
                          transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
                        />
+                       <motion.line 
+                          x1="2" y1="0" x2="2" y2="32" 
+                          stroke="#ffffff" strokeWidth="1.5" opacity="0.25"
+                          strokeDasharray="6 6"
+                          animate={{ strokeDashoffset: [0, -12] }}
+                          transition={{ repeat: Infinity, duration: 1.2, ease: "linear", delay: 0.2 }}
+                        />
                      </svg>
                    )}
  

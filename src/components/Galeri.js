@@ -373,10 +373,17 @@ const Galeri = () => {
                           drag={!isMobile} // Disable dragging on mobile to avoid scroll hijacking
                           dragConstraints={constraintsRef}
                           dragTransition={{ power: 0.15, bounceStiffness: 220, bounceDamping: 22 }}
+                          whileHover={{ 
+                            scale: isMobile ? 1 : 1.05, 
+                            rotate: 0,
+                            boxShadow: "0px 20px 40px rgba(27,67,50,0.14)",
+                            zIndex: 50
+                          }}
                           whileDrag={{ 
-                            scale: 1.04, 
-                            boxShadow: "0px 25px 50px rgba(27,67,50,0.18)",
-                            rotate: 0 
+                            scale: 1.08, 
+                            boxShadow: "0px 30px 60px rgba(27,67,50,0.22)",
+                            rotate: 0,
+                            zIndex: 60
                           }}
                           onDragStart={() => bringToFront(photo.id)}
                           onTapStart={() => bringToFront(photo.id)}
@@ -399,7 +406,7 @@ const Galeri = () => {
                           }}
                           exit={{ opacity: 0, scale: 0.8, y: 30 }}
                           transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                          className={`w-64 md:w-[275px] bg-white p-3.5 pb-8 rounded-sm border border-stone-200/80 shadow-md hover:shadow-xl transition-shadow duration-300 select-none cursor-grab active:cursor-grabbing flex flex-col group relative`}
+                          className={`w-64 md:w-[275px] bg-white p-3.5 pb-8 rounded-sm border border-stone-200/80 shadow-md select-none cursor-grab active:cursor-grabbing flex flex-col group relative`}
                         >
                           {/* Jagged Washi Tape Ribbon (aesthetic torn tape effect) */}
                           <div 
