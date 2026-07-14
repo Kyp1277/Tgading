@@ -1,14 +1,61 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useReducedMotion, useScroll } from 'framer-motion';
+import { motion, useReducedMotion, useScroll, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { Calendar, CheckCircle2, AlertCircle, Clock, BookOpen, Loader2 } from 'lucide-react';
 import BackgroundDecor from './BackgroundDecor';
+
+// Reusable 3D TiltCard Component for Program Kerja Cards
+const TiltCard = ({ children, className, shouldReduce, onMouseEnter, onMouseLeave, ...props }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  
+  const springConfig = { damping: 25, stiffness: 180, mass: 0.5 };
+  const rotateXSpring = useSpring(useTransform(y, [-120, 120], [8, -8]), springConfig);
+  const rotateYSpring = useSpring(useTransform(x, [-120, 120], [-8, 8]), springConfig);
+
+  const handleMouseMove = (e) => {
+    if (shouldReduce) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left - width / 2;
+    const mouseY = e.clientY - rect.top - height / 2;
+    x.set(mouseX);
+    y.set(mouseY);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+    if (onMouseLeave) onMouseLeave();
+  };
+
+  return (
+    <motion.div
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      onMouseEnter={onMouseEnter}
+      style={{
+        rotateX: shouldReduce ? 0 : rotateXSpring,
+        rotateY: shouldReduce ? 0 : rotateYSpring,
+        transformStyle: "preserve-3d",
+      }}
+      className={className}
+      {...props}
+    >
+      <div style={{ transform: "translateZ(15px)", transformStyle: "preserve-3d" }} className="w-full h-full flex flex-col relative z-10">
+        {children}
+      </div>
+    </motion.div>
+  );
+};
 
 const Proker = () => {
   const shouldReduce = useReducedMotion();
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [hoveredEventId, setHoveredEventId] = useState(null);
   const timelineRef = useRef(null);
 
   // Hook Framer Motion untuk mendeteksi progress scroll pada elemen linimasa
@@ -120,49 +167,70 @@ const Proker = () => {
             {events.map((event, idx) => {
               const isEven = idx % 2 === 0;
               const isOngoing = event.status === 'Berlangsung';
+              const isHovered = hoveredEventId === event.id;
               const styles = getStatusStyles(event.status);
               const StatusIcon = styles.icon;
 
               return (
                 <div key={event.id} className="relative mb-8 md:mb-10 flex flex-col md:flex-row items-stretch overflow-hidden">
                   
-                  {/* Timeline Center Bullet Pin with dynamic pulsate glow */}
-                  <div className="absolute -left-[43px] top-0 md:left-1/2 md:-translate-x-1/2 w-6 h-6 rounded-full border-2 border-brand-gold bg-white flex items-center justify-center shadow-md z-10">
-                    {isOngoing && (
+                  {/* Timeline Center Bullet Pin with dynamic scale & glow (Opsi F) */}
+                  <motion.div 
+                    animate={{
+                      scale: isHovered ? 1.35 : 1,
+                      borderColor: isHovered ? "#c9a227" : "rgba(201, 162, 39, 1)",
+                      boxShadow: isHovered ? "0 0 15px rgba(201, 162, 39, 0.85)" : "0 2px 4px rgba(0,0,0,0.05)"
+                    }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    className="absolute -left-[43px] top-0 md:left-1/2 md:-translate-x-1/2 w-6 h-6 rounded-full border-2 bg-white flex items-center justify-center z-10"
+                  >
+                    {(isOngoing || isHovered) && (
                       <span className="absolute inset-0 rounded-full bg-brand-gold/45 animate-ping z-0 pointer-events-none" />
                     )}
-                    <svg viewBox="0 0 100 100" className="w-2.5 h-2.5 fill-brand-gold z-10">
+                    <svg viewBox="0 0 100 100" className="w-2.5 h-2.5 fill-brand-gold z-10 transition-transform duration-300" style={{ transform: isHovered ? "scale(1.2)" : "scale(1)" }}>
                       <ellipse cx="50" cy="50" rx="30" ry="35" />
                       <path d="M 50,15 C 50,5 40,5 50,0 C 60,5 50,5 50,15" stroke="currentColor" strokeWidth="4" />
                     </svg>
-                  </div>
+                  </motion.div>
 
-                  {/* Grid content alignment */}
+                  {/* Grid content alignment (Even cards on left on desktop) */}
                   <div className="w-full md:w-1/2 flex items-center justify-end pr-0 md:pr-10 md:text-right select-none order-2 md:order-1">
                     {isEven && (
-                      <motion.div 
+                      <motion.div
                         initial={{ opacity: 0, x: shouldReduce ? 0 : -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: "-80px" }}
                         transition={{ duration: 0.6 }}
-                        className={`w-full max-w-xl md:max-w-[460px] lg:max-w-[500px] bg-white border-2 border-brand-gold/10 hover:border-brand-gold/25 border-l-4 border-l-transparent hover:border-l-brand-gold p-8 rounded-3xl transition-all duration-300 text-left ${styles.shadow}`}
+                        className="w-full max-w-xl md:max-w-[460px] lg:max-w-[500px]"
                       >
-                        <div className="flex items-center justify-between md:justify-start gap-3 mb-3.5">
-                          <span className="font-sans text-xs font-bold text-brand-gold flex items-center gap-1.5 order-2 md:order-1">
-                            <Calendar size={12} />
-                            {event.date}
-                          </span>
-                          <span className={`font-sans text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full ${styles.bg} ${styles.color} border border-brand-gold/10 order-1 md:order-2 flex items-center gap-1`}>
-                            <StatusIcon size={10} />
-                            {event.status}
-                          </span>
-                        </div>
-                        <h3 className="font-serif font-bold text-xl md:text-[22px] text-brand-green-dark mb-2.5 leading-tight">
-                          {event.title}
-                        </h3>
-                        <p className="font-sans text-sm md:text-[15px] text-brand-green-dark/70 leading-relaxed">
-                          {event.desc}
-                        </p>
+                        <TiltCard 
+                          shouldReduce={shouldReduce}
+                          onMouseEnter={() => setHoveredEventId(event.id)}
+                          onMouseLeave={() => setHoveredEventId(null)}
+                          className={`w-full bg-white border-2 border-brand-gold/10 hover:border-brand-gold/25 border-l-4 border-l-transparent hover:border-l-brand-gold p-8 rounded-3xl transition-all duration-300 text-left cursor-default relative overflow-hidden group ${styles.shadow}`}
+                        >
+                          {/* Subtle Gold Glow on Hover */}
+                          <div className="absolute -right-10 -top-10 w-24 h-24 rounded-full bg-brand-gold/5 group-hover:bg-brand-gold/15 blur-xl transition-all duration-300 pointer-events-none" />
+                          
+                          <div className="flex items-center justify-between md:justify-start gap-3 mb-3.5 relative z-10">
+                            <span className="font-sans text-xs font-bold text-brand-gold flex items-center gap-1.5 order-2 md:order-1">
+                              <Calendar size={12} />
+                              {event.date}
+                            </span>
+                            <span className={`font-sans text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full ${styles.bg} ${styles.color} border border-brand-gold/10 order-1 md:order-2 flex items-center gap-1`}>
+                              <StatusIcon size={10} />
+                              {event.status}
+                            </span>
+                          </div>
+                          
+                          <h3 className="font-serif font-bold text-xl md:text-[22px] text-brand-green-dark mb-2.5 leading-tight relative z-10 transition-colors group-hover:text-brand-gold duration-200">
+                            {event.title}
+                          </h3>
+                          
+                          <p className="font-sans text-sm md:text-[15px] text-brand-green-dark/70 leading-relaxed relative z-10">
+                            {event.desc}
+                          </p>
+                        </TiltCard>
                       </motion.div>
                     )}
                   </div>
@@ -170,7 +238,7 @@ const Proker = () => {
                   {/* Spacer on desktop */}
                   <div className="hidden md:block w-0.5" />
 
-                  {/* Right column (Opposite align) */}
+                  {/* Right column (Odd cards on right on desktop) */}
                   <div className="w-full md:w-1/2 flex items-center justify-start pl-0 md:pl-10 order-3">
                     {!isEven && (
                       <motion.div 
@@ -178,24 +246,36 @@ const Proker = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: "-80px" }}
                         transition={{ duration: 0.6 }}
-                        className={`w-full max-w-xl md:max-w-[460px] lg:max-w-[500px] bg-white border-2 border-brand-gold/10 hover:border-brand-gold/25 border-l-4 border-l-transparent hover:border-l-brand-gold p-8 rounded-3xl transition-all duration-300 text-left ${styles.shadow}`}
+                        className="w-full max-w-xl md:max-w-[460px] lg:max-w-[500px]"
                       >
-                        <div className="flex items-center justify-between gap-3 mb-3.5">
-                          <span className="font-sans text-xs font-bold text-brand-gold flex items-center gap-1.5">
-                            <Calendar size={12} />
-                            {event.date}
-                          </span>
-                          <span className={`font-sans text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full ${styles.bg} ${styles.color} border border-brand-gold/10 flex items-center gap-1`}>
-                            <StatusIcon size={10} />
-                            {event.status}
-                          </span>
-                        </div>
-                        <h3 className="font-serif font-bold text-xl md:text-[22px] text-brand-green-dark mb-2.5 leading-tight">
-                          {event.title}
-                        </h3>
-                        <p className="font-sans text-sm md:text-[15px] text-brand-green-dark/70 leading-relaxed">
-                          {event.desc}
-                        </p>
+                        <TiltCard 
+                          shouldReduce={shouldReduce}
+                          onMouseEnter={() => setHoveredEventId(event.id)}
+                          onMouseLeave={() => setHoveredEventId(null)}
+                          className={`w-full bg-white border-2 border-brand-gold/10 hover:border-brand-gold/25 border-l-4 border-l-transparent hover:border-l-brand-gold p-8 rounded-3xl transition-all duration-300 text-left cursor-default relative overflow-hidden group ${styles.shadow}`}
+                        >
+                          {/* Subtle Gold Glow on Hover */}
+                          <div className="absolute -right-10 -top-10 w-24 h-24 rounded-full bg-brand-gold/5 group-hover:bg-brand-gold/15 blur-xl transition-all duration-300 pointer-events-none" />
+
+                          <div className="flex items-center justify-between gap-3 mb-3.5 relative z-10">
+                            <span className="font-sans text-xs font-bold text-brand-gold flex items-center gap-1.5">
+                              <Calendar size={12} />
+                              {event.date}
+                            </span>
+                            <span className={`font-sans text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full ${styles.bg} ${styles.color} border border-brand-gold/10 flex items-center gap-1`}>
+                              <StatusIcon size={10} />
+                              {event.status}
+                            </span>
+                          </div>
+                          
+                          <h3 className="font-serif font-bold text-xl md:text-[22px] text-brand-green-dark mb-2.5 leading-tight relative z-10 transition-colors group-hover:text-brand-gold duration-200">
+                            {event.title}
+                          </h3>
+                          
+                          <p className="font-sans text-sm md:text-[15px] text-brand-green-dark/70 leading-relaxed relative z-10">
+                            {event.desc}
+                          </p>
+                        </TiltCard>
                       </motion.div>
                     )}
                   </div>

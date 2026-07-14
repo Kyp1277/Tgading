@@ -17,6 +17,42 @@ import {
 } from 'lucide-react';
 import BackgroundDecor from './BackgroundDecor';
 
+// Shimmer effect using Framer Motion
+const ShimmerOverlay = () => (
+  <motion.div
+    initial={{ x: "-100%" }}
+    animate={{ x: "100%" }}
+    transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+    className="absolute inset-0 bg-gradient-to-r from-transparent via-brand-gold/15 to-transparent z-10"
+  />
+);
+
+// Card loader skeleton
+const SkeletonCard = () => (
+  <div className="bg-white border-2 border-brand-gold/10 rounded-[32px] p-6 h-[380px] flex flex-col relative overflow-hidden shadow-sm">
+    <div className="w-full h-48 rounded-2xl bg-brand-green-dark/5 relative overflow-hidden mb-4">
+      <ShimmerOverlay />
+    </div>
+    <div className="w-20 h-5 rounded-full bg-brand-green-dark/5 relative overflow-hidden mb-3">
+      <ShimmerOverlay />
+    </div>
+    <div className="w-3/4 h-6 rounded-md bg-brand-green-dark/5 relative overflow-hidden mb-2">
+      <ShimmerOverlay />
+    </div>
+    <div className="w-1/2 h-6 rounded-md bg-brand-green-dark/5 relative overflow-hidden mb-4">
+      <ShimmerOverlay />
+    </div>
+    <div className="flex justify-between items-center mt-auto">
+      <div className="w-24 h-4 rounded-md bg-brand-green-dark/5 relative overflow-hidden">
+        <ShimmerOverlay />
+      </div>
+      <div className="w-6 h-6 rounded-full bg-brand-green-dark/5 relative overflow-hidden">
+        <ShimmerOverlay />
+      </div>
+    </div>
+  </div>
+);
+
 const Galeri = () => {
   const [activeCategory, setActiveCategory] = useState('Semua');
   const [lightboxIndex, setLightboxIndex] = useState(null);
@@ -268,9 +304,10 @@ const Galeri = () => {
         </div>
 
         {loading ? (
-          <div className="py-20 flex flex-col items-center justify-center">
-            <Loader2 className="w-10 h-10 text-brand-gold animate-spin mb-4" />
-            <p className="font-sans text-brand-green-dark/65 text-sm">Memuat galeri foto...</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[...Array(6)].map((_, i) => (
+              <SkeletonCard key={i} />
+            ))}
           </div>
         ) : filteredPhotos.length === 0 ? (
           <div className="py-20 text-center bg-brand-cream/5 rounded-3xl border border-brand-gold/10 max-w-2xl mx-auto">
