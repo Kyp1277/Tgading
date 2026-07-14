@@ -20,7 +20,7 @@ import BackgroundDecor from './BackgroundDecor';
 const Galeri = () => {
   const [activeCategory, setActiveCategory] = useState('Semua');
   const [lightboxIndex, setLightboxIndex] = useState(null);
-  const [layoutMode, setLayoutMode] = useState('scrapbook'); // default to aesthetic scrapbook
+  const [layoutMode, setLayoutMode] = useState('scrapbook'); // default to scrapbook
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(true);
   const shouldReduce = useReducedMotion();
@@ -318,97 +318,109 @@ const Galeri = () => {
                   </div>
                 </div>
 
-                {/* Cards Container */}
-                <div className={isMobile ? "flex flex-col items-center gap-10 py-6 overflow-y-auto max-h-[560px]" : "w-full h-full relative"}>
-                  {filteredPhotos.map((photo, index) => {
-                    const pos = initialPositions[index % initialPositions.length];
-                    const washiColor = getWashiTapeClass(photo.category);
-                    const pinColor = getPinColor(index);
+                {/* Cards Container with layout morphing enabled */}
+                <motion.div 
+                  layout
+                  className={isMobile ? "flex flex-col items-center gap-10 py-6 overflow-y-auto max-h-[560px]" : "w-full h-full relative"}
+                >
+                  <AnimatePresence mode="popLayout">
+                    {filteredPhotos.map((photo, index) => {
+                      const pos = initialPositions[index % initialPositions.length];
+                      const washiColor = getWashiTapeClass(photo.category);
+                      const pinColor = getPinColor(index);
 
-                    return (
-                      <motion.div
-                        key={photo.id}
-                        drag={!isMobile} // Disable dragging on mobile to avoid scroll hijacking
-                        dragConstraints={constraintsRef}
-                        dragTransition={{ power: 0.15, bounceStiffness: 220, bounceDamping: 22 }}
-                        whileDrag={{ 
-                          scale: 1.04, 
-                          boxShadow: "0px 25px 50px rgba(27,67,50,0.18)",
-                          rotate: 0 
-                        }}
-                        onDragStart={() => bringToFront(photo.id)}
-                        onTapStart={() => bringToFront(photo.id)}
-                        style={{
-                          position: isMobile ? 'relative' : 'absolute',
-                          top: isMobile ? 'auto' : pos.top,
-                          left: isMobile ? 'auto' : pos.left,
-                          zIndex: zIndices[photo.id] || 10,
-                          transform: isMobile ? `rotate(${pos.rotate * 0.5}deg)` : undefined,
-                        }}
-                        // Initial animation when component mounts
-                        initial={{ 
-                          opacity: 0, 
-                          scale: 0.8, 
-                          rotate: isMobile ? pos.rotate * 0.5 : pos.rotate * 1.5 
-                        }}
-                        animate={{ 
-                          opacity: 1, 
-                          scale: 1, 
-                          rotate: isMobile ? pos.rotate * 0.5 : pos.rotate 
-                        }}
-                        transition={{ duration: 0.6, delay: index * 0.05, ease: "easeOut" }}
-                        className={`w-64 md:w-[275px] bg-white p-3.5 pb-8 rounded-sm border border-stone-200/80 shadow-md hover:shadow-xl transition-shadow duration-300 select-none cursor-grab active:cursor-grabbing flex flex-col group relative`}
-                      >
-                        {/* Washi Tape Ribbon (aesthetic) */}
-                        <div className={`absolute -top-3.5 left-1/2 -translate-x-1/2 w-28 h-6.5 border-l border-r border-dashed mix-blend-multiply flex items-center justify-center font-handwritten text-[10px] tracking-widest font-bold uppercase select-none z-10 ${washiColor}`}>
-                          {photo.category}
-                        </div>
-
-                        {/* Push Pin (metal/colored board pin) */}
-                        <svg 
-                          style={{ color: pinColor }}
-                          className="absolute -top-2 left-6 w-5.5 h-5.5 z-20 drop-shadow-[1.5px_3px_2px_rgba(0,0,0,0.3)] pointer-events-none" 
-                          viewBox="0 0 24 24" 
-                          fill="none"
+                      return (
+                        <motion.div
+                          layout
+                          key={photo.id}
+                          drag={!isMobile} // Disable dragging on mobile to avoid scroll hijacking
+                          dragConstraints={constraintsRef}
+                          dragTransition={{ power: 0.15, bounceStiffness: 220, bounceDamping: 22 }}
+                          whileDrag={{ 
+                            scale: 1.04, 
+                            boxShadow: "0px 25px 50px rgba(27,67,50,0.18)",
+                            rotate: 0 
+                          }}
+                          onDragStart={() => bringToFront(photo.id)}
+                          onTapStart={() => bringToFront(photo.id)}
+                          style={{
+                            position: isMobile ? 'relative' : 'absolute',
+                            top: isMobile ? 'auto' : pos.top,
+                            left: isMobile ? 'auto' : pos.left,
+                            zIndex: zIndices[photo.id] || 10,
+                            transform: isMobile ? `rotate(${pos.rotate * 0.5}deg)` : undefined,
+                          }}
+                          initial={{ 
+                            opacity: 0, 
+                            scale: 0.8, 
+                            rotate: isMobile ? pos.rotate * 0.5 : pos.rotate * 1.5 
+                          }}
+                          animate={{ 
+                            opacity: 1, 
+                            scale: 1, 
+                            rotate: isMobile ? pos.rotate * 0.5 : pos.rotate 
+                          }}
+                          exit={{ opacity: 0, scale: 0.8, y: 30 }}
+                          transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                          className={`w-64 md:w-[275px] bg-white p-3.5 pb-8 rounded-sm border border-stone-200/80 shadow-md hover:shadow-xl transition-shadow duration-300 select-none cursor-grab active:cursor-grabbing flex flex-col group relative`}
                         >
-                          <circle cx="12" cy="7" r="5" fill="currentColor" />
-                          <path d="M12,12 L12,21" stroke="#94a3b8" strokeWidth="2.5" strokeLinecap="round" />
-                          <path d="M9,12 L15,12" stroke="currentColor" strokeWidth="1.5" />
-                        </svg>
+                          {/* Jagged Washi Tape Ribbon (aesthetic torn tape effect) */}
+                          <div 
+                            className={`absolute -top-3.5 left-1/2 -translate-x-1/2 w-28 h-6.5 border-l border-r border-dashed mix-blend-multiply flex items-center justify-center font-handwritten text-[10px] tracking-widest font-bold uppercase select-none z-10 ${washiColor}`}
+                            style={{
+                              clipPath: "polygon(0% 8%, 4% 1%, 10% 8%, 15% 0%, 22% 8%, 28% 1%, 35% 8%, 40% 0%, 47% 8%, 53% 1%, 60% 8%, 66% 0%, 73% 8%, 79% 1%, 86% 8%, 92% 0%, 98% 8%, 100% 2%, 100% 92%, 96% 99%, 90% 92%, 84% 100%, 77% 92%, 71% 100%, 64% 92%, 58% 100%, 52% 92%, 46% 100%, 39% 92%, 33% 100%, 26% 92%, 20% 100%, 13% 92%, 7% 100%, 0% 91%)"
+                            }}
+                          >
+                            {photo.category}
+                          </div>
 
-                        {/* Inner photo container with border and hover glow */}
-                        <div 
-                          className="relative overflow-hidden bg-stone-100 border border-stone-200 aspect-[4/3] rounded-sm group-hover:border-brand-gold/30 transition-colors duration-300"
-                          onClick={() => openLightbox(index)}
-                        >
-                          <img
-                            src={photo.url}
-                            alt={photo.title}
-                            className="w-full h-full object-cover select-none pointer-events-none"
-                          />
-                          
-                          {/* Mini magnifying glass overlay on hover */}
-                          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
-                            <div className="p-2 rounded-full bg-white/80 text-brand-green-dark shadow">
-                              <Maximize2 size={16} />
+                          {/* Push Pin (metal/colored board pin) */}
+                          <svg 
+                            style={{ color: pinColor }}
+                            className="absolute -top-2 left-6 w-5.5 h-5.5 z-20 drop-shadow-[1.5px_3px_2px_rgba(0,0,0,0.3)] pointer-events-none" 
+                            viewBox="0 0 24 24" 
+                            fill="none"
+                          >
+                            <circle cx="12" cy="7" r="5" fill="currentColor" />
+                            <path d="M12,12 L12,21" stroke="#94a3b8" strokeWidth="2.5" strokeLinecap="round" />
+                            <path d="M9,12 L15,12" stroke="currentColor" strokeWidth="1.5" />
+                          </svg>
+
+                          {/* Inner photo container with morphing image */}
+                          <div 
+                            className="relative overflow-hidden bg-stone-100 border border-stone-200 aspect-[4/3] rounded-sm group-hover:border-brand-gold/30 transition-colors duration-300 cursor-pointer"
+                            onClick={() => openLightbox(index)}
+                          >
+                            <motion.img
+                              layoutId={`gallery-img-${photo.id}`}
+                              src={photo.url}
+                              alt={photo.title}
+                              className="w-full h-full object-cover select-none pointer-events-none"
+                            />
+                            
+                            {/* Mini magnifying glass overlay on hover */}
+                            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+                              <div className="p-2 rounded-full bg-white/80 text-brand-green-dark shadow">
+                                <Maximize2 size={16} />
+                              </div>
                             </div>
                           </div>
-                        </div>
 
-                        {/* Polaroid Handwritten Text Caption */}
-                        <h4 className="font-handwritten text-[22px] text-stone-800 leading-tight text-center mt-4 tracking-wide select-none filter drop-shadow-[0_0.5px_0.5px_rgba(0,0,0,0.12)]">
-                          {photo.title}
-                        </h4>
+                          {/* Polaroid Handwritten Text Caption */}
+                          <h4 className="font-handwritten text-[22px] text-stone-800 leading-tight text-center mt-4 tracking-wide select-none filter drop-shadow-[0_0.5px_0.5px_rgba(0,0,0,0.12)]">
+                            {photo.title}
+                          </h4>
 
-                        {/* Tiny date marker at bottom */}
-                        <div className="flex items-center justify-end gap-1 text-[11px] text-stone-400 font-handwritten mt-1.5 px-1 select-none">
-                          <Calendar size={10} />
-                          {photo.date}
-                        </div>
-                      </motion.div>
-                    );
-                  })}
-                </div>
+                          {/* Tiny date marker at bottom */}
+                          <div className="flex items-center justify-end gap-1 text-[11px] text-stone-400 font-handwritten mt-1.5 px-1 select-none">
+                            <Calendar size={10} />
+                            {photo.date}
+                          </div>
+                        </motion.div>
+                      );
+                    })}
+                  </AnimatePresence>
+                </motion.div>
               </motion.div>
             ) : (
               /* =================== CLASSIC BENTO GRID LAYOUT =================== */
@@ -421,103 +433,103 @@ const Galeri = () => {
                 layout 
                 className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:auto-rows-[228px] relative z-10"
               >
-                {filteredPhotos.map((photo, index) => (
-                  <motion.div
-                    key={photo.id}
-                    variants={itemVariants}
-                    layout
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.4 }}
-                    onClick={() => openLightbox(index)}
-                    className={`bg-white border border-brand-gold/15 rounded-[32px] overflow-hidden cursor-pointer relative flex flex-col group shadow-sm hover:border-brand-gold/30 ${getBentoClasses(index)}`}
-                  >
-                    {/* Image */}
-                    <img
-                      src={photo.url}
-                      alt={photo.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none pointer-events-none"
-                    />
-                    
-                    {/* Hover detail overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/75 to-transparent opacity-0 group-hover:opacity-100 backdrop-blur-[2px] transition-all duration-300 flex flex-col justify-end p-8">
-                      <span className="font-sans text-[10px] font-bold text-brand-gold uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
-                        <Tag size={10} className="text-brand-gold" />
-                        {photo.category}
-                      </span>
-                      <h4 className="font-serif font-bold text-base md:text-lg text-white leading-tight mb-2">
-                        {photo.title}
-                      </h4>
-                      <p className="font-sans text-xs md:text-sm text-white/80 leading-relaxed mb-4 line-clamp-3">
-                        {photo.desc}
-                      </p>
-                      <div className="flex items-center gap-1.5 text-[10px] text-white/50 font-bold uppercase tracking-wider">
-                        <Calendar size={12} className="text-white/50" />
-                        {photo.date}
+                <AnimatePresence mode="popLayout">
+                  {filteredPhotos.map((photo, index) => (
+                    <motion.div
+                      layout
+                      key={photo.id}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95, y: 15 }}
+                      transition={{ duration: 0.4 }}
+                      onClick={() => openLightbox(index)}
+                      className={`bg-white border border-brand-gold/15 rounded-[32px] overflow-hidden cursor-pointer relative flex flex-col group shadow-sm hover:border-brand-gold/30 ${getBentoClasses(index)}`}
+                    >
+                      {/* Image with layoutId for smooth morphing to lightbox */}
+                      <motion.img
+                        layoutId={`gallery-img-${photo.id}`}
+                        src={photo.url}
+                        alt={photo.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none pointer-events-none"
+                      />
+                      
+                      {/* Hover detail overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/75 to-transparent opacity-0 group-hover:opacity-100 backdrop-blur-[2px] transition-all duration-300 flex flex-col justify-end p-8 z-10">
+                        <span className="font-sans text-[10px] font-bold text-brand-gold uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
+                          <Tag size={10} className="text-brand-gold" />
+                          {photo.category}
+                        </span>
+                        <h4 className="font-serif font-bold text-base md:text-lg text-white leading-tight mb-2">
+                          {photo.title}
+                        </h4>
+                        <p className="font-sans text-xs md:text-sm text-white/80 leading-relaxed mb-4 line-clamp-3">
+                          {photo.desc}
+                        </p>
+                        <div className="flex items-center gap-1.5 text-[10px] text-white/50 font-bold uppercase tracking-wider">
+                          <Calendar size={12} className="text-white/50" />
+                          {photo.date}
+                        </div>
                       </div>
-                    </div>
-                  </motion.div>
-                ))}
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
               </motion.div>
             )}
           </AnimatePresence>
         )}
 
-        {/* Lightbox Modal */}
+        {/* Lightbox Modal with Seamless Morphing Image */}
         <AnimatePresence>
           {lightboxIndex !== null && filteredPhotos[lightboxIndex] && (
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex flex-col justify-between p-6 bg-black/98 overflow-y-auto"
+              className="fixed inset-0 z-[9999] flex flex-col justify-between p-6 bg-black/98 overflow-y-auto backdrop-blur-md"
               onClick={closeLightbox}
             >
               {/* Header controls */}
-              <div className="flex justify-between items-center p-4 md:p-6 flex-shrink-0">
+              <div className="flex justify-between items-center p-4 md:p-6 flex-shrink-0 z-10">
                 <span className="font-sans text-[10px] font-bold text-brand-gold uppercase tracking-wider bg-brand-gold/10 px-3 py-1.5 rounded-full border border-brand-gold/15">
                   {filteredPhotos[lightboxIndex].category}
                 </span>
                 <button
                   onClick={closeLightbox}
-                  className="text-white/60 hover:text-white p-2 rounded-full bg-white/5 border border-white/10 cursor-pointer"
+                  className="text-white/60 hover:text-white p-2.5 rounded-full bg-white/5 border border-white/10 hover:border-white/20 transition-colors cursor-pointer"
                 >
                   <X size={18} />
                 </button>
               </div>
 
               {/* Central Image and Arrows */}
-              <div className="flex-grow flex items-center justify-center relative max-h-[58vh] md:max-h-[65vh] my-4 flex-shrink-0">
+              <div className="flex-grow flex items-center justify-center relative max-h-[58vh] md:max-h-[65vh] my-4 flex-shrink-0 z-10">
                 <button
                   onClick={prevPhoto}
-                  className="absolute left-4 p-3 rounded-full bg-white/5 border border-white/10 text-white/60 hover:text-white z-10 transition-all hover:scale-105 cursor-pointer"
+                  className="absolute left-4 p-3 rounded-full bg-white/5 border border-white/10 text-white/60 hover:text-white z-20 transition-all hover:scale-105 cursor-pointer"
                 >
                   <ChevronLeft size={22} />
                 </button>
 
+                {/* Morphing Image via layoutId */}
                 <motion.img
+                  layoutId={`gallery-img-${filteredPhotos[lightboxIndex].id}`}
                   key={lightboxIndex}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.3 }}
                   src={filteredPhotos[lightboxIndex].url}
                   alt={filteredPhotos[lightboxIndex].title}
-                  className="max-w-full max-h-full object-contain rounded-2xl border border-white/10 shadow-2xl"
+                  className="max-w-full max-h-full object-contain rounded-2xl border border-white/10 shadow-2xl z-10"
                   onClick={(e) => e.stopPropagation()}
                 />
 
                 <button
                   onClick={nextPhoto}
-                  className="absolute right-4 p-3 rounded-full bg-white/5 border border-white/10 text-white/60 hover:text-white z-10 transition-all hover:scale-105 cursor-pointer"
+                  className="absolute right-4 p-3 rounded-full bg-white/5 border border-white/10 text-white/60 hover:text-white z-20 transition-all hover:scale-105 cursor-pointer"
                 >
                   <ChevronRight size={22} />
                 </button>
               </div>
 
               {/* Bottom details */}
-              <div className="pt-4 pb-12 px-6 max-w-2xl mx-auto text-center flex-shrink-0" onClick={(e) => e.stopPropagation()}>
+              <div className="pt-4 pb-12 px-6 max-w-2xl mx-auto text-center flex-shrink-0 z-10" onClick={(e) => e.stopPropagation()}>
                 <h3 className="font-serif font-bold text-lg md:text-xl text-white mb-2">
                   {filteredPhotos[lightboxIndex].title}
                 </h3>

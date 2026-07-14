@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence, useReducedMotion, useSpring, useMotionValue, useTransform } from 'framer-motion';
 import { anggotaData } from '../data/anggotaData';
 import { Instagram, Linkedin, Mail, X, Award, Users, Github, Facebook, Globe } from 'lucide-react';
 import BackgroundDecor from './BackgroundDecor';
@@ -22,10 +22,63 @@ const Tiktok = ({ size = 16, className }) => (
   </svg>
 );
 
+// 3D Parallax Tilt Card Component
+const TiltCard = ({ children, className, onClick, shouldReduce, ...props }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  
+  const springConfig = { damping: 25, stiffness: 180, mass: 0.5 };
+  const rotateXSpring = useSpring(useTransform(y, [-120, 120], [10, -10]), springConfig);
+  const rotateYSpring = useSpring(useTransform(x, [-120, 120], [-10, 10]), springConfig);
+
+  const handleMouseMove = (e) => {
+    if (shouldReduce) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left - width / 2;
+    const mouseY = e.clientY - rect.top - height / 2;
+    x.set(mouseX);
+    y.set(mouseY);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX: shouldReduce ? 0 : rotateXSpring,
+        rotateY: shouldReduce ? 0 : rotateYSpring,
+        transformStyle: "preserve-3d",
+      }}
+      onClick={onClick}
+      className={className}
+      {...props}
+    >
+      <div style={{ transform: "translateZ(20px)", transformStyle: "preserve-3d" }} className="w-full h-full flex flex-col items-center">
+        {children}
+      </div>
+    </motion.div>
+  );
+};
+
 const Struktur = () => {
   const [selectedMember, setSelectedMember] = useState(null);
   const [selectedDivision, setSelectedDivision] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
   const shouldReduce = useReducedMotion();
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // BPH mapping
   const ketua = anggotaData.find(m => m.id === 1);
@@ -74,11 +127,10 @@ const Struktur = () => {
   const MemberNode = ({ member }) => {
     if (!member) return null;
     return (
-      <motion.div 
+      <TiltCard 
         onClick={() => setSelectedMember(member)}
-        whileHover={shouldReduce ? {} : { y: -6, scale: 1.02, boxShadow: "0 15px 35px rgba(20,83,45,0.08)" }}
-        whileTap={{ scale: 0.98 }}
-        className="relative bg-white border-2 border-brand-gold/15 hover:border-brand-gold p-7 md:p-8 rounded-3xl w-64 sm:w-72 text-center flex flex-col items-center cursor-pointer shadow-sm group select-none transition-all duration-300 z-10"
+        shouldReduce={shouldReduce}
+        className="relative bg-white border-2 border-brand-gold/15 hover:border-brand-gold p-7 md:p-8 rounded-3xl w-64 sm:w-72 text-center flex flex-col items-center cursor-pointer shadow-sm group select-none transition-all duration-300 z-10 animate-float-delayed"
       >
         <span className="absolute top-4 right-5 font-sans text-[9px] font-bold text-brand-gold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           Detail
@@ -91,6 +143,7 @@ const Struktur = () => {
             e.target.src = member.avatar;
           }}
           className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-brand-gold bg-brand-cream mb-4 shadow-sm group-hover:scale-105 transition-transform duration-300"
+          style={{ transform: "translateZ(15px)" }}
         />
         <h4 className="font-serif font-bold text-sm md:text-base text-brand-green-dark leading-tight mb-1.5 truncate w-full">
           {member.name}
@@ -101,7 +154,7 @@ const Struktur = () => {
         <p className="font-sans text-[10px] md:text-xs text-brand-green-dark/50 mt-1">
           {member.major}
         </p>
-      </motion.div>
+      </TiltCard>
     );
   };
 
@@ -111,10 +164,9 @@ const Struktur = () => {
     if (!group) return null;
 
     return (
-      <motion.div 
+      <TiltCard 
         onClick={() => setSelectedDivision(group)}
-        whileHover={shouldReduce ? {} : { y: -6, scale: 1.02, boxShadow: "0 15px 35px rgba(20,83,45,0.08)" }}
-        whileTap={{ scale: 0.98 }}
+        shouldReduce={shouldReduce}
         className="relative bg-white border-2 border-brand-gold/15 hover:border-brand-gold p-6 rounded-3xl w-64 sm:w-72 text-center flex flex-col items-center cursor-pointer shadow-sm group select-none transition-all duration-300 z-10"
       >
         <span className="absolute top-4 right-5 font-sans text-[9px] font-bold text-brand-gold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -122,7 +174,7 @@ const Struktur = () => {
         </span>
         
         {/* Group Image Container */}
-        <div className="w-full aspect-[4/5] rounded-2xl overflow-hidden border-2 border-brand-gold/10 bg-brand-cream mb-4 relative shadow-sm group-hover:scale-[1.01] transition-transform duration-300">
+        <div className="w-full aspect-[4/5] rounded-2xl overflow-hidden border-2 border-brand-gold/10 bg-brand-cream mb-4 relative shadow-sm group-hover:scale-[1.01] transition-transform duration-300" style={{ transform: "translateZ(12px)" }}>
           {imageError ? (
             <div className="w-full h-full bg-gradient-to-br from-brand-green-dark to-brand-green flex flex-col items-center justify-center p-6 text-white">
               <Users size={32} className="text-brand-gold mb-2 opacity-80" />
@@ -150,7 +202,7 @@ const Struktur = () => {
         <p className="font-sans text-[10px] text-brand-green-dark/50 mt-1">
           {group.members.length} Anggota
         </p>
-      </motion.div>
+      </TiltCard>
     );
   };
 
@@ -199,7 +251,7 @@ const Struktur = () => {
             <GroupNode group={ketuaGroup} />
             {/* Animated Connector Line going straight down */}
             {!shouldReduce && (
-              <svg className="w-1 h-8 absolute -bottom-8 left-1/2 -translate-x-1/2 overflow-visible pointer-events-none">
+              <svg className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-8 overflow-visible pointer-events-none">
                 <motion.line 
                   x1="2" y1="0" x2="2" y2="32" 
                   stroke="#c9a227" strokeWidth="3"
@@ -212,41 +264,43 @@ const Struktur = () => {
             )}
           </motion.div>
 
-          {/* Level 2: BPH (Lisa, Nur Annisa, Tasya) */}
+          {/* Level 2: BPH (Sekretaris & Bendahara branches) */}
           <motion.div 
             initial={{ opacity: 0, y: shouldReduce ? 0 : 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: shouldReduce ? 0 : 0.2 }}
-            className="pt-8 relative w-full flex flex-col items-center"
+            className="pt-8 pb-4 relative w-full flex flex-col items-center"
           >
-            {/* Thicker Horizontal connecting bridge across 2 cards */}
+            {/* Horizontal line connecting BPH elements */}
             {!shouldReduce && (
-              <>
-                <svg className="hidden md:block absolute top-0 left-[25%] right-[25%] h-[3px] w-[50%] overflow-visible pointer-events-none">
+              <svg className="absolute top-0 left-[25%] right-[25%] h-[3px] w-[50%] overflow-visible pointer-events-none">
+                <motion.line 
+                  x1="0" y1="1.5" x2="100%" y2="1.5" 
+                  stroke="#c9a227" strokeWidth="3"
+                  initial={{ pathLength: 0 }}
+                  whileInView={{ pathLength: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                />
+              </svg>
+            )}
+
+            <div className="flex justify-center gap-16 md:gap-32 w-full max-w-4xl relative">
+              {/* Vertical drops to each BPH card */}
+              {!shouldReduce && bphGroups.map((_, i) => (
+                <svg key={i} className={`absolute top-0 w-1 h-8 overflow-visible pointer-events-none ${i === 0 ? 'left-[25%] md:left-[30%]' : 'right-[25%] md:right-[30%]'}`}>
                   <motion.line 
-                    x1="0" y1="1.5" x2="100%" y2="1.5" 
-                    stroke="#c9a227" strokeWidth="3" opacity="0.35"
+                    x1="2" y1="0" x2="2" y2="32" 
+                    stroke="#c9a227" strokeWidth="3"
                     initial={{ pathLength: 0 }}
                     whileInView={{ pathLength: 1 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, ease: "easeInOut" }}
+                    transition={{ delay: 0.1, duration: 0.3 }}
                   />
                 </svg>
-                {/* Left drop to Sekretaris */}
-                <svg className="hidden md:block absolute top-0 left-[25%] w-1 h-8 overflow-visible pointer-events-none">
-                  <motion.line x1="2" y1="0" x2="2" y2="32" stroke="#c9a227" strokeWidth="3" opacity="0.35"
-                    initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.4 }} />
-                </svg>
-                {/* Right drop to Bendahara */}
-                <svg className="hidden md:block absolute top-0 right-[25%] w-1 h-8 overflow-visible pointer-events-none">
-                  <motion.line x1="2" y1="0" x2="2" y2="32" stroke="#c9a227" strokeWidth="3" opacity="0.35"
-                    initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.4 }} />
-                </svg>
-              </>
-            )}
+              ))}
 
-            <div className="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 pt-4 md:pt-8 w-full max-w-max mx-auto">
               {bphGroups.map((group, idx) => (
                 <div key={idx} className="flex flex-col items-center">
                   <GroupNode group={group} />
@@ -318,228 +372,252 @@ const Struktur = () => {
         </div>
       </div>
 
-      {/* Member Details Modal */}
+      {/* Member Details Drawer (Responsive sliding panel) */}
       <AnimatePresence>
         {selectedMember && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-green-dark/80 backdrop-blur-sm"
-            onClick={() => setSelectedMember(null)}
-          >
+          <>
+            {/* Backdrop overlay */}
             <motion.div 
-              initial={{ scale: 0.95, y: 15 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.95, y: 15 }}
-              transition={{ type: "spring", duration: 0.5 }}
-              className="bg-white max-w-lg w-full rounded-3xl overflow-hidden border border-brand-gold/30 shadow-[0_20px_50px_rgba(201,162,39,0.15)] relative z-50"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 bg-brand-green-dark/60 backdrop-blur-md"
+              onClick={() => setSelectedMember(null)}
+            />
+            
+            {/* Panel */}
+            <motion.div 
+              initial={isMobile ? { y: "100%", x: 0 } : { x: "100%", y: 0 }}
+              animate={{ x: 0, y: 0 }}
+              exit={isMobile ? { y: "100%", x: 0 } : { x: "100%", y: 0 }}
+              transition={{ type: "spring", damping: 30, stiffness: 240 }}
+              className="fixed z-[999] bg-white shadow-[0_-15px_50px_rgba(20,83,45,0.12)] flex flex-col overflow-hidden
+                bottom-0 right-0 
+                w-full h-[85vh] rounded-t-[32px] border-t border-brand-gold/15
+                md:w-[460px] md:h-screen md:rounded-l-[32px] md:rounded-tr-none md:border-l md:border-t-0"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
               <button 
                 onClick={() => setSelectedMember(null)}
-                className="absolute top-4 right-4 text-brand-green-dark/60 hover:text-brand-gold p-2 rounded-full bg-brand-cream/60 border border-brand-gold/10 transition-colors cursor-pointer"
+                className="absolute top-5 right-5 text-brand-green-dark/60 hover:text-brand-gold p-2.5 rounded-full bg-brand-cream/80 border border-brand-gold/10 hover:border-brand-gold/30 transition-all cursor-pointer z-50"
               >
                 <X size={18} />
               </button>
 
-              {/* Profile Info */}
-              <div className="p-8 flex flex-col items-center text-center">
-                <img 
-                  src={selectedMember.fotoStruktur || selectedMember.avatar} 
-                  alt={selectedMember.name} 
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = selectedMember.avatar;
-                  }}
-                  className="w-24 h-24 rounded-full border-2 border-brand-gold bg-brand-cream mb-4 shadow-sm"
-                />
-                <span className="font-sans text-[10px] font-bold tracking-widest text-brand-gold uppercase px-3.5 py-1.5 rounded-full border border-brand-gold/15 bg-brand-gold/5 mb-2">
+              {/* Drawer Content */}
+              <div className="flex-grow overflow-y-auto p-8 flex flex-col items-center text-center scrollbar-thin">
+                {/* Profile Top Decoration Banner */}
+                <div className="w-32 h-32 rounded-full border-4 border-brand-gold/25 p-1 mb-5 relative bg-white shrink-0 shadow-md mt-6">
+                  <img 
+                    src={selectedMember.fotoStruktur || selectedMember.fotoAnggota || selectedMember.avatar} 
+                    alt={selectedMember.name} 
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = selectedMember.avatar;
+                    }}
+                    className="w-full h-full rounded-full object-cover"
+                  />
+                  {selectedMember.division === 'BPH (Badan Pengurus Harian)' && (
+                    <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 text-[9px] font-sans font-extrabold tracking-widest text-white bg-brand-gold px-3 py-1 rounded-full shadow-md flex items-center gap-0.5 border border-white">
+                      <Award size={9} />
+                      BPH
+                    </span>
+                  )}
+                </div>
+
+                <span className="font-sans text-[10px] font-bold tracking-widest text-brand-gold uppercase px-4 py-1.5 rounded-full border border-brand-gold/15 bg-brand-gold/5 mb-3.5 shadow-sm">
                   {selectedMember.division}
                 </span>
-                <h3 className="font-serif font-bold text-xl text-brand-green-dark mb-1">
+
+                <h3 className="font-serif font-bold text-2xl text-brand-green-dark mb-1.5 leading-tight">
                   {selectedMember.name}
                 </h3>
-                <p className="font-sans text-sm text-brand-green-dark/70 font-semibold mb-3">
+                
+                <p className="font-sans text-sm text-brand-green-dark/70 font-semibold mb-1">
                   {selectedMember.role}
                 </p>
-                <p className="font-sans text-xs text-brand-green-dark/50 mb-6 italic">
+                
+                <p className="font-sans text-xs text-brand-green-dark/50 mb-6 italic font-medium">
                   Program Studi: {selectedMember.major}
                 </p>
                 
-                <div className="h-px w-full bg-brand-gold/15 mb-6" />
+                <div className="h-0.5 w-24 bg-brand-gold/20 mb-6 shrink-0" />
                 
-                <p className="font-sans text-sm text-brand-green-dark/75 leading-relaxed mb-8">
+                <p className="font-sans text-sm text-brand-green-dark/75 leading-relaxed mb-8 flex-grow">
                   {selectedMember.bio}
                 </p>
 
-                {/* Social links */}
-                <div className="flex flex-wrap gap-3">
-                  {selectedMember.socials?.instagram && (
-                    <a 
-                      href={selectedMember.socials.instagram} 
-                      target="_blank" 
-                      rel="noreferrer"
-                      className="w-10 h-10 rounded-full border border-brand-gold/25 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream transition-all duration-300 shadow-sm"
-                    >
-                      <Instagram size={16} />
-                    </a>
-                  )}
-                  {selectedMember.socials?.tiktok && (
-                    <a 
-                      href={selectedMember.socials.tiktok} 
-                      target="_blank" 
-                      rel="noreferrer"
-                      className="w-10 h-10 rounded-full border border-brand-gold/25 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream transition-all duration-300 shadow-sm"
-                    >
-                      <Tiktok size={16} />
-                    </a>
-                  )}
-                  {selectedMember.socials?.linkedin && (
-                    <a 
-                      href={selectedMember.socials.linkedin} 
-                      target="_blank" 
-                      rel="noreferrer"
-                      className="w-10 h-10 rounded-full border border-brand-gold/25 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream transition-all duration-300 shadow-sm"
-                    >
-                      <Linkedin size={16} />
-                    </a>
-                  )}
-                  {selectedMember.socials?.github && (
-                    <a 
-                      href={selectedMember.socials.github} 
-                      target="_blank" 
-                      rel="noreferrer"
-                      className="w-10 h-10 rounded-full border border-brand-gold/25 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream transition-all duration-300 shadow-sm"
-                    >
-                      <Github size={16} />
-                    </a>
-                  )}
-                  {selectedMember.socials?.facebook && (
-                    <a 
-                      href={selectedMember.socials.facebook} 
-                      target="_blank" 
-                      rel="noreferrer"
-                      className="w-10 h-10 rounded-full border border-brand-gold/25 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream transition-all duration-300 shadow-sm"
-                    >
-                      <Facebook size={16} />
-                    </a>
-                  )}
-                  {selectedMember.socials?.website && (
-                    <a 
-                      href={selectedMember.socials.website} 
-                      target="_blank" 
-                      rel="noreferrer"
-                      className="w-10 h-10 rounded-full border border-brand-gold/25 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream transition-all duration-300 shadow-sm"
-                    >
-                      <Globe size={16} />
-                    </a>
-                  )}
-                  {selectedMember.socials?.email && (
-                    <a 
-                      href={selectedMember.socials.email.startsWith('mailto:') ? selectedMember.socials.email.trim() : `mailto:${selectedMember.socials.email.trim()}`}
-                      className="w-10 h-10 rounded-full border border-brand-gold/25 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream transition-all duration-300 shadow-sm"
-                    >
-                      <Mail size={16} />
-                    </a>
-                  )}
+                {/* Social Links */}
+                <div className="mt-auto w-full">
+                  <p className="font-sans text-[10px] text-brand-green-dark/40 font-bold uppercase tracking-widest mb-4">Hubungi Anggota:</p>
+                  <div className="flex flex-wrap gap-3 justify-center mb-6">
+                    {selectedMember.socials?.instagram && (
+                      <a 
+                        href={selectedMember.socials.instagram} 
+                        target="_blank" 
+                        rel="noreferrer"
+                        className="w-10 h-10 rounded-full border border-brand-gold/20 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream hover:bg-white transition-all duration-300 shadow-sm"
+                      >
+                        <Instagram size={16} />
+                      </a>
+                    )}
+                    {selectedMember.socials?.tiktok && (
+                      <a 
+                        href={selectedMember.socials.tiktok} 
+                        target="_blank" 
+                        rel="noreferrer"
+                        className="w-10 h-10 rounded-full border border-brand-gold/20 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream hover:bg-white transition-all duration-300 shadow-sm"
+                      >
+                        <Tiktok size={16} />
+                      </a>
+                    )}
+                    {selectedMember.socials?.linkedin && (
+                      <a 
+                        href={selectedMember.socials.linkedin} 
+                        target="_blank" 
+                        rel="noreferrer"
+                        className="w-10 h-10 rounded-full border border-brand-gold/20 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream hover:bg-white transition-all duration-300 shadow-sm"
+                      >
+                        <Linkedin size={16} />
+                      </a>
+                    )}
+                    {selectedMember.socials?.github && (
+                      <a 
+                        href={selectedMember.socials.github} 
+                        target="_blank" 
+                        rel="noreferrer"
+                        className="w-10 h-10 rounded-full border border-brand-gold/20 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream hover:bg-white transition-all duration-300 shadow-sm"
+                      >
+                        <Github size={16} />
+                      </a>
+                    )}
+                    {selectedMember.socials?.facebook && (
+                      <a 
+                        href={selectedMember.socials.facebook} 
+                        target="_blank" 
+                        rel="noreferrer"
+                        className="w-10 h-10 rounded-full border border-brand-gold/20 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream hover:bg-white transition-all duration-300 shadow-sm"
+                      >
+                        <Facebook size={16} />
+                      </a>
+                    )}
+                    {selectedMember.socials?.website && (
+                      <a 
+                        href={selectedMember.socials.website} 
+                        target="_blank" 
+                        rel="noreferrer"
+                        className="w-10 h-10 rounded-full border border-brand-gold/20 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream hover:bg-white transition-all duration-300 shadow-sm"
+                      >
+                        <Globe size={16} />
+                      </a>
+                    )}
+                    {selectedMember.socials?.email && (
+                      <a 
+                        href={selectedMember.socials.email.startsWith('mailto:') ? selectedMember.socials.email.trim() : `mailto:${selectedMember.socials.email.trim()}`}
+                        className="w-10 h-10 rounded-full border border-brand-gold/20 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/80 hover:text-brand-gold bg-brand-cream hover:bg-white transition-all duration-300 shadow-sm"
+                      >
+                        <Mail size={16} />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             </motion.div>
-          </motion.div>
+          </>
         )}
       </AnimatePresence>
 
-      {/* Division Details Modal */}
+      {/* Division Details Drawer */}
       <AnimatePresence>
         {selectedDivision && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-green-dark/80 backdrop-blur-sm"
-            onClick={() => setSelectedDivision(null)}
-          >
+          <>
+            {/* Backdrop overlay */}
             <motion.div 
-              initial={{ scale: 0.95, y: 15 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.95, y: 15 }}
-              transition={{ type: "spring", duration: 0.5 }}
-              className="bg-white max-w-2xl w-full rounded-3xl overflow-hidden border border-brand-gold/30 shadow-[0_20px_50px_rgba(201,162,39,0.15)] relative z-50 flex flex-col md:flex-row"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 bg-brand-green-dark/60 backdrop-blur-md"
+              onClick={() => setSelectedDivision(null)}
+            />
+            
+            {/* Slide-out Panel */}
+            <motion.div 
+              initial={isMobile ? { y: "100%", x: 0 } : { x: "100%", y: 0 }}
+              animate={{ x: 0, y: 0 }}
+              exit={isMobile ? { y: "100%", x: 0 } : { x: "100%", y: 0 }}
+              transition={{ type: "spring", damping: 30, stiffness: 240 }}
+              className="fixed z-[999] bg-white shadow-[0_-15px_50px_rgba(20,83,45,0.12)] flex flex-col overflow-hidden
+                bottom-0 right-0 
+                w-full h-[85vh] rounded-t-[32px] border-t border-brand-gold/15
+                md:w-[480px] md:h-screen md:rounded-l-[32px] md:rounded-tr-none md:border-l md:border-t-0"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
               <button 
                 onClick={() => setSelectedDivision(null)}
-                className="absolute top-4 right-4 text-brand-green-dark/60 hover:text-brand-gold p-2 rounded-full bg-brand-cream/60 border border-brand-gold/10 transition-colors cursor-pointer z-10"
+                className="absolute top-5 right-5 text-brand-green-dark/60 hover:text-brand-gold p-2.5 rounded-full bg-brand-cream/80 border border-brand-gold/10 hover:border-brand-gold/30 transition-all cursor-pointer z-50"
               >
                 <X size={18} />
               </button>
 
-              {/* Left Side: Division Photo */}
-              <div className="w-full md:w-1/2 aspect-[4/5] md:aspect-auto md:h-[500px] bg-brand-cream relative overflow-hidden border-b md:border-b-0 md:border-r border-brand-gold/15 shrink-0 flex flex-col justify-end">
-                {/* Fallback pattern if image is missing */}
+              {/* Group Image */}
+              <div className="w-full aspect-[16/10] md:h-[240px] bg-brand-cream relative overflow-hidden border-b border-brand-gold/15 shrink-0">
                 <div className="absolute inset-0 bg-gradient-to-br from-brand-green-dark to-brand-green flex flex-col items-center justify-center p-6 text-white">
-                  <Users size={48} className="text-brand-gold mb-2 opacity-80" />
-                  <span className="font-serif font-bold text-xl tracking-wider uppercase">{selectedDivision.name.replace('Divisi ', '')}</span>
-                  <span className="font-sans text-[10px] text-white/60 mt-1 font-semibold uppercase tracking-wide">Foto bersama KKN</span>
+                  <Users size={40} className="text-brand-gold mb-1.5 opacity-80" />
+                  <span className="font-serif font-bold text-lg tracking-wider uppercase">{selectedDivision.name.replace('Divisi ', '')}</span>
                 </div>
                 
-                {/* actual image overlay */}
                 <img 
                   src={selectedDivision.image} 
                   alt={selectedDivision.name} 
-                  onError={(e) => {
-                    e.target.style.opacity = 0; // hides image and shows the CSS background/placeholder underneath
-                  }}
+                  onError={(e) => { e.target.style.opacity = 0; }}
                   className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 z-1"
                 />
                 
-                {/* Title Overlay */}
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 text-white z-2">
-                  <span className="font-sans text-[9px] font-bold tracking-widest text-brand-gold uppercase mb-1 block">
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent p-5 text-white z-2 flex flex-col text-left">
+                  <span className="font-sans text-[8px] font-bold tracking-widest text-brand-gold uppercase mb-0.5">
                     KKN UIN Suska Riau 2026
                   </span>
-                  <h3 className="font-serif font-bold text-2xl">
+                  <h3 className="font-serif font-bold text-xl leading-tight">
                     {selectedDivision.name}
                   </h3>
                 </div>
               </div>
 
-              {/* Right Side: Members list */}
-              <div className="w-full md:w-1/2 p-6 md:p-8 flex flex-col max-h-[500px] overflow-y-auto bg-[#fcfcfc]">
-                <h4 className="font-serif font-bold text-base text-brand-green-dark mb-4 pb-2 border-b border-brand-gold/15 tracking-wide">
+              {/* Members list inside drawer */}
+              <div className="flex-grow overflow-y-auto p-6 bg-[#fdfdfd] flex flex-col scrollbar-thin">
+                <h4 className="font-serif font-bold text-xs text-brand-green-dark/50 uppercase tracking-widest mb-4 pb-2 border-b border-brand-gold/15 text-left shrink-0">
                   Anggota Divisi
                 </h4>
                 
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 overflow-y-auto pr-1">
                   {selectedDivision.members.map((member) => (
-                    <div key={member.id} className="bg-white border border-brand-gold/10 hover:border-brand-gold/25 p-4 rounded-2xl flex items-start gap-3 shadow-sm transition-all duration-300">
+                    <div key={member.id} className="bg-white border border-brand-gold/10 hover:border-brand-gold/25 p-4.5 rounded-2xl flex items-start gap-4 shadow-sm transition-all duration-300">
                       <img 
-                        src={member.avatar} 
+                        src={member.fotoAnggota || member.avatar} 
                         alt={member.name} 
-                        className="w-11 h-11 rounded-full border border-brand-gold/20 bg-brand-cream shadow-sm shrink-0"
+                        className="w-12 h-12 rounded-full border border-brand-gold/15 bg-brand-cream shadow-sm shrink-0 object-cover"
                       />
-                      <div className="flex-grow min-w-0">
+                      <div className="flex-grow min-w-0 text-left">
                         <h5 className="font-serif font-bold text-sm text-brand-green-dark leading-tight truncate">
                           {member.name}
                         </h5>
                         <p className="font-sans text-[9px] text-brand-gold font-bold uppercase tracking-wider mt-0.5 truncate">
                           {member.role === 'Anggota' ? member.major : `${member.role} — ${member.major}`}
                         </p>
-                        <p className="font-sans text-[11px] text-brand-green-dark/75 leading-relaxed mt-2 line-clamp-3">
+                        <p className="font-sans text-xs text-brand-green-dark/75 leading-relaxed mt-2.5">
                           {member.bio}
                         </p>
                         
                         {/* Individual Social Links */}
-                        <div className="flex flex-wrap gap-1.5 mt-3">
+                        <div className="flex flex-wrap gap-1.5 mt-3.5">
                           {member.socials?.instagram && (
                             <a 
                               href={member.socials.instagram} 
                               target="_blank" 
                               rel="noreferrer"
-                              className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream transition-colors duration-200"
+                              className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream hover:bg-white transition-colors duration-200"
                             >
                               <Instagram size={11} />
                             </a>
@@ -549,7 +627,7 @@ const Struktur = () => {
                               href={member.socials.tiktok} 
                               target="_blank" 
                               rel="noreferrer"
-                              className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream transition-colors duration-200"
+                              className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream hover:bg-white transition-colors duration-200"
                             >
                               <Tiktok size={11} />
                             </a>
@@ -559,7 +637,7 @@ const Struktur = () => {
                               href={member.socials.linkedin} 
                               target="_blank" 
                               rel="noreferrer"
-                              className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream transition-colors duration-200"
+                              className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream hover:bg-white transition-colors duration-200"
                             >
                               <Linkedin size={11} />
                             </a>
@@ -569,7 +647,7 @@ const Struktur = () => {
                               href={member.socials.github} 
                               target="_blank" 
                               rel="noreferrer"
-                              className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream transition-colors duration-200"
+                              className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream hover:bg-white transition-colors duration-200"
                             >
                               <Github size={11} />
                             </a>
@@ -579,7 +657,7 @@ const Struktur = () => {
                               href={member.socials.facebook} 
                               target="_blank" 
                               rel="noreferrer"
-                              className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream transition-colors duration-200"
+                              className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream hover:bg-white transition-colors duration-200"
                             >
                               <Facebook size={11} />
                             </a>
@@ -589,7 +667,7 @@ const Struktur = () => {
                               href={member.socials.website} 
                               target="_blank" 
                               rel="noreferrer"
-                              className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream transition-colors duration-200"
+                              className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream hover:bg-white transition-colors duration-200"
                             >
                               <Globe size={11} />
                             </a>
@@ -597,7 +675,7 @@ const Struktur = () => {
                           {member.socials?.email && (
                             <a 
                               href={member.socials.email.startsWith('mailto:') ? member.socials.email.trim() : `mailto:${member.socials.email.trim()}`}
-                              className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream transition-colors duration-200"
+                              className="w-7 h-7 rounded-full border border-brand-gold/15 hover:border-brand-gold flex items-center justify-center text-brand-green-dark/70 hover:text-brand-gold bg-brand-cream hover:bg-white transition-colors duration-200"
                             >
                               <Mail size={11} />
                             </a>
@@ -609,7 +687,7 @@ const Struktur = () => {
                 </div>
               </div>
             </motion.div>
-          </motion.div>
+          </>
         )}
       </AnimatePresence>
     </section>
