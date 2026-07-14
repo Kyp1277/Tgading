@@ -212,7 +212,17 @@ const Anggota = () => {
                   >
                     {/* Profile Top Banner */}
                     <div className="h-24 bg-gradient-to-br from-brand-green-dark to-brand-green relative overflow-hidden">
-                      <div className="absolute inset-0 bg-radial-gradient from-brand-gold/10 to-transparent" />
+                      {/* Radial gold glow orb */}
+                      <div className="absolute -right-4 -top-8 w-24 h-24 rounded-full bg-brand-gold/20 blur-xl pointer-events-none" />
+                      
+                      {/* Topographic contour lines */}
+                      <svg className="absolute inset-0 w-full h-full text-white/[0.04] pointer-events-none" viewBox="0 0 100 50" fill="none" stroke="currentColor" strokeWidth="0.6">
+                        <path d="M -10,12 C 15,5 30,22 55,10 C 80,-2 90,15 110,8" />
+                        <path d="M -10,22 C 15,15 30,32 55,20 C 80,8 90,25 110,18" />
+                        <path d="M -10,32 C 15,25 30,42 55,30 C 80,18 90,35 110,28" />
+                        <path d="M -10,42 C 15,35 30,52 55,40 C 80,28 90,45 110,38" />
+                      </svg>
+                      
                       <div className="absolute top-4 right-4 flex items-center gap-1.5 z-10">
                         {isBPH && (
                           <span className="text-[8px] font-sans font-extrabold tracking-widest text-white bg-brand-gold px-2 py-0.5 rounded-full shadow-[0_0_8px_rgba(201,162,39,0.5)] flex items-center gap-0.5 border border-white/10">
