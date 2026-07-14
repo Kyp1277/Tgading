@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
+import fs from 'fs';
+import path from 'path';
 
 // We dynamically import @vercel/kv to prevent compilation errors if the user hasn't linked it yet.
-// If it fails, we fall back to a local/static cache or default list.
 let kv;
 try {
   const vercelKv = require('@vercel/kv');
@@ -56,6 +57,36 @@ const defaultProker = [
   }
 ];
 
+const localFilePath = path.join(process.cwd(), 'src/data/proker.json');
+
+// Helper to read local JSON proker
+function getLocalProker() {
+  try {
+    if (fs.existsSync(localFilePath)) {
+      const data = fs.readFileSync(localFilePath, 'utf8');
+      return JSON.parse(data);
+    }
+  } catch (e) {
+    console.error("Gagal membaca file lokal proker:", e);
+  }
+  return defaultProker;
+}
+
+// Helper to write local JSON proker
+function saveLocalProker(data) {
+  try {
+    const dir = path.dirname(localFilePath);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    fs.writeFileSync(localFilePath, JSON.stringify(data, null, 2), 'utf8');
+    return true;
+  } catch (e) {
+    console.error("Gagal menyimpan file lokal proker:", e);
+    return false;
+  }
+}
+
 // Helper to check if request is authenticated
 async function isAuthenticated() {
   try {
@@ -70,20 +101,21 @@ async function isAuthenticated() {
 export async function GET() {
   try {
     if (!kv || !process.env.KV_REST_API_URL) {
-      console.warn("Vercel KV is not configured. Falling back to default static list.");
-      return NextResponse.json(defaultProker);
+      console.warn("Vercel KV is not configured. Falling back to local JSON storage.");
+      return NextResponse.json(getLocalProker());
     }
     
     let proker = await kv.get('proker_items');
     if (!proker) {
       // Initialize KV with default data if empty
-      await kv.set('proker_items', defaultProker);
-      proker = defaultProker;
+      const localProker = getLocalProker();
+      await kv.set('proker_items', localProker);
+      proker = localProker;
     }
     return NextResponse.json(proker);
   } catch (error) {
     console.error("Error fetching proker from Vercel KV:", error);
-    return NextResponse.json(defaultProker);
+    return NextResponse.json(getLocalProker());
   }
 }
 
@@ -93,11 +125,27 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const item = await request.json();
+
     if (!kv || !process.env.KV_REST_API_URL) {
-      return NextResponse.json({ error: 'Database Vercel KV belum terhubung!' }, { status: 500 });
+      console.warn("Vercel KV is not configured. Saving to local JSON storage.");
+      let proker = getLocalProker();
+      if (item.id) {
+        const index = proker.findIndex(p => p.id === Number(item.id));
+        if (index !== -1) {
+          proker[index] = { ...proker[index], ...item, id: Number(item.id) };
+        } else {
+          item.id = Number(item.id);
+          proker.push(item);
+        }
+      } else {
+        const nextId = proker.length > 0 ? Math.max(...proker.map(p => p.id || 0)) + 1 : 1;
+        proker.push({ ...item, id: nextId });
+      }
+      saveLocalProker(proker);
+      return NextResponse.json({ success: true, data: proker });
     }
 
-    const item = await request.json();
     let proker = await kv.get('proker_items') || defaultProker;
 
     if (item.id) {
@@ -110,7 +158,6 @@ export async function POST(request) {
           id: Number(item.id)
         };
       } else {
-        // Fallback: If id specified but not found, push it
         item.id = Number(item.id);
         proker.push(item);
       }
@@ -125,6 +172,8 @@ export async function POST(request) {
     }
 
     await kv.set('proker_items', proker);
+    // Sync to local file too if possible
+    saveLocalProker(proker);
     return NextResponse.json({ success: true, data: proker });
   } catch (error) {
     console.error("Error saving proker to Vercel KV:", error);
@@ -138,10 +187,6 @@ export async function DELETE(request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    if (!kv || !process.env.KV_REST_API_URL) {
-      return NextResponse.json({ error: 'Database Vercel KV belum terhubung!' }, { status: 500 });
-    }
-
     const { searchParams } = new URL(request.url);
     const id = Number(searchParams.get('id'));
 
@@ -149,10 +194,19 @@ export async function DELETE(request) {
       return NextResponse.json({ error: 'Missing ID parameter' }, { status: 400 });
     }
 
+    if (!kv || !process.env.KV_REST_API_URL) {
+      console.warn("Vercel KV is not configured. Deleting from local JSON storage.");
+      let proker = getLocalProker();
+      proker = proker.filter(p => p.id !== id);
+      saveLocalProker(proker);
+      return NextResponse.json({ success: true, data: proker });
+    }
+
     let proker = await kv.get('proker_items') || defaultProker;
     proker = proker.filter(p => p.id !== id);
 
     await kv.set('proker_items', proker);
+    saveLocalProker(proker);
     return NextResponse.json({ success: true, data: proker });
   } catch (error) {
     console.error("Error deleting proker from Vercel KV:", error);
