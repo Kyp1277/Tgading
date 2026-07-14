@@ -10,6 +10,7 @@ import Proker from '@/components/Proker';
 import Galeri from '@/components/Galeri';
 import Footer from '@/components/Footer';
 import TransitionOverlay from '@/components/TransitionOverlay';
+import AudioPlayer from '@/components/AudioPlayer';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
 export default function Home() {
@@ -133,6 +134,9 @@ export default function Home() {
 
           {/* Footer */}
           <Footer navigateTo={navigateTo} />
+
+          {/* Floating Audio Player widget */}
+          <AudioPlayer />
 
           {/* Custom Animated Turtle Page Transition Overlay */}
           <TransitionOverlay isActive={isTransitioning} />

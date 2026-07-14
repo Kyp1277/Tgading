@@ -25,9 +25,9 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="id"
-      className={`${playfair.variable} ${inter.variable} ${caveat.variable} h-full`}
+      className={`${playfair.variable} ${inter.variable} ${caveat.variable}`}
     >
-      <body className="min-h-full bg-white text-[#111e16] font-sans">
+      <body className="bg-white text-[#111e16] font-sans">
         {children}
       </body>
     </html>
