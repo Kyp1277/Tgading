@@ -1,5 +1,6 @@
 import { Playfair_Display, Inter, Caveat } from "next/font/google";
 import "./globals.css";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -25,10 +26,12 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="id"
-      className={`${playfair.variable} ${inter.variable} ${caveat.variable} h-full antialiasedScroll`}
+      className={`${playfair.variable} ${inter.variable} ${caveat.variable} h-full`}
     >
       <body className="min-h-full bg-white text-[#111e16] font-sans">
-        {children}
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );

@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useReducedMotion, useScroll } from 'framer-motion';
 import { Calendar, CheckCircle2, AlertCircle, Clock, BookOpen, Loader2 } from 'lucide-react';
 import BackgroundDecor from './BackgroundDecor';
 
@@ -9,6 +9,13 @@ const Proker = () => {
   const shouldReduce = useReducedMotion();
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const timelineRef = useRef(null);
+
+  // Hook Framer Motion untuk mendeteksi progress scroll pada elemen linimasa
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start center", "end center"]
+  });
 
   useEffect(() => {
     const fetchProker = async () => {
@@ -34,18 +41,21 @@ const Proker = () => {
           icon: CheckCircle2,
           color: 'text-emerald-500',
           bg: 'bg-emerald-50',
+          shadow: 'shadow-[0_0_12px_rgba(16,185,129,0.2)]',
         };
       case 'Berlangsung':
         return {
           icon: AlertCircle,
           color: 'text-brand-gold',
           bg: 'bg-brand-gold/10',
+          shadow: 'shadow-[0_0_12px_rgba(201,162,39,0.25)]',
         };
       default:
         return {
           icon: Clock,
           color: 'text-brand-green',
           bg: 'bg-brand-green/10',
+          shadow: 'shadow-sm',
         };
     }
   };
@@ -90,8 +100,22 @@ const Proker = () => {
             <p className="font-sans text-sm text-brand-green-dark/60">Belum ada program kerja yang terdaftar saat ini.</p>
           </div>
         ) : (
-          /* Timeline Layout */
-          <div className="relative border-l-[3px] border-brand-gold/25 md:border-l-0 md:before:absolute md:before:left-1/2 md:before:top-0 md:before:h-full md:before:w-[3px] md:before:bg-brand-gold/25 pl-8 md:pl-0">
+          /* Timeline Layout Container */
+          <div ref={timelineRef} className="relative pl-8 md:pl-0">
+            
+            {/* 1. Background static timeline line */}
+            <div className="absolute left-[1.5px] md:left-1/2 -translate-x-1/2 top-0 bottom-0 w-[3px] bg-brand-gold/15" />
+            
+            {/* 2. Scroll-linked glowing progress line */}
+            {!shouldReduce && (
+              <motion.div 
+                style={{ 
+                  scaleY: scrollYProgress,
+                  transformOrigin: "top"
+                }}
+                className="absolute left-[1.5px] md:left-1/2 -translate-x-1/2 top-0 bottom-0 w-[3px] bg-brand-gold shadow-[0_0_12px_rgba(201,162,39,0.7)]"
+              />
+            )}
             
             {events.map((event, idx) => {
               const isEven = idx % 2 === 0;
@@ -102,7 +126,7 @@ const Proker = () => {
               return (
                 <div key={event.id} className="relative mb-8 md:mb-10 flex flex-col md:flex-row items-stretch overflow-hidden">
                   
-                  {/* Timeline Center Bullet Pin */}
+                  {/* Timeline Center Bullet Pin with dynamic pulsate glow */}
                   <div className="absolute -left-[43px] top-0 md:left-1/2 md:-translate-x-1/2 w-6 h-6 rounded-full border-2 border-brand-gold bg-white flex items-center justify-center shadow-md z-10">
                     {isOngoing && (
                       <span className="absolute inset-0 rounded-full bg-brand-gold/45 animate-ping z-0 pointer-events-none" />
@@ -121,7 +145,7 @@ const Proker = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: "-80px" }}
                         transition={{ duration: 0.6 }}
-                        className="w-full max-w-xl md:max-w-[460px] lg:max-w-[500px] bg-white border-2 border-brand-gold/10 hover:border-brand-gold/25 border-l-4 border-l-transparent hover:border-l-brand-gold p-8 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300 text-left"
+                        className={`w-full max-w-xl md:max-w-[460px] lg:max-w-[500px] bg-white border-2 border-brand-gold/10 hover:border-brand-gold/25 border-l-4 border-l-transparent hover:border-l-brand-gold p-8 rounded-3xl transition-all duration-300 text-left ${styles.shadow}`}
                       >
                         <div className="flex items-center justify-between md:justify-start gap-3 mb-3.5">
                           <span className="font-sans text-xs font-bold text-brand-gold flex items-center gap-1.5 order-2 md:order-1">
@@ -154,7 +178,7 @@ const Proker = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: "-80px" }}
                         transition={{ duration: 0.6 }}
-                        className="w-full max-w-xl md:max-w-[460px] lg:max-w-[500px] bg-white border-2 border-brand-gold/10 hover:border-brand-gold/25 border-l-4 border-l-transparent hover:border-l-brand-gold p-8 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300 text-left"
+                        className={`w-full max-w-xl md:max-w-[460px] lg:max-w-[500px] bg-white border-2 border-brand-gold/10 hover:border-brand-gold/25 border-l-4 border-l-transparent hover:border-l-brand-gold p-8 rounded-3xl transition-all duration-300 text-left ${styles.shadow}`}
                       >
                         <div className="flex items-center justify-between gap-3 mb-3.5">
                           <span className="font-sans text-xs font-bold text-brand-gold flex items-center gap-1.5">

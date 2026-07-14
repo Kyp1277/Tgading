@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Home, Compass, Users, Award, Image as ImageIcon, BookOpen } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { MagneticButton } from './Hero';
 
 const Navbar = ({ currentPage, navigateTo }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -88,14 +89,12 @@ const Navbar = ({ currentPage, navigateTo }) => {
 
         {/* Desktop CTA */}
         <div className="hidden md:block">
-          <motion.button 
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
+          <MagneticButton 
             onClick={() => navigateTo('desa')}
             className="font-sans text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-white transition-all duration-300 shadow-[0_4px_15px_rgba(201,162,39,0.1)] cursor-pointer"
           >
             Jelajahi Kelurahan
-          </motion.button>
+          </MagneticButton>
         </div>
 
         {/* Mobile Menu Button */}
