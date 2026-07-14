@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useReducedMotion, useSpring, useMotionValue, useTransform } from 'framer-motion';
 import { anggotaData } from '../data/anggotaData';
-import { Search, Filter, Instagram, Linkedin, Mail, Users, Github, Facebook, Globe, X, Award } from 'lucide-react';
+import { Search, Filter, Instagram, Linkedin, Mail, Users, Github, Facebook, Globe, X, Award, RefreshCw } from 'lucide-react';
 import BackgroundDecor from './BackgroundDecor';
 
 const Tiktok = ({ size = 16, className }) => (
@@ -22,48 +22,183 @@ const Tiktok = ({ size = 16, className }) => (
   </svg>
 );
 
-// 3D Parallax Tilt Card Component
-const TiltCard = ({ children, className, onClick, shouldReduce, ...props }) => {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  
-  const springConfig = { damping: 25, stiffness: 180, mass: 0.5 };
-  const rotateXSpring = useSpring(useTransform(y, [-120, 120], [10, -10]), springConfig);
-  const rotateYSpring = useSpring(useTransform(x, [-120, 120], [-10, 10]), springConfig);
+// 3D Double-Sided Polaroid Flip Card Component (Opsi A)
+const FlipCard = ({ member, isBPH, shouldReduce, onClick }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
 
-  const handleMouseMove = (e) => {
-    if (shouldReduce) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left - width / 2;
-    const mouseY = e.clientY - rect.top - height / 2;
-    x.set(mouseX);
-    y.set(mouseY);
+  const customQuotes = {
+    1: "Memimpin dengan hati, mengabdi dengan aksi nyata untuk Tanjung Gading.",
+    2: "Kelancaran administrasi adalah fondasi kesuksesan seluruh program kerja.",
+    3: "Ketelitian dalam pencatatan menjaga keharmonisan kerja tim pengabdian.",
+    4: "Transparansi dan ketepatan alokasi dana memastikan efektivitas pengabdian.",
+    5: "Membangun jembatan komunikasi yang kokoh antara mahasiswa dan warga.",
+    6: "Kolaborasi masyarakat adalah kunci keberlanjutan program pembangunan.",
+    7: "Mengabadikan setiap senyum pengabdian lewat lensa visual dan karya digital.",
+    8: "Desain visual yang kreatif menyampaikan pesan pengabdian secara luas.",
+    9: "Edukasi adalah kunci membuka potensi masa depan anak-anak Tanjung Gading.",
+    10: "Menciptakan ruang belajar ceria demi menumbuhkan minat belajar adik-adik.",
+    11: "Kesiapan logistik dan perlengkapan menjamin kelancaran aksi di lapangan."
   };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
+  const quote = customQuotes[member.id] || "Mengabdi dengan ikhlas, bekerja dengan cerdas untuk kemajuan Tanjung Gading.";
 
   return (
-    <motion.div
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        rotateX: shouldReduce ? 0 : rotateXSpring,
-        rotateY: shouldReduce ? 0 : rotateYSpring,
-        transformStyle: "preserve-3d",
-      }}
-      onClick={onClick}
-      className={className}
-      {...props}
+    <div 
+      className="w-full h-[380px] cursor-pointer relative select-none"
+      style={{ perspective: "1000px" }}
+      onMouseEnter={() => !shouldReduce && setIsFlipped(true)}
+      onMouseLeave={() => !shouldReduce && setIsFlipped(false)}
+      onClick={() => setIsFlipped(!isFlipped)}
     >
-      <div style={{ transform: "translateZ(20px)", transformStyle: "preserve-3d" }} className="w-full h-full flex flex-col">
-        {children}
-      </div>
-    </motion.div>
+      <motion.div
+        className="w-full h-full relative"
+        style={{ transformStyle: "preserve-3d" }}
+        animate={{ rotateY: isFlipped ? 180 : 0 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+      >
+        {/* FRONT SIDE */}
+        <div 
+          className={`absolute inset-0 w-full h-full bg-white border-2 rounded-3xl overflow-hidden flex flex-col group shadow-sm transition-all duration-300 ${
+            isBPH 
+              ? 'border-brand-gold/35 shadow-[0_4px_20px_rgba(201,162,39,0.12)]' 
+              : 'border-brand-gold/10'
+          }`}
+          style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+        >
+          {/* Profile Top Banner */}
+          <div className="h-24 bg-gradient-to-br from-brand-green-dark to-brand-green relative overflow-hidden">
+            <div className="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-brand-gold/15 blur-xl pointer-events-none" />
+            
+            <svg className="absolute inset-0 w-full h-full text-brand-gold/[0.08] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id={`pucukRebung-${member.id}`} width="20" height="24" patternUnits="userSpaceOnUse">
+                  <path d="M 10,2 L 2,22 L 18,22 Z" fill="none" stroke="currentColor" strokeWidth="0.8" />
+                  <path d="M 10,2 L 10,22" stroke="currentColor" strokeWidth="0.5" strokeDasharray="1 1" />
+                  <path d="M 6,13 L 10,9 L 14,13" fill="none" stroke="currentColor" strokeWidth="0.6" />
+                  <path d="M 4,18 L 10,13 L 16,18" fill="none" stroke="currentColor" strokeWidth="0.6" />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill={`url(#pucukRebung-${member.id})`} />
+            </svg>
+            
+            <div className="absolute top-4 right-4 flex items-center gap-1.5 z-10">
+              {isBPH && (
+                <span className="text-[8px] font-sans font-extrabold tracking-widest text-white bg-brand-gold px-2 py-0.5 rounded-full shadow-[0_0_8px_rgba(201,162,39,0.5)] flex items-center gap-0.5 border border-white/10">
+                  <Award size={8} />
+                  BPH
+                </span>
+              )}
+              <span className="text-[9px] font-sans font-bold tracking-widest text-brand-gold bg-black/40 px-2.5 py-1 rounded-full border border-brand-gold/15">
+                #{member.id}
+              </span>
+            </div>
+          </div>
+
+          {/* Avatar Position overlap */}
+          <div className="px-6 pb-6 flex-grow flex flex-col items-center -mt-12 relative text-center">
+            <img
+              src={member.fotoAnggota || member.avatar}
+              alt={member.name}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = member.avatar;
+              }}
+              className="w-24 h-24 rounded-full border-4 border-white bg-brand-cream shadow-md mb-3 object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+
+            <span className="font-sans text-[9px] font-bold tracking-widest uppercase mb-1 text-slate-500">
+              {member.role}
+            </span>
+
+            <h3 className="font-serif font-bold text-base text-brand-green-dark mb-1 leading-tight group-hover:text-brand-gold transition-colors duration-300">
+              {member.name}
+            </h3>
+
+            <p className="font-sans text-[9px] text-slate-400 font-bold uppercase tracking-wider mb-3">
+              {member.major}
+            </p>
+
+            <p className="font-sans text-xs text-slate-500 leading-relaxed line-clamp-3 mb-4">
+              {member.bio}
+            </p>
+            
+            <div className="text-[10px] font-sans font-bold text-brand-gold flex items-center gap-1 opacity-60 group-hover:opacity-100 transition-opacity duration-300 mt-auto">
+              <span>Ketuk untuk Balik</span>
+              <RefreshCw size={10} className="animate-spin-slow" />
+            </div>
+          </div>
+        </div>
+
+        {/* BACK SIDE */}
+        <div 
+          className={`absolute inset-0 w-full h-full bg-white border-2 rounded-3xl overflow-hidden flex flex-col p-6 text-center shadow-md ${
+            isBPH 
+              ? 'border-brand-gold/35 shadow-[0_4px_20px_rgba(201,162,39,0.12)]' 
+              : 'border-brand-gold/10'
+          }`}
+          style={{ 
+            backfaceVisibility: "hidden", 
+            WebkitBackfaceVisibility: "hidden",
+            transform: "rotateY(180deg)"
+          }}
+        >
+          <div className="flex flex-col items-center flex-grow justify-between h-full">
+            {/* Slogan Quote */}
+            <div className="my-auto">
+              <span className="font-serif text-3xl text-brand-gold/45 font-bold leading-none">“</span>
+              <p className="font-serif italic text-xs md:text-sm text-brand-green-dark/95 px-1 leading-relaxed -mt-1.5">
+                {quote}
+              </p>
+              <span className="font-serif text-3xl text-brand-gold/45 font-bold leading-none">”</span>
+            </div>
+
+            {/* Division Detail */}
+            <div className="w-full space-y-3.5 mt-auto">
+              <div className="bg-brand-cream/80 py-2 px-3.5 rounded-xl border border-brand-gold/10">
+                <p className="font-sans text-[8px] font-bold text-brand-gold uppercase tracking-widest mb-0.5">Divisi KKN</p>
+                <p className="font-sans text-[11px] font-bold text-brand-green-dark leading-tight">{member.division}</p>
+              </div>
+
+              {/* Social Media Link Icons */}
+              <div className="flex justify-center gap-2.5">
+                {member.socials?.instagram && (
+                  <a 
+                    href={member.socials.instagram} 
+                    target="_blank" 
+                    rel="noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="w-8 h-8 rounded-full border border-brand-gold/20 hover:border-brand-gold flex items-center justify-center text-slate-550 hover:text-brand-gold bg-brand-sand hover:bg-white transition-all duration-300"
+                  >
+                    <Instagram size={14} />
+                  </a>
+                )}
+                {member.socials?.linkedin && (
+                  <a 
+                    href={member.socials.linkedin} 
+                    target="_blank" 
+                    rel="noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="w-8 h-8 rounded-full border border-brand-gold/20 hover:border-brand-gold flex items-center justify-center text-slate-550 hover:text-brand-gold bg-brand-sand hover:bg-white transition-all duration-300"
+                  >
+                    <Linkedin size={14} />
+                  </a>
+                )}
+              </div>
+            </div>
+
+            {/* Action button to open full bio modal */}
+            <button 
+              className="mt-5 w-full py-2.5 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-sans text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-sm flex items-center justify-center gap-1 cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                onClick();
+              }}
+            >
+              Buka Detail Profil
+            </button>
+          </div>
+        </div>
+      </motion.div>
+    </div>
   );
 };
 
@@ -198,83 +333,18 @@ const Anggota = () => {
               filteredMembers.map((member) => {
                 const isBPH = member.division === 'BPH (Badan Pengurus Harian)';
                 return (
-                  <TiltCard
+                  <motion.div
                     key={member.id}
                     variants={cardVariants}
                     layout
-                    shouldReduce={shouldReduce}
-                    onClick={() => setSelectedMember(member)}
-                    className={`bg-white border-2 rounded-3xl overflow-hidden flex flex-col group shadow-sm transition-all duration-300 cursor-pointer ${
-                      isBPH 
-                        ? 'border-brand-gold/35 shadow-[0_4px_20px_rgba(201,162,39,0.12)] hover:border-brand-gold/50' 
-                        : 'border-brand-gold/10 hover:border-brand-gold/25'
-                    }`}
                   >
-                    {/* Profile Top Banner */}
-                    <div className="h-24 bg-gradient-to-br from-brand-green-dark to-brand-green relative overflow-hidden">
-                      {/* Soft glow behind the motif */}
-                      <div className="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-brand-gold/15 blur-xl pointer-events-none" />
-                      
-                      {/* Motif Ragam Hias Pucuk Rebung Melayu Riau Pattern */}
-                      <svg className="absolute inset-0 w-full h-full text-brand-gold/[0.08] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                          <pattern id="pucukRebung" width="20" height="24" patternUnits="userSpaceOnUse">
-                            <path d="M 10,2 L 2,22 L 18,22 Z" fill="none" stroke="currentColor" strokeWidth="0.8" />
-                            <path d="M 10,2 L 10,22" stroke="currentColor" strokeWidth="0.5" strokeDasharray="1 1" />
-                            <path d="M 6,13 L 10,9 L 14,13" fill="none" stroke="currentColor" strokeWidth="0.6" />
-                            <path d="M 4,18 L 10,13 L 16,18" fill="none" stroke="currentColor" strokeWidth="0.6" />
-                          </pattern>
-                        </defs>
-                        <rect width="100%" height="100%" fill="url(#pucukRebung)" />
-                      </svg>
-                      
-                      <div className="absolute top-4 right-4 flex items-center gap-1.5 z-10">
-                        {isBPH && (
-                          <span className="text-[8px] font-sans font-extrabold tracking-widest text-white bg-brand-gold px-2 py-0.5 rounded-full shadow-[0_0_8px_rgba(201,162,39,0.5)] flex items-center gap-0.5 border border-white/10">
-                            <Award size={8} />
-                            BPH
-                          </span>
-                        )}
-                        <span className="text-[9px] font-sans font-bold tracking-widest text-brand-gold bg-black/40 px-2.5 py-1 rounded-full border border-brand-gold/15">
-                          #{member.id}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Avatar position overlaps banner */}
-                    <div className="px-8 pb-6 flex-grow flex flex-col items-center -mt-12 relative text-center" style={{ transform: "translateZ(30px)", transformStyle: "preserve-3d" }}>
-                      <img
-                        src={member.fotoAnggota || member.avatar}
-                        alt={member.name}
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = member.avatar;
-                        }}
-                        className="w-24 h-24 rounded-full border-4 border-white bg-brand-cream shadow-md mb-4 object-cover group-hover:scale-105 transition-transform duration-300"
-                        style={{ transform: "translateZ(10px)" }}
-                      />
-
-                      <span className={`font-sans text-[9px] font-bold tracking-widest uppercase mb-1.5 ${isBPH ? 'text-brand-gold-dark' : 'text-slate-500'}`}>
-                        {member.role}
-                      </span>
-
-                      <h3 className="font-serif font-bold text-lg text-brand-green-dark mb-1.5 leading-tight group-hover:text-brand-gold transition-colors duration-300">
-                        {member.name}
-                      </h3>
-
-                      <p className="font-sans text-[10px] text-slate-500 font-bold uppercase tracking-wider mb-4">
-                        {member.major}
-                      </p>
-
-                      <p className="font-sans text-sm text-slate-600 leading-relaxed line-clamp-3 mb-4">
-                        {member.bio}
-                      </p>
-                      
-                      <div className="text-[10px] font-sans font-bold text-brand-gold flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-auto">
-                        Lihat Profil Detail &rarr;
-                      </div>
-                    </div>
-                  </TiltCard>
+                    <FlipCard
+                      member={member}
+                      isBPH={isBPH}
+                      shouldReduce={shouldReduce}
+                      onClick={() => setSelectedMember(member)}
+                    />
+                  </motion.div>
                 );
               })
             ) : (
