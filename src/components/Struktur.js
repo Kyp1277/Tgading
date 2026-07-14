@@ -410,7 +410,7 @@ const Struktur = () => {
                 {/* Profile Top Decoration Banner */}
                 <div className="w-32 h-32 rounded-full border-4 border-brand-gold/25 p-1 mb-5 relative bg-white shrink-0 shadow-md mt-6">
                   <img 
-                    src={selectedMember.fotoStruktur || selectedMember.fotoAnggota || selectedMember.avatar} 
+                    src={selectedMember.fotoAnggota || selectedMember.avatar} 
                     alt={selectedMember.name} 
                     onError={(e) => {
                       e.target.onerror = null;
