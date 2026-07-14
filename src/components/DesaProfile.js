@@ -1,9 +1,53 @@
 "use client";
 
 import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { MapPin, Users, Activity, Leaf, Shield, BookOpen } from 'lucide-react';
 import BackgroundDecor from './BackgroundDecor';
+
+// Reusable 3D TiltCard Component for Stats & Potentials
+const TiltCard = ({ children, className, shouldReduce, ...props }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  
+  const springConfig = { damping: 25, stiffness: 180, mass: 0.5 };
+  const rotateXSpring = useSpring(useTransform(y, [-120, 120], [8, -8]), springConfig);
+  const rotateYSpring = useSpring(useTransform(x, [-120, 120], [-8, 8]), springConfig);
+
+  const handleMouseMove = (e) => {
+    if (shouldReduce) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left - width / 2;
+    const mouseY = e.clientY - rect.top - height / 2;
+    x.set(mouseX);
+    y.set(mouseY);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX: shouldReduce ? 0 : rotateXSpring,
+        rotateY: shouldReduce ? 0 : rotateYSpring,
+        transformStyle: "preserve-3d",
+      }}
+      className={className}
+      {...props}
+    >
+      <div style={{ transform: "translateZ(15px)", transformStyle: "preserve-3d" }} className="w-full h-full flex flex-col relative z-10">
+        {children}
+      </div>
+    </motion.div>
+  );
+};
 
 const DesaProfile = () => {
   const shouldReduce = useReducedMotion();
@@ -77,7 +121,7 @@ const DesaProfile = () => {
           </p>
         </motion.div>
 
-        {/* Quick Stats Grid - padding 28px and gap 24px */}
+        {/* Quick Stats Grid with 3D Tilt Cards (Opsi B) */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
@@ -88,17 +132,20 @@ const DesaProfile = () => {
           {stats.map((stat, idx) => {
             const Icon = stat.icon;
             return (
-              <motion.div 
-                key={idx}
-                variants={itemVariants}
-                whileHover={shouldReduce ? {} : { y: -6, borderColor: "rgba(201,162,39,0.35)", boxShadow: "0 15px 30px rgba(20,83,45,0.06)" }}
-                className="bg-white border-2 border-brand-gold/10 p-7 md:p-8 text-center rounded-[32px] transition-all duration-300 shadow-sm"
-              >
-                <div className="w-10 h-10 mx-auto rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold mb-3">
-                  <Icon size={18} />
-                </div>
-                <p className="font-sans text-[10px] text-brand-green-dark/50 uppercase tracking-wider mb-1 font-bold">{stat.label}</p>
-                <p className="font-serif font-bold text-base md:text-lg text-brand-green-dark">{stat.value}</p>
+              <motion.div key={idx} variants={itemVariants}>
+                <TiltCard 
+                  shouldReduce={shouldReduce}
+                  className="bg-white border-2 border-brand-gold/10 hover:border-brand-gold/30 p-7 md:p-8 text-center rounded-[32px] transition-all duration-300 shadow-sm hover:shadow-[0_15px_35px_rgba(201,162,39,0.12)] cursor-default relative overflow-hidden group"
+                >
+                  {/* Subtle Glowing Background Accent */}
+                  <div className="absolute -right-10 -top-10 w-24 h-24 rounded-full bg-brand-gold/5 group-hover:bg-brand-gold/15 blur-xl transition-all duration-300 pointer-events-none" />
+                  
+                  <div className="w-10 h-10 mx-auto rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold mb-3 transition-colors group-hover:bg-brand-gold group-hover:text-white duration-300">
+                    <Icon size={18} />
+                  </div>
+                  <p className="font-sans text-[10px] text-brand-green-dark/50 uppercase tracking-wider mb-1 font-bold">{stat.label}</p>
+                  <p className="font-serif font-bold text-base md:text-lg text-brand-green-dark transition-colors group-hover:text-brand-gold duration-200">{stat.value}</p>
+                </TiltCard>
               </motion.div>
             );
           })}
@@ -187,7 +234,7 @@ const DesaProfile = () => {
           </motion.a>
         </div>
 
-        {/* Potentials Section */}
+        {/* Potentials Section with 3D Tilt Cards (Opsi B) */}
         <div className="mt-12">
           <motion.h3 
             initial={{ opacity: 0 }}
@@ -198,7 +245,6 @@ const DesaProfile = () => {
             Potensi Pengembangan Wilayah
           </motion.h3>
           
-          {/* Potentials Grid - padding 28px and gap 24px */}
           <motion.div 
             variants={containerVariants}
             initial="hidden"
@@ -209,21 +255,24 @@ const DesaProfile = () => {
             {potentials.map((item, idx) => {
               const Icon = item.icon;
               return (
-                <motion.div 
-                  key={idx}
-                  variants={itemVariants}
-                  whileHover={shouldReduce ? {} : { y: -6, borderColor: "rgba(20,83,45,0.25)", boxShadow: "0 15px 30px rgba(20,83,45,0.06)" }}
-                  className="bg-white border-2 border-brand-gold/10 p-7 md:p-8 rounded-[32px] transition-all duration-300 hover:shadow-md text-left"
-                >
-                  <div className="w-12 h-12 rounded-2xl bg-brand-gold/10 flex items-center justify-center text-brand-gold mb-4">
-                    <Icon size={24} />
-                  </div>
-                  <h4 className="font-serif font-bold text-lg mb-3 text-brand-green-dark">
-                    {item.title}
-                  </h4>
-                  <p className="font-sans text-sm text-brand-green-dark/70 leading-relaxed">
-                    {item.desc}
-                  </p>
+                <motion.div key={idx} variants={itemVariants}>
+                  <TiltCard 
+                    shouldReduce={shouldReduce}
+                    className="bg-white border-2 border-brand-gold/10 hover:border-brand-gold/30 p-7 md:p-8 rounded-[32px] transition-all duration-300 hover:shadow-[0_15px_35px_rgba(201,162,39,0.12)] text-left relative overflow-hidden group cursor-default"
+                  >
+                    {/* Subtle Glowing Background Accent */}
+                    <div className="absolute -right-12 -top-12 w-28 h-28 rounded-full bg-brand-gold/5 group-hover:bg-brand-gold/15 blur-xl transition-all duration-300 pointer-events-none" />
+
+                    <div className="w-12 h-12 rounded-2xl bg-brand-gold/10 flex items-center justify-center text-brand-gold mb-4 transition-colors group-hover:bg-brand-gold group-hover:text-white duration-300">
+                      <Icon size={24} />
+                    </div>
+                    <h4 className="font-serif font-bold text-lg mb-3 text-brand-green-dark transition-colors group-hover:text-brand-gold duration-200">
+                      {item.title}
+                    </h4>
+                    <p className="font-sans text-sm text-brand-green-dark/70 leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </TiltCard>
                 </motion.div>
               );
             })}
