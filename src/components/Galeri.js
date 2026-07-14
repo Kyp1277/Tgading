@@ -223,39 +223,39 @@ const Galeri = () => {
             Galeri Interaktif
           </span>
 
-          {/* Triple Toggle for Scrapbook vs Grid vs 3D Carousel */}
-          <div className="bg-white border border-brand-gold/15 p-1 flex rounded-full shadow-sm relative z-20 mb-8 w-fit mx-auto overflow-hidden">
+          {/* Triple Toggle for Scrapbook vs Grid vs 3D Carousel (Responsive Layout) */}
+          <div className="bg-white border border-brand-gold/15 p-1 flex flex-wrap justify-center rounded-2xl md:rounded-full shadow-sm relative z-20 mb-8 w-full max-w-sm md:w-fit mx-auto gap-0.5 md:gap-0">
              <button
               onClick={() => setLayoutMode('scrapbook')}
-              className={`font-sans text-xs font-bold px-5 py-2.5 rounded-full transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+              className={`font-sans text-[10px] md:text-xs font-bold px-3 md:px-5 py-2 md:py-2.5 rounded-xl md:rounded-full transition-all duration-300 flex items-center gap-1.5 md:gap-2 cursor-pointer ${
                 layoutMode === 'scrapbook'
                   ? 'bg-brand-gold text-white shadow-[0_3px_8px_rgba(201,162,39,0.25)]'
                   : 'bg-transparent text-slate-500 hover:text-brand-green-dark'
               }`}
             >
-              <Layers size={14} />
+              <Layers size={12} className="md:w-3.5 md:h-3.5" />
               Buku Tempel
             </button>
             <button
               onClick={() => setLayoutMode('grid')}
-              className={`font-sans text-xs font-bold px-5 py-2.5 rounded-full transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+              className={`font-sans text-[10px] md:text-xs font-bold px-3 md:px-5 py-2 md:py-2.5 rounded-xl md:rounded-full transition-all duration-300 flex items-center gap-1.5 md:gap-2 cursor-pointer ${
                 layoutMode === 'grid'
                   ? 'bg-brand-gold text-white shadow-[0_3px_8px_rgba(201,162,39,0.25)]'
                   : 'bg-transparent text-slate-500 hover:text-brand-green-dark'
               }`}
             >
-              <Grid size={14} />
+              <Grid size={12} className="md:w-3.5 md:h-3.5" />
               Grid Modern
             </button>
             <button
               onClick={() => setLayoutMode('carousel')}
-              className={`font-sans text-xs font-bold px-5 py-2.5 rounded-full transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+              className={`font-sans text-[10px] md:text-xs font-bold px-3 md:px-5 py-2 md:py-2.5 rounded-xl md:rounded-full transition-all duration-300 flex items-center gap-1.5 md:gap-2 cursor-pointer ${
                 layoutMode === 'carousel'
                   ? 'bg-brand-gold text-white shadow-[0_3px_8px_rgba(201,162,39,0.25)]'
                   : 'bg-transparent text-slate-500 hover:text-brand-green-dark'
               }`}
             >
-              <RotateCw size={14} />
+              <RotateCw size={12} className="md:w-3.5 md:h-3.5" />
               3D Carousel
             </button>
           </div>

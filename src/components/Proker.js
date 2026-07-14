@@ -148,10 +148,10 @@ const Proker = () => {
           </div>
         ) : (
           /* Timeline Layout Container */
-          <div ref={timelineRef} className="relative pl-8 md:pl-0">
+          <div ref={timelineRef} className="relative pl-10 md:pl-0">
             
             {/* 1. Background static timeline line */}
-            <div className="absolute left-[1.5px] md:left-1/2 -translate-x-1/2 top-0 bottom-0 w-[3px] bg-brand-gold/15" />
+            <div className="absolute left-4 md:left-1/2 -translate-x-1/2 top-0 bottom-0 w-[3px] bg-brand-gold/15" />
             
             {/* 2. Scroll-linked glowing progress line */}
             {!shouldReduce && (
@@ -160,7 +160,7 @@ const Proker = () => {
                   scaleY: scrollYProgress,
                   transformOrigin: "top"
                 }}
-                className="absolute left-[1.5px] md:left-1/2 -translate-x-1/2 top-0 bottom-0 w-[3px] bg-brand-gold shadow-[0_0_12px_rgba(201,162,39,0.7)]"
+                className="absolute left-4 md:left-1/2 -translate-x-1/2 top-0 bottom-0 w-[3px] bg-brand-gold shadow-[0_0_12px_rgba(201,162,39,0.7)]"
               />
             )}
             
@@ -182,7 +182,7 @@ const Proker = () => {
                       boxShadow: isHovered ? "0 0 15px rgba(201, 162, 39, 0.85)" : "0 2px 4px rgba(0,0,0,0.05)"
                     }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    className="absolute -left-[43px] top-0 md:left-1/2 md:-translate-x-1/2 w-6 h-6 rounded-full border-2 bg-white flex items-center justify-center z-10"
+                    className="absolute left-1 top-0 md:left-1/2 md:-translate-x-1/2 w-6 h-6 rounded-full border-2 bg-white flex items-center justify-center z-10"
                   >
                     {(isOngoing || isHovered) && (
                       <span className="absolute inset-0 rounded-full bg-brand-gold/45 animate-ping z-0 pointer-events-none" />

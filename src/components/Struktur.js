@@ -274,7 +274,7 @@ const Struktur = () => {
           >
             {/* Horizontal line connecting BPH elements */}
             {!shouldReduce && (
-              <svg className="absolute top-0 left-[25%] right-[25%] h-[3px] w-[50%] overflow-visible pointer-events-none">
+              <svg className="hidden md:block absolute top-0 left-[25%] right-[25%] h-[3px] w-[50%] overflow-visible pointer-events-none">
                 <motion.line 
                   x1="0" y1="1.5" x2="100%" y2="1.5" 
                   stroke="#c9a227" strokeWidth="3"
@@ -286,10 +286,10 @@ const Struktur = () => {
               </svg>
             )}
 
-            <div className="flex justify-center gap-16 md:gap-32 w-full max-w-4xl relative">
+            <div className="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-32 w-full max-w-4xl relative">
               {/* Vertical drops to each BPH card */}
               {!shouldReduce && bphGroups.map((_, i) => (
-                <svg key={i} className={`absolute top-0 w-1 h-8 overflow-visible pointer-events-none ${i === 0 ? 'left-[25%] md:left-[30%]' : 'right-[25%] md:right-[30%]'}`}>
+                <svg key={i} className={`hidden md:block absolute top-0 w-1 h-8 overflow-visible pointer-events-none ${i === 0 ? 'left-[25%] md:left-[30%]' : 'right-[25%] md:right-[30%]'}`}>
                   <motion.line 
                     x1="2" y1="0" x2="2" y2="32" 
                     stroke="#c9a227" strokeWidth="3"
@@ -310,7 +310,7 @@ const Struktur = () => {
 
             {/* Central drop line to Kordivs */}
             {!shouldReduce && (
-              <svg className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-8 overflow-visible pointer-events-none">
+              <svg className="hidden md:block absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-8 overflow-visible pointer-events-none">
                 <motion.line 
                   x1="2" y1="0" x2="2" y2="32" 
                   stroke="#c9a227" strokeWidth="3"

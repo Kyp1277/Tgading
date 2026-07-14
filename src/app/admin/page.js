@@ -781,9 +781,9 @@ export default function AdminPage() {
                   {filteredProker.map((item) => (
                     <div 
                       key={item.id}
-                      className="bg-white p-5 rounded-2xl border border-brand-gold/10 hover:border-brand-gold/20 shadow-sm flex items-start justify-between gap-4 transition-all duration-300"
+                      className="bg-white p-5 rounded-2xl border border-brand-gold/10 hover:border-brand-gold/20 shadow-sm flex flex-col sm:flex-row sm:items-start justify-between gap-4 transition-all duration-300"
                     >
-                      <div className="space-y-1.5 max-w-[80%]">
+                      <div className="space-y-1.5 w-full sm:max-w-[80%]">
                         <div className="flex flex-wrap items-center gap-2">
                           <span className="font-sans text-[9px] font-bold bg-brand-cream text-brand-gold border border-brand-gold/20 px-2 py-0.5 rounded-full">
                             ID #{item.id}
@@ -810,7 +810,7 @@ export default function AdminPage() {
                         </p>
                       </div>
 
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 self-end sm:self-start border-t border-brand-cream sm:border-t-0 pt-2 sm:pt-0 w-full sm:w-auto justify-end">
                         <button
                           onClick={() => handleProkerEdit(item)}
                           className="p-2 hover:bg-brand-cream/50 text-slate-400 hover:text-brand-gold rounded-lg transition-colors duration-300 cursor-pointer"
@@ -820,7 +820,7 @@ export default function AdminPage() {
                         </button>
                         <button
                           onClick={() => triggerDeleteConfirm(item.id, 'proker')}
-                          className="p-2 hover:bg-red-50 text-red-400 hover:text-red-655 hover:text-red-600 rounded-lg transition-colors duration-300 cursor-pointer"
+                          className="p-2 hover:bg-red-50 text-red-400 hover:text-red-600 rounded-lg transition-colors duration-300 cursor-pointer"
                           title="Hapus"
                         >
                           <Trash2 size={15} />
@@ -840,9 +840,9 @@ export default function AdminPage() {
                   {filteredGaleri.map((item) => (
                     <div 
                       key={item.id}
-                      className="bg-white p-4 rounded-2xl border border-brand-gold/10 hover:border-brand-gold/20 shadow-sm flex items-center justify-between gap-4 transition-all duration-300"
+                      className="bg-white p-4 rounded-2xl border border-brand-gold/10 hover:border-brand-gold/20 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all duration-300"
                     >
-                      <div className="flex items-center gap-4 max-w-[80%]">
+                      <div className="flex items-center gap-4 w-full sm:max-w-[80%]">
                         <img 
                           src={item.url} 
                           alt={item.title} 
@@ -869,7 +869,7 @@ export default function AdminPage() {
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 self-end sm:self-auto border-t border-brand-cream sm:border-t-0 pt-2 sm:pt-0 w-full sm:w-auto justify-end">
                         <button
                           onClick={() => handleGaleriEdit(item)}
                           className="p-2 hover:bg-brand-cream/50 text-slate-400 hover:text-brand-gold rounded-lg transition-colors duration-300 cursor-pointer"
@@ -879,7 +879,7 @@ export default function AdminPage() {
                         </button>
                         <button
                           onClick={() => triggerDeleteConfirm(item.id, 'galeri')}
-                          className="p-2 hover:bg-red-50 text-red-400 hover:text-red-655 hover:text-red-600 rounded-lg transition-colors duration-300 cursor-pointer"
+                          className="p-2 hover:bg-red-50 text-red-400 hover:text-red-600 rounded-lg transition-colors duration-300 cursor-pointer"
                           title="Hapus"
                         >
                           <Trash2 size={15} />
