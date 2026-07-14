@@ -1,17 +1,43 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { Calendar, Tag, X, ChevronLeft, ChevronRight, Image as ImageIcon, Loader2 } from 'lucide-react';
+import { 
+  Calendar, 
+  Tag, 
+  X, 
+  ChevronLeft, 
+  ChevronRight, 
+  Image as ImageIcon, 
+  Loader2, 
+  Sparkles, 
+  Grid, 
+  Layers,
+  Maximize2 
+} from 'lucide-react';
 import BackgroundDecor from './BackgroundDecor';
 
 const Galeri = () => {
   const [activeCategory, setActiveCategory] = useState('Semua');
   const [lightboxIndex, setLightboxIndex] = useState(null);
-  const shouldReduce = useReducedMotion();
-
+  const [layoutMode, setLayoutMode] = useState('scrapbook'); // default to aesthetic scrapbook
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const shouldReduce = useReducedMotion();
+  const constraintsRef = useRef(null);
+
+  // States to manage z-indices of draggable polaroids
+  const [zIndices, setZIndices] = useState({});
+  const [maxZ, setMaxZ] = useState(10);
+
+  // Detect mobile screen for layout styling
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const categories = ['Semua', 'Edukasi', 'Sosialisasi', 'Gotong Royong', 'Sosial & Budaya'];
 
@@ -49,14 +75,55 @@ const Galeri = () => {
     setLightboxIndex((prev) => (prev - 1 + filteredPhotos.length) % filteredPhotos.length);
   };
 
-  // Bento grid mapping helper
+  // Bring clicked/dragged photo to front
+  const bringToFront = (id) => {
+    const nextZ = maxZ + 1;
+    setZIndices((prev) => ({ ...prev, [id]: nextZ }));
+    setMaxZ(nextZ);
+  };
+
+  // Bento grid mapping helper for Classic Grid mode
   const getBentoClasses = (index) => {
     if (index === 0) return "md:col-span-2 md:row-span-2 h-64 sm:h-80 md:h-full";
     if (index === 1 || index === 4) return "md:col-span-2 md:row-span-1 h-64 md:h-full";
     return "md:col-span-1 md:row-span-1 h-64 md:h-full";
   };
 
-  // Stagger variants
+  // Pre-configured positions for Polaroid cards in Scrapbook mode (Desktop)
+  const initialPositions = [
+    { top: '6%', left: '6%', rotate: -5 },
+    { top: '3%', left: '38%', rotate: 4 },
+    { top: '8%', left: '70%', rotate: -3 },
+    { top: '34%', left: '3%', rotate: 5 },
+    { top: '32%', left: '35%', rotate: -4 },
+    { top: '35%', left: '68%', rotate: 3 },
+    { top: '64%', left: '10%', rotate: -3 },
+    { top: '62%', left: '42%', rotate: 5 },
+    { top: '60%', left: '72%', rotate: -4 },
+  ];
+
+  // Helper to color-code washi tape based on category
+  const getWashiTapeClass = (category) => {
+    switch (category) {
+      case 'Edukasi':
+        return 'bg-amber-400/35 border-amber-500/40 text-amber-900/60';
+      case 'Sosialisasi':
+        return 'bg-cyan-400/35 border-cyan-500/40 text-cyan-900/60';
+      case 'Gotong Royong':
+        return 'bg-emerald-400/35 border-emerald-500/40 text-emerald-900/60';
+      case 'Sosial & Budaya':
+        return 'bg-rose-400/35 border-rose-500/40 text-rose-900/60';
+      default:
+        return 'bg-brand-gold/35 border-brand-gold/40 text-yellow-950/60';
+    }
+  };
+
+  const getPinColor = (index) => {
+    const pinColors = ['#ef4444', '#3b82f6', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6'];
+    return pinColors[index % pinColors.length];
+  };
+
+  // Stagger variants for Grid mode
   const containerVariants = {
     hidden: {},
     visible: {
@@ -83,39 +150,90 @@ const Galeri = () => {
 
       <div className="max-w-[1360px] mx-auto px-6 md:px-8 relative z-10">
         
-        {/* Header */}
-        <motion.div 
-          initial={{ opacity: 0, y: shouldReduce ? 0 : 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-12 md:mb-16"
-        >
-          <span className="font-sans text-xs font-bold uppercase tracking-widest text-brand-gold bg-brand-gold/10 px-4 py-2 rounded-full inline-flex items-center gap-1.5">
-            <ImageIcon size={12} />
-            Dokumentasi KKN
+        {/* Layout Switcher & Header */}
+        <div className="flex flex-col items-center mb-10">
+          <span className="font-sans text-xs font-bold uppercase tracking-widest text-brand-gold bg-brand-gold/10 px-4 py-2 rounded-full inline-flex items-center gap-1.5 mb-4">
+            <Sparkles size={12} className="animate-pulse" />
+            Galeri Interaktif
           </span>
-          <h2 className="font-serif font-bold text-3xl md:text-5xl lg:text-[44px] text-brand-green-dark mt-4 mb-6 leading-tight">
-            Galeri Kegiatan Pengabdian <br />
-            <span className="bg-gradient-to-r from-brand-gold via-brand-gold-dark to-brand-gold bg-clip-text text-transparent">
-              Kelurahan Tanjung Gading
-            </span>
-          </h2>
-          <p className="font-sans text-brand-green-dark/70 max-w-2xl mx-auto leading-relaxed text-sm md:text-base">
-            Kumpulan momen kebersamaan, kerja keras, dan dedikasi tim KKN UIN Suska Riau dalam menjalankan program kerja di Kelurahan Tanjung Gading.
-          </p>
-        </motion.div>
+
+          {/* Dual Toggle for Grid vs Scrapbook */}
+          <div className="bg-white border border-brand-gold/15 p-1 flex rounded-full shadow-sm relative z-20 mb-8">
+            <button
+              onClick={() => setLayoutMode('scrapbook')}
+              className={`font-sans text-xs font-bold px-5 py-2.5 rounded-full transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+                layoutMode === 'scrapbook'
+                  ? 'bg-brand-gold text-white shadow-[0_3px_8px_rgba(201,162,39,0.25)]'
+                  : 'bg-transparent text-brand-green-dark/70 hover:text-brand-green-dark'
+              }`}
+            >
+              <Layers size={14} />
+              Buku Tempel (Aesthetic)
+            </button>
+            <button
+              onClick={() => setLayoutMode('grid')}
+              className={`font-sans text-xs font-bold px-5 py-2.5 rounded-full transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+                layoutMode === 'grid'
+                  ? 'bg-brand-gold text-white shadow-[0_3px_8px_rgba(201,162,39,0.25)]'
+                  : 'bg-transparent text-brand-green-dark/70 hover:text-brand-green-dark'
+              }`}
+            >
+              <Grid size={14} />
+              Grid Modern
+            </button>
+          </div>
+
+          {/* Header Typography based on Selected Mode */}
+          <AnimatePresence mode="wait">
+            {layoutMode === 'scrapbook' ? (
+              <motion.div
+                key="scrapbook-header"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.4 }}
+                className="text-center"
+              >
+                <h2 className="font-serif font-black text-4xl md:text-[54px] text-bevel-green tracking-wide uppercase leading-tight mb-3">
+                  Temenin PDD Jalan-Jalan!
+                </h2>
+                <p className="font-handwritten text-2xl text-brand-gold-dark/95 max-w-2xl mx-auto leading-relaxed">
+                  "Geser dan tata foto-foto kegiatan kami di papan tulis tempel di bawah..."
+                </p>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="grid-header"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.4 }}
+                className="text-center"
+              >
+                <h2 className="font-serif font-bold text-3xl md:text-5xl lg:text-[44px] text-brand-green-dark mt-2 mb-4 leading-tight">
+                  Galeri Kegiatan Pengabdian <br />
+                  <span className="bg-gradient-to-r from-brand-gold via-brand-gold-dark to-brand-gold bg-clip-text text-transparent">
+                    Kelurahan Tanjung Gading
+                  </span>
+                </h2>
+                <p className="font-sans text-brand-green-dark/70 max-w-2xl mx-auto leading-relaxed text-sm md:text-base">
+                  Kumpulan momen kebersamaan, kerja keras, dan dedikasi tim KKN UIN Suska Riau dalam menjalankan program kerja di Kelurahan Tanjung Gading.
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
 
         {/* Category Tabs */}
-        <div className="flex justify-center mb-12 relative z-10">
-          <div className="bg-white border border-brand-gold/15 p-1.5 flex gap-2 overflow-x-auto max-w-full scrollbar-none rounded-full shadow-sm">
+        <div className="flex justify-center mb-10 relative z-20">
+          <div className="bg-white border border-brand-gold/15 p-1.5 flex gap-1.5 overflow-x-auto max-w-full scrollbar-none rounded-full shadow-sm">
             {categories.map((category) => {
               const isSelected = activeCategory === category;
               return (
                 <button
                   key={category}
                   onClick={() => setActiveCategory(category)}
-                  className={`font-sans text-xs font-bold px-6 py-3 rounded-full transition-all duration-300 whitespace-nowrap cursor-pointer ${
+                  className={`font-sans text-[11px] md:text-xs font-bold px-5 py-2.5 rounded-full transition-all duration-300 whitespace-nowrap cursor-pointer ${
                     isSelected
                       ? 'bg-brand-gold text-white shadow-[0_4px_12px_rgba(201,162,39,0.2)]'
                       : 'bg-transparent text-brand-green-dark/70 hover:text-brand-green-dark'
@@ -138,56 +256,191 @@ const Galeri = () => {
             <p className="font-sans text-sm text-brand-green-dark/60">Tidak ada foto kegiatan untuk kategori ini.</p>
           </div>
         ) : (
-          /* Bento Grid with layout transition & stagger reveal */
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            layout 
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:auto-rows-[228px] relative z-10"
-          >
-            <AnimatePresence mode="popLayout">
-              {filteredPhotos.map((photo, index) => (
-                <motion.div
-                  key={photo.id}
-                  variants={itemVariants}
-                  layout
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.4 }}
-                  onClick={() => openLightbox(index)}
-                  className={`bg-white border border-brand-gold/15 rounded-[32px] overflow-hidden cursor-pointer relative flex flex-col group shadow-sm hover:border-brand-gold/30 ${getBentoClasses(index)}`}
-                >
-                  {/* Image (with slight zoom-in on hover) */}
-                  <img
-                    src={photo.url}
-                    alt={photo.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none pointer-events-none"
-                  />
+          <AnimatePresence mode="wait">
+            {layoutMode === 'scrapbook' ? (
+              /* =================== AESTHETIK SCRAPBOOK LAYOUT =================== */
+              <motion.div
+                key="scrapbook-view"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+                ref={constraintsRef}
+                className="relative w-full min-h-[600px] md:h-[820px] bg-[#fbfbf9] rounded-[36px] border-2 border-brand-gold/15 p-4 md:p-8 overflow-hidden shadow-inner dotted-canvas"
+              >
+                {/* SVG doodles behind the polaroid cards */}
+                <div className="absolute inset-0 pointer-events-none select-none opacity-20">
+                  {/* Scribble circle */}
+                  <svg className="absolute top-10 left-[15%] w-24 h-24 text-brand-gold" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M50,10 C20,20 10,50 30,80 C50,100 90,90 90,60 C90,30 60,10 40,20" strokeDasharray="3,3" />
+                  </svg>
                   
-                  {/* Overlay description on hover (with subtle backdrop blur) */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/75 to-transparent opacity-0 group-hover:opacity-100 backdrop-blur-[2px] transition-all duration-300 flex flex-col justify-end p-8">
-                    <span className="font-sans text-[10px] font-bold text-brand-gold uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
-                      <Tag size={10} className="text-brand-gold" />
-                      {photo.category}
-                    </span>
-                    <h4 className="font-serif font-bold text-base md:text-lg text-white leading-tight mb-2">
-                      {photo.title}
-                    </h4>
-                    <p className="font-sans text-xs md:text-sm text-white/80 leading-relaxed mb-4 line-clamp-3">
-                      {photo.desc}
-                    </p>
-                    <div className="flex items-center gap-1.5 text-[10px] text-white/50 font-bold uppercase tracking-wider">
-                      <Calendar size={12} className="text-white/50" />
-                      {photo.date}
-                    </div>
+                  {/* Arrow connector */}
+                  <svg className="absolute top-[48%] left-[45%] w-36 h-20 text-brand-green hidden md:block" viewBox="0 0 200 100" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M10,80 Q100,20 180,50" strokeDasharray="6,6" />
+                    <path d="M165,40 L180,50 L168,65" />
+                  </svg>
+
+                  {/* Cute handdrawn stars */}
+                  <svg className="absolute top-16 right-[20%] w-12 h-12 text-brand-gold" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.787 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.132 9.21l8.2-1.192L12 .587z" />
+                  </svg>
+
+                  {/* Heart sticker */}
+                  <svg className="absolute bottom-20 left-[8%] w-16 h-16 text-rose-400" viewBox="0 0 100 100" fill="currentColor">
+                    <path d="M50,30 C50,10 20,10 20,35 C20,60 50,80 50,80 C50,80 80,60 80,35 C80,10 50,10 50,30 Z" />
+                  </svg>
+
+                  {/* Cardboard sticker text */}
+                  <div className="absolute bottom-6 right-10 border border-brand-gold/30 bg-brand-cream/40 px-4 py-2 font-handwritten text-lg text-brand-green-dark rotate-3 rounded-md">
+                    📚 Tanjung Gading 2026
                   </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
+                </div>
+
+                {/* Cards Container */}
+                <div className={isMobile ? "flex flex-col items-center gap-10 py-6 overflow-y-auto max-h-[560px]" : "w-full h-full relative"}>
+                  {filteredPhotos.map((photo, index) => {
+                    const pos = initialPositions[index % initialPositions.length];
+                    const washiColor = getWashiTapeClass(photo.category);
+                    const pinColor = getPinColor(index);
+
+                    return (
+                      <motion.div
+                        key={photo.id}
+                        drag={!isMobile} // Disable dragging on mobile to avoid scroll hijacking
+                        dragConstraints={constraintsRef}
+                        dragTransition={{ power: 0.15, bounceStiffness: 220, bounceDamping: 22 }}
+                        whileDrag={{ 
+                          scale: 1.04, 
+                          boxShadow: "0px 25px 50px rgba(27,67,50,0.18)",
+                          rotate: 0 
+                        }}
+                        onDragStart={() => bringToFront(photo.id)}
+                        onTapStart={() => bringToFront(photo.id)}
+                        style={{
+                          position: isMobile ? 'relative' : 'absolute',
+                          top: isMobile ? 'auto' : pos.top,
+                          left: isMobile ? 'auto' : pos.left,
+                          zIndex: zIndices[photo.id] || 10,
+                          transform: isMobile ? `rotate(${pos.rotate * 0.5}deg)` : undefined,
+                        }}
+                        // Initial animation when component mounts
+                        initial={{ 
+                          opacity: 0, 
+                          scale: 0.8, 
+                          rotate: isMobile ? pos.rotate * 0.5 : pos.rotate * 1.5 
+                        }}
+                        animate={{ 
+                          opacity: 1, 
+                          scale: 1, 
+                          rotate: isMobile ? pos.rotate * 0.5 : pos.rotate 
+                        }}
+                        transition={{ duration: 0.6, delay: index * 0.05, ease: "easeOut" }}
+                        className={`w-64 md:w-[275px] bg-white p-3.5 pb-8 rounded-sm border border-stone-200/80 shadow-md hover:shadow-xl transition-shadow duration-300 select-none cursor-grab active:cursor-grabbing flex flex-col group relative`}
+                      >
+                        {/* Washi Tape Ribbon (aesthetic) */}
+                        <div className={`absolute -top-3.5 left-1/2 -translate-x-1/2 w-28 h-6.5 border-l border-r border-dashed mix-blend-multiply flex items-center justify-center font-handwritten text-[10px] tracking-widest font-bold uppercase select-none z-10 ${washiColor}`}>
+                          {photo.category}
+                        </div>
+
+                        {/* Push Pin (metal/colored board pin) */}
+                        <svg 
+                          style={{ color: pinColor }}
+                          className="absolute -top-2 left-6 w-5.5 h-5.5 z-20 drop-shadow-[1.5px_3px_2px_rgba(0,0,0,0.3)] pointer-events-none" 
+                          viewBox="0 0 24 24" 
+                          fill="none"
+                        >
+                          <circle cx="12" cy="7" r="5" fill="currentColor" />
+                          <path d="M12,12 L12,21" stroke="#94a3b8" strokeWidth="2.5" strokeLinecap="round" />
+                          <path d="M9,12 L15,12" stroke="currentColor" strokeWidth="1.5" />
+                        </svg>
+
+                        {/* Inner photo container with border and hover glow */}
+                        <div 
+                          className="relative overflow-hidden bg-stone-100 border border-stone-200 aspect-[4/3] rounded-sm group-hover:border-brand-gold/30 transition-colors duration-300"
+                          onClick={() => openLightbox(index)}
+                        >
+                          <img
+                            src={photo.url}
+                            alt={photo.title}
+                            className="w-full h-full object-cover select-none pointer-events-none"
+                          />
+                          
+                          {/* Mini magnifying glass overlay on hover */}
+                          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+                            <div className="p-2 rounded-full bg-white/80 text-brand-green-dark shadow">
+                              <Maximize2 size={16} />
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Polaroid Handwritten Text Caption */}
+                        <h4 className="font-handwritten text-[22px] text-stone-800 leading-tight text-center mt-4 tracking-wide select-none filter drop-shadow-[0_0.5px_0.5px_rgba(0,0,0,0.12)]">
+                          {photo.title}
+                        </h4>
+
+                        {/* Tiny date marker at bottom */}
+                        <div className="flex items-center justify-end gap-1 text-[11px] text-stone-400 font-handwritten mt-1.5 px-1 select-none">
+                          <Calendar size={10} />
+                          {photo.date}
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            ) : (
+              /* =================== CLASSIC BENTO GRID LAYOUT =================== */
+              <motion.div 
+                key="grid-view"
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-60px" }}
+                layout 
+                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:auto-rows-[228px] relative z-10"
+              >
+                {filteredPhotos.map((photo, index) => (
+                  <motion.div
+                    key={photo.id}
+                    variants={itemVariants}
+                    layout
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.4 }}
+                    onClick={() => openLightbox(index)}
+                    className={`bg-white border border-brand-gold/15 rounded-[32px] overflow-hidden cursor-pointer relative flex flex-col group shadow-sm hover:border-brand-gold/30 ${getBentoClasses(index)}`}
+                  >
+                    {/* Image */}
+                    <img
+                      src={photo.url}
+                      alt={photo.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none pointer-events-none"
+                    />
+                    
+                    {/* Hover detail overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/75 to-transparent opacity-0 group-hover:opacity-100 backdrop-blur-[2px] transition-all duration-300 flex flex-col justify-end p-8">
+                      <span className="font-sans text-[10px] font-bold text-brand-gold uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
+                        <Tag size={10} className="text-brand-gold" />
+                        {photo.category}
+                      </span>
+                      <h4 className="font-serif font-bold text-base md:text-lg text-white leading-tight mb-2">
+                        {photo.title}
+                      </h4>
+                      <p className="font-sans text-xs md:text-sm text-white/80 leading-relaxed mb-4 line-clamp-3">
+                        {photo.desc}
+                      </p>
+                      <div className="flex items-center gap-1.5 text-[10px] text-white/50 font-bold uppercase tracking-wider">
+                        <Calendar size={12} className="text-white/50" />
+                        {photo.date}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
         )}
 
         {/* Lightbox Modal */}
