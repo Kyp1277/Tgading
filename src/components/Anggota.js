@@ -212,15 +212,20 @@ const Anggota = () => {
                   >
                     {/* Profile Top Banner */}
                     <div className="h-24 bg-gradient-to-br from-brand-green-dark to-brand-green relative overflow-hidden">
-                      {/* Radial gold glow orb */}
-                      <div className="absolute -right-4 -top-8 w-24 h-24 rounded-full bg-brand-gold/20 blur-xl pointer-events-none" />
+                      {/* Soft glow behind the motif */}
+                      <div className="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-brand-gold/15 blur-xl pointer-events-none" />
                       
-                      {/* Topographic contour lines */}
-                      <svg className="absolute inset-0 w-full h-full text-white/[0.04] pointer-events-none" viewBox="0 0 100 50" fill="none" stroke="currentColor" strokeWidth="0.6">
-                        <path d="M -10,12 C 15,5 30,22 55,10 C 80,-2 90,15 110,8" />
-                        <path d="M -10,22 C 15,15 30,32 55,20 C 80,8 90,25 110,18" />
-                        <path d="M -10,32 C 15,25 30,42 55,30 C 80,18 90,35 110,28" />
-                        <path d="M -10,42 C 15,35 30,52 55,40 C 80,28 90,45 110,38" />
+                      {/* Motif Ragam Hias Pucuk Rebung Melayu Riau Pattern */}
+                      <svg className="absolute inset-0 w-full h-full text-brand-gold/[0.08] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                          <pattern id="pucukRebung" width="20" height="24" patternUnits="userSpaceOnUse">
+                            <path d="M 10,2 L 2,22 L 18,22 Z" fill="none" stroke="currentColor" strokeWidth="0.8" />
+                            <path d="M 10,2 L 10,22" stroke="currentColor" strokeWidth="0.5" strokeDasharray="1 1" />
+                            <path d="M 6,13 L 10,9 L 14,13" fill="none" stroke="currentColor" strokeWidth="0.6" />
+                            <path d="M 4,18 L 10,13 L 16,18" fill="none" stroke="currentColor" strokeWidth="0.6" />
+                          </pattern>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#pucukRebung)" />
                       </svg>
                       
                       <div className="absolute top-4 right-4 flex items-center gap-1.5 z-10">
