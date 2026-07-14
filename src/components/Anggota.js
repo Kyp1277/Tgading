@@ -77,7 +77,7 @@ const FlipCard = ({ member, isBPH, shouldReduce, onClick }) => {
   return (
     <div 
       className="w-full h-[380px] cursor-pointer relative select-none"
-      style={{ perspective: "1500px" }}
+      style={{ perspective: "1000px" }}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => !shouldReduce && setIsFlipped(true)}
       onMouseLeave={handleMouseLeave}
@@ -87,14 +87,10 @@ const FlipCard = ({ member, isBPH, shouldReduce, onClick }) => {
         className="w-full h-full relative"
         style={{ 
           transformStyle: "preserve-3d",
-          transformOrigin: "left center",
-        }}
-        animate={{ 
           rotateX: isFlipped ? 0 : rotateX,
-          rotateY: isFlipped ? -180 : rotateY,
-          x: isFlipped ? "100%" : "0%"
+          rotateY: isFlipped ? 180 : rotateY
         }}
-        transition={{ duration: 0.85, ease: [0.25, 1, 0.5, 1] }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
       >
         {/* FRONT SIDE */}
         <div 
