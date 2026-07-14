@@ -22,9 +22,42 @@ const Tiktok = ({ size = 16, className }) => (
   </svg>
 );
 
-// 3D Double-Sided Polaroid Flip Card Component (Opsi A)
+// 3D Double-Sided Polaroid Flip Card Component with Parallax Depth (Opsi C)
 const FlipCard = ({ member, isBPH, shouldReduce, onClick }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springConfig = { damping: 25, stiffness: 180, mass: 0.5 };
+  const rotateX = useSpring(useTransform(mouseY, [-150, 150], [10, -10]), springConfig);
+  const rotateY = useSpring(useTransform(mouseX, [-150, 150], [-10, 10]), springConfig);
+
+  // Opposite translations for 3D depth parallax
+  const avatarX = useSpring(useTransform(mouseX, [-150, 150], [8, -8]), springConfig);
+  const avatarY = useSpring(useTransform(mouseY, [-150, 150], [8, -8]), springConfig);
+
+  const bannerX = useSpring(useTransform(mouseX, [-150, 150], [6, -6]), springConfig);
+  const bannerY = useSpring(useTransform(mouseY, [-150, 150], [4, -4]), springConfig);
+
+  const handleMouseMove = (e) => {
+    if (shouldReduce) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const xVal = e.clientX - rect.left - width / 2;
+    const yVal = e.clientY - rect.top - height / 2;
+    mouseX.set(xVal);
+    mouseY.set(yVal);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+    if (!shouldReduce) {
+      setIsFlipped(false);
+    }
+  };
 
   const customQuotes = {
     1: "Memimpin dengan hati, mengabdi dengan aksi nyata untuk Tanjung Gading.",
@@ -45,14 +78,18 @@ const FlipCard = ({ member, isBPH, shouldReduce, onClick }) => {
     <div 
       className="w-full h-[380px] cursor-pointer relative select-none"
       style={{ perspective: "1000px" }}
+      onMouseMove={handleMouseMove}
       onMouseEnter={() => !shouldReduce && setIsFlipped(true)}
-      onMouseLeave={() => !shouldReduce && setIsFlipped(false)}
+      onMouseLeave={handleMouseLeave}
       onClick={() => setIsFlipped(!isFlipped)}
     >
       <motion.div
         className="w-full h-full relative"
-        style={{ transformStyle: "preserve-3d" }}
-        animate={{ rotateY: isFlipped ? 180 : 0 }}
+        style={{ 
+          transformStyle: "preserve-3d",
+          rotateX: isFlipped ? 0 : rotateX,
+          rotateY: isFlipped ? 180 : rotateY
+        }}
         transition={{ duration: 0.6, ease: "easeInOut" }}
       >
         {/* FRONT SIDE */}
@@ -68,17 +105,23 @@ const FlipCard = ({ member, isBPH, shouldReduce, onClick }) => {
           <div className="h-24 bg-gradient-to-br from-brand-green-dark to-brand-green relative overflow-hidden">
             <div className="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-brand-gold/15 blur-xl pointer-events-none" />
             
-            <svg className="absolute inset-0 w-full h-full text-brand-gold/[0.08] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <pattern id={`pucukRebung-${member.id}`} width="20" height="24" patternUnits="userSpaceOnUse">
-                  <path d="M 10,2 L 2,22 L 18,22 Z" fill="none" stroke="currentColor" strokeWidth="0.8" />
-                  <path d="M 10,2 L 10,22" stroke="currentColor" strokeWidth="0.5" strokeDasharray="1 1" />
-                  <path d="M 6,13 L 10,9 L 14,13" fill="none" stroke="currentColor" strokeWidth="0.6" />
-                  <path d="M 4,18 L 10,13 L 16,18" fill="none" stroke="currentColor" strokeWidth="0.6" />
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill={`url(#pucukRebung-${member.id})`} />
-            </svg>
+            {/* Parallax Background Motif (Layer 1) */}
+            <motion.div 
+              style={{ x: bannerX, y: bannerY, scale: 1.1 }}
+              className="absolute inset-0 w-full h-full"
+            >
+              <svg className="w-full h-full text-brand-gold/[0.08] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <pattern id={`pucukRebung-${member.id}`} width="20" height="24" patternUnits="userSpaceOnUse">
+                    <path d="M 10,2 L 2,22 L 18,22 Z" fill="none" stroke="currentColor" strokeWidth="0.8" />
+                    <path d="M 10,2 L 10,22" stroke="currentColor" strokeWidth="0.5" strokeDasharray="1 1" />
+                    <path d="M 6,13 L 10,9 L 14,13" fill="none" stroke="currentColor" strokeWidth="0.6" />
+                    <path d="M 4,18 L 10,13 L 16,18" fill="none" stroke="currentColor" strokeWidth="0.6" />
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill={`url(#pucukRebung-${member.id})`} />
+              </svg>
+            </motion.div>
             
             <div className="absolute top-4 right-4 flex items-center gap-1.5 z-10">
               {isBPH && (
@@ -93,17 +136,25 @@ const FlipCard = ({ member, isBPH, shouldReduce, onClick }) => {
             </div>
           </div>
 
-          {/* Avatar Position overlap */}
+          {/* Avatar Position overlap (Layer 2 Parallax Image) */}
           <div className="px-6 pb-6 flex-grow flex flex-col items-center -mt-12 relative text-center">
-            <img
-              src={member.fotoAnggota || member.avatar}
-              alt={member.name}
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = member.avatar;
-              }}
-              className="w-24 h-24 rounded-full border-4 border-white bg-brand-cream shadow-md mb-3 object-cover group-hover:scale-105 transition-transform duration-300"
-            />
+            {/* Parallax Container */}
+            <div className="w-24 h-24 rounded-full border-4 border-white bg-brand-cream shadow-md mb-3 overflow-hidden relative">
+              <motion.img
+                src={member.fotoAnggota || member.avatar}
+                alt={member.name}
+                style={{ 
+                  x: shouldReduce ? 0 : avatarX, 
+                  y: shouldReduce ? 0 : avatarY,
+                  scale: 1.15
+                }}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = member.avatar;
+                }}
+              />
+            </div>
 
             <span className="font-sans text-[9px] font-bold tracking-widest uppercase mb-1 text-slate-500">
               {member.role}
