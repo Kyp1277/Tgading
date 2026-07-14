@@ -450,11 +450,11 @@ const Galeri = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex flex-col justify-between p-4 bg-black/98"
+              className="fixed inset-0 z-50 flex flex-col justify-between p-6 bg-black/98 overflow-y-auto"
               onClick={closeLightbox}
             >
               {/* Header controls */}
-              <div className="flex justify-between items-center p-4">
+              <div className="flex justify-between items-center p-4 md:p-6 flex-shrink-0">
                 <span className="font-sans text-[10px] font-bold text-brand-gold uppercase tracking-wider bg-brand-gold/10 px-3 py-1.5 rounded-full border border-brand-gold/15">
                   {filteredPhotos[lightboxIndex].category}
                 </span>
@@ -467,7 +467,7 @@ const Galeri = () => {
               </div>
 
               {/* Central Image and Arrows */}
-              <div className="flex-grow flex items-center justify-center relative max-h-[70vh]">
+              <div className="flex-grow flex items-center justify-center relative max-h-[58vh] md:max-h-[65vh] my-4 flex-shrink-0">
                 <button
                   onClick={prevPhoto}
                   className="absolute left-4 p-3 rounded-full bg-white/5 border border-white/10 text-white/60 hover:text-white z-10 transition-all hover:scale-105 cursor-pointer"
@@ -496,7 +496,7 @@ const Galeri = () => {
               </div>
 
               {/* Bottom details */}
-              <div className="p-6 max-w-2xl mx-auto text-center" onClick={(e) => e.stopPropagation()}>
+              <div className="pt-4 pb-12 px-6 max-w-2xl mx-auto text-center flex-shrink-0" onClick={(e) => e.stopPropagation()}>
                 <h3 className="font-serif font-bold text-lg md:text-xl text-white mb-2">
                   {filteredPhotos[lightboxIndex].title}
                 </h3>
