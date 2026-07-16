@@ -94,9 +94,7 @@ export const anggotaData = [
     fotoAnggota: '/images/anggota/wardi.jpeg',
     bio: 'Membantu menjalin komunikasi eksternal and mempererat jalinan kerjasama dengan berbagai organisasi kemasyarakatan setempat.',
     socials: {
-      instagram: 'https://instagram.com/dummy_account',
-      linkedin: 'https://linkedin.com/in/dummy_account',
-      email: 'mailto:wardi.siregar@example.com',
+      instagram: 'https://www.instagram.com/wars0510?igsh=OTBoNDlnc2tkNnc%3D',
     }
   },
   {
@@ -128,9 +126,7 @@ export const anggotaData = [
     fotoAnggota: '/images/anggota/nadira.jpeg',
     bio: 'Membantu mengonsep materi publikasi digital, mendesain pamflet kegiatan, serta mengelola dokumentasi media sosial KKN.',
     socials: {
-      instagram: 'https://instagram.com/dummy_account',
-      linkedin: 'https://linkedin.com/in/dummy_account',
-      email: 'mailto:nadira.solekha@example.com',
+      instagram: 'https://www.instagram.com/ndraslha_?igsh=MTc5NW95cTE4eTE0OQ%3D%3D&utm_source=qr',
     }
   },
   {
@@ -145,9 +141,7 @@ export const anggotaData = [
     fotoAnggota: '/images/anggota/anisa.jpeg',
     bio: 'Mengonsep kelas bimbingan belajar tambahan untuk anak-anak sekolah dasar serta memimpin rangkaian acara festival keagamaan.',
     socials: {
-      instagram: 'https://instagram.com/dummy_account',
-      linkedin: 'https://linkedin.com/in/dummy_account',
-      email: 'mailto:anisa.febrianti@example.com',
+      instagram: 'https://www.instagram.com/anisaftii?igsh=MTltN28wOTI2MHB6Yg%3D%3D',
     }
   },
   {
