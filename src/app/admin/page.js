@@ -45,6 +45,56 @@ const parseIndonesianToIsoDate = (indoDateStr) => {
   return `${year}-${month}-${day}`;
 };
 
+const parseProkerDate = (dateStr) => {
+  if (!dateStr || typeof dateStr !== 'string') return new Date(0);
+
+  let startPart = dateStr.split('-')[0].trim();
+  const yearMatch = dateStr.match(/\b(20\d\d)\b/);
+  const year = yearMatch ? yearMatch[1] : new Date().getFullYear().toString();
+
+  if (!/\b(20\d\d)\b/.test(startPart)) {
+    startPart = `${startPart} ${year}`;
+  }
+
+  const months = {
+    januari: 0, jan: 0,
+    februari: 1, feb: 1,
+    maret: 2, mar: 2,
+    april: 3, apr: 3,
+    mei: 4,
+    juni: 5, jun: 5,
+    juli: 6, jul: 6,
+    agustus: 7, agust: 7, agu: 7, ags: 7,
+    september: 8, sep: 8,
+    oktober: 9, okt: 9,
+    november: 10, nov: 10,
+    desember: 11, des: 11
+  };
+
+  const parts = startPart.toLowerCase().split(/\s+/);
+  
+  if (parts.length === 1 && parts[0].includes('-')) {
+    const d = new Date(parts[0]);
+    if (!isNaN(d.getTime())) return d;
+  }
+
+  let day = 1;
+  let month = 0;
+  let parsedYear = parseInt(year, 10);
+
+  for (const part of parts) {
+    if (/^\d{1,2}$/.test(part)) {
+      day = parseInt(part, 10);
+    } else if (/^\d{4}$/.test(part)) {
+      parsedYear = parseInt(part, 10);
+    } else if (months[part] !== undefined) {
+      month = months[part];
+    }
+  }
+
+  return new Date(parsedYear, month, day);
+};
+
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [authChecking, setAuthChecking] = useState(true);
@@ -130,7 +180,7 @@ export default function AdminPage() {
       ]);
       if (prokerRes.ok) {
         const prokerData = await prokerRes.json();
-        setProker(prokerData.sort((a, b) => b.id - a.id));
+        setProker(prokerData.sort((a, b) => parseProkerDate(a.date) - parseProkerDate(b.date)));
       }
       if (galeriRes.ok) {
         const galeriData = await galeriRes.json();

@@ -98,24 +98,77 @@ async function isAuthenticated() {
   }
 }
 
+function parseProkerDate(dateStr) {
+  if (!dateStr || typeof dateStr !== 'string') return new Date(0);
+
+  let startPart = dateStr.split('-')[0].trim();
+  const yearMatch = dateStr.match(/\b(20\d\d)\b/);
+  const year = yearMatch ? yearMatch[1] : new Date().getFullYear().toString();
+
+  if (!/\b(20\d\d)\b/.test(startPart)) {
+    startPart = `${startPart} ${year}`;
+  }
+
+  const months = {
+    januari: 0, jan: 0,
+    februari: 1, feb: 1,
+    maret: 2, mar: 2,
+    april: 3, apr: 3,
+    mei: 4,
+    juni: 5, jun: 5,
+    juli: 6, jul: 6,
+    agustus: 7, agust: 7, agu: 7, ags: 7,
+    september: 8, sep: 8,
+    oktober: 9, okt: 9,
+    november: 10, nov: 10,
+    desember: 11, des: 11
+  };
+
+  const parts = startPart.toLowerCase().split(/\s+/);
+  
+  if (parts.length === 1 && parts[0].includes('-')) {
+    const d = new Date(parts[0]);
+    if (!isNaN(d.getTime())) return d;
+  }
+
+  let day = 1;
+  let month = 0;
+  let parsedYear = parseInt(year, 10);
+
+  for (const part of parts) {
+    if (/^\d{1,2}$/.test(part)) {
+      day = parseInt(part, 10);
+    } else if (/^\d{4}$/.test(part)) {
+      parsedYear = parseInt(part, 10);
+    } else if (months[part] !== undefined) {
+      month = months[part];
+    }
+  }
+
+  return new Date(parsedYear, month, day);
+}
+
 export async function GET() {
   try {
+    let proker;
     if (!kv || !process.env.KV_REST_API_URL) {
       console.warn("Vercel KV is not configured. Falling back to local JSON storage.");
-      return NextResponse.json(getLocalProker());
+      proker = getLocalProker();
+    } else {
+      proker = await kv.get('proker_items');
+      if (!proker) {
+        // Initialize KV with default data if empty
+        const localProker = getLocalProker();
+        await kv.set('proker_items', localProker);
+        proker = localProker;
+      }
     }
-    
-    let proker = await kv.get('proker_items');
-    if (!proker) {
-      // Initialize KV with default data if empty
-      const localProker = getLocalProker();
-      await kv.set('proker_items', localProker);
-      proker = localProker;
-    }
-    return NextResponse.json(proker);
+    const sortedProker = [...proker].sort((a, b) => parseProkerDate(a.date) - parseProkerDate(b.date));
+    return NextResponse.json(sortedProker);
   } catch (error) {
     console.error("Error fetching proker from Vercel KV:", error);
-    return NextResponse.json(getLocalProker());
+    const fallback = getLocalProker().sort((a, b) => parseProkerDate(a.date) - parseProkerDate(b.date));
+    return NextResponse.json(fallback);
   }
 }
 
