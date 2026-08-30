@@ -1222,17 +1222,28 @@ async function isAuthenticated() {
   }
 }
 
-export async function GET() {
+export async function GET(request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const sync = searchParams.get('sync');
+
     if (!kv || !process.env.KV_REST_API_URL) {
       console.warn("Vercel KV is not configured. Falling back to default static list.");
       return NextResponse.json(defaultPhotos);
     }
     
     let photos = await kv.get('galeri_items');
-    if (!photos) {
-      await kv.set('galeri_items', defaultPhotos);
-      photos = defaultPhotos;
+    if (!photos || photos.length < defaultPhotos.length || sync === 'true') {
+      const customPhotos = Array.isArray(photos)
+        ? photos.filter(p => !defaultPhotos.some(dp => dp.id === p.id || dp.url === p.url))
+        : [];
+      const mergedPhotos = [...defaultPhotos, ...customPhotos];
+      try {
+        await kv.set('galeri_items', mergedPhotos);
+      } catch (err) {
+        console.error("Could not write sync to KV:", err);
+      }
+      photos = mergedPhotos;
     }
     return NextResponse.json(photos);
   } catch (error) {
