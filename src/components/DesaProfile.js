@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion, useReducedMotion, useMotionValue, useTransform, useSpring } from 'framer-motion';
-import { MapPin, Users, Activity, Leaf, Shield, BookOpen } from 'lucide-react';
+import { MapPin, Users, Activity, Leaf, Shield, BookOpen, ExternalLink } from 'lucide-react';
 import BackgroundDecor from './BackgroundDecor';
 
 // Reusable 3D TiltCard Component for Stats & Potentials
@@ -178,60 +178,61 @@ const DesaProfile = () => {
             </div>
           </motion.div>
 
-          {/* Right: Map Card linked directly to Google Maps */}
-          <motion.a 
-            href="https://www.google.com/maps/search/?api=1&query=Tanjung+Gading+Pasir+Penyu+Indragiri+Hulu+Riau"
-            target="_blank"
-            rel="noopener noreferrer"
+          {/* Right: Embedded Interactive WebGIS Map Card */}
+          <motion.div 
             initial={{ opacity: 0, x: shouldReduce ? 0 : 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
-            className="lg:col-span-5 w-full aspect-square bg-white p-6 border-2 border-brand-gold/10 hover:border-brand-gold rounded-[32px] flex flex-col justify-between relative overflow-hidden group shadow-sm transition-all duration-300 cursor-pointer"
+            className="lg:col-span-5 w-full h-[480px] md:h-[520px] bg-white p-5 md:p-6 border-2 border-brand-gold/20 rounded-[32px] flex flex-col justify-between relative overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
           >
             <div className="absolute inset-0 bg-gradient-to-tr from-brand-gold/5 to-transparent pointer-events-none" />
             
-            {/* Hover Glassmorphic Overlay */}
-            <div className="absolute inset-0 bg-brand-green-dark/85 backdrop-blur-xs opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center transition-opacity duration-300 z-20">
-              <span className="bg-brand-gold text-brand-green-dark font-sans font-bold text-xs uppercase tracking-widest px-5 py-3 rounded-full inline-flex items-center gap-2 shadow-md hover:scale-105 transition-transform duration-300">
-                <MapPin size={14} />
-                Buka Google Maps
-              </span>
+            {/* Header */}
+            <div className="flex justify-between items-center mb-3 z-10">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]" />
+                <span className="font-serif font-bold text-xs md:text-sm tracking-wider text-brand-gold">
+                  Peta WebGIS Lokasi Wilayah
+                </span>
+              </div>
+              <a 
+                href="https://webgis-sage.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 font-sans font-bold text-xs text-brand-green-dark hover:text-brand-gold bg-brand-gold/10 hover:bg-brand-gold/20 px-3 py-1.5 rounded-full transition-all duration-200"
+                title="Buka WebGIS di tab baru"
+              >
+                <span>Buka WebGIS</span>
+                <ExternalLink size={13} />
+              </a>
             </div>
 
-            <div className="flex justify-between items-center mb-4 z-10">
-              <span className="font-serif font-bold text-xs tracking-wider text-brand-gold">
-                Peta Lokasi Wilayah
-              </span>
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]" />
+            {/* Embedded WebGIS Map iframe */}
+            <div className="w-full flex-grow relative rounded-2xl overflow-hidden border border-slate-200/80 shadow-inner bg-slate-50 z-10 min-h-[300px]">
+              <iframe 
+                src="https://webgis-sage.vercel.app/"
+                title="Peta WebGIS Kelurahan Tanjung Gading"
+                className="w-full h-full border-0 absolute inset-0"
+                loading="lazy"
+                allow="geolocation; fullscreen"
+              />
             </div>
 
-            {/* Stylized Map SVG */}
-            <div className="w-full flex-grow flex items-center justify-center my-4">
-              <svg viewBox="0 0 200 200" className="w-48 h-48 drop-shadow-[0_4px_15px_rgba(201,162,39,0.12)]">
-                {/* Rivers */}
-                <path d="M -10,100 Q 40,80 80,110 Q 120,140 210,120" fill="none" stroke="#1b4332" strokeWidth="4" opacity="0.3" />
-                <path d="M -10,100 Q 40,80 80,110 Q 120,140 210,120" fill="none" stroke="#c9a227" strokeWidth="1" opacity="0.5" strokeDasharray="3 3" />
-                {/* Land boundary outline */}
-                <path d="M 30,40 C 70,20 150,30 170,60 C 190,90 160,150 140,170 C 110,190 50,170 30,140 C 10,110 20,60 30,40 Z" 
-                      fill="rgba(20, 83, 45, 0.04)" stroke="#c9a227" strokeWidth="1.5" />
-                {/* Plantation Grid overlay */}
-                <path d="M 50,60 Q 80,50 120,65" fill="none" stroke="rgba(20, 83, 45, 0.08)" strokeWidth="1" />
-                <path d="M 40,90 Q 90,80 140,100" fill="none" stroke="rgba(20, 83, 45, 0.08)" strokeWidth="1" />
-                <path d="M 60,130 Q 100,120 150,135" fill="none" stroke="rgba(20, 83, 45, 0.08)" strokeWidth="1" />
-                {/* Target Marker */}
-                <g transform="translate(100, 95)" className="cursor-pointer">
-                  <circle cx="0" cy="0" r="14" fill="rgba(201, 162, 39, 0.2)" />
-                  <circle cx="0" cy="0" r="6" fill="#c9a227" />
-                  <path d="M 0,-15 L 0,-6 M 0,6 L 0,15 M -15,0 L -6,0 M 6,0 L 15,0" stroke="#c9a227" strokeWidth="1.5" />
-                </g>
-              </svg>
+            {/* Footer Caption & Link */}
+            <div className="flex items-center justify-between z-10 font-sans text-xs text-slate-500 font-bold tracking-wide mt-3 pt-1">
+              <span>Kelurahan Tanjung Gading, Kec. Pasir Penyu</span>
+              <a 
+                href="https://webgis-sage.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand-gold hover:underline inline-flex items-center gap-1"
+              >
+                <span>Lihat Peta Penuh</span>
+                <ExternalLink size={12} />
+              </a>
             </div>
-
-            <div className="text-center z-10 font-sans text-xs text-slate-500 font-bold tracking-wide">
-              Kelurahan Tanjung Gading, Kec. Pasir Penyu
-            </div>
-          </motion.a>
+          </motion.div>
         </div>
 
         {/* Potentials Section with 3D Tilt Cards (Opsi B) */}
