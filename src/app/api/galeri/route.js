@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { kv } from '@vercel/kv';
 
-// Fallback & default dataset - 100% verified accurate visual inspection
+// Default dataset of 150 photos - verified visual inspection
 const defaultPhotos = [
   {
     "id": 1,
@@ -1363,7 +1363,7 @@ export async function GET(request) {
     if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
       if (force === 'true') {
         await kv.set('galeri_items', defaultPhotos);
-        return NextResponse.json({ success: true, count: defaultPhotos.length, data: defaultPhotos, source: 'synced_to_kv' });
+        return NextResponse.json(defaultPhotos);
       }
 
       let photos = await kv.get('galeri_items');
@@ -1371,13 +1371,13 @@ export async function GET(request) {
         await kv.set('galeri_items', defaultPhotos);
         photos = defaultPhotos;
       }
-      return NextResponse.json({ success: true, count: photos.length, data: photos, source: 'kv' });
+      return NextResponse.json(photos);
     }
   } catch (error) {
     console.error('KV get error, fallback to local dataset:', error);
   }
 
-  return NextResponse.json({ success: true, count: defaultPhotos.length, data: defaultPhotos, source: 'default' });
+  return NextResponse.json(defaultPhotos);
 }
 
 export async function POST(request) {
@@ -1406,6 +1406,7 @@ export async function POST(request) {
       day: day || 1,
       date: date || new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }),
       image,
+      url: image,
       title,
       desc: desc || '',
       category: category || 'Kegiatan'
@@ -1421,7 +1422,7 @@ export async function POST(request) {
       }
     }
 
-    return NextResponse.json({ success: true, data: newPhoto, total: updatedPhotos.length });
+    return NextResponse.json(newPhoto);
   } catch (error) {
     console.error('Error adding photo:', error);
     return NextResponse.json({ error: 'Failed to process request' }, { status: 500 });

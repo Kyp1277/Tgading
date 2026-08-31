@@ -180,11 +180,13 @@ export default function AdminPage() {
       ]);
       if (prokerRes.ok) {
         const prokerData = await prokerRes.json();
-        setProker(prokerData.sort((a, b) => parseProkerDate(a.date) - parseProkerDate(b.date)));
+        const prokerList = Array.isArray(prokerData) ? prokerData : (prokerData?.data || []);
+        setProker([...prokerList].sort((a, b) => parseProkerDate(a.date) - parseProkerDate(b.date)));
       }
       if (galeriRes.ok) {
         const galeriData = await galeriRes.json();
-        setGaleri(galeriData.sort((a, b) => b.id - a.id));
+        const galeriList = Array.isArray(galeriData) ? galeriData : (galeriData?.data || []);
+        setGaleri([...galeriList].sort((a, b) => (b.id || 0) - (a.id || 0)));
       }
     } catch (e) {
       console.error("Gagal mengambil data", e);
