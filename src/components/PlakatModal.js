@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   X, 
@@ -22,6 +23,11 @@ const PlakatModal = ({ isOpen, onClose }) => {
   const [activeCategory, setActiveCategory] = useState('Semua');
   const [searchQuery, setSearchQuery] = useState('');
   const [lightboxIndex, setLightboxIndex] = useState(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Lock body scroll when modal is open
   useEffect(() => {
@@ -63,28 +69,30 @@ const PlakatModal = ({ isOpen, onClose }) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [lightboxIndex, filteredPhotos]);
 
-  if (!isOpen) return null;
+  if (!mounted) return null;
 
   const currentPhoto = lightboxIndex !== null ? filteredPhotos[lightboxIndex] : null;
 
-  return (
+  return createPortal(
     <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4 md:p-6 bg-brand-green-dark/80 backdrop-blur-md"
-        onClick={onClose}
-      >
-        {/* Main Modal Container */}
+      {isOpen && (
         <motion.div
-          initial={{ scale: 0.94, opacity: 0, y: 20 }}
-          animate={{ scale: 1, opacity: 1, y: 0 }}
-          exit={{ scale: 0.94, opacity: 0, y: 20 }}
-          transition={{ type: "spring", stiffness: 300, damping: 28 }}
-          onClick={(e) => e.stopPropagation()}
-          className="relative w-full max-w-6xl max-h-[92vh] bg-white rounded-3xl md:rounded-[36px] shadow-[0_25px_80px_rgba(0,0,0,0.35)] border-2 border-brand-gold/30 flex flex-col overflow-hidden"
+          key="plakat-modal-backdrop"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-4 md:p-6 bg-brand-green-dark/85 backdrop-blur-md"
+          onClick={onClose}
         >
+          {/* Main Modal Container */}
+          <motion.div
+            initial={{ scale: 0.94, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.94, opacity: 0, y: 20 }}
+            transition={{ type: "spring", stiffness: 300, damping: 28 }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-6xl max-h-[88vh] md:max-h-[90vh] bg-white rounded-3xl md:rounded-[36px] shadow-[0_25px_80px_rgba(0,0,0,0.35)] border-2 border-brand-gold/30 flex flex-col overflow-hidden my-auto"
+          >
           {/* Header */}
           <div className="relative px-6 py-5 md:px-8 md:py-6 bg-gradient-to-r from-brand-green-dark via-[#1a4329] to-brand-green-dark text-white flex items-center justify-between border-b border-brand-gold/20 flex-shrink-0">
             <div className="flex items-center gap-3.5 md:gap-4">
@@ -343,8 +351,10 @@ const PlakatModal = ({ isOpen, onClose }) => {
             </motion.div>
           )}
         </AnimatePresence>
-      </motion.div>
-    </AnimatePresence>
+        </motion.div>
+      )}
+    </AnimatePresence>,
+    document.body
   );
 };
 

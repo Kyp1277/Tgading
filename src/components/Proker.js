@@ -175,19 +175,11 @@ const Proker = () => {
   const isPlakatProker = (event) => {
     if (!event) return false;
     const title = (event.title || '').toLowerCase();
-    const desc = (event.desc || '').toLowerCase();
     return Boolean(
-      event.hasDocumentation ||
       event.docType === 'plakat' ||
-      event.id === 6 ||
-      title.includes('signage') ||
-      title.includes('plakat') ||
-      title.includes('plang') ||
-      title.includes('identitas') ||
-      desc.includes('signage') ||
-      desc.includes('plakat') ||
-      desc.includes('plang') ||
-      desc.includes('papan informasi')
+      (title.includes('plakat') && (title.includes('rt') || title.includes('rw') || title.includes('nama'))) ||
+      (title.includes('plang') && (title.includes('rt') || title.includes('rw') || title.includes('nama'))) ||
+      (title.includes('signage') && (title.includes('rt') || title.includes('rw')))
     );
   };
 
