@@ -1088,8 +1088,8 @@ const defaultPhotos = [
     "day": 22,
     "date": "10 Agustus 2026",
     "image": "/images/galeri/kkn_day_22_1.jpg",
-    "title": "Takziyah & Doa di Pemakaman Warga",
-    "desc": "Mahasiswa KKN bersama tokoh masyarakat dan perangkat kelurahan mendoakan almarhum di TPU.",
+    "title": "Silaturahmi & Diskusi Bersama Tokoh Warga",
+    "desc": "Mahasiswa KKN bersama Ibu Lurah berdiskusi dan bermusyawarah santai di kediaman tokoh masyarakat.",
     "category": "Sosial"
   },
   {
@@ -1097,8 +1097,8 @@ const defaultPhotos = [
     "day": 22,
     "date": "10 Agustus 2026",
     "image": "/images/galeri/kkn_day_22_2.jpg",
-    "title": "Ziarah Kubur Bersama Tokoh Agama",
-    "desc": "Prosesi pemakaman dan doa bersama sesepuh warga dan Bu Lurah di makam warga Tanjung Gading.",
+    "title": "Takziyah & Doa Bersama di Pemakaman",
+    "desc": "Mahasiswa KKN bersama aparatur kelurahan dan warga memanjatkan doa bersama di TPU.",
     "category": "Sosial"
   },
   {
@@ -1106,8 +1106,8 @@ const defaultPhotos = [
     "day": 22,
     "date": "10 Agustus 2026",
     "image": "/images/galeri/kkn_day_22_3.jpg",
-    "title": "Doa Penghormatan Terakhir",
-    "desc": "Momen khidmat melafazkan doa di pemakaman umum menunjukkan empati mendalam.",
+    "title": "Musyawarah & Bincang Hangat di Ruang Tamu",
+    "desc": "Ibu Lurah bersama mahasiswa KKN dan ibu-ibu warga berbincang hangat membahas aspirasi lingkungan.",
     "category": "Sosial"
   },
   {
@@ -1115,8 +1115,8 @@ const defaultPhotos = [
     "day": 22,
     "date": "10 Agustus 2026",
     "image": "/images/galeri/kkn_day_22_4.jpg",
-    "title": "Takziyah ke Rumah Duka Bersama Bu Lurah",
-    "desc": "Silaturahmi takziyah ke rumah keluarga ahli musibah bersama Ibu Lurah Tanjung Gading.",
+    "title": "Foto Bersama Usai Kunjungan Silaturahmi",
+    "desc": "Potret kebersamaan tim KKN bersama Ibu Lurah dan keluarga tokoh masyarakat di pelataran rumah.",
     "category": "Sosial"
   },
   {
@@ -1124,8 +1124,8 @@ const defaultPhotos = [
     "day": 22,
     "date": "10 Agustus 2026",
     "image": "/images/galeri/kkn_day_22_5.jpg",
-    "title": "Foto Bersama Keluarga Ahli Musibah",
-    "desc": "Dokumentasi silaturahmi menyampaikan belasungkawa di halaman kediaman warga.",
+    "title": "Ziarah Kubur & Doa di Pemakaman TPU",
+    "desc": "Mahasiswa KKN mendampingi prosesi doa bersama tokoh agama di pemakaman umum warga.",
     "category": "Sosial"
   },
   {
@@ -1133,8 +1133,8 @@ const defaultPhotos = [
     "day": 22,
     "date": "10 Agustus 2026",
     "image": "/images/galeri/kkn_day_22_6.jpg",
-    "title": "Empati Sosial Mahasiswa KKN",
-    "desc": "Kehadiran mahasiswa KKN membersamai warga baik dalam suka maupun duka.",
+    "title": "Rembug Warga Bersama Ibu Lurah",
+    "desc": "Suasana akrab musyawarah dan ramah tamah mahasiswa KKN bersama tokoh masyarakat di atas karpet.",
     "category": "Sosial"
   },
   {
