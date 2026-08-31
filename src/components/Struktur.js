@@ -32,7 +32,7 @@ const TiltCard = ({ children, className, onClick, shouldReduce, ...props }) => {
   const rotateYSpring = useSpring(useTransform(x, [-120, 120], [-10, 10]), springConfig);
 
   const handleMouseMove = (e) => {
-    if (shouldReduce) return;
+    if (shouldReduce || (typeof window !== 'undefined' && window.innerWidth < 768)) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
@@ -43,6 +43,7 @@ const TiltCard = ({ children, className, onClick, shouldReduce, ...props }) => {
   };
 
   const handleMouseLeave = () => {
+    if (typeof window !== 'undefined' && window.innerWidth < 768) return;
     x.set(0);
     y.set(0);
   };
@@ -51,6 +52,7 @@ const TiltCard = ({ children, className, onClick, shouldReduce, ...props }) => {
     <motion.div
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      whileTap={{ scale: 0.97 }}
       style={{
         rotateX: shouldReduce ? 0 : rotateXSpring,
         rotateY: shouldReduce ? 0 : rotateYSpring,

@@ -100,7 +100,8 @@ const Navbar = ({ currentPage, navigateTo }) => {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-brand-green-dark hover:text-brand-gold p-1 transition-colors cursor-pointer"
+          aria-label={isOpen ? "Tutup menu" : "Buka menu"}
+          className="md:hidden text-brand-green-dark hover:text-brand-gold p-2 -mr-1 transition-colors cursor-pointer rounded-full active:bg-brand-gold/10"
         >
           {isOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
@@ -110,10 +111,11 @@ const Navbar = ({ currentPage, navigateTo }) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="md:hidden mt-2 mx-auto bg-white/95 backdrop-blur-md border border-brand-gold/15 shadow-xl px-4 py-5 flex flex-col gap-2 rounded-2xl"
+            initial={{ opacity: 0, y: -12, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -12, scale: 0.98 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="md:hidden mt-2 mx-auto bg-white/95 backdrop-blur-md border border-brand-gold/20 shadow-2xl px-3.5 py-4 flex flex-col gap-1.5 rounded-2xl gpu-accelerated"
           >
             {menuItems.map((item) => {
               const Icon = item.icon;
@@ -125,10 +127,10 @@ const Navbar = ({ currentPage, navigateTo }) => {
                     navigateTo(item.id);
                     setIsOpen(false);
                   }}
-                  className={`font-sans text-left text-[15px] font-medium tracking-normal flex items-center gap-3 transition-all duration-300 py-3 px-4 rounded-xl cursor-pointer ${
+                  className={`font-sans text-left text-sm font-medium tracking-normal flex items-center gap-3 transition-all duration-200 py-3 px-4 rounded-xl cursor-pointer active:scale-[0.98] ${
                     isSelfActive
                       ? 'text-brand-gold-dark bg-brand-cream border-l-[3px] border-brand-gold-dark font-bold'
-                      : 'text-slate-600 hover:text-brand-gold-dark hover:bg-brand-cream/50'
+                      : 'text-slate-600 hover:text-brand-gold-dark hover:bg-brand-cream/50 active:bg-brand-cream/70'
                   }`}
                 >
                   <Icon size={16} />
@@ -142,7 +144,7 @@ const Navbar = ({ currentPage, navigateTo }) => {
                 navigateTo('desa');
                 setIsOpen(false);
               }}
-              className="font-sans text-center text-xs font-bold uppercase tracking-wider py-3 rounded-xl border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-white transition-all duration-300 cursor-pointer"
+              className="font-sans text-center text-xs font-bold uppercase tracking-wider py-3 rounded-xl border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-white transition-all duration-200 cursor-pointer active:scale-[0.98]"
             >
               Jelajahi Kelurahan
             </button>

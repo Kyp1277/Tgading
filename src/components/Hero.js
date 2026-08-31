@@ -16,7 +16,7 @@ export const MagneticButton = ({ children, className, onClick, ...props }) => {
   const springY = useSpring(y, springConfig);
 
   const handleMouseMove = (e) => {
-    if (shouldReduce) return;
+    if (shouldReduce || (typeof window !== 'undefined' && window.innerWidth < 768)) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
@@ -38,6 +38,7 @@ export const MagneticButton = ({ children, className, onClick, ...props }) => {
     <motion.button
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      whileTap={{ scale: 0.96 }}
       style={{
         x: shouldReduce ? 0 : springX,
         y: shouldReduce ? 0 : springY,
@@ -71,7 +72,7 @@ const Hero = ({ navigateTo }) => {
   const slowParallaxY = useTransform(mouseY, [0, 1080], [-12, 12]);
 
   const handleMouseMove = (e) => {
-    if (shouldReduce) return;
+    if (shouldReduce || (typeof window !== 'undefined' && window.innerWidth < 768)) return;
     const rect = e.currentTarget.getBoundingClientRect();
     mouseX.set(e.clientX - rect.left);
     mouseY.set(e.clientY - rect.top);
@@ -80,27 +81,25 @@ const Hero = ({ navigateTo }) => {
   return (
     <section 
       onMouseMove={handleMouseMove}
-      className="relative min-h-screen pt-24 pb-16 md:pt-28 md:pb-20 px-6 md:px-8 flex flex-col items-center justify-center text-center overflow-hidden bg-gradient-to-b from-white via-brand-cream/40 to-brand-cream/80"
+      className="relative min-h-[90vh] md:min-h-screen pt-20 pb-12 md:pt-28 md:pb-20 px-4 sm:px-6 md:px-8 flex flex-col items-center justify-center text-center overflow-hidden bg-gradient-to-b from-white via-brand-cream/40 to-brand-cream/80"
     >
       
-      {/* Background Decorative Parallax/Floating Elements */}
-      {/* Floating Gold Sphere */}
+      {/* Background Decorative Parallax/Floating Elements (Desktop only) */}
       <motion.div
         animate={{ y: [0, -15, 0], rotate: [0, 2, 0] }}
         transition={{ duration: 6, ease: "easeInOut", repeat: Infinity }}
         style={{ pointerEvents: 'none' }}
-        className="absolute top-40 left-[10%] w-72 h-72 bg-brand-gold/5 blur-[80px] rounded-full hidden md:block z-0"
+        className="absolute top-40 left-[10%] w-72 h-72 bg-brand-gold/5 blur-[60px] rounded-full hidden md:block z-0 gpu-accelerated"
       />
       
-      {/* Floating Green Sphere */}
       <motion.div
         animate={{ y: [0, 20, 0], rotate: [0, -2, 0] }}
         transition={{ duration: 8, ease: "easeInOut", repeat: Infinity }}
         style={{ pointerEvents: 'none' }}
-        className="absolute top-60 right-[10%] w-80 h-80 bg-brand-green/8 blur-[100px] rounded-full hidden md:block z-0"
+        className="absolute top-60 right-[10%] w-80 h-80 bg-brand-green/8 blur-[70px] rounded-full hidden md:block z-0 gpu-accelerated"
       />
 
-      {/* Cursor Light Follower (Opsi 4) */}
+      {/* Cursor Light Follower (Desktop only) */}
       {!shouldReduce && (
         <motion.div
           style={{
@@ -108,12 +107,12 @@ const Hero = ({ navigateTo }) => {
             top: springMouseY,
             transform: "translate(-50%, -50%)",
           }}
-          className="absolute w-[450px] h-[450px] bg-brand-gold/[0.08] blur-[100px] rounded-full pointer-events-none z-0 select-none hidden md:block"
+          className="absolute w-[400px] h-[400px] bg-brand-gold/[0.07] blur-[80px] rounded-full pointer-events-none z-0 select-none hidden md:block gpu-accelerated"
         />
       )}
 
       {/* Large Focal Glow Blob behind the logo */}
-      <div className="absolute w-80 h-80 bg-brand-gold/[0.08] blur-[90px] rounded-full -translate-y-12 pointer-events-none select-none z-0" />
+      <div className="absolute w-56 h-56 md:w-80 md:h-80 bg-brand-gold/[0.08] blur-[40px] md:blur-[80px] rounded-full -translate-y-8 md:-translate-y-12 pointer-events-none select-none z-0 gpu-accelerated" />
 
       {/* Decorative Palm Silhouette in Top-Right */}
       <div className="absolute -top-12 -right-12 w-80 h-80 text-brand-green/[0.04] rotate-[50deg] pointer-events-none select-none z-0 hidden md:block">
@@ -152,24 +151,23 @@ const Hero = ({ navigateTo }) => {
 
       {/* Logo Container */}
       <motion.div 
-        initial={{ opacity: 0, scale: 0.8, y: 0 }}
+        initial={{ opacity: 0, scale: 0.85 }}
         animate={{ 
           opacity: 1, 
           scale: 1,
-          y: [0, -5, 0]
+          y: [0, -4, 0]
         }}
         transition={{ 
-          opacity: { duration: 0.8 },
-          scale: { duration: 0.8 },
-          y: { repeat: Infinity, duration: 5, ease: "easeInOut" }
+          opacity: { duration: 0.6 },
+          scale: { duration: 0.6 },
+          y: { repeat: Infinity, duration: 4.5, ease: "easeInOut" }
         }}
-        whileHover={{ scale: 1.03 }}
-        className="relative w-56 h-56 md:w-72 md:h-72 mb-4 p-3 md:p-4 bg-white border border-brand-gold/25 shadow-[0_20px_60px_rgba(20,83,45,0.08)] rounded-[32px] flex items-center justify-center overflow-hidden select-none z-10"
+        className="relative w-44 h-44 sm:w-56 sm:h-56 md:w-72 md:h-72 mb-3 md:mb-4 p-2.5 sm:p-3 md:p-4 bg-white border border-brand-gold/25 shadow-[0_12px_40px_rgba(20,83,45,0.08)] rounded-[28px] md:rounded-[32px] flex items-center justify-center overflow-hidden select-none z-10 gpu-accelerated"
       >
         <img 
           src="/logo.png" 
           alt="Logo KKN Kelurahan Tanjung Gading" 
-          className="w-full h-full object-contain rounded-[24px]"
+          className="w-full h-full object-contain rounded-[20px] md:rounded-[24px]"
         />
       </motion.div>
 
@@ -177,18 +175,18 @@ const Hero = ({ navigateTo }) => {
       <motion.div 
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1, duration: 0.6 }}
-        className="font-sans text-[10px] md:text-xs font-bold uppercase tracking-widest text-brand-gold bg-brand-gold/10 border border-brand-gold/15 px-4.5 py-2.5 rounded-full inline-flex items-center gap-1.5 mb-5 z-10 select-none"
+        transition={{ delay: 0.1, duration: 0.5 }}
+        className="font-sans text-[9px] sm:text-[10px] md:text-xs font-bold uppercase tracking-wider text-brand-gold bg-brand-gold/10 border border-brand-gold/15 px-3.5 py-1.5 sm:px-4.5 sm:py-2.5 rounded-full inline-flex items-center gap-1.5 mb-3 sm:mb-5 z-10 select-none max-w-[90%]"
       >
-        Tema KKN: Penguatan Masyarakat Berbasis Kearifan Lokal
+        <span className="truncate">Tema KKN: Penguatan Masyarakat Berbasis Kearifan Lokal</span>
       </motion.div>
 
       {/* Hero Content */}
       <motion.h1 
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.8 }}
-        className="font-serif font-bold text-3xl md:text-5xl lg:text-6xl text-brand-green-dark leading-tight mb-4 tracking-wide max-w-4xl z-10"
+        transition={{ delay: 0.2, duration: 0.6 }}
+        className="font-serif font-bold text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-brand-green-dark leading-snug sm:leading-tight mb-3 md:mb-4 tracking-wide max-w-4xl z-10 px-2"
       >
         Mengukir Karya Pengabdian <br />
         <span className="bg-gradient-to-r from-brand-gold-dark via-brand-gold to-brand-gold-dark bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(201,162,39,0.05)]">
@@ -197,24 +195,24 @@ const Hero = ({ navigateTo }) => {
       </motion.h1>
 
       <motion.p 
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4, duration: 0.8 }}
-        className="font-sans text-sm md:text-base text-slate-600 max-w-2xl mb-10 leading-relaxed z-10"
+        transition={{ delay: 0.3, duration: 0.6 }}
+        className="font-sans text-xs sm:text-sm md:text-base text-slate-600 max-w-2xl mb-8 md:mb-10 leading-relaxed z-10 px-4"
       >
-        Selamat datang di gerbang informasi dan karya mahasiswa KKN UIN Suska Riau 2026. Bersama warga Pasir Penyu mewujudkan kolaborasi sosial, pengembangan UMKM sawit-karet, serta digitalisasi administrasi kelurahan.
+        Selamat datang di gerbang informasi dan karya mahasiswa KKN UIN Suska Riau 2026. Bersama warga Pasir Penyu mewujudkan kolaborasi sosial, pengembangan UMKM lokal, serta digitalisasi administrasi kelurahan.
       </motion.p>
 
-      {/* Call to actions - wrapped with MagneticButton (Opsi 6) */}
+      {/* Call to actions */}
       <motion.div 
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6, duration: 0.8 }}
-        className="flex flex-col sm:flex-row gap-4 mb-16 z-10"
+        transition={{ delay: 0.4, duration: 0.6 }}
+        className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-12 md:mb-16 z-10 w-full sm:w-auto max-w-xs sm:max-w-none px-4"
       >
         <MagneticButton
           onClick={() => navigateTo('desa')}
-          className="font-sans px-8 py-4 rounded-full bg-brand-green text-white font-bold tracking-wide hover:bg-brand-green-dark transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(20,83,45,0.25)] cursor-pointer"
+          className="font-sans w-full sm:w-auto px-6 py-3.5 md:px-8 md:py-4 rounded-full bg-brand-green text-white text-xs sm:text-sm md:text-base font-bold tracking-wide hover:bg-brand-green-dark transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_4px_16px_rgba(20,83,45,0.22)] cursor-pointer"
         >
           <Compass size={16} />
           Jelajahi Profil Wilayah
@@ -222,27 +220,26 @@ const Hero = ({ navigateTo }) => {
         </MagneticButton>
         <MagneticButton
           onClick={() => navigateTo('anggota')}
-          className="font-sans px-8 py-4 rounded-full border-2 border-brand-green-dark bg-white hover:bg-brand-green/5 text-brand-green-dark font-bold tracking-wide transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+          className="font-sans w-full sm:w-auto px-6 py-3.5 md:px-8 md:py-4 rounded-full border-2 border-brand-green-dark bg-white hover:bg-brand-green/5 text-brand-green-dark text-xs sm:text-sm md:text-base font-bold tracking-wide transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-sm"
         >
           <Users size={16} />
           Kenali Anggota Tim
         </MagneticButton>
       </motion.div>
 
-      {/* Decorative Thin Wave Line at the bottom area */}
-      <div className="absolute bottom-16 left-0 w-full opacity-[0.06] pointer-events-none select-none z-0">
+      {/* Decorative Thin Wave Line at the bottom area (Desktop only) */}
+      <div className="absolute bottom-16 left-0 w-full opacity-[0.06] pointer-events-none select-none z-0 hidden md:block">
         <svg viewBox="0 0 1200 120" fill="none" stroke="#1b4332" strokeWidth="2" className="w-[200%] h-8 animated-wave-delayed">
           <path d="M0,60 Q300,90 600,60 T1200,60" />
         </svg>
       </div>
 
       {/* Looping wave animation divider at the bottom of hero */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-[200%] h-12 fill-white animated-wave">
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20 pointer-events-none">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-[200%] h-8 sm:h-12 fill-white animated-wave">
           <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"></path>
         </svg>
       </div>
-
     </section>
   );
 };

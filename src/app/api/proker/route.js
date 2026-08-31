@@ -50,10 +50,14 @@ const defaultProker = [
   },
   {
     id: 6,
-    title: 'Gotong Royong Raya & Perapian Plang Batas Wilayah',
-    date: '18 Agustus 2026',
-    status: 'Direncanakan',
-    desc: 'Aksi kebersihan massal bersama masyarakat setempat sekaligus peresmian gapura/plang pembatas dusun hasil karya teknik sipil.',
+    title: 'Pengadaan & Penyerahan Plakat Nama RT / RW',
+    date: '18 - 25 Agustus 2026',
+    status: 'Selesai',
+    desc: 'Pengadaan, pembuatan, dan penyerahan plakat penanda resmi kepada seluruh ketua RT dan RW se-Kelurahan Tanjung Gading untuk memperjelas tata kelola wilayah dan identitas lingkungan pemukiman warga.',
+    hasDocumentation: true,
+    docType: 'plakat',
+    photoCount: 21,
+    coverImage: '/images/plakat/plakat_1.jpg'
   }
 ];
 

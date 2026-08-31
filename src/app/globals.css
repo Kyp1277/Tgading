@@ -140,3 +140,28 @@ body {
   background-color: #faf9f5;
   box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.02), 0 10px 30px rgba(0, 0, 0, 0.05);
 }
+
+/* Touch & Mobile Performance Optimizations */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  /* Pause heavy infinite CSS animations on low-power mobile or reduce their frequency */
+  .animated-wave {
+    animation-duration: 22s;
+    will-change: transform;
+  }
+  .animated-wave-delayed {
+    animation-duration: 28s;
+    will-change: transform;
+  }
+}
+

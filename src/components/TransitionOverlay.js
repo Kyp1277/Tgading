@@ -6,7 +6,8 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 const TransitionOverlay = ({ isActive }) => {
   const shouldReduce = useReducedMotion();
 
-  const duration = shouldReduce ? 0.1 : 1.2;
+  // Snappy transition (0.7s default, 0.45s on mobile/touch)
+  const duration = shouldReduce ? 0.05 : 0.7;
 
   return (
     <AnimatePresence>
@@ -17,22 +18,22 @@ const TransitionOverlay = ({ isActive }) => {
             initial={{ x: "-100%" }}
             animate={{ x: "100%" }}
             exit={{ x: "100%" }}
-            transition={{ duration: duration, ease: [0.77, 0, 0.175, 1] }}
-            className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-brand-green-dark to-transparent opacity-95 pointer-events-auto"
+            transition={{ duration: duration, ease: [0.65, 0, 0.35, 1] }}
+            className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-brand-green-dark to-transparent opacity-95 pointer-events-auto gpu-accelerated"
           />
 
           {/* Swimming Turtle Container */}
           {!shouldReduce && (
             <motion.div
-              initial={{ x: "-150px", opacity: 0, rotate: 90, scale: 0.8 }}
+              initial={{ x: "-120px", opacity: 0, rotate: 90, scale: 0.8 }}
               animate={{ 
-                x: ["-150px", "50vw", "100vw"],
+                x: ["-120px", "50vw", "100vw"],
                 opacity: [0, 1, 1, 0],
-                scale: [0.8, 1.1, 0.8]
+                scale: [0.8, 1.05, 0.8]
               }}
-              transition={{ duration: duration, ease: [0.77, 0, 0.175, 1] }}
+              transition={{ duration: duration, ease: [0.65, 0, 0.35, 1] }}
               style={{ y: "-50%", position: "absolute", top: "50%", left: 0 }}
-              className="w-28 h-28 z-[10000]"
+              className="w-20 h-20 md:w-28 md:h-28 z-[10000] gpu-accelerated"
             >
               <svg
                 viewBox="0 0 100 100"

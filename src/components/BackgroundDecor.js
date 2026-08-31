@@ -70,41 +70,41 @@ const BackgroundDecor = ({ variant = 'home' }) => {
         className="absolute inset-0 w-full h-full opacity-100" 
       />
 
-      {/* 2. Page-specific Radial Glow Blobs (More prominent opacity 10-12%) */}
+      {/* 2. Page-specific Radial Glow Blobs (Optimized for mobile GPU fillrate) */}
       {variant === 'home' && (
         <>
-          <div className="absolute top-20 left-[10%] w-96 h-96 bg-brand-gold/12 blur-[100px] rounded-full" />
-          <div className="absolute bottom-40 right-[10%] w-[450px] h-[450px] bg-brand-green/10 blur-[130px] rounded-full" />
+          <div className="absolute top-20 left-[10%] w-72 h-72 md:w-96 md:h-96 bg-brand-gold/10 md:bg-brand-gold/12 blur-[50px] md:blur-[100px] rounded-full gpu-accelerated pointer-events-none" />
+          <div className="absolute bottom-40 right-[10%] w-72 h-72 md:w-[450px] md:h-[450px] bg-brand-green/8 md:bg-brand-green/10 blur-[60px] md:blur-[130px] rounded-full gpu-accelerated pointer-events-none" />
         </>
       )}
       {variant === 'profile' && (
         <>
-          <div className="absolute top-40 right-[8%] w-96 h-96 bg-brand-green/10 blur-[110px] rounded-full" />
-          <div className="absolute bottom-20 left-[8%] w-96 h-96 bg-brand-gold/10 blur-[110px] rounded-full" />
+          <div className="absolute top-40 right-[8%] w-72 h-72 md:w-96 md:h-96 bg-brand-green/8 md:bg-brand-green/10 blur-[50px] md:blur-[110px] rounded-full gpu-accelerated pointer-events-none" />
+          <div className="absolute bottom-20 left-[8%] w-72 h-72 md:w-96 md:h-96 bg-brand-gold/8 md:bg-brand-gold/10 blur-[50px] md:blur-[110px] rounded-full gpu-accelerated pointer-events-none" />
         </>
       )}
       {variant === 'struktur' && (
         <>
-          <div className="absolute top-20 left-[15%] w-[450px] h-[450px] bg-brand-gold/10 blur-[120px] rounded-full" />
-          <div className="absolute bottom-10 right-[15%] w-96 h-96 bg-brand-green/10 blur-[100px] rounded-full" />
+          <div className="absolute top-20 left-[15%] w-72 h-72 md:w-[450px] md:h-[450px] bg-brand-gold/8 md:bg-brand-gold/10 blur-[50px] md:blur-[120px] rounded-full gpu-accelerated pointer-events-none" />
+          <div className="absolute bottom-10 right-[15%] w-72 h-72 md:w-96 md:h-96 bg-brand-green/8 md:bg-brand-green/10 blur-[50px] md:blur-[100px] rounded-full gpu-accelerated pointer-events-none" />
         </>
       )}
       {variant === 'anggota' && (
         <>
-          <div className="absolute top-60 right-[10%] w-96 h-96 bg-brand-green/10 blur-[110px] rounded-full" />
-          <div className="absolute bottom-40 left-[10%] w-96 h-96 bg-brand-gold/12 blur-[120px] rounded-full" />
+          <div className="absolute top-60 right-[10%] w-72 h-72 md:w-96 md:h-96 bg-brand-green/8 md:bg-brand-green/10 blur-[50px] md:blur-[110px] rounded-full gpu-accelerated pointer-events-none" />
+          <div className="absolute bottom-40 left-[10%] w-72 h-72 md:w-96 md:h-96 bg-brand-gold/8 md:bg-brand-gold/12 blur-[50px] md:blur-[120px] rounded-full gpu-accelerated pointer-events-none" />
         </>
       )}
       {variant === 'proker' && (
         <>
-          <div className="absolute top-30 left-[10%] w-[450px] h-[450px] bg-brand-gold/10 blur-[130px] rounded-full" />
-          <div className="absolute bottom-60 right-[10%] w-96 h-96 bg-brand-green/9 blur-[100px] rounded-full" />
+          <div className="absolute top-30 left-[10%] w-72 h-72 md:w-[450px] md:h-[450px] bg-brand-gold/8 md:bg-brand-gold/10 blur-[50px] md:blur-[130px] rounded-full gpu-accelerated pointer-events-none" />
+          <div className="absolute bottom-60 right-[10%] w-72 h-72 md:w-96 md:h-96 bg-brand-green/8 md:bg-brand-green/9 blur-[50px] md:blur-[100px] rounded-full gpu-accelerated pointer-events-none" />
         </>
       )}
       {variant === 'galeri' && (
         <>
-          <div className="absolute top-40 right-[12%] w-96 h-96 bg-brand-green/10 blur-[110px] rounded-full" />
-          <div className="absolute bottom-30 left-[12%] w-96 h-96 bg-brand-gold/12 blur-[110px] rounded-full" />
+          <div className="absolute top-40 right-[12%] w-72 h-72 md:w-96 md:h-96 bg-brand-green/8 md:bg-brand-green/10 blur-[50px] md:blur-[110px] rounded-full gpu-accelerated pointer-events-none" />
+          <div className="absolute bottom-30 left-[12%] w-72 h-72 md:w-96 md:h-96 bg-brand-gold/8 md:bg-brand-gold/12 blur-[50px] md:blur-[110px] rounded-full gpu-accelerated pointer-events-none" />
         </>
       )}
 
@@ -197,82 +197,84 @@ const BackgroundDecor = ({ variant = 'home' }) => {
         </motion.div>
       </div>
 
-      {/* 5. Floating Accents (Dots & Outline Icons) with infinite floats */}
-      {!shouldReduce && accents.map((accent, idx) => (
-        <motion.div
-          key={idx}
-          style={{
-            position: 'absolute',
-            top: accent.top,
-            left: accent.left,
-            right: accent.right,
-          }}
-          animate={{ y: [0, -10, 0] }}
-          transition={{
-            duration: 5 + (idx % 3),
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: accent.delay
-          }}
-          className={`${accent.size} ${accent.color} rounded-full`}
-        />
-      ))}
-
-      {/* Outline Turtle floating watermark (Lower page section) */}
+      {/* 5. Floating Accents (Dots & Outline Icons) - Visible on larger screens */}
       {!shouldReduce && (
-        <motion.div
-          style={{
-            position: 'absolute',
-            bottom: '15%',
-            left: variant === 'struktur' || variant === 'proker' ? '4%' : '88%',
-          }}
-          animate={{ y: [0, 8, 0], rotate: [0, 4, 0] }}
-          transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut" }}
-          className="w-16 h-16 text-brand-gold opacity-[0.18] hidden md:block"
-        >
-          <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-full h-full">
-            <ellipse cx="50" cy="50" rx="30" ry="35" />
-            <path d="M 50,15 C 50,5 40,5 50,0 C 60,5 50,5 50,15" />
-            <path d="M 20,40 C 5,35 -5,15 5,5" />
-            <path d="M 80,40 C 95,35 105,15 95,5" />
-          </svg>
-        </motion.div>
-      )}
+        <div className="hidden md:block">
+          {accents.map((accent, idx) => (
+            <motion.div
+              key={idx}
+              style={{
+                position: 'absolute',
+                top: accent.top,
+                left: accent.left,
+                right: accent.right,
+              }}
+              animate={{ y: [0, -10, 0] }}
+              transition={{
+                duration: 5 + (idx % 3),
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: accent.delay
+              }}
+              className={`${accent.size} ${accent.color} rounded-full gpu-accelerated`}
+            />
+          ))}
 
-      {/* 6. Premium Golden Floating Dust Particles (Opsi J) */}
-      {!shouldReduce && [
-        { top: '10%', left: '15%', size: 'w-1 h-1', duration: 12, delay: 0 },
-        { top: '25%', left: '80%', size: 'w-1.5 h-1.5', duration: 15, delay: 1.5 },
-        { top: '40%', left: '30%', size: 'w-1 h-1', duration: 18, delay: 0.5 },
-        { top: '55%', left: '70%', size: 'w-1.5 h-1.5', duration: 14, delay: 2.2 },
-        { top: '70%', left: '20%', size: 'w-1 h-1', duration: 16, delay: 0.8 },
-        { top: '85%', left: '85%', size: 'w-1.2 h-1.2', duration: 20, delay: 1.0 },
-        { top: '30%', left: '60%', size: 'w-1 h-1', duration: 13, delay: 2.8 },
-        { top: '65%', left: '45%', size: 'w-1.5 h-1.5', duration: 17, delay: 0.3 },
-        { top: '80%', left: '55%', size: 'w-1 h-1', duration: 15, delay: 1.9 },
-        { top: '92%', left: '12%', size: 'w-1.2 h-1.2', duration: 19, delay: 2.5 },
-      ].map((p, idx) => (
-        <motion.div
-          key={`particle-${idx}`}
-          style={{
-            position: 'absolute',
-            top: p.top,
-            left: p.left,
-          }}
-          animate={{ 
-            y: [0, -80, 0],
-            x: [0, 20, 0],
-            opacity: [0.15, 0.45, 0.15]
-          }}
-          transition={{
-            duration: p.duration,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: p.delay
-          }}
-          className={`${p.size} bg-brand-gold/40 rounded-full blur-[0.5px] z-0`}
-        />
-      ))}
+          {/* Outline Turtle floating watermark (Lower page section) */}
+          <motion.div
+            style={{
+              position: 'absolute',
+              bottom: '15%',
+              left: variant === 'struktur' || variant === 'proker' ? '4%' : '88%',
+            }}
+            animate={{ y: [0, 8, 0], rotate: [0, 4, 0] }}
+            transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut" }}
+            className="w-16 h-16 text-brand-gold opacity-[0.18] gpu-accelerated"
+          >
+            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-full h-full">
+              <ellipse cx="50" cy="50" rx="30" ry="35" />
+              <path d="M 50,15 C 50,5 40,5 50,0 C 60,5 50,5 50,15" />
+              <path d="M 20,40 C 5,35 -5,15 5,5" />
+              <path d="M 80,40 C 95,35 105,15 95,5" />
+            </svg>
+          </motion.div>
+
+          {/* 6. Premium Golden Floating Dust Particles (Desktop only for GPU preservation) */}
+          {[
+            { top: '10%', left: '15%', size: 'w-1 h-1', duration: 12, delay: 0 },
+            { top: '25%', left: '80%', size: 'w-1.5 h-1.5', duration: 15, delay: 1.5 },
+            { top: '40%', left: '30%', size: 'w-1 h-1', duration: 18, delay: 0.5 },
+            { top: '55%', left: '70%', size: 'w-1.5 h-1.5', duration: 14, delay: 2.2 },
+            { top: '70%', left: '20%', size: 'w-1 h-1', duration: 16, delay: 0.8 },
+            { top: '85%', left: '85%', size: 'w-1.2 h-1.2', duration: 20, delay: 1.0 },
+            { top: '30%', left: '60%', size: 'w-1 h-1', duration: 13, delay: 2.8 },
+            { top: '65%', left: '45%', size: 'w-1.5 h-1.5', duration: 17, delay: 0.3 },
+            { top: '80%', left: '55%', size: 'w-1 h-1', duration: 15, delay: 1.9 },
+            { top: '92%', left: '12%', size: 'w-1.2 h-1.2', duration: 19, delay: 2.5 },
+          ].map((p, idx) => (
+            <motion.div
+              key={`particle-${idx}`}
+              style={{
+                position: 'absolute',
+                top: p.top,
+                left: p.left,
+              }}
+              animate={{ 
+                y: [0, -80, 0],
+                x: [0, 20, 0],
+                opacity: [0.15, 0.45, 0.15]
+              }}
+              transition={{
+                duration: p.duration,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: p.delay
+              }}
+              className={`${p.size} bg-brand-gold/40 rounded-full blur-[0.5px] z-0 gpu-accelerated`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -1,0 +1,48 @@
+[
+  {
+    "id": 1,
+    "title": "Penerimaan Kelompok KKN oleh Aparatur Kelurahan",
+    "date": "10 Juli 2026",
+    "status": "Selesai",
+    "desc": "Pertemuan resmi perdana bersama Lurah Tanjung Gading, jajaran perangkat kelurahan, dan tokoh pemuda untuk memaparkan program pengabdian KKN."
+  },
+  {
+    "id": 2,
+    "title": "Sosialisasi Digitalisasi Administrasi Kelurahan",
+    "date": "15 Juli 2026",
+    "status": "Selesai",
+    "desc": "Pelatihan dasar penggunaan platform digital tata kelola surat-menyurat untuk sekretariat kelurahan guna mempercepat layanan administrasi lingkungan."
+  },
+  {
+    "id": 3,
+    "title": "Bimbingan Belajar Matematika & Bahasa Inggris Ceria",
+    "date": "17 Juli - 10 Agustus 2026",
+    "status": "Berlangsung",
+    "desc": "Program bimbingan belajar gratis pasca sekolah untuk siswa SD dan SMP yang berfokus pada metode belajar interaktif dan edukasi karakter."
+  },
+  {
+    "id": 4,
+    "title": "Festival Keagamaan Anak Sholeh se-Tanjung Gading",
+    "date": "5 Agustus 2026",
+    "status": "Direncanakan",
+    "desc": "Perlombaan membaca Al-Qur'an, azan, dan hafalan surah pendek tingkat lingkungan untuk meningkatkan syiar keagamaan anak-anak."
+  },
+  {
+    "id": 5,
+    "title": "Pelatihan Branding & Digital Marketing UMKM Sapu Lidi",
+    "date": "12 Agustus 2026",
+    "status": "Direncanakan",
+    "desc": "Pendampingan branding produk sapu lidi kreasi warga agar memiliki nilai jual tinggi secara digital serta perluasan kemitraan distribusi."
+  },
+  {
+    "id": 6,
+    "title": "Pengadaan & Penyerahan Plakat Nama RT / RW",
+    "date": "18 - 25 Agustus 2026",
+    "status": "Selesai",
+    "desc": "Pengadaan, pembuatan, dan penyerahan plakat penanda resmi kepada seluruh ketua RT dan RW se-Kelurahan Tanjung Gading untuk memperjelas tata kelola wilayah dan identitas lingkungan pemukiman warga.",
+    "hasDocumentation": true,
+    "docType": "plakat",
+    "photoCount": 21,
+    "coverImage": "/images/plakat/plakat_1.jpg"
+  }
+]

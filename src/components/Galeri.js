@@ -162,12 +162,13 @@ const Galeri = () => {
     (photo) => activeCategory === 'Semua' || photo.category === activeCategory
   );
 
-  // Scrapbook pagination calculations
-  const scrapbookItemsPerPage = 9;
+  // Scrapbook pagination calculations (Optimized for mobile DOM performance)
+  const scrapbookItemsPerPage = isMobile ? 6 : 9;
   const totalScrapbookPages = Math.ceil(filteredPhotos.length / scrapbookItemsPerPage);
-  const displayedScrapbookPhotos = isMobile 
-    ? filteredPhotos 
-    : filteredPhotos.slice(scrapbookPage * scrapbookItemsPerPage, (scrapbookPage + 1) * scrapbookItemsPerPage);
+  const displayedScrapbookPhotos = filteredPhotos.slice(
+    scrapbookPage * scrapbookItemsPerPage, 
+    (scrapbookPage + 1) * scrapbookItemsPerPage
+  );
 
   const displayedGridPhotos = filteredPhotos.slice(0, gridLimit);
 
@@ -416,7 +417,7 @@ const Galeri = () => {
 
                 {/* Cards Container */}
                 <div 
-                  className={isMobile ? "flex flex-col items-center gap-10 py-6 overflow-y-auto max-h-[560px]" : "w-full h-full relative flex-grow"}
+                  className={isMobile ? "flex flex-col items-center gap-8 py-4 w-full" : "w-full h-full relative flex-grow"}
                 >
                   <AnimatePresence mode="popLayout">
                     {displayedScrapbookPhotos.map((photo, index) => {
@@ -455,7 +456,7 @@ const Galeri = () => {
                           }}
                           initial={{ 
                             opacity: 0, 
-                            scale: 0.8, 
+                            scale: 0.9, 
                             rotate: isMobile ? pos.rotate * 0.5 : pos.rotate * 1.5 
                           }}
                           animate={{ 
@@ -463,9 +464,9 @@ const Galeri = () => {
                             scale: 1, 
                             rotate: isMobile ? pos.rotate * 0.5 : pos.rotate 
                           }}
-                          exit={{ opacity: 0, scale: 0.8, y: 30 }}
-                          transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                          className={`w-64 md:w-[275px] bg-white p-3.5 pb-7 rounded-sm border border-stone-200/80 shadow-md select-none cursor-grab active:cursor-grabbing flex flex-col group relative`}
+                          exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                          transition={{ duration: 0.3 }}
+                          className={`w-64 sm:w-72 md:w-[275px] bg-white p-3.5 pb-6 sm:pb-7 rounded-sm border border-stone-200/80 shadow-md select-none cursor-grab active:cursor-grabbing flex flex-col group relative gpu-accelerated`}
                         >
                           {/* Jagged Washi Tape Ribbon */}
                           <div 
@@ -509,7 +510,7 @@ const Galeri = () => {
                           </div>
 
                           {/* Polaroid Handwritten Text Caption */}
-                          <h4 className="font-handwritten text-[20px] text-stone-800 leading-tight text-center mt-3 tracking-wide select-none filter drop-shadow-[0_0.5px_0.5px_rgba(0,0,0,0.12)] line-clamp-2">
+                          <h4 className="font-handwritten text-[18px] sm:text-[20px] text-stone-800 leading-tight text-center mt-3 tracking-wide select-none filter drop-shadow-[0_0.5px_0.5px_rgba(0,0,0,0.12)] line-clamp-2">
                             {photo.title}
                           </h4>
 
@@ -524,9 +525,9 @@ const Galeri = () => {
                   </AnimatePresence>
                 </div>
 
-                {/* Scrapbook Pagination / Navigation Controls (Desktop) */}
-                {!isMobile && totalScrapbookPages > 1 && (
-                  <div className="relative z-30 flex items-center justify-center gap-3 pt-4 border-t border-brand-gold/15 bg-white/60 backdrop-blur-sm rounded-2xl px-6 py-2 w-fit mx-auto shadow-sm">
+                {/* Scrapbook Pagination / Navigation Controls (Desktop & Mobile) */}
+                {totalScrapbookPages > 1 && (
+                  <div className="relative z-30 flex items-center justify-center gap-2 sm:gap-3 pt-3 md:pt-4 border-t border-brand-gold/15 bg-white/80 md:bg-white/60 backdrop-blur-sm rounded-2xl px-4 sm:px-6 py-2 w-fit mx-auto shadow-sm mt-4">
                     <button
                       onClick={() => setScrapbookPage(p => Math.max(0, p - 1))}
                       disabled={scrapbookPage === 0}
@@ -536,7 +537,7 @@ const Galeri = () => {
                       <ChevronLeft size={16} />
                     </button>
 
-                    <span className="font-handwritten text-lg font-bold text-brand-green-dark px-3">
+                    <span className="font-handwritten text-base sm:text-lg font-bold text-brand-green-dark px-2 sm:px-3">
                       Halaman {scrapbookPage + 1} dari {totalScrapbookPages}
                     </span>
 

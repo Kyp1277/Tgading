@@ -1,9 +1,20 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useReducedMotion, useScroll, useMotionValue, useTransform, useSpring } from 'framer-motion';
-import { Calendar, CheckCircle2, AlertCircle, Clock, BookOpen, Loader2 } from 'lucide-react';
+import { motion, useReducedMotion, useScroll, useMotionValue, useTransform, useSpring, AnimatePresence } from 'framer-motion';
+import { 
+  Calendar, 
+  CheckCircle2, 
+  AlertCircle, 
+  Clock, 
+  BookOpen, 
+  Loader2, 
+  Image as ImageIcon, 
+  Sparkles, 
+  ArrowRight 
+} from 'lucide-react';
 import BackgroundDecor from './BackgroundDecor';
+import PlakatModal from './PlakatModal';
 
 // Reusable 3D TiltCard Component for Program Kerja Cards
 const TiltCard = ({ children, className, shouldReduce, onMouseEnter, onMouseLeave, ...props }) => {
@@ -15,7 +26,7 @@ const TiltCard = ({ children, className, shouldReduce, onMouseEnter, onMouseLeav
   const rotateYSpring = useSpring(useTransform(x, [-120, 120], [-8, 8]), springConfig);
 
   const handleMouseMove = (e) => {
-    if (shouldReduce) return;
+    if (shouldReduce || (typeof window !== 'undefined' && window.innerWidth < 768)) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
@@ -26,6 +37,7 @@ const TiltCard = ({ children, className, shouldReduce, onMouseEnter, onMouseLeav
   };
 
   const handleMouseLeave = () => {
+    if (typeof window !== 'undefined' && window.innerWidth < 768) return;
     x.set(0);
     y.set(0);
     if (onMouseLeave) onMouseLeave();
@@ -36,6 +48,7 @@ const TiltCard = ({ children, className, shouldReduce, onMouseEnter, onMouseLeav
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onMouseEnter={onMouseEnter}
+      whileTap={{ scale: 0.98 }}
       style={{
         rotateX: shouldReduce ? 0 : rotateXSpring,
         rotateY: shouldReduce ? 0 : rotateYSpring,
@@ -106,6 +119,7 @@ const Proker = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [hoveredEventId, setHoveredEventId] = useState(null);
+  const [isPlakatModalOpen, setIsPlakatModalOpen] = useState(false);
   const timelineRef = useRef(null);
 
   // Hook Framer Motion untuk mendeteksi progress scroll pada elemen linimasa
@@ -158,6 +172,25 @@ const Proker = () => {
     }
   };
 
+  const isPlakatProker = (event) => {
+    if (!event) return false;
+    const title = (event.title || '').toLowerCase();
+    const desc = (event.desc || '').toLowerCase();
+    return Boolean(
+      event.hasDocumentation ||
+      event.docType === 'plakat' ||
+      event.id === 6 ||
+      title.includes('signage') ||
+      title.includes('plakat') ||
+      title.includes('plang') ||
+      title.includes('identitas') ||
+      desc.includes('signage') ||
+      desc.includes('plakat') ||
+      desc.includes('plang') ||
+      desc.includes('papan informasi')
+    );
+  };
+
   return (
     <section className="relative pt-28 pb-20 md:pt-24 md:pb-24 w-full bg-white min-h-screen overflow-hidden">
       
@@ -171,7 +204,7 @@ const Proker = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16 md:mb-20"
+          className="text-center mb-14 md:mb-16"
         >
           <span className="font-sans text-xs font-bold uppercase tracking-widest text-brand-gold bg-brand-gold/10 px-4 py-2 rounded-full inline-flex items-center gap-1.5">
             <BookOpen size={12} />
@@ -183,9 +216,29 @@ const Proker = () => {
               Kelurahan Tanjung Gading
             </span>
           </h2>
-          <p className="font-sans text-slate-600 max-w-2xl mx-auto leading-relaxed text-sm md:text-base">
+          <p className="font-sans text-slate-600 max-w-2xl mx-auto leading-relaxed text-sm md:text-base mb-6">
             Rangkaian timeline kegiatan KKN UIN Suska Riau 2026 di Kelurahan Tanjung Gading. Dirancang secara terukur untuk mewujudkan keberlanjutan potensi wilayah.
           </p>
+
+          {/* Quick Spotlight Banner for Plakat & Signage RT/RW */}
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="inline-flex items-center gap-3 bg-brand-cream/90 border border-brand-gold/40 hover:border-brand-gold py-2 px-4 md:px-5 rounded-full shadow-sm hover:shadow-md cursor-pointer transition-all duration-300 group"
+            onClick={() => setIsPlakatModalOpen(true)}
+          >
+            <div className="flex items-center -space-x-2 overflow-hidden">
+              <img src="/images/plakat/plakat_1.jpg" alt="Preview 1" className="w-6 h-6 rounded-full border-2 border-white object-cover" />
+              <img src="/images/plakat/plakat_7.jpg" alt="Preview 2" className="w-6 h-6 rounded-full border-2 border-white object-cover" />
+              <img src="/images/plakat/plakat_13.jpg" alt="Preview 3" className="w-6 h-6 rounded-full border-2 border-white object-cover" />
+            </div>
+            <span className="font-sans text-xs md:text-sm font-bold text-brand-green-dark group-hover:text-brand-gold-dark transition-colors flex items-center gap-1.5">
+              <Sparkles size={14} className="text-brand-gold" />
+              Dokumentasi Spesial: Penyerahan Plakat & Signage RT/RW (21 Foto)
+              <ArrowRight size={13} className="text-brand-gold group-hover:translate-x-1 transition-transform" />
+            </span>
+          </motion.div>
         </motion.div>
 
         {loading ? (
@@ -221,11 +274,12 @@ const Proker = () => {
               const isHovered = hoveredEventId === event.id;
               const styles = getStatusStyles(event.status);
               const StatusIcon = styles.icon;
+              const hasDoc = isPlakatProker(event);
 
               return (
-                <div key={event.id} className="relative mb-8 md:mb-10 flex flex-col md:flex-row items-stretch overflow-hidden">
+                <div key={event.id} className="relative mb-8 md:mb-12 flex flex-col md:flex-row items-stretch overflow-hidden">
                   
-                  {/* Timeline Center Bullet Pin with dynamic scale & glow (Opsi F) */}
+                  {/* Timeline Center Bullet Pin with dynamic scale & glow */}
                   <motion.div 
                     animate={{
                       scale: isHovered ? 1.35 : 1,
@@ -252,13 +306,13 @@ const Proker = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: "-80px" }}
                         transition={{ duration: 0.6 }}
-                        className="w-full max-w-xl md:max-w-[460px] lg:max-w-[500px]"
+                        className="w-full max-w-xl md:max-w-[480px] lg:max-w-[520px]"
                       >
                         <TiltCard 
                           shouldReduce={shouldReduce}
                           onMouseEnter={() => setHoveredEventId(event.id)}
                           onMouseLeave={() => setHoveredEventId(null)}
-                          className={`w-full bg-white border-2 border-brand-gold/10 hover:border-brand-gold/25 border-l-4 border-l-transparent hover:border-l-brand-gold p-8 rounded-3xl transition-all duration-300 text-left cursor-default relative overflow-hidden group ${styles.shadow}`}
+                          className={`w-full bg-white border-2 border-brand-gold/15 hover:border-brand-gold/40 border-l-4 border-l-transparent hover:border-l-brand-gold p-6 md:p-8 rounded-3xl transition-all duration-300 text-left cursor-default relative overflow-hidden group ${styles.shadow}`}
                         >
                           {/* Subtle Gold Glow on Hover */}
                           <div className="absolute -right-10 -top-10 w-24 h-24 rounded-full bg-brand-gold/5 group-hover:bg-brand-gold/15 blur-xl transition-all duration-300 pointer-events-none" />
@@ -281,6 +335,46 @@ const Proker = () => {
                           <p className="font-sans text-sm md:text-[15px] text-slate-600 leading-relaxed relative z-10">
                             {event.desc}
                           </p>
+
+                          {/* Documentation Showcase Button for Plakat RT/RW */}
+                          {hasDoc && (
+                            <div className="mt-5 pt-4 border-t border-brand-gold/20 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 relative z-10">
+                              <div className="flex items-center gap-2">
+                                <div className="flex items-center -space-x-2.5 overflow-hidden">
+                                  <img 
+                                    src="/images/plakat/plakat_1.jpg" 
+                                    alt="Plakat 1" 
+                                    className="w-8 h-8 rounded-full border-2 border-white object-cover shadow-sm"
+                                  />
+                                  <img 
+                                    src="/images/plakat/plakat_7.jpg" 
+                                    alt="Plakat 7" 
+                                    className="w-8 h-8 rounded-full border-2 border-white object-cover shadow-sm"
+                                  />
+                                  <img 
+                                    src="/images/plakat/plakat_13.jpg" 
+                                    alt="Plakat 13" 
+                                    className="w-8 h-8 rounded-full border-2 border-white object-cover shadow-sm"
+                                  />
+                                </div>
+                                <span className="font-sans text-[11px] font-bold text-brand-green-dark bg-brand-gold/20 px-2 py-0.5 rounded-full border border-brand-gold/30">
+                                  21 Foto Dokumentasi
+                                </span>
+                              </div>
+
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setIsPlakatModalOpen(true);
+                                }}
+                                className="font-sans text-xs font-bold text-white bg-brand-green-dark hover:bg-brand-gold-dark hover:text-white px-4 py-2.5 rounded-full border border-brand-gold/30 shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-1.5 cursor-pointer group/btn"
+                              >
+                                <ImageIcon size={14} className="text-brand-gold group-hover/btn:text-white transition-colors" />
+                                <span>Lihat Dokumentasi Lengkap</span>
+                                <ArrowRight size={12} className="group-hover/btn:translate-x-0.5 transition-transform" />
+                              </button>
+                            </div>
+                          )}
                         </TiltCard>
                       </motion.div>
                     )}
@@ -297,13 +391,13 @@ const Proker = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: "-80px" }}
                         transition={{ duration: 0.6 }}
-                        className="w-full max-w-xl md:max-w-[460px] lg:max-w-[500px]"
+                        className="w-full max-w-xl md:max-w-[480px] lg:max-w-[520px]"
                       >
                         <TiltCard 
                           shouldReduce={shouldReduce}
                           onMouseEnter={() => setHoveredEventId(event.id)}
                           onMouseLeave={() => setHoveredEventId(null)}
-                          className={`w-full bg-white border-2 border-brand-gold/10 hover:border-brand-gold/25 border-l-4 border-l-transparent hover:border-l-brand-gold p-8 rounded-3xl transition-all duration-300 text-left cursor-default relative overflow-hidden group ${styles.shadow}`}
+                          className={`w-full bg-white border-2 border-brand-gold/15 hover:border-brand-gold/40 border-l-4 border-l-transparent hover:border-l-brand-gold p-6 md:p-8 rounded-3xl transition-all duration-300 text-left cursor-default relative overflow-hidden group ${styles.shadow}`}
                         >
                           {/* Subtle Gold Glow on Hover */}
                           <div className="absolute -right-10 -top-10 w-24 h-24 rounded-full bg-brand-gold/5 group-hover:bg-brand-gold/15 blur-xl transition-all duration-300 pointer-events-none" />
@@ -326,6 +420,46 @@ const Proker = () => {
                           <p className="font-sans text-sm md:text-[15px] text-slate-600 leading-relaxed relative z-10">
                             {event.desc}
                           </p>
+
+                          {/* Documentation Showcase Button for Plakat RT/RW */}
+                          {hasDoc && (
+                            <div className="mt-5 pt-4 border-t border-brand-gold/20 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 relative z-10">
+                              <div className="flex items-center gap-2">
+                                <div className="flex items-center -space-x-2.5 overflow-hidden">
+                                  <img 
+                                    src="/images/plakat/plakat_1.jpg" 
+                                    alt="Plakat 1" 
+                                    className="w-8 h-8 rounded-full border-2 border-white object-cover shadow-sm"
+                                  />
+                                  <img 
+                                    src="/images/plakat/plakat_7.jpg" 
+                                    alt="Plakat 7" 
+                                    className="w-8 h-8 rounded-full border-2 border-white object-cover shadow-sm"
+                                  />
+                                  <img 
+                                    src="/images/plakat/plakat_13.jpg" 
+                                    alt="Plakat 13" 
+                                    className="w-8 h-8 rounded-full border-2 border-white object-cover shadow-sm"
+                                  />
+                                </div>
+                                <span className="font-sans text-[11px] font-bold text-brand-green-dark bg-brand-gold/20 px-2 py-0.5 rounded-full border border-brand-gold/30">
+                                  21 Foto Dokumentasi
+                                </span>
+                              </div>
+
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setIsPlakatModalOpen(true);
+                                }}
+                                className="font-sans text-xs font-bold text-white bg-brand-green-dark hover:bg-brand-gold-dark hover:text-white px-4 py-2.5 rounded-full border border-brand-gold/30 shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-1.5 cursor-pointer group/btn"
+                              >
+                                <ImageIcon size={14} className="text-brand-gold group-hover/btn:text-white transition-colors" />
+                                <span>Lihat Dokumentasi Lengkap</span>
+                                <ArrowRight size={12} className="group-hover/btn:translate-x-0.5 transition-transform" />
+                              </button>
+                            </div>
+                          )}
                         </TiltCard>
                       </motion.div>
                     )}
@@ -338,6 +472,12 @@ const Proker = () => {
           </div>
         )}
       </div>
+
+      {/* Interactive Plakat Documentation Modal */}
+      <PlakatModal
+        isOpen={isPlakatModalOpen}
+        onClose={() => setIsPlakatModalOpen(false)}
+      />
     </section>
   );
 };

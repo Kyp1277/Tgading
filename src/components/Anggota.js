@@ -41,7 +41,7 @@ const FlipCard = ({ member, isBPH, shouldReduce, onClick }) => {
   const bannerY = useSpring(useTransform(mouseY, [-150, 150], [4, -4]), springConfig);
 
   const handleMouseMove = (e) => {
-    if (shouldReduce) return;
+    if (shouldReduce || (typeof window !== 'undefined' && window.innerWidth < 768)) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
@@ -52,6 +52,7 @@ const FlipCard = ({ member, isBPH, shouldReduce, onClick }) => {
   };
 
   const handleMouseLeave = () => {
+    if (typeof window !== 'undefined' && window.innerWidth < 768) return;
     mouseX.set(0);
     mouseY.set(0);
     if (!shouldReduce) {

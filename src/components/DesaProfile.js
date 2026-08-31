@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion, useReducedMotion, useMotionValue, useTransform, useSpring } from 'framer-motion';
-import { MapPin, Users, Activity, Leaf, Shield, BookOpen, ExternalLink } from 'lucide-react';
+import { MapPin, Users, Activity, Shield, BookOpen, ExternalLink } from 'lucide-react';
 import BackgroundDecor from './BackgroundDecor';
 
 // Reusable 3D TiltCard Component for Stats & Potentials
@@ -15,7 +15,7 @@ const TiltCard = ({ children, className, shouldReduce, ...props }) => {
   const rotateYSpring = useSpring(useTransform(x, [-120, 120], [-8, 8]), springConfig);
 
   const handleMouseMove = (e) => {
-    if (shouldReduce) return;
+    if (shouldReduce || (typeof window !== 'undefined' && window.innerWidth < 768)) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
@@ -26,6 +26,7 @@ const TiltCard = ({ children, className, shouldReduce, ...props }) => {
   };
 
   const handleMouseLeave = () => {
+    if (typeof window !== 'undefined' && window.innerWidth < 768) return;
     x.set(0);
     y.set(0);
   };
@@ -34,6 +35,7 @@ const TiltCard = ({ children, className, shouldReduce, ...props }) => {
     <motion.div
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      whileTap={{ scale: 0.98 }}
       style={{
         rotateX: shouldReduce ? 0 : rotateXSpring,
         rotateY: shouldReduce ? 0 : rotateYSpring,
@@ -55,25 +57,25 @@ const DesaProfile = () => {
   const stats = [
     { label: 'Kecamatan', value: 'Pasir Penyu', icon: MapPin },
     { label: 'Kabupaten', value: 'Indragiri Hulu', icon: Shield },
-    { label: 'Potensi Utama', value: 'Sawit & Karet', icon: Leaf },
+    { label: 'Potensi Utama', value: 'UMKM & Kerajinan', icon: Activity },
     { label: 'Kepadatan Penduduk', value: 'Sedang', icon: Users },
   ];
 
   const potentials = [
     {
-      title: 'Perkebunan Kelapa Sawit & Karet',
-      desc: 'Sebagian besar wilayah kelurahan didominasi oleh lahan perkebunan produktif yang dikelola secara mandiri oleh warga maupun kemitraan lokal.',
-      icon: Leaf,
-    },
-    {
       title: 'UMKM Kerajinan & Kuliner',
-      desc: 'Masyarakat Tanjung Gading kreatif dalam mengolah hasil kebun dan membuat kudapan khas Riau serta kerajinan tangan bernilai ekonomi.',
+      desc: 'Masyarakat Tanjung Gading kreatif dalam memproduksi aneka olahan kuliner khas serta kerajinan tangan bernilai ekonomi seperti sapu lidi.',
       icon: Activity,
     },
     {
       title: 'Pendidikan & Keagamaan',
-      desc: 'Memiliki basis keagamaan yang kuat dengan sarana masjid/mushola aktif serta antusiasme tinggi dari anak-anak kelurahan untuk belajar.',
+      desc: 'Memiliki basis keagamaan yang kuat dengan sarana masjid/mushola aktif serta antusiasme tinggi dari anak-anak kelurahan untuk belajar dan mengaji.',
       icon: BookOpen,
+    },
+    {
+      title: 'Gotong Royong & Kemasyarakatan',
+      desc: 'Nilai kebersamaan dan kerukunan warga yang kokoh melalui rutinitas sosial, kerja bakti lingkungan, serta sinergi erat bersama aparatur kelurahan.',
+      icon: Users,
     },
   ];
 
@@ -117,7 +119,7 @@ const DesaProfile = () => {
             </span>
           </h2>
           <p className="font-sans text-slate-600 max-w-3xl mx-auto leading-relaxed text-sm md:text-base">
-            Kelurahan Tanjung Gading terletak di Kecamatan Pasir Penyu, Kabupaten Indragiri Hulu, Riau. Sebuah kawasan yang asri dengan kehangatan warganya, semangat gotong royong yang tinggi, serta alam perkebunan yang subur.
+            Kelurahan Tanjung Gading terletak di Kecamatan Pasir Penyu, Kabupaten Indragiri Hulu, Riau. Sebuah kawasan yang asri dengan kehangatan warganya, semangat gotong royong yang tinggi, serta potensi kreativitas masyarakat yang terus berkembang.
           </p>
         </motion.div>
 

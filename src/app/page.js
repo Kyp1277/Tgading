@@ -32,9 +32,9 @@ export default function Home() {
     
     setIsTransitioning(true);
     
-    // Snappy transitions: switch halfway through (600ms)
-    const midPoint = shouldReduce ? 50 : 600;
-    const endPoint = shouldReduce ? 100 : 1200;
+    // Snappy transitions: switch halfway through (350ms)
+    const midPoint = shouldReduce ? 50 : 350;
+    const endPoint = shouldReduce ? 100 : 700;
 
     setTimeout(() => {
       setCurrentPage(page);
@@ -74,14 +74,14 @@ export default function Home() {
             key="splash"
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
             className="fixed inset-0 z-[99999] bg-brand-green-dark flex flex-col items-center justify-center pointer-events-auto"
           >
             {/* Pulsing Logo */}
             <motion.div
-              animate={{ scale: [0.95, 1.05, 0.95] }}
-              transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
-              className="w-40 h-40 md:w-48 md:h-48 p-4 bg-white rounded-3xl border-2 border-brand-gold/30 shadow-[0_20px_50px_rgba(201,162,39,0.15)] flex items-center justify-center mb-8"
+              animate={{ scale: [0.96, 1.04, 0.96] }}
+              transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
+              className="w-36 h-36 md:w-48 md:h-48 p-4 bg-white rounded-3xl border-2 border-brand-gold/30 shadow-[0_20px_50px_rgba(201,162,39,0.15)] flex items-center justify-center mb-8"
             >
               <img 
                 src="/logo.png" 
@@ -91,7 +91,7 @@ export default function Home() {
             </motion.div>
 
             {/* Title */}
-            <h1 className="font-serif font-bold text-lg md:text-xl text-white tracking-widest uppercase mb-1">
+            <h1 className="font-serif font-bold text-base md:text-xl text-white tracking-widest uppercase mb-1 text-center px-4">
               KELURAHAN TANJUNG GADING
             </h1>
             <p className="font-sans text-[10px] md:text-xs text-brand-gold font-bold tracking-widest uppercase mb-8">
@@ -99,11 +99,11 @@ export default function Home() {
             </p>
 
             {/* Gold Loading bar */}
-            <div className="w-48 h-1 bg-white/10 rounded-full overflow-hidden relative">
+            <div className="w-44 md:w-48 h-1 bg-white/10 rounded-full overflow-hidden relative">
               <motion.div
                 initial={{ x: "-100%" }}
                 animate={{ x: "0%" }}
-                transition={{ duration: 1.2, ease: "easeInOut" }}
+                transition={{ duration: 1.0, ease: "easeInOut" }}
                 className="absolute inset-0 h-full bg-brand-gold rounded-full"
               />
             </div>
@@ -117,21 +117,19 @@ export default function Home() {
           {/* Navigation */}
           <Navbar currentPage={currentPage} navigateTo={navigateTo} />
           
-          {/* Dynamic Content Area with key to force Framer Motion animate on mount */}
+          {/* Dynamic Content Area with smooth GPU-accelerated fade */}
           <main className="flex-grow">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentPage}
-                initial={{ opacity: 0, y: shouldReduce ? 0 : 40 }}
+                initial={{ opacity: 0, y: shouldReduce ? 0 : 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: shouldReduce ? 0 : -30 }}
+                exit={{ opacity: 0, y: shouldReduce ? 0 : -12 }}
                 transition={{ 
-                  type: "spring",
-                  stiffness: 120,
-                  damping: 17,
-                  mass: 0.7,
-                  opacity: { duration: 0.35, ease: "easeOut" }
+                  duration: 0.25, 
+                  ease: [0.25, 0.1, 0.25, 1] 
                 }}
+                className="gpu-accelerated"
               >
                 {renderPage()}
               </motion.div>
