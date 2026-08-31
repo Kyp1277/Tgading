@@ -1,173 +1,173 @@
-// Data Dokumentasi Penyerahan Plakat RT & RW Kelurahan Tanjung Gading
+// Data Dokumentasi Penyerahan Plakat RT, RW, Kepala Lingkungan & Kelembagaan Kelurahan Tanjung Gading
 // KKN UIN Suska Riau 2026
 
 export const plakatData = [
   {
     id: 1,
     image: "/images/plakat/plakat_1.jpg",
-    title: "Penyerahan Plakat Nama Wilayah RT 01",
+    title: "Penyerahan Plakat Ketua RT 02 / RW 02 (Lingkungan 1)",
     category: "Penyerahan RT",
     date: "18 Agustus 2026",
-    desc: "Penyerahan plakat penanda identitas resmi RT secara langsung kepada ketua RT 01 di lingkungan Kelurahan Tanjung Gading."
+    desc: "Penyerahan plakat penanda identitas resmi Ketua RT 002 RW 002 Lingkungan I Kelurahan Tanjung Gading."
   },
   {
     id: 2,
     image: "/images/plakat/plakat_2.jpg",
-    title: "Penyerahan Plakat Nama Wilayah RT 02",
-    category: "Penyerahan RT",
+    title: "Penyerahan Plakat Ketua RW 02 (Lingkungan 1)",
+    category: "Penyerahan RW",
     date: "18 Agustus 2026",
-    desc: "Sosialisasi pemasangan plakat dan penyerahan simbolis bersama pengurus rukun tetangga RT 02."
+    desc: "Penyerahan plakat penanda identitas resmi Ketua RW 002 Lingkungan I Kelurahan Tanjung Gading."
   },
   {
     id: 3,
     image: "/images/plakat/plakat_3.jpg",
-    title: "Penyerahan Plakat Nama Wilayah RT 03",
+    title: "Penyerahan Plakat Ketua RT 01 / RW 02 (Lingkungan 1)",
     category: "Penyerahan RT",
     date: "19 Agustus 2026",
-    desc: "Kunjungan silaturahmi mahasiswa KKN sekaligus penyerahan plakat nama rumah ketua RT 03."
+    desc: "Penyerahan plakat penanda identitas resmi Ketua RT 001 RW 002 Lingkungan I Kelurahan Tanjung Gading."
   },
   {
     id: 4,
     image: "/images/plakat/plakat_4.jpg",
-    title: "Penyerahan Plakat Nama Wilayah RT 04",
-    category: "Penyerahan RT",
+    title: "Penyerahan Plakat Kepala Lingkungan I (KL 1)",
+    category: "Kepala Lingkungan",
     date: "19 Agustus 2026",
-    desc: "Penyerahan plakat kayu ukir/cetak identitas pengurus RT 04 demi memudahkan akses informasi warga."
+    desc: "Penyerahan plakat resmi penanda kediaman Kepala Lingkungan I Kelurahan Tanjung Gading."
   },
   {
     id: 5,
     image: "/images/plakat/plakat_5.jpg",
-    title: "Penyerahan Plakat Nama Wilayah RT 05",
-    category: "Penyerahan RT",
+    title: "Penyerahan Plakat Ketua Karang Taruna (Rosseno Wiharjo)",
+    category: "Kelembagaan",
     date: "20 Agustus 2026",
-    desc: "Pemberian plakat resmi penanda kediaman RT 05 disaksikan perwakilan tokoh masyarakat setempat."
+    desc: "Penyerahan plakat resmi kepada Ketua Karang Taruna Kelurahan Tanjung Gading, Rosseno Wiharjo."
   },
   {
     id: 6,
     image: "/images/plakat/plakat_6.jpg",
-    title: "Penyerahan Plakat Nama Wilayah RT 06",
-    category: "Penyerahan RT",
+    title: "Penyerahan Plakat Ketua RW 01 (Lingkungan 1)",
+    category: "Penyerahan RW",
     date: "20 Agustus 2026",
-    desc: "Mahasiswa KKN menyerahkan plakat nomor RT 06 sebagai penunjang tertib administrasi lingkungan."
+    desc: "Penyerahan plakat penanda identitas resmi Ketua RW 001 Lingkungan I Kelurahan Tanjung Gading."
   },
   {
     id: 7,
     image: "/images/plakat/plakat_7.jpg",
-    title: "Penyerahan Plakat Nama Wilayah RW 01",
-    category: "Penyerahan RW",
+    title: "Penyerahan Plakat Kepala Lingkungan II (KL 2)",
+    category: "Kepala Lingkungan",
     date: "21 Agustus 2026",
-    desc: "Penyerahan plakat tingkatan Rukun Warga kepada Ketua RW 01 di Kelurahan Tanjung Gading."
+    desc: "Penyerahan plakat resmi penanda kediaman Kepala Lingkungan II Kelurahan Tanjung Gading."
   },
   {
     id: 8,
     image: "/images/plakat/plakat_8.jpg",
-    title: "Penyerahan Plakat Nama Wilayah RW 02",
-    category: "Penyerahan RW",
+    title: "Penyerahan Plakat Ketua RT 03 / RW 01 (Lingkungan 2)",
+    category: "Penyerahan RT",
     date: "21 Agustus 2026",
-    desc: "Foto bersama Ketua RW 02 saat serah terima plakat penanda rukun warga Tanjung Gading."
+    desc: "Penyerahan plakat penanda identitas resmi Ketua RT 003 RW 001 Lingkungan II Kelurahan Tanjung Gading."
   },
   {
     id: 9,
     image: "/images/plakat/plakat_9.jpg",
-    title: "Penyerahan Plakat Nama Wilayah RT 07",
+    title: "Penyerahan Plakat Ketua RT 02 / RW 01 (Lingkungan 2)",
     category: "Penyerahan RT",
     date: "22 Agustus 2026",
-    desc: "Sesi dokumentasi penyerahan plakat RT 07 diiringi sambutan hangat dari ketua RT penerima."
+    desc: "Penyerahan plakat penanda identitas resmi Ketua RT 002 RW 001 Lingkungan II Kelurahan Tanjung Gading."
   },
   {
     id: 10,
     image: "/images/plakat/plakat_10.jpg",
-    title: "Penyerahan Plakat Nama Wilayah RT 08",
+    title: "Penyerahan Plakat Ketua RT 01 / RW 02 (Lingkungan 2)",
     category: "Penyerahan RT",
     date: "22 Agustus 2026",
-    desc: "Penyerahan plakat penanda kantor/rumah pelayanan ketua RT 08 Tanjung Gading."
+    desc: "Penyerahan plakat penanda identitas resmi Ketua RT 001 RW 002 Lingkungan II Kelurahan Tanjung Gading."
   },
   {
     id: 11,
     image: "/images/plakat/plakat_11.jpg",
-    title: "Penyerahan Plakat Nama Wilayah RT 09",
-    category: "Penyerahan RT",
+    title: "Penyerahan Plakat Ketua RW 02 (Lingkungan 3)",
+    category: "Penyerahan RW",
     date: "23 Agustus 2026",
-    desc: "Dokumentasi serah terima plakat nomor RT 09 bersama anggota tim KKN UIN Suska Riau."
+    desc: "Penyerahan plakat penanda identitas resmi Ketua RW 002 Lingkungan III Kelurahan Tanjung Gading."
   },
   {
     id: 12,
     image: "/images/plakat/plakat_12.jpg",
-    title: "Penyerahan Plakat Nama Wilayah RT 10",
+    title: "Penyerahan Plakat Ketua RT 02 / RW 02 (Lingkungan 2)",
     category: "Penyerahan RT",
     date: "23 Agustus 2026",
-    desc: "Ketua RT 10 menerima plakat nama rukun tetangga dengan penuh apresiasi terhadap tim KKN."
+    desc: "Penyerahan plakat penanda identitas resmi Ketua RT 002 RW 002 Lingkungan II Kelurahan Tanjung Gading."
   },
   {
     id: 13,
     image: "/images/plakat/plakat_13.jpg",
-    title: "Penyerahan Plakat Nama Wilayah RW 03",
-    category: "Penyerahan RW",
+    title: "Penyerahan Plakat Ketua RT 01 / RW 01 (Lingkungan 2)",
+    category: "Penyerahan RT",
     date: "23 Agustus 2026",
-    desc: "Serah terima plakat pengurus RW 03 untuk mempermudah identifikasi batas zona lingkungan."
+    desc: "Penyerahan plakat penanda identitas resmi Ketua RT 001 RW 001 Lingkungan II Kelurahan Tanjung Gading."
   },
   {
     id: 14,
     image: "/images/plakat/plakat_14.jpg",
-    title: "Penyerahan Plakat Nama Wilayah RT 11",
-    category: "Penyerahan RT",
+    title: "Penyerahan Plakat Ketua RW 01 (Lingkungan 2)",
+    category: "Penyerahan RW",
     date: "24 Agustus 2026",
-    desc: "Pemberian plakat penanda wilayah kepada pengurus RT 11 Tanjung Gading."
+    desc: "Penyerahan plakat penanda identitas resmi Ketua RW 001 Lingkungan II Kelurahan Tanjung Gading."
   },
   {
     id: 15,
     image: "/images/plakat/plakat_15.jpg",
-    title: "Penyerahan Plakat Nama Wilayah RT 12",
-    category: "Penyerahan RT",
+    title: "Penyerahan Plakat Ketua LPM (Sudarto)",
+    category: "Kelembagaan",
     date: "24 Agustus 2026",
-    desc: "Penerimaan plakat RT 12 bersama keluarga ketua RT dan perwakilan mahasiswa."
+    desc: "Penyerahan plakat penanda resmi kepada Ketua Lembaga Pemberdayaan Masyarakat (LPM) Kelurahan Tanjung Gading, Sudarto."
   },
   {
     id: 16,
     image: "/images/plakat/plakat_16.jpg",
-    title: "Penyerahan Plakat Nama Wilayah RT 13",
+    title: "Penyerahan Plakat Ketua RT 01 / RW 01 (Lingkungan 3)",
     category: "Penyerahan RT",
     date: "24 Agustus 2026",
-    desc: "Simbolis penyerahan plakat rumah ketua RT 13 di pemukiman Kelurahan Tanjung Gading."
+    desc: "Penyerahan plakat penanda identitas resmi Ketua RT 001 RW 001 Lingkungan III Kelurahan Tanjung Gading."
   },
   {
     id: 17,
     image: "/images/plakat/plakat_17.jpg",
-    title: "Penyerahan Plakat Nama Wilayah RT 14",
+    title: "Penyerahan Plakat Ketua RT 02 / RW 01 (Lingkungan 3)",
     category: "Penyerahan RT",
     date: "25 Agustus 2026",
-    desc: "Dokumentasi foto bersama ketua RT 14 saat menerima plakat resmi buatan tim KKN."
+    desc: "Penyerahan plakat penanda identitas resmi Ketua RT 002 RW 001 Lingkungan III Kelurahan Tanjung Gading."
   },
   {
     id: 18,
     image: "/images/plakat/plakat_18.jpg",
-    title: "Penyerahan Plakat Nama Wilayah RW 04",
-    category: "Penyerahan RW",
+    title: "Penyerahan Plakat Kepala Lingkungan III (KL 3)",
+    category: "Kepala Lingkungan",
     date: "25 Agustus 2026",
-    desc: "Penyerahan plakat pimpinan RW 04 sebagai pelengkap sarana publikasi lingkungan."
+    desc: "Penyerahan plakat resmi penanda kediaman Kepala Lingkungan III Kelurahan Tanjung Gading."
   },
   {
     id: 19,
     image: "/images/plakat/plakat_19.jpg",
-    title: "Penyerahan Plakat Nama Wilayah RT 15",
+    title: "Penyerahan Plakat Ketua RT 03 / RW 01 (Lingkungan 3)",
     category: "Penyerahan RT",
     date: "25 Agustus 2026",
-    desc: "Serah terima plakat RT 15 sebagai bagian dari program pemetaan dan perapian identitas wilayah."
+    desc: "Penyerahan plakat penanda identitas resmi Ketua RT 003 RW 001 Lingkungan III Kelurahan Tanjung Gading."
   },
   {
     id: 20,
     image: "/images/plakat/plakat_20.jpg",
-    title: "Penyerahan Plakat Nama Wilayah RT 16",
+    title: "Penyerahan Plakat Ketua RT 01 / RW 02 (Lingkungan 3)",
     category: "Penyerahan RT",
     date: "25 Agustus 2026",
-    desc: "Dokumentasi kebersamaan penyerahan plakat ke ketua RT 16 Tanjung Gading."
+    desc: "Penyerahan plakat penanda identitas resmi Ketua RT 001 RW 002 Lingkungan III Kelurahan Tanjung Gading."
   },
   {
     id: 21,
     image: "/images/plakat/plakat_21.jpg",
-    title: "Foto Bersama & Penutupan Program Plakat RT/RW",
-    category: "Kebersamaan",
+    title: "Penyerahan Plakat Ketua RT 02 / RW 02 (Lingkungan 3)",
+    category: "Penyerahan RT",
     date: "25 Agustus 2026",
-    desc: "Momen penutupan rangkaian program pengadaan dan penyerahan 21 plakat nama RT & RW se-Kelurahan Tanjung Gading."
+    desc: "Penyerahan plakat penanda identitas resmi Ketua RT 002 RW 002 Lingkungan III Kelurahan Tanjung Gading."
   }
 ];

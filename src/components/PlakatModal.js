@@ -42,7 +42,7 @@ const PlakatModal = ({ isOpen, onClose }) => {
     };
   }, [isOpen]);
 
-  const categories = ['Semua', 'Penyerahan RT', 'Penyerahan RW', 'Kebersamaan'];
+  const categories = ['Semua', 'Penyerahan RT', 'Penyerahan RW', 'Kepala Lingkungan', 'Kelembagaan'];
 
   const filteredPhotos = plakatData.filter((item) => {
     const matchesCategory = activeCategory === 'Semua' || item.category === activeCategory;

@@ -50,10 +50,10 @@ const defaultProker = [
   },
   {
     id: 6,
-    title: 'Pengadaan & Penyerahan Plakat Nama RT / RW',
+    title: 'Pengadaan & Penyerahan Plakat Nama RT, RW & Kepala Lingkungan',
     date: '18 - 25 Agustus 2026',
     status: 'Selesai',
-    desc: 'Pengadaan, pembuatan, dan penyerahan plakat penanda resmi kepada seluruh ketua RT dan RW se-Kelurahan Tanjung Gading untuk memperjelas tata kelola wilayah dan identitas lingkungan pemukiman warga.',
+    desc: 'Pengadaan, pembuatan, dan penyerahan 21 plakat penanda resmi kepada seluruh ketua RT, RW, Kepala Lingkungan (KL 1, 2, 3), serta Kelembagaan se-Kelurahan Tanjung Gading untuk memperjelas tata kelola wilayah dan identitas lingkungan pemukiman warga.',
     hasDocumentation: true,
     docType: 'plakat',
     photoCount: 21,
