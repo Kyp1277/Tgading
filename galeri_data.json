@@ -1,1202 +1,1352 @@
 [
   {
     "id": 1,
-    "title": "Pembagian Makanan Bergizi Gratis di Sekolah",
+    "day": 1,
     "date": "20 Juli 2026",
-    "desc": "Mahasiswa KKN mendistribusikan makanan bergizi gratis menggunakan wadah stainless steel ramah lingkungan.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_1_1.jpg"
+    "image": "/images/galeri/kkn_day_1_1.jpg",
+    "title": "Distribusi Makanan Bergizi Gratis (MBG)",
+    "desc": "Mahasiswi KKN bersama kader posyandu melayani pembagian makanan bergizi gratis dalam wadah stainless steel untuk siswa.",
+    "category": "Kesehatan"
   },
   {
     "id": 2,
-    "title": "Pemberian Makanan Sehat untuk Ibu & Warga",
+    "day": 1,
     "date": "20 Juli 2026",
-    "desc": "Pelayanan pembagian asupan gizi sehat untuk ibu hamil dan warga masyarakat di lokasi posyandu.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_1_2.jpg"
+    "image": "/images/galeri/kkn_day_1_2.jpg",
+    "title": "Pelayanan Posyandu & Gizi Ibu Hamil",
+    "desc": "Membantu pelayanan registrasi dan pembagian asupan makanan bergizi bagi ibu hamil dan warga sekitar.",
+    "category": "Kesehatan"
   },
   {
     "id": 3,
-    "title": "Santap Siang Bersama Menu MBG",
+    "day": 1,
     "date": "20 Juli 2026",
-    "desc": "Momen kebersamaan anggota KKN menyantap menu makanan bergizi sehat bersama di sela-sela kegiatan.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_1_3.jpg"
+    "image": "/images/galeri/kkn_day_1_3.jpg",
+    "title": "Makan Siang Bareng Menu MBG",
+    "desc": "Keseruan selfie anggota KKN saat santap siang bersama mencicipi menu sehat nampan MBG.",
+    "category": "Kebersamaan"
   },
   {
     "id": 4,
-    "title": "Foto Bersama Kader Posyandu",
+    "day": 1,
     "date": "20 Juli 2026",
-    "desc": "Foto bersama para kader posyandu dan tim KKN di bawah pohon rindang tempat posko pembagian gizi.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_1_4.jpg"
+    "image": "/images/galeri/kkn_day_1_4.jpg",
+    "title": "Foto Bersama Kader Posyandu",
+    "desc": "Potret kebersamaan mahasiswa KKN dan kader posyandu di stand pembagian makanan sehat.",
+    "category": "Kesehatan"
   },
   {
     "id": 5,
-    "title": "Penerimaan Awal di Kantor Kelurahan",
+    "day": 1,
     "date": "20 Juli 2026",
-    "desc": "Foto bersama seluruh anggota KKN UIN Suska bersama jajaran perangkat Kelurahan Tanjung Gading.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_1_5.jpg"
+    "image": "/images/galeri/kkn_day_1_5.jpg",
+    "title": "Penerimaan di Kantor Kelurahan",
+    "desc": "Penyambutan mahasiswa KKN bersama Ibu Lurah dan jajaran perangkat Kelurahan Tanjung Gading.",
+    "category": "Pemerintahan"
   },
   {
     "id": 6,
-    "title": "Foto Bersama Staf Kelurahan",
+    "day": 1,
     "date": "20 Juli 2026",
+    "image": "/images/galeri/kkn_day_1_6.jpg",
+    "title": "Foto Bersama Staf Kelurahan",
     "desc": "Dokumentasi pose kompak tim KKN bersama staf kantor lurah berbusana batik KORPRI.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_1_6.jpg"
+    "category": "Pemerintahan"
   },
   {
     "id": 7,
-    "title": "Pertemuan Perdana di Ruang Lurah",
+    "day": 2,
     "date": "21 Juli 2026",
-    "desc": "Dosen Pembimbing Lapangan (DPL) mendampingi mahasiswa KKN beraudiensi di ruang kerja Lurah Tanjung Gading.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_2_1.jpg"
+    "image": "/images/galeri/kkn_day_2_1.jpg",
+    "title": "Audiensi di Ruang Kerja Lurah",
+    "desc": "Pertemuan mahasiswa KKN bersama DPL dan Ibu Lurah di ruang kerja lurah.",
+    "category": "Pemerintahan"
   },
   {
     "id": 8,
-    "title": "Arahan dari Ibu Lurah Tanjung Gading",
+    "day": 2,
     "date": "21 Juli 2026",
-    "desc": "Ibu Lurah memberikan bimbingan dan arahan terkait situasi wilayah serta prioritas program kerja di kelurahan.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_2_2.jpg"
+    "image": "/images/galeri/kkn_day_2_2.jpg",
+    "title": "Bimbingan & Arahan dari Ibu Lurah",
+    "desc": "Ibu Lurah Tanjung Gading memberikan arahan terkait gambaran umum wilayah dan masyarakat.",
+    "category": "Pemerintahan"
   },
   {
     "id": 9,
-    "title": "Diskusi Program Bersama Ibu Lurah",
+    "day": 2,
     "date": "21 Juli 2026",
-    "desc": "Perwakilan mahasiswa memaparkan garis besar program kerja yang akan dilaksanakan selama masa KKN.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_2_3.jpg"
+    "image": "/images/galeri/kkn_day_2_3.jpg",
+    "title": "Diskusi Rencana Kegiatan KKN",
+    "desc": "Sesi bincang santai membahas rencana awal pengabdian mahasiswa di kelurahan.",
+    "category": "Pemerintahan"
   },
   {
     "id": 10,
-    "title": "Serah Terima Mahasiswa KKN oleh DPL",
+    "day": 2,
     "date": "21 Juli 2026",
-    "desc": "Foto bersama serah terima mahasiswa KKN berseragam PDL bersama DPL dan Ibu Lurah di teras kantor.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_2_4.jpg"
+    "image": "/images/galeri/kkn_day_2_4.jpg",
+    "title": "Penyerahan Mahasiswa oleh DPL",
+    "desc": "Serah terima resmi mahasiswa KKN oleh Dosen Pembimbing Lapangan kepada Ibu Lurah Tanjung Gading.",
+    "category": "Pemerintahan"
   },
   {
     "id": 11,
-    "title": "Foto Bersama DPL di Depan Kantor Lurah",
+    "day": 2,
     "date": "21 Juli 2026",
-    "desc": "Pose bersama seluruh anggota kelompok KKN UIN Suska Riau bersama DPL sebelum memulai agenda lapangan.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_2_5.jpg"
+    "image": "/images/galeri/kkn_day_2_5.jpg",
+    "title": "Foto Bersama DPL & Bu Lurah",
+    "desc": "Pose kompak seluruh anggota kelompok KKN bersama DPL dan Bu Lurah di teras kantor kelurahan.",
+    "category": "Pemerintahan"
   },
   {
     "id": 12,
-    "title": "Konsolidasi Awal Tim KKN",
+    "day": 2,
     "date": "21 Juli 2026",
-    "desc": "Sesi diskusi internal singkat antar mahasiswa usai acara penerimaan resmi oleh pemerintah kelurahan.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_2_6.jpg"
+    "image": "/images/galeri/kkn_day_2_6.jpg",
+    "title": "Dokumentasi PDL KKN UIN Suska",
+    "desc": "Tim KKN mengenakan seragam PDL resmi siap mengabdi di Kelurahan Tanjung Gading.",
+    "category": "Kebersamaan"
   },
   {
     "id": 13,
-    "title": "Foto Bersama Aparatur & Babinsa Bhabinkamtibmas",
+    "day": 3,
     "date": "22 Juli 2026",
-    "desc": "Dokumentasi bersama seluruh jajaran kelurahan, Babinsa TNI, Bhabinkamtibmas Polri, dan tokoh masyarakat.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_3_1.jpg"
+    "image": "/images/galeri/kkn_day_3_1.jpg",
+    "title": "Sinergi Bersama Tiga Pilar & Warga",
+    "desc": "Foto bersama aparatur kelurahan, Babinsa TNI, Bhabinkamtibmas Polri, dan tokoh masyarakat.",
+    "category": "Sosial"
   },
   {
     "id": 14,
-    "title": "Koordinasi Kamtibmas Lingkungan",
+    "day": 3,
     "date": "22 Juli 2026",
-    "desc": "Sinergi tim KKN bersama Babinsa dan Bhabinkamtibmas dalam mendukung keamanan kegiatan pengabdian.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_3_2.jpg"
+    "image": "/images/galeri/kkn_day_3_2.jpg",
+    "title": "Silaturahmi di Halaman Kelurahan",
+    "desc": "Momen keakraban tim KKN bersama tokoh agama dan jajaran aparat keamanan kelurahan.",
+    "category": "Sosial"
   },
   {
     "id": 15,
-    "title": "Silaturahmi ke Rumah Pengurus Masjid",
+    "day": 3,
     "date": "22 Juli 2026",
+    "image": "/images/galeri/kkn_day_3_3.jpg",
+    "title": "Silaturahmi ke Rumah Pengurus Masjid",
     "desc": "Kunjungan silaturahmi mahasiswa KKN ke kediaman Ketua Pengurus Masjid Al-Muslimin Tanjung Gading.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_3_3.jpg"
+    "category": "Sosial"
   },
   {
     "id": 16,
-    "title": "Ramah Tamah Bersama Jemaah & Sesepuh",
+    "day": 3,
     "date": "22 Juli 2026",
-    "desc": "Suasana perbincangan hangat dan perkenalan anggota KKN bersama ibu-ibu jemaah pengajian di ruang tamu warga.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_3_4.jpg"
+    "image": "/images/galeri/kkn_day_3_4.jpg",
+    "title": "Ramah Tamah Bersama Jemaah Pengajian",
+    "desc": "Bincang hangat dan perkenalan tim KKN bersama ibu-ibu jemaah di ruang tamu warga.",
+    "category": "Sosial"
   },
   {
     "id": 17,
-    "title": "Diskusi Program Keagamaan Masjid",
+    "day": 3,
     "date": "22 Juli 2026",
-    "desc": "Pemaparan rencana kegiatan keagamaan dan pendampingan mengaji yang akan dibantu oleh mahasiswa KKN.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_3_5.jpg"
+    "image": "/images/galeri/kkn_day_3_5.jpg",
+    "title": "Diskusi Kegiatan Keagamaan Warga",
+    "desc": "Membahas partisipasi mahasiswa dalam kegiatan pengajian dan bimbingan mengaji anak-anak.",
+    "category": "Keagamaan"
   },
   {
     "id": 18,
-    "title": "Doa Bersama untuk Kelancaran KKN",
+    "day": 3,
     "date": "22 Juli 2026",
-    "desc": "Momen doa bersama sesepuh masjid mengharapkan keberkahan dan kelancaran selama masa pengabdian.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_3_6.jpg"
+    "image": "/images/galeri/kkn_day_3_6.jpg",
+    "title": "Doa Bersama Kelancaran Pengabdian",
+    "desc": "Momen silaturahmi penuh keakraban bersama tokoh agama dan warga lingkungan.",
+    "category": "Sosial"
   },
   {
     "id": 19,
-    "title": "Senam Sehat di Halaman Kantor Lurah",
+    "day": 4,
     "date": "23 Juli 2026",
-    "desc": "Gerakan senam sehat bersama perangkat kelurahan dan warga di halaman kantor lurah pada pagi hari yang cerah.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_4_1.jpg"
+    "image": "/images/galeri/kkn_day_4_1.jpg",
+    "title": "Senam Sehat di Halaman Kelurahan",
+    "desc": "Senam pagi bersama perangkat kelurahan dan masyarakat untuk menjaga kebugaran jasmani.",
+    "category": "Kesehatan"
   },
   {
     "id": 20,
-    "title": "Antusiasme Peserta Senam Pagi",
+    "day": 4,
     "date": "23 Juli 2026",
-    "desc": "Warga dan mahasiswa KKN mengikuti instruksi senam dengan penuh semangat dan keceriaan.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_4_2.jpg"
+    "image": "/images/galeri/kkn_day_4_2.jpg",
+    "title": "Antusiasme Peserta Senam Pagi",
+    "desc": "Warga dan mahasiswa KKN bersemangat mengikuti setiap gerakan senam kebugaran.",
+    "category": "Kesehatan"
   },
   {
     "id": 21,
-    "title": "Keceriaan Gerakan Senam Bersama",
+    "day": 4,
     "date": "23 Juli 2026",
-    "desc": "Momen penuh tawa dan kebersamaan saat memperagakan variasi gerakan senam aerobik.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_4_3.jpg"
+    "image": "/images/galeri/kkn_day_4_3.jpg",
+    "title": "Keceriaan Olahraga Senam Bersama",
+    "desc": "Momen penuh tawa dan kekompakan memperagakan variasi gerakan senam aerobik.",
+    "category": "Kesehatan"
   },
   {
     "id": 22,
-    "title": "Suasana Olahraga Pagi di Kelurahan",
+    "day": 4,
     "date": "23 Juli 2026",
-    "desc": "Peserta senam memadati pelataran kantor kelurahan Tanjung Gading untuk menjaga kebugaran tubuh.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_4_4.jpg"
+    "image": "/images/galeri/kkn_day_4_4.jpg",
+    "title": "Suasana Halaman Kelurahan Saat Senam",
+    "desc": "Pelataran kantor lurah Tanjung Gading dipenuhi peserta senam di pagi hari yang cerah.",
+    "category": "Kesehatan"
   },
   {
     "id": 23,
-    "title": "Pose Kompak Usai Senam Sehat",
+    "day": 4,
     "date": "23 Juli 2026",
-    "desc": "Foto bersama para peserta senam dan staf kelurahan usai menyelesaikan seluruh rangkaian olahraga pagi.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_4_5.jpg"
+    "image": "/images/galeri/kkn_day_4_5.jpg",
+    "title": "Pose Kompak Usai Senam Sehat",
+    "desc": "Foto bersama seluruh peserta senam dan staf kelurahan setelah selesai berolahraga.",
+    "category": "Kebersamaan"
   },
   {
     "id": 24,
-    "title": "Istirahat & Berbincang Santai Bersama Warga",
+    "day": 4,
     "date": "23 Juli 2026",
-    "desc": "Momen santai dan berbincang akrab dengan masyarakat sambil menikmati hidangan pelepas dahaga pasca senam.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_4_6.jpg"
+    "image": "/images/galeri/kkn_day_4_6.jpg",
+    "title": "Bincang Santai Pasca Senam",
+    "desc": "Momen istirahat dan ramah tamah bersama warga sambil menikmati hidangan pelepas dahaga.",
+    "category": "Sosial"
   },
   {
     "id": 25,
-    "title": "Sarapan Pagi Bersama Warga di Kedai",
+    "day": 5,
     "date": "24 Juli 2026",
-    "desc": "Menikmati sarapan pagi bersama warga dan tokoh masyarakat di kedai setempat sebelum berkunjung ke sekolah.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_5_1.jpg"
+    "image": "/images/galeri/kkn_day_5_1.jpg",
+    "title": "Sarapan Pagi di Kedai Warga",
+    "desc": "Menikmati sarapan bersama sebelum memulai aktivitas kunjungan lapangan.",
+    "category": "Kebersamaan"
   },
   {
     "id": 26,
-    "title": "Bincang Akrab di Warung Kopi",
+    "day": 5,
     "date": "24 Juli 2026",
-    "desc": "Momen kebersamaan mahasiswa KKN dan aparatur desa menjalin keakraban sambil menikmati teh hangat.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_5_2.jpg"
+    "image": "/images/galeri/kkn_day_5_2.jpg",
+    "title": "Bincang Santai di Warung Kopi",
+    "desc": "Menjalin keakraban bersama warga lokal sambil menikmati minuman hangat.",
+    "category": "Sosial"
   },
   {
     "id": 27,
-    "title": "Kunjungan Silaturahmi ke SDN 008 Tanjung Gading",
+    "day": 5,
     "date": "24 Juli 2026",
-    "desc": "Foto bersama Kepala Sekolah, dewan guru, dan perwakilan siswa di halaman depan SDN 008 Tanjung Gading.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_5_3.jpg"
+    "image": "/images/galeri/kkn_day_5_3.jpg",
+    "title": "Kunjungan ke SDN 008 Tanjung Gading",
+    "desc": "Foto bersama Kepala Sekolah, dewan guru, dan siswa di halaman depan SDN 008 Tanjung Gading.",
+    "category": "Pendidikan"
   },
   {
     "id": 28,
-    "title": "Sambutan Hangat dari Dewan Guru",
+    "day": 5,
     "date": "24 Juli 2026",
-    "desc": "Pihak guru dan anak-anak sekolah menyambut kehadiran mahasiswa KKN dengan sukacita di pelataran sekolah.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_5_4.jpg"
+    "image": "/images/galeri/kkn_day_5_4.jpg",
+    "title": "Penyambutan Hangat di SDN 008",
+    "desc": "Dewan guru dan siswa-siswi menyambut hangat kedatangan tim mahasiswa KKN.",
+    "category": "Pendidikan"
   },
   {
     "id": 29,
-    "title": "Koordinasi Program Literasi Bersama Guru",
+    "day": 5,
     "date": "24 Juli 2026",
-    "desc": "Diskusi bersama guru kelas mengenai jadwal pendampingan belajar dan kegiatan ekstrakurikuler KKN.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_5_5.jpg"
+    "image": "/images/galeri/kkn_day_5_5.jpg",
+    "title": "Koordinasi Program Belajar Mengajar",
+    "desc": "Diskusi bersama pihak guru mengenai pendampingan kegiatan belajar mengajar di kelas.",
+    "category": "Pendidikan"
   },
   {
     "id": 30,
-    "title": "Perkenalan dengan Murid SDN 008",
+    "day": 5,
     "date": "24 Juli 2026",
-    "desc": "Perkenalan kakak-kakak mahasiswa KKN kepada anak-anak sekolah dasar di pelataran SDN 008.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_5_6.jpg"
+    "image": "/images/galeri/kkn_day_5_6.jpg",
+    "title": "Perkenalan Bersama Siswa SD",
+    "desc": "Perkenalan awal mahasiswa KKN kepada anak-anak sekolah dasar penuh keceriaan.",
+    "category": "Pendidikan"
   },
   {
     "id": 31,
-    "title": "Potret Estetik Mahasiswi KKN",
+    "day": 6,
     "date": "25 Juli 2026",
-    "desc": "Foto anggun mahasiswi KKN berbusana rapi pada momen refreshing akhir pekan.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_6_1.jpg"
+    "image": "/images/galeri/kkn_day_6_1.jpg",
+    "title": "Mirror Selfie Estetik di Kafe",
+    "desc": "Mirror selfie estetik mahasiswi KKN di dinding kaca prisma sebuah kafe.",
+    "category": "Kebersamaan"
   },
   {
     "id": 32,
-    "title": "Kebersamaan Mahasiswi KKN Berbusana Anggun",
+    "day": 6,
     "date": "25 Juli 2026",
-    "desc": "Foto bersama mahasiswi KKN mengenakan pakaian terbaik saat menghadiri acara silaturahmi.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_6_2.jpg"
+    "image": "/images/galeri/kkn_day_6_2.jpg",
+    "title": "Pose Anggun Mahasiswi KKN",
+    "desc": "Potret ceria mahasiswi KKN mengenakan busana gamis anggun di depan bangunan kafe.",
+    "category": "Kebersamaan"
   },
   {
     "id": 33,
-    "title": "Mirror Selfie Spontan & Ceria",
+    "day": 6,
     "date": "25 Juli 2026",
-    "desc": "Momen mirror selfie candid penuh keceriaan seluruh anggota tim di sela-sela waktu istirahat.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_6_3.jpg"
+    "image": "/images/galeri/kkn_day_6_3.jpg",
+    "title": "Gathering Santai Mahasiswi KKN",
+    "desc": "Momen kumpul santai mahasiswi KKN menjalin keakraban di akhir pekan.",
+    "category": "Kebersamaan"
   },
   {
     "id": 34,
-    "title": "Pose Kompak Tim KKN",
+    "day": 6,
     "date": "25 Juli 2026",
-    "desc": "Potret kebersamaan tim KKN yang semakin solid setelah menjalani pekan pertama pengabdian.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_6_4.jpg"
+    "image": "/images/galeri/kkn_day_6_4.jpg",
+    "title": "Kekompakan Mahasiswi KKN",
+    "desc": "Pose manis bersandar bahu penuh kehangatan antar anggota mahasiswi KKN.",
+    "category": "Kebersamaan"
   },
   {
     "id": 35,
-    "title": "Sesi Santai Melepas Penat",
+    "day": 6,
     "date": "25 Juli 2026",
-    "desc": "Canda tawa dan momen relaksasi anggota kelompok KKN untuk mengisi energi menyongsong pekan berikutnya.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_6_5.jpg"
+    "image": "/images/galeri/kkn_day_6_5.jpg",
+    "title": "Foto Cantik Bernuansa Elegan",
+    "desc": "Sesi foto bersama berlatar arsitektur kafe modern yang estetik.",
+    "category": "Kebersamaan"
   },
   {
     "id": 36,
-    "title": "Momen Bahagia Kebersamaan Tim",
+    "day": 6,
     "date": "25 Juli 2026",
-    "desc": "Dokumentasi kebersamaan hangat mempererat tali persaudaraan antar anggota pengabdian.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_6_6.jpg"
+    "image": "/images/galeri/kkn_day_6_6.jpg",
+    "title": "Quality Time Tim Mahasiswi",
+    "desc": "Menikmati kebersamaan dan tawa bersama tim mahasiswi di luar jam dinas.",
+    "category": "Kebersamaan"
   },
   {
     "id": 37,
-    "title": "Rapat Musyawarah di Aula Kelurahan",
+    "day": 7,
     "date": "26 Juli 2026",
-    "desc": "Rapat koordinasi bersama Bu Lurah, sekretaris kelurahan, ketua RT/RW, dan tokoh masyarakat di aula pertemuan.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_7_1.jpg"
+    "image": "/images/galeri/kkn_day_7_1.jpg",
+    "title": "Rapat Koordinasi di Aula Kelurahan",
+    "desc": "Musyawarah program kerja bersama Ibu Lurah, perangkat kelurahan, dan tokoh masyarakat.",
+    "category": "Pemerintahan"
   },
   {
     "id": 38,
-    "title": "Pemaparan Program Kerja KKN",
+    "day": 7,
     "date": "26 Juli 2026",
-    "desc": "Mahasiswa KKN memaparkan rangkaian agenda kerja pengabdian di hadapan forum musyawarah kelurahan.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_7_2.jpg"
+    "image": "/images/galeri/kkn_day_7_2.jpg",
+    "title": "Arahan Ibu Lurah dalam Musyawarah",
+    "desc": "Ibu Lurah memberikan pandangan dan dukungan terhadap rencana kerja mahasiswa KKN.",
+    "category": "Pemerintahan"
   },
   {
     "id": 39,
-    "title": "Tanggapan & Masukan dari Tokoh Warga",
+    "day": 7,
     "date": "26 Juli 2026",
-    "desc": "Sesi tanya jawab dan masukan positif dari para sesepuh desa untuk menyelaraskan program dengan kebutuhan warga.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_7_3.jpg"
+    "image": "/images/galeri/kkn_day_7_3.jpg",
+    "title": "Pertemuan Lintas Tokoh Lingkungan",
+    "desc": "Kehadiran pengurus RT, RW, dan LPM dalam musyawarah kerja kelurahan.",
+    "category": "Pemerintahan"
   },
   {
     "id": 40,
-    "title": "Notulensi & Penyusunan Jadwal Kegiatan",
+    "day": 7,
     "date": "26 Juli 2026",
-    "desc": "Pencatatan poin-poin penting kesepakatan jadwal dan penanggung jawab setiap program kerja desa.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_7_4.jpg"
+    "image": "/images/galeri/kkn_day_7_4.jpg",
+    "title": "Diskusi Partisipasi Masyarakat",
+    "desc": "Membahas sinergi warga dalam menyukseskan program kebersihan dan perayaan kemerdekaan.",
+    "category": "Sosial"
   },
   {
     "id": 41,
-    "title": "Kesepakatan Bersama Aparatur Kelurahan",
+    "day": 7,
     "date": "26 Juli 2026",
-    "desc": "Ibu Lurah bersama tokoh masyarakat menyetujui seluruh rancangan agenda KKN yang akan diimplementasikan.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_7_5.jpg"
+    "image": "/images/galeri/kkn_day_7_5.jpg",
+    "title": "Penyampaian Rencana Program KKN",
+    "desc": "Mahasiswa KKN menyimak masukan dari masyarakat demi kelancaran program kerja.",
+    "category": "Pemerintahan"
   },
   {
     "id": 42,
-    "title": "Foto Bersama Usai Musyawarah Proker",
+    "day": 7,
     "date": "26 Juli 2026",
-    "desc": "Dokumentasi kebersamaan peserta rapat musyawarah desa usai mencapai mufakat bersama tim KKN.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_7_6.jpg"
+    "image": "/images/galeri/kkn_day_7_6.jpg",
+    "title": "Kesepakatan Musyawarah Kelurahan",
+    "desc": "Penetapan agenda gotong royong dan kegiatan kemasyarakatan Tanjung Gading.",
+    "category": "Pemerintahan"
   },
   {
     "id": 43,
-    "title": "Gendong Ceria Murid Sekolah",
+    "day": 8,
     "date": "27 Juli 2026",
-    "desc": "Momen manis kedekatan mahasiswa KKN menggendong anak murid yang bermanja di sela jam istirahat kelas.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_8_1.jpg"
+    "image": "/images/galeri/kkn_day_8_1.jpg",
+    "title": "Kehangatan Bersama Santri di Kelas",
+    "desc": "Mahasiswa KKN menggendong anak santri dengan penuh kasih sayang di ruang kelas madrasah.",
+    "category": "Pendidikan"
   },
   {
     "id": 44,
-    "title": "Pendampingan Belajar di Ruang Kelas",
+    "day": 8,
     "date": "27 Juli 2026",
-    "desc": "Mahasiswa membimbing siswa-siswi membaca, berhitung, dan mengerjakan tugas sekolah.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_8_2.jpg"
+    "image": "/images/galeri/kkn_day_8_2.jpg",
+    "title": "Bimbingan Belajar di Ruang Kelas",
+    "desc": "Mahasiswa KKN mengajar dan membimbing adik-adik santri madrasah di depan papan tulis.",
+    "category": "Pendidikan"
   },
   {
     "id": 45,
-    "title": "Bermain & Belajar Interaktif",
+    "day": 8,
     "date": "27 Juli 2026",
-    "desc": "Kuis edukatif dan permainan angka yang memicu antusiasme belajar anak-anak di kelas.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_8_3.jpg"
+    "image": "/images/galeri/kkn_day_8_3.jpg",
+    "title": "Interaksi Mengajar Santri Madrasah",
+    "desc": "Pemberian materi pembelajaran yang interaktif dan menyenangkan bagi santri madrasah diniyah.",
+    "category": "Pendidikan"
   },
   {
     "id": 46,
-    "title": "Keceriaan Anak-Anak di Bangku Sekolah",
+    "day": 8,
     "date": "27 Juli 2026",
-    "desc": "Tawa ceria para siswa saat belajar bersama kakak-kakak mahasiswa KKN UIN Suska.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_8_4.jpg"
+    "image": "/images/galeri/kkn_day_8_4.jpg",
+    "title": "Foto Ceria Bersama Siswa SD",
+    "desc": "Foto ceria bersama adik-adik murid SD berseragam merah putih di lorong selasar sekolah.",
+    "category": "Pendidikan"
   },
   {
     "id": 47,
-    "title": "Motivasi dan Apresiasi untuk Siswa",
+    "day": 8,
     "date": "27 Juli 2026",
-    "desc": "Pemberian motivasi dan pujian kepada siswa yang berani maju ke depan menjawab pertanyaan.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_8_5.jpg"
+    "image": "/images/galeri/kkn_day_8_5.jpg",
+    "title": "Pose Seru Bersama Siswa-Siswi",
+    "desc": "Keceriaan anak-anak sekolah berpose bersama kakak-kakak mahasiswa KKN.",
+    "category": "Pendidikan"
   },
   {
     "id": 48,
-    "title": "Foto Bersama Adik-Adik Siswa SD",
+    "day": 8,
     "date": "27 Juli 2026",
-    "desc": "Dokumentasi penuh kehangatan bersama para murid di ruang kelas sekolah dasar.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_8_6.jpg"
+    "image": "/images/galeri/kkn_day_8_6.jpg",
+    "title": "Kebersamaan Usai Jam Pelajaran",
+    "desc": "Potret penuh tawa dan keakraban mahasiswa KKN bersama murid-murid sekolah dasar.",
+    "category": "Kebersamaan"
   },
   {
     "id": 49,
-    "title": "Penyambutan Tim Penilai Evaluasi Kecamatan (EKK)",
+    "day": 9,
     "date": "28 Juli 2026",
-    "desc": "Mahasiswa KKN foto bersama di bawah spanduk Selamat Datang Tim Penilai Evaluasi Kinerja Kecamatan.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_9_1.jpg"
+    "image": "/images/galeri/kkn_day_9_1.jpg",
+    "title": "Evaluasi Kinerja Kecamatan (EKK)",
+    "desc": "Foto bersama jajaran Camat dan Ibu Lurah dalam rangka Evaluasi Kinerja Kecamatan di kantor camat.",
+    "category": "Pemerintahan"
   },
   {
     "id": 50,
-    "title": "Sinergi Aparatur Pemerintah Pasir Penyu",
+    "day": 9,
     "date": "28 Juli 2026",
-    "desc": "Dokumentasi kebersamaan staf pemerintah Pasir Penyu dan mahasiswa KKN dalam menyukseskan agenda evaluasi.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_9_2.jpg"
+    "image": "/images/galeri/kkn_day_9_2.jpg",
+    "title": "Penyambutan Tim Penilai EKK",
+    "desc": "Tim KKN mendampingi perangkat pemerintahan pada acara penilaian kinerja di Pasir Penyu.",
+    "category": "Pemerintahan"
   },
   {
     "id": 51,
-    "title": "Pendampingan Administrasi Evaluasi",
+    "day": 9,
     "date": "28 Juli 2026",
-    "desc": "Mahasiswa turut membantu kesiapan berkas dan penyambutan tim verifikasi kinerja lapangan.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_9_3.jpg"
+    "image": "/images/galeri/kkn_day_9_3.jpg",
+    "title": "Senam Kebugaran Lansia & Warga",
+    "desc": "Kegiatan senam sehat bersama ibu-ibu warga di halaman kantor kelurahan.",
+    "category": "Kesehatan"
   },
   {
     "id": 52,
-    "title": "Kesiagaan Protokoler Acara",
+    "day": 9,
     "date": "28 Juli 2026",
-    "desc": "Kesiagaan tim KKN mendampingi jalannya acara penilaian kinerja di kantor pemerintahan.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_9_4.jpg"
+    "image": "/images/galeri/kkn_day_9_4.jpg",
+    "title": "Foto Bersama Peserta Senam Pagi",
+    "desc": "Dokumentasi kebersamaan peserta senam lansia dan mahasiswa KKN di halaman kantor lurah.",
+    "category": "Kesehatan"
   },
   {
     "id": 53,
-    "title": "Diskusi Bersama Pejabat Kecamatan",
+    "day": 9,
     "date": "28 Juli 2026",
-    "desc": "Bincang singkat mahasiswa KKN bersama perwakilan pemerintah daerah mengenai pelayanan publik.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_9_5.jpg"
+    "image": "/images/galeri/kkn_day_9_5.jpg",
+    "title": "Semangat Olahraga Lansia Kelurahan",
+    "desc": "Ibu-ibu warga menunjukkan semangat tinggi dalam berolahraga menjaga kesehatan.",
+    "category": "Kesehatan"
   },
   {
     "id": 54,
-    "title": "Momen Kebersamaan Usai Visitasi EKK",
+    "day": 9,
     "date": "28 Juli 2026",
-    "desc": "Momen kebersamaan usai rangkaian visitasi dan penilaian evaluasi kinerja berlangsung sukses.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_9_6.jpg"
+    "image": "/images/galeri/kkn_day_9_6.jpg",
+    "title": "Ramah Tamah Usai Senam Lansia",
+    "desc": "Momen kebersamaan dan tawa bersama ibu-ibu peserta senam setelah pendinginan.",
+    "category": "Sosial"
   },
   {
     "id": 55,
-    "title": "4-Grid Selfie Mahasiswi KKN di Masjid",
+    "day": 10,
     "date": "29 Juli 2026",
-    "desc": "Potret 4-grid ceria mahasiswi KKN mengenakan jilbab motif saat menghadiri kegiatan di masjid.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_10_1.jpg"
+    "image": "/images/galeri/kkn_day_10_1.jpg",
+    "title": "Selfie Ceria Mahasiswi di Masjid",
+    "desc": "Selfie 4-frame mahasiswi KKN berkerudung motif di dalam masjid dengan latar ornamen kaligrafi.",
+    "category": "Kebersamaan"
   },
   {
     "id": 56,
-    "title": "Kehadiran di Pengajian Kaum Ibu",
+    "day": 10,
     "date": "29 Juli 2026",
-    "desc": "Mahasiswi KKN berpartisipasi aktif dalam kegiatan majelis taklim dan silaturahmi bersama warga.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_10_2.jpg"
+    "image": "/images/galeri/kkn_day_10_2.jpg",
+    "title": "Rapat Evaluasi Malam di Posko",
+    "desc": "Rapat evaluasi dan briefing malam tim KKN duduk melingkar di lantai ruang posko.",
+    "category": "Kebersamaan"
   },
   {
     "id": 57,
-    "title": "Menyimak Tausiyah Keagamaan",
+    "day": 10,
     "date": "29 Juli 2026",
-    "desc": "Suasana khidmat mendengarkan nasihat agama bersama jemaah masjid lingkungan setempat.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_10_3.jpg"
+    "image": "/images/galeri/kkn_day_10_3.jpg",
+    "title": "Diskusi Progres Program Kerja",
+    "desc": "Membahas capaian program harian dan pembagian tugas antar divisi di posko KKN.",
+    "category": "Kebersamaan"
   },
   {
     "id": 58,
-    "title": "Ramah Tamah dengan Jemaah Pengajian",
+    "day": 10,
     "date": "29 Juli 2026",
-    "desc": "Berbincang akrab dan bersalaman dengan ibu-ibu pengajian usai kegiatan taklim selesai.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_10_4.jpg"
+    "image": "/images/galeri/kkn_day_10_4.jpg",
+    "title": "Bincang Santai & Koordinasi Tim",
+    "desc": "Suasana hangat evaluasi kerja malam hari sambil mencatat agenda kegiatan esok hari.",
+    "category": "Kebersamaan"
   },
   {
     "id": 59,
-    "title": "Keceriaan di Serambi Masjid",
+    "day": 10,
     "date": "29 Juli 2026",
-    "desc": "Momen candid santai dan senyuman ramah anggota tim KKN di area halaman masjid.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_10_5.jpg"
+    "image": "/images/galeri/kkn_day_10_5.jpg",
+    "title": "Perencanaan Kegiatan Posko KKN",
+    "desc": "Anggota KKN saling bertukar masukan demi menyukseskan program kerja kelompok.",
+    "category": "Kebersamaan"
   },
   {
     "id": 60,
-    "title": "Foto Kompak Mahasiswi KKN",
+    "day": 10,
     "date": "29 Juli 2026",
-    "desc": "Pose kompak anggota tim KKN yang selalu siap berbaur dengan seluruh lapisan masyarakat.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_10_6.jpg"
+    "image": "/images/galeri/kkn_day_10_6.jpg",
+    "title": "Kekompakan Rapat Malam Tim",
+    "desc": "Momen kebersamaan penuh canda dan fokus saat briefing malam di ruang posko.",
+    "category": "Kebersamaan"
   },
   {
     "id": 61,
-    "title": "Wirid Yasinan Malam di Masjid",
+    "day": 11,
     "date": "30 Juli 2026",
-    "desc": "Suasana khusyuk pembacaan surah Yasin dan doa bersama bapak-bapak dan ibu-ibu di dalam masjid.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_11_1.jpg"
+    "image": "/images/galeri/kkn_day_11_1.jpg",
+    "title": "Wirid Yasinan Malam di Masjid",
+    "desc": "Kegiatan wirid pengajian malam rutin jemaah bersama mahasiswa KKN di karpet hijau masjid.",
+    "category": "Keagamaan"
   },
   {
     "id": 62,
-    "title": "Zikir & Doa Bersama Tokoh Agama",
+    "day": 11,
     "date": "30 Juli 2026",
-    "desc": "Jemaah dan mahasiswa KKN larut dalam zikir dan doa mengharap keberkahan untuk warga desa.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_11_2.jpg"
+    "image": "/images/galeri/kkn_day_11_2.jpg",
+    "title": "Doa Bersama Jemaah Masjid",
+    "desc": "Pembacaan surah Yasin dan doa bersama para jemaah dan sesepuh masjid Tanjung Gading.",
+    "category": "Keagamaan"
   },
   {
     "id": 63,
-    "title": "Kehangatan Jemaah Wirid Mingguan",
+    "day": 11,
     "date": "30 Juli 2026",
-    "desc": "Partisipasi lengkap mahasiswa dan mahasiswi KKN berbaur bersama masyarakat dalam wirid mingguan.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_11_3.jpg"
+    "image": "/images/galeri/kkn_day_11_3.jpg",
+    "title": "Kajian Agama Rutin Kelurahan",
+    "desc": "Mahasiswa KKN berpartisipasi aktif dalam kegiatan ibadah dan kajian malam masyarakat.",
+    "category": "Keagamaan"
   },
   {
     "id": 64,
-    "title": "Menyimak Ceramah Mempererat Kerukunan",
+    "day": 11,
     "date": "30 Juli 2026",
-    "desc": "Ustadz menyampaikan tausiyah memperkuat ukhuwah islamiyah dan kerukunan warga.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_11_4.jpg"
+    "image": "/images/galeri/kkn_day_11_4.jpg",
+    "title": "Kerja Bakti Median Jalan Raya",
+    "desc": "Gotong royong membersihkan trotoar dan median jalan raya bersama bapak-bapak warga sekitar.",
+    "category": "Lingkungan"
   },
   {
     "id": 65,
-    "title": "Menikmati Jamuan Ringan Usai Pengajian",
+    "day": 11,
     "date": "30 Juli 2026",
-    "desc": "Momen santap kue dan teh hangat bersama para jemaah setelah pembacaan doa selesai.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_11_5.jpg"
+    "image": "/images/galeri/kkn_day_11_5.jpg",
+    "title": "Pose Gotong Royong di Pembatas Jalan",
+    "desc": "Foto bersama warga membawa sekop setelah membersihkan pasir dan rumput median jalan.",
+    "category": "Lingkungan"
   },
   {
     "id": 66,
-    "title": "Silaturahmi Penutup Pengajian Malam",
+    "day": 11,
     "date": "30 Juli 2026",
-    "desc": "Salaman hangat dan perbincangan akrab antara mahasiswa KKN dengan para tokoh alim ulama.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_11_6.jpg"
+    "image": "/images/galeri/kkn_day_11_6.jpg",
+    "title": "Kebersamaan Bersih Jalan Protokol",
+    "desc": "Aksi nyata peduli lingkungan jalan raya demi kenyamanan dan keselamatan pengendara.",
+    "category": "Lingkungan"
   },
   {
     "id": 67,
-    "title": "Pertemuan Akbar Siswa Madrasah/Pesantren",
+    "day": 12,
     "date": "31 Juli 2026",
-    "desc": "Pose serempak tangan di dada bersama ratusan santri/siswa madrasah di dalam aula serbaguna yang luas.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_12_1.jpg"
+    "image": "/images/galeri/kkn_day_12_1.jpg",
+    "title": "Sosialisasi Akbar di Pondok Pesantren",
+    "desc": "Pertemuan dan sosialisasi program kerja bersama para santri dan ustadz di aula ponpes.",
+    "category": "Pendidikan"
   },
   {
     "id": 68,
-    "title": "Antusiasme Santri di Dalam Aula",
+    "day": 12,
     "date": "31 Juli 2026",
-    "desc": "Riuh semangat para santriwan dan santriwati mengikuti jalannya materi pembinaan karakter.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_12_2.jpg"
+    "image": "/images/galeri/kkn_day_12_2.jpg",
+    "title": "Selfie Tongsis Tim Jas Biru",
+    "desc": "Selfie tongsis ceria tim KKN berjas almamater biru di samping sepeda motor sebelum kegiatan.",
+    "category": "Kebersamaan"
   },
   {
     "id": 69,
-    "title": "Penyampaian Motivasi Belajar & Cita-Cita",
+    "day": 12,
     "date": "31 Juli 2026",
-    "desc": "Mahasiswa KKN memberikan motivasi pentingnya melanjutkan pendidikan tinggi dan meraih cita-cita.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_12_3.jpg"
+    "image": "/images/galeri/kkn_day_12_3.jpg",
+    "title": "Pose Tim di Gerbang Pondok Pesantren",
+    "desc": "Keseruan rombongan mahasiswa KKN berfoto bersama di plang gerbang masuk pondok pesantren.",
+    "category": "Kebersamaan"
   },
   {
     "id": 70,
-    "title": "Tanya Jawab Interaktif Santriwan-Santriwati",
+    "day": 12,
     "date": "31 Juli 2026",
-    "desc": "Siswa madrasah antusias mengacungkan tangan menjawab pertanyaan seputar wawasan keilmuan.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_12_4.jpg"
+    "image": "/images/galeri/kkn_day_12_4.jpg",
+    "title": "Kunjungan Silaturahmi Ponpes",
+    "desc": "Mahasiswa KKN berkunjung menjalin kemitraan pendidikan keagamaan bersama pimpinan ponpes.",
+    "category": "Sosial"
   },
   {
     "id": 71,
-    "title": "Penyerahan Hadiah untuk Peserta Teraktif",
+    "day": 12,
     "date": "31 Juli 2026",
-    "desc": "Penyerahan apresiasi kepada peserta yang paling aktif dan berprestasi selama sesi sosialisasi.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_12_5.jpg"
+    "image": "/images/galeri/kkn_day_12_5.jpg",
+    "title": "Dokumentasi Bersama Pengurus Ponpes",
+    "desc": "Foto bersama dewan guru dan pengasuh pondok pesantren usai kegiatan kunjungan.",
+    "category": "Pendidikan"
   },
   {
     "id": 72,
-    "title": "Salam Kompak Penutupan Sosialisasi",
+    "day": 12,
     "date": "31 Juli 2026",
-    "desc": "Gema yel-yel dan salam penutup mempererat hubungan antara tim KKN dan civitas madrasah.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_12_6.jpg"
+    "image": "/images/galeri/kkn_day_12_6.jpg",
+    "title": "Foto Bersama Santri Ponpes",
+    "desc": "Pose kompak mahasiswa KKN bersama santriawan dan santriwati pondok pesantren.",
+    "category": "Pendidikan"
   },
   {
     "id": 73,
-    "title": "Photobooth 'Menabung Itu Keren'",
+    "day": 13,
     "date": "1 Agustus 2026",
-    "desc": "Mahasiswa KKN berpose dengan frame photobooth bertema edukasi menabung dan literasi keuangan anak.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_13_1.jpg"
+    "image": "/images/galeri/kkn_day_13_1.jpg",
+    "title": "Photobooth Gemar Menabung KKN",
+    "desc": "Anggota KKN berpose di dalam bingkai photobooth edukasi 'Menabung itu Keren!' buatan mahasiswa.",
+    "category": "Pendidikan"
   },
   {
     "id": 74,
-    "title": "Pengenalan Celengan Kreatif untuk Siswa",
+    "day": 13,
     "date": "1 Agustus 2026",
-    "desc": "Mengajarkan siswa menyisihkan uang jajan untuk ditabung ke dalam celengan karakter buatan sendiri.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_13_2.jpg"
+    "image": "/images/galeri/kkn_day_13_2.jpg",
+    "title": "Pose Cantik di Bingkai Photobooth",
+    "desc": "Mahasiswi KKN berfoto ceria mengenakan kacamata hitam di bingkai kreasi celengan dan buku.",
+    "category": "Kebersamaan"
   },
   {
     "id": 75,
-    "title": "Pemberian Materi Literasi Keuangan Anak",
+    "day": 13,
     "date": "1 Agustus 2026",
-    "desc": "Edukasi sederhana tentang perbedaan kebutuhan vs keinginan kepada murid sekolah dasar.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_13_3.jpg"
+    "image": "/images/galeri/kkn_day_13_3.jpg",
+    "title": "Kreasi Bingkai Literasi Finansial",
+    "desc": "Bingkai photobooth bertema 'Sedikit demi sedikit, lama-lama jadi bukit' untuk anak-anak sekolah.",
+    "category": "Pendidikan"
   },
   {
     "id": 76,
-    "title": "Keceriaan Berfoto di Frame KKN",
+    "day": 13,
     "date": "1 Agustus 2026",
-    "desc": "Siswa-siswi bergantian foto di frame 'Sedikit demi sedikit, lama-lama jadi bukit'.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_13_4.jpg"
+    "image": "/images/galeri/kkn_day_13_4.jpg",
+    "title": "Uji Coba Media Edukasi SDN 008",
+    "desc": "Mahasiswi KKN mencoba photobooth interaktif sebelum digunakan untuk sosialisasi siswa SD.",
+    "category": "Pendidikan"
   },
   {
     "id": 77,
-    "title": "Praktik Menabung Koin Bersama Murid",
+    "day": 13,
     "date": "1 Agustus 2026",
-    "desc": "Simulasi memasukkan koin pertama ke celengan sebagai langkah awal membiasakan budaya hemat.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_13_5.jpg"
+    "image": "/images/galeri/kkn_day_13_5.jpg",
+    "title": "Senyum Manis di Frame Menabung",
+    "desc": "Pose manis mahasiswi KKN di bingkai kreatif KKN UIN Suska Riau 2026.",
+    "category": "Kebersamaan"
   },
   {
     "id": 78,
-    "title": "Foto Bersama Tim Literasi Keuangan",
+    "day": 13,
     "date": "1 Agustus 2026",
-    "desc": "Dokumentasi penutupan program kerja literasi keuangan bersama para guru dan siswa.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_13_6.jpg"
+    "image": "/images/galeri/kkn_day_13_6.jpg",
+    "title": "Hasil Karya Photobooth Edukatif",
+    "desc": "Dokumentasi karya kerajinan media photobooth interaktif untuk menarik minat belajar anak.",
+    "category": "Pendidikan"
   },
   {
     "id": 79,
-    "title": "Mengajar Menggunakan Smart Board Digital",
+    "day": 15,
     "date": "3 Agustus 2026",
-    "desc": "Mahasiswa KKN mengajarkan materi tulisan Arab dan kosakata melalui papan tulis interaktif digital.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_15_1.jpg"
+    "image": "/images/galeri/kkn_day_15_1.jpg",
+    "title": "Pembelajaran Smart Board Digital",
+    "desc": "Mahasiswa KKN mengajarkan materi bahasa Arab menggunakan layar Smart Board interaktif di kelas.",
+    "category": "Pendidikan"
   },
   {
     "id": 80,
-    "title": "Fokus Siswa Menyimak Media Interaktif",
+    "day": 15,
     "date": "3 Agustus 2026",
-    "desc": "Anak-anak kelas tampak antusias dan tertib memperhatikan materi interaktif di layar depan kelas.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_15_2.jpg"
+    "image": "/images/galeri/kkn_day_15_2.jpg",
+    "title": "Antusiasme Belajar Bahasa Arab",
+    "desc": "Siswa-siswi sekolah dasar tekun memperhatikan penjelasan kosakata Arab di layar digital.",
+    "category": "Pendidikan"
   },
   {
     "id": 81,
-    "title": "Praktik Menulis Digital di Smart Board",
+    "day": 15,
     "date": "3 Agustus 2026",
-    "desc": "Siswa dipandu maju ke depan untuk mencoba menuliskan kata pada papan digital modern.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_15_3.jpg"
+    "image": "/images/galeri/kkn_day_15_3.jpg",
+    "title": "Inovasi Pembelajaran Digital Sekolah",
+    "desc": "Pemanfaatan teknologi layar sentuh interaktif untuk meningkatkan pemahaman siswa di kelas.",
+    "category": "Pendidikan"
   },
   {
     "id": 82,
-    "title": "Suasana Pembelajaran Modern di Kelas",
+    "day": 15,
     "date": "3 Agustus 2026",
-    "desc": "Metode belajar visual membuat suasana kelas menjadi menyenangkan dan mudah dipahami siswa.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_15_4.jpg"
+    "image": "/images/galeri/kkn_day_15_4.jpg",
+    "title": "Bimbingan Menulis Kalimat Arab",
+    "desc": "Pengajar KKN mencontohkan struktur kalimat bahasa Arab langsung di layar Smart Board.",
+    "category": "Pendidikan"
   },
   {
     "id": 83,
-    "title": "Kuis Interaktif Menguji Pemahaman Siswa",
+    "day": 15,
     "date": "3 Agustus 2026",
-    "desc": "Tanya jawab cepat menguji daya tangkap murid terhadap materi yang baru dipelajari.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_15_5.jpg"
+    "image": "/images/galeri/kkn_day_15_5.jpg",
+    "title": "Suasana Kelas Interaktif & Tertib",
+    "desc": "Anak-anak memperhatikan dengan antusias metode pembelajaran visual yang menyenangkan.",
+    "category": "Pendidikan"
   },
   {
     "id": 84,
-    "title": "Apresiasi Guru Terhadap Inovasi Belajar",
+    "day": 15,
     "date": "3 Agustus 2026",
-    "desc": "Dewan guru mengapresiasi pemanfaatan teknologi digital dalam kegiatan belajar mengajar di SD.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_15_6.jpg"
+    "image": "/images/galeri/kkn_day_15_6.jpg",
+    "title": "Pendampingan Belajar Siswa di Meja",
+    "desc": "Mahasiswi KKN mendampingi langsung siswa yang sedang menyalin materi ke buku tulis.",
+    "category": "Pendidikan"
   },
   {
     "id": 85,
-    "title": "Belanja Bumbu Dapur di Pasar Tradisional",
+    "day": 16,
     "date": "4 Agustus 2026",
-    "desc": "Mahasiswi KKN berbelanja stok bawang putih, bawang merah, dan cabai merah di pasar tradisional.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_16_1.jpg"
+    "image": "/images/galeri/kkn_day_16_1.jpg",
+    "title": "Belanja Bumbu Dapur di Pasar",
+    "desc": "Memilih komoditas bawang merah dan bumbu rempah dapur di lapak pasar tradisional.",
+    "category": "Kebersamaan"
   },
   {
     "id": 86,
-    "title": "Interaksi Hangat dengan Pedagang Sayur",
+    "day": 16,
     "date": "4 Agustus 2026",
-    "desc": "Momen tawar-menawar ramah dan perbincangan akrab bersama pedagang sayur setempat.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_16_2.jpg"
+    "image": "/images/galeri/kkn_day_16_2.jpg",
+    "title": "Menimbang Sayur & Cabai Segar",
+    "desc": "Mahasiswi KKN menimbang sayuran dan cabai merah segar bersama pedagang pasar Air Molek.",
+    "category": "Sosial"
   },
   {
     "id": 87,
-    "title": "Menimbang Stok Bahan Makanan Posko",
+    "day": 16,
     "date": "4 Agustus 2026",
-    "desc": "Penimbangan bumbu dapur segar untuk kebutuhan konsumsi makan bersama di posko KKN.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_16_3.jpg"
+    "image": "/images/galeri/kkn_day_16_3.jpg",
+    "title": "Belanja Logistik Dapur Posko",
+    "desc": "Membeli bahan masakan harian untuk kebutuhan konsumsi seluruh anggota tim di posko.",
+    "category": "Kebersamaan"
   },
   {
     "id": 88,
-    "title": "Geliat Pagi di Pasar Tradisional",
+    "day": 16,
     "date": "4 Agustus 2026",
-    "desc": "Dokumentasi aktivitas ekonomi masyarakat lokal di pasar rakyat Tanjung Gading.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_16_4.jpg"
+    "image": "/images/galeri/kkn_day_16_4.jpg",
+    "title": "Interaksi Ramah Pedagang Pasar",
+    "desc": "Bercengkerama ramah dengan pedagang pasar tradisional sambil memilih sayuran segar.",
+    "category": "Sosial"
   },
   {
     "id": 89,
-    "title": "Memilih Sayuran & Lauk Segar",
+    "day": 16,
     "date": "4 Agustus 2026",
-    "desc": "Memilih sayuran hijau dan bahan makanan bergizi untuk menu masak harian tim pengabdian.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_16_5.jpg"
+    "image": "/images/galeri/kkn_day_16_5.jpg",
+    "title": "Suasana Pagi Pasar Tradisional",
+    "desc": "Aktivitas belanja pagi mahasiswa KKN di tengah keramaian pasar rakyat.",
+    "category": "Sosial"
   },
   {
     "id": 90,
-    "title": "Membawa Belanjaan Dapur ke Posko",
+    "day": 16,
     "date": "4 Agustus 2026",
-    "desc": "Keseruan anggota tim membawa keranjang belanjaan penuh bahan makanan segar siap masak.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_16_6.jpg"
+    "image": "/images/galeri/kkn_day_16_6.jpg",
+    "title": "Logistik Dapur Posko Lengkap",
+    "desc": "Selesai berbelanja bahan makanan segar siap diolah bersama tim konsumsi posko.",
+    "category": "Kebersamaan"
   },
   {
     "id": 91,
-    "title": "Candid Lucu Gotong Royong Mahkota Nanas",
+    "day": 17,
     "date": "5 Agustus 2026",
+    "image": "/images/galeri/kkn_day_17_1.jpg",
+    "title": "Candid Lucu Mahkota Daun Nanas",
     "desc": "Foto penuh tawa mahasiswa bermahkota daun nanas bersama Bu Lurah, tokoh warga, dan pemuda di jalan.",
-    "category": "Gotong Royong",
-    "url": "/images/galeri/kkn_day_17_1.jpg"
+    "category": "Kebersamaan"
   },
   {
     "id": 92,
-    "title": "Memasang Tiang Bendera Merah Putih",
+    "day": 17,
     "date": "5 Agustus 2026",
-    "desc": "Bahu-membahu mendirikan tiang bambu bendera di sepanjang trotoar jalan utama kelurahan.",
-    "category": "Gotong Royong",
-    "url": "/images/galeri/kkn_day_17_2.jpg"
+    "image": "/images/galeri/kkn_day_17_2.jpg",
+    "title": "Pembersihan Plang Kantor Lurah & LPM",
+    "desc": "Gotong royong membersihkan papan nama Kantor Lurah Tanjung Gading dan LPM bersama warga.",
+    "category": "Lingkungan"
   },
   {
     "id": 93,
-    "title": "Merapikan Umbul-Umbul Kemerdekaan",
+    "day": 17,
     "date": "5 Agustus 2026",
-    "desc": "Pemasangan hiasan kain merah putih menyambut hari ulang tahun kemerdekaan Republik Indonesia.",
-    "category": "Gotong Royong",
-    "url": "/images/galeri/kkn_day_17_3.jpg"
+    "image": "/images/galeri/kkn_day_17_3.jpg",
+    "title": "Pemasangan Umbul-Umbul Merah Putih",
+    "desc": "Memasang bendera dan umbul-umbul kemerdekaan di halaman kantor kelurahan.",
+    "category": "Lingkungan"
   },
   {
     "id": 94,
-    "title": "Kebersamaan Warga & Mahasiswa di Jalan",
+    "day": 17,
     "date": "5 Agustus 2026",
-    "desc": "Semangat gotong royong warga segala usia mempercantik tata jalan lingkungan kelurahan.",
-    "category": "Gotong Royong",
-    "url": "/images/galeri/kkn_day_17_4.jpg"
+    "image": "/images/galeri/kkn_day_17_4.jpg",
+    "title": "Belajar Doa Istighfar via Smart Board",
+    "desc": "Mahasiswi KKN mendampingi siswa SD belajar lafaz dan arti doa istighfar di layar digital.",
+    "category": "Pendidikan"
   },
   {
     "id": 95,
-    "title": "Istirahat Minum Es Bersama Warga",
+    "day": 17,
     "date": "5 Agustus 2026",
-    "desc": "Momen istirahat minum es bersama warga dan aparat kelurahan usai memasang deretan umbul-umbul.",
-    "category": "Gotong Royong",
-    "url": "/images/galeri/kkn_day_17_5.jpg"
+    "image": "/images/galeri/kkn_day_17_5.jpg",
+    "title": "Pencatatan Materi Doa di Buku Siswa",
+    "desc": "Murid-murid menyalin teks bacaan istighfar yang ditampilkan di Smart Board kelas.",
+    "category": "Pendidikan"
   },
   {
     "id": 96,
-    "title": "Jalanan Lingkungan Semarak Merah Putih",
+    "day": 17,
     "date": "5 Agustus 2026",
-    "desc": "Pemandangan jalan poros desa yang kini semarak dengan kibaran bendera merah putih yang rapi.",
-    "category": "Gotong Royong",
-    "url": "/images/galeri/kkn_day_17_6.jpg"
+    "image": "/images/galeri/kkn_day_17_6.jpg",
+    "title": "Pendampingan Belajar Siswa SDN 008",
+    "desc": "Bimbingan materi keagamaan yang interaktif dan mudah dipahami siswa sekolah dasar.",
+    "category": "Pendidikan"
   },
   {
     "id": 97,
-    "title": "Foto Akbar Bersama Siswa Kaus Biru SMA/SMK",
+    "day": 18,
     "date": "6 Agustus 2026",
-    "desc": "Pose kompak bersama puluhan siswa-siswi SMA/SMK di depan gedung sekolah bertuliskan running text.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_18_1.jpg"
+    "image": "/images/galeri/kkn_day_18_1.jpg",
+    "title": "Foto Bersama Siswa SMA Negeri",
+    "desc": "Foto bersama puluhan siswa-siswi SMA Negeri berpakaian olahraga biru di lapangan sekolah.",
+    "category": "Pendidikan"
   },
   {
     "id": 98,
-    "title": "Sosialisasi Hidup Sehat & Remaja Positif",
+    "day": 18,
     "date": "6 Agustus 2026",
-    "desc": "Penyuluhan edukatif bagi kalangan remaja tentang kesehatan, pergaulan positif, dan anti-bullying.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_18_2.jpg"
+    "image": "/images/galeri/kkn_day_18_2.jpg",
+    "title": "Dokumentasi Tim PDL di Gedung SMA",
+    "desc": "Foto bersama seluruh tim KKN mengenakan seragam PDL di depan gedung utama SMA Negeri.",
+    "category": "Pendidikan"
   },
   {
     "id": 99,
-    "title": "Olahraga Bersama Siswa Sekolah Menengah",
+    "day": 18,
     "date": "6 Agustus 2026",
-    "desc": "Keseruan pemanasan dan olahraga bersama di lapangan sekolah yang luas.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_18_3.jpg"
+    "image": "/images/galeri/kkn_day_18_3.jpg",
+    "title": "Pose Heboh di Tulisan SMA NEGERI",
+    "desc": "Pose jenaka dan heboh anggota tim KKN di depan tulisan gedung kuning SMA Negeri.",
+    "category": "Kebersamaan"
   },
   {
     "id": 100,
-    "title": "Sharing Pengalaman & Info Masuk Kuliah",
+    "day": 18,
     "date": "6 Agustus 2026",
-    "desc": "Sesi berbagi cerita dunia perkuliahan dan kiat memilih jurusan perguruan tinggi bagi siswa kelas akhir.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_18_4.jpg"
+    "image": "/images/galeri/kkn_day_18_4.jpg",
+    "title": "Sinergi Kunjungan ke SMA Negeri",
+    "desc": "Kunjungan sosialisasi dan penjajakan kerja sama program pengabdian di tingkat SMA.",
+    "category": "Pendidikan"
   },
   {
     "id": 101,
-    "title": "Pemberian Hadiah untuk Siswa Berprestasi",
+    "day": 18,
     "date": "6 Agustus 2026",
-    "desc": "Pemberian doorprize kecil kepada siswa yang berani berbagi impian dan menjawab kuis motivasi.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_18_5.jpg"
+    "image": "/images/galeri/kkn_day_18_5.jpg",
+    "title": "Keceriaan Bersama Pelajar SMA",
+    "desc": "Menjalin kedekatan dan motivasi melanjutkan pendidikan tinggi bagi pelajar SMA.",
+    "category": "Sosial"
   },
   {
     "id": 102,
-    "title": "Salam Hangat Penutup Bersama Siswa SMA",
+    "day": 18,
     "date": "6 Agustus 2026",
-    "desc": "Siswa dan tim KKN saling bersalaman dan berterima kasih atas sesi edukasi yang inspiratif.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_18_6.jpg"
+    "image": "/images/galeri/kkn_day_18_6.jpg",
+    "title": "Foto Kompak Tim di Lingkungan Sekolah",
+    "desc": "Dokumentasi kebersamaan tim KKN di halaman paving block sekolah menengah atas.",
+    "category": "Kebersamaan"
   },
   {
     "id": 103,
-    "title": "Sosialisasi Literasi Digital untuk Ibu-Ibu PKK",
+    "day": 19,
     "date": "7 Agustus 2026",
-    "desc": "Mahasiswa KKN memaparkan materi cara mendeteksi penipuan online dan pesan hoaks di depan ibu-ibu PKK.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_19_1.jpg"
+    "image": "/images/galeri/kkn_day_19_1.jpg",
+    "title": "Sosialisasi Anti-Hoaks untuk PKK",
+    "desc": "Penyuluhan literasi digital dan bahaya hoaks media sosial bagi ibu-ibu penggerak PKK di aula.",
+    "category": "Pemerintahan"
   },
   {
     "id": 104,
-    "title": "Antusiasme Ibu-Ibu PKK Menyimak Tips Aman",
+    "day": 19,
     "date": "7 Agustus 2026",
-    "desc": "Ibu-ibu kader PKK memperhatikan dengan saksama tips aman bermedia sosial dan transaksi digital.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_19_2.jpg"
+    "image": "/images/galeri/kkn_day_19_2.jpg",
+    "title": "Penyaluran Sembako PKK x BMT Insan Madani",
+    "desc": "Penyerahan bantuan sembako beras dan bahan pokok kepada warga lansia di teras rumah hijau.",
+    "category": "Sosial"
   },
   {
     "id": 105,
-    "title": "Bedah Kasus Penipuan WhatsApp Berantai",
+    "day": 19,
     "date": "7 Agustus 2026",
-    "desc": "Penjelasan studi kasus link phising dan modus penipuan kurir paket atau undangan pernikahan digital.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_19_3.jpg"
+    "image": "/images/galeri/kkn_day_19_3.jpg",
+    "title": "Presentasi Waspada Hoaks Medsos",
+    "desc": "Pemaparan materi mengenali informasi palsu di depan puluhan kader PKK berkerudung hijau.",
+    "category": "Pendidikan"
   },
   {
     "id": 106,
-    "title": "Tanya Jawab Pengalaman Digital Warga",
+    "day": 19,
     "date": "7 Agustus 2026",
-    "desc": "Diskusi interaktif seputar pengalaman warga menerima pesan mencurigakan di smartphone mereka.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_19_4.jpg"
+    "image": "/images/galeri/kkn_day_19_4.jpg",
+    "title": "Antusiasme Kader PKK Menyimak Materi",
+    "desc": "Ibu-ibu PKK Tanjung Gading aktif menyimak penjelasan keamanan bermedia sosial.",
+    "category": "Sosial"
   },
   {
     "id": 107,
-    "title": "Tips Keamanan Akun Ponsel untuk Kader PKK",
+    "day": 19,
     "date": "7 Agustus 2026",
-    "desc": "Panduan praktis mengaktifkan verifikasi 2 langkah pada aplikasi perpesanan bagi para kader.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_19_5.jpg"
+    "image": "/images/galeri/kkn_day_19_5.jpg",
+    "title": "Edukasi Pembuatan Akun & Privasi",
+    "desc": "Panduan menjaga keamanan akun digital dan mengenali modus penipuan online.",
+    "category": "Pendidikan"
   },
   {
     "id": 108,
-    "title": "Foto Bersama Jajaran Pengurus PKK",
+    "day": 19,
     "date": "7 Agustus 2026",
-    "desc": "Dokumentasi kebersamaan tim KKN bersama seluruh jajaran pengurus PKK usai penyuluhan digital selesai.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_19_6.jpg"
+    "image": "/images/galeri/kkn_day_19_6.jpg",
+    "title": "Bedah Pesan Berantai WhatsApp",
+    "desc": "Diskusi interaktif membongkar ciri-ciri pesan hoaks broadcast WhatsApp di masyarakat.",
+    "category": "Pendidikan"
   },
   {
     "id": 109,
-    "title": "Senam Pagi Merah Putih Bersama PKK",
+    "day": 20,
     "date": "8 Agustus 2026",
-    "desc": "Ibu-ibu PKK dan mahasiswa KKN berbaris rapi di halaman kantor lurah mengenakan kostum serasi merah putih.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_20_1.jpg"
+    "image": "/images/galeri/kkn_day_20_1.jpg",
+    "title": "Pemanasan Senam Pagi Merah Putih",
+    "desc": "Gerakan peregangan dan pemanasan senam bersama ibu-ibu warga bertema Merah Putih.",
+    "category": "Kesehatan"
   },
   {
     "id": 110,
-    "title": "Gerakan Energik Penuh Semangat Kemerdekaan",
+    "day": 20,
     "date": "8 Agustus 2026",
-    "desc": "Iringan musik senam membakar semangat peserta untuk terus bergerak menjaga kesehatan tubuh.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_20_2.jpg"
+    "image": "/images/galeri/kkn_day_20_2.jpg",
+    "title": "Senam Kebugaran di Halaman Kelurahan",
+    "desc": "Suasana senam pagi cerah di halaman kantor lurah Tanjung Gading berlatar tiang bendera.",
+    "category": "Kesehatan"
   },
   {
     "id": 111,
-    "title": "Semarak Merah Putih Pagi Hari",
+    "day": 20,
     "date": "8 Agustus 2026",
-    "desc": "Semarak merah putih menyatu dalam tawa dan keceriaan seluruh elemen masyarakat desa.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_20_3.jpg"
+    "image": "/images/galeri/kkn_day_20_3.jpg",
+    "title": "Kekompakan Peserta Seragam Merah",
+    "desc": "Barisan ibu-ibu warga dan perangkat kelurahan bersemangat melakukan senam aerobik.",
+    "category": "Kesehatan"
   },
   {
     "id": 112,
-    "title": "Instruktur Memandu Senam Bersama Warga",
+    "day": 20,
     "date": "8 Agustus 2026",
-    "desc": "Gerakan senam dipandu dengan enerjik diiringi sorak ceria para peserta di halaman kelurahan.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_20_4.jpg"
+    "image": "/images/galeri/kkn_day_20_4.jpg",
+    "title": "Gerakan Inti Senam Sehat Bersama",
+    "desc": "Instruktur dan peserta senam memperagakan gerakan tangan terbuka menjaga kebugaran tubuh.",
+    "category": "Kesehatan"
   },
   {
     "id": 113,
-    "title": "Foto Bersama Barisan Senam Merah Putih",
+    "day": 20,
     "date": "8 Agustus 2026",
-    "desc": "Foto bersama peserta senam merah putih membentuk barisan rapi di depan gedung kantor kelurahan.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_20_5.jpg"
+    "image": "/images/galeri/kkn_day_20_5.jpg",
+    "title": "Antusiasme Warga Berolahraga Pagi",
+    "desc": "Momen kebersamaan penuh energi positif menyambut HUT Kemerdekaan RI.",
+    "category": "Sosial"
   },
   {
     "id": 114,
-    "title": "Sarapan Sehat Bersama Ibu-Ibu PKK",
+    "day": 20,
     "date": "8 Agustus 2026",
-    "desc": "Suasana santai menikmati bubur kacang hijau dan minuman hangat bersama para ibu kader.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_20_6.jpg"
+    "image": "/images/galeri/kkn_day_20_6.jpg",
+    "title": "Pendinginan Menutup Senam Pagi",
+    "desc": "Gerakan relaksasi dan pendinginan mengakhiri rangkaian senam sehat bersama warga.",
+    "category": "Kesehatan"
   },
   {
     "id": 115,
-    "title": "Foto Bersama di UPT Puskesmas Air Molek II",
+    "day": 21,
     "date": "9 Agustus 2026",
-    "desc": "Gabungan mahasiswa KKN dan tenaga kesehatan foto bersama di pelataran UPT Puskesmas Air Molek II.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_21_1.jpg"
+    "image": "/images/galeri/kkn_day_21_1.jpg",
+    "title": "Babat Rumput di Puskesmas Air Molek II",
+    "desc": "Mahasiswa KKN membersihkan semak belukar dan ilalang liar di pekarangan Puskesmas Air Molek II.",
+    "category": "Lingkungan"
   },
   {
     "id": 116,
-    "title": "Bakti Kesehatan & Pelayanan Posyandu",
+    "day": 21,
     "date": "9 Agustus 2026",
-    "desc": "Membantu registrasi, penimbangan berat badan balita, dan edukasi sanitasi lingkungan.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_21_2.jpg"
+    "image": "/images/galeri/kkn_day_21_2.jpg",
+    "title": "Pembakaran Sampah Rumput Liar",
+    "desc": "Pengumpulan dan pembakaran sampah rumput hasil gotong royong di halaman depan gedung puskesmas.",
+    "category": "Lingkungan"
   },
   {
     "id": 117,
-    "title": "Pendampingan Alur Periksa Kesehatan Lansia",
+    "day": 21,
     "date": "9 Agustus 2026",
-    "desc": "Mahasiswa turut membantu alur antrean lansia dan masyarakat yang datang memeriksakan kesehatan.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_21_3.jpg"
+    "image": "/images/galeri/kkn_day_21_3.jpg",
+    "title": "Gotong Royong Bersihkan Puskesmas",
+    "desc": "Kerja bakti bersama membersihkan sudut pekarangan fasilitas kesehatan masyarakat.",
+    "category": "Lingkungan"
   },
   {
     "id": 118,
-    "title": "Pertemuan Silaturahmi Lintas Posko KKN",
+    "day": 21,
     "date": "9 Agustus 2026",
-    "desc": "Diskusi hangat dan silaturahmi antar mahasiswa berbagai posko KKN di wilayah Pasir Penyu.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_21_4.jpg"
+    "image": "/images/galeri/kkn_day_21_4.jpg",
+    "title": "Sinergi Bersih Lingkungan Faskes",
+    "desc": "Mahasiswa KKN dan staf bahu-membahu menata area pekarangan Puskesmas Air Molek II.",
+    "category": "Lingkungan"
   },
   {
     "id": 119,
-    "title": "Edukasi Pola Hidup Bersih & Sehat (PHBS)",
+    "day": 21,
     "date": "9 Agustus 2026",
-    "desc": "Penyampaian informasi kesehatan seputar pencegahan stunting dan pentingnya imunisasi lengkap.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_21_5.jpg"
+    "image": "/images/galeri/kkn_day_21_5.jpg",
+    "title": "Istirahat Sejenak Usai Babat Rumput",
+    "desc": "Momen melepas lelah bersama sambil berbincang usai membersihkan halaman luas puskesmas.",
+    "category": "Kebersamaan"
   },
   {
     "id": 120,
-    "title": "Dokumentasi Apresiasi dari Pihak Puskesmas",
+    "day": 21,
     "date": "9 Agustus 2026",
-    "desc": "Pihak pimpinan Puskesmas menyampaikan terima kasih atas kontribusi aktif mahasiswa KKN.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_21_6.jpg"
+    "image": "/images/galeri/kkn_day_21_6.jpg",
+    "title": "Dokumentasi Bersih Puskesmas Air Molek II",
+    "desc": "Foto bersama usai kerja bakti di depan gedung hijau Puskesmas Air Molek II.",
+    "category": "Lingkungan"
   },
   {
     "id": 121,
-    "title": "Silaturahmi ke Rumah Tokoh Sesepuh Desa",
+    "day": 22,
     "date": "10 Agustus 2026",
-    "desc": "Ibu Lurah bersama mahasiswa KKN duduk bersila di atas karpet mendengarkan wejangan dari sesepuh kelurahan.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_22_1.jpg"
+    "image": "/images/galeri/kkn_day_22_1.jpg",
+    "title": "Takziyah & Doa di Pemakaman Warga",
+    "desc": "Mahasiswa KKN bersama tokoh masyarakat dan perangkat kelurahan mendoakan almarhum di TPU.",
+    "category": "Sosial"
   },
   {
     "id": 122,
-    "title": "Mendengarkan Sejarah & Asal-Usul Desa",
+    "day": 22,
     "date": "10 Agustus 2026",
-    "desc": "Perbincangan hangat mengenai asal-usul, tradisi budaya, dan perkembangan Kelurahan Tanjung Gading.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_22_2.jpg"
+    "image": "/images/galeri/kkn_day_22_2.jpg",
+    "title": "Ziarah Kubur Bersama Tokoh Agama",
+    "desc": "Prosesi pemakaman dan doa bersama sesepuh warga dan Bu Lurah di makam warga Tanjung Gading.",
+    "category": "Sosial"
   },
   {
     "id": 123,
-    "title": "Menikmati Jamuan Santap Bersama Tokoh",
+    "day": 22,
     "date": "10 Agustus 2026",
-    "desc": "Menikmati hidangan buah segar dan aneka jajanan pasar yang disuguhkan penuh keramahtamahan.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_22_3.jpg"
+    "image": "/images/galeri/kkn_day_22_3.jpg",
+    "title": "Doa Penghormatan Terakhir",
+    "desc": "Momen khidmat melafazkan doa di pemakaman umum menunjukkan empati mendalam.",
+    "category": "Sosial"
   },
   {
     "id": 124,
-    "title": "Wejangan & Nasihat Hidup untuk Mahasiswa",
+    "day": 22,
     "date": "10 Agustus 2026",
-    "desc": "Sesepuh desa memberikan pesan moral dan dorongan semangat bagi mahasiswa dalam menyelesaikan studi.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_22_4.jpg"
+    "image": "/images/galeri/kkn_day_22_4.jpg",
+    "title": "Takziyah ke Rumah Duka Bersama Bu Lurah",
+    "desc": "Silaturahmi takziyah ke rumah keluarga ahli musibah bersama Ibu Lurah Tanjung Gading.",
+    "category": "Sosial"
   },
   {
     "id": 125,
-    "title": "Ungkapan Terima Kasih Tim KKN",
+    "day": 22,
     "date": "10 Agustus 2026",
-    "desc": "Mahasiswa menghaturkan apresiasi atas penerimaan warga desa yang begitu hangat dan penuh kekeluargaan.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_22_5.jpg"
+    "image": "/images/galeri/kkn_day_22_5.jpg",
+    "title": "Foto Bersama Keluarga Ahli Musibah",
+    "desc": "Dokumentasi silaturahmi menyampaikan belasungkawa di halaman kediaman warga.",
+    "category": "Sosial"
   },
   {
     "id": 126,
-    "title": "Berpamitan Penuh Rasa Hormat",
+    "day": 22,
     "date": "10 Agustus 2026",
-    "desc": "Momen berpamitan dengan cium tangan penuh takzim kepada para tetua lingkungan.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_22_6.jpg"
+    "image": "/images/galeri/kkn_day_22_6.jpg",
+    "title": "Empati Sosial Mahasiswa KKN",
+    "desc": "Kehadiran mahasiswa KKN membersamai warga baik dalam suka maupun duka.",
+    "category": "Sosial"
   },
   {
     "id": 127,
-    "title": "Latihan Senam Kreasi Kemerdekaan",
+    "day": 23,
     "date": "11 Agustus 2026",
-    "desc": "Warga dan mahasiswa giat berlatih variasi gerakan senam kreasi untuk perlombaan menyambut HUT RI.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_23_1.jpg"
+    "image": "/images/galeri/kkn_day_23_1.jpg",
+    "title": "Senam Pagi di Halaman Kelurahan",
+    "desc": "Kegiatan senam aerobik massal bersama ibu-ibu warga dan perangkat kelurahan.",
+    "category": "Kesehatan"
   },
   {
     "id": 128,
-    "title": "Melatih Irama Musik & Kekompakan Senam",
+    "day": 23,
     "date": "11 Agustus 2026",
-    "desc": "Kekompakan gerakan tangan dan kaki selaras dengan ketukan musik lagu-lagu nasional.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_23_2.jpg"
+    "image": "/images/galeri/kkn_day_23_2.jpg",
+    "title": "Gerakan Aerobik Kebugaran Jasmani",
+    "desc": "Peserta senam antusias mengikuti ritme musik senam kebugaran di pagi hari.",
+    "category": "Kesehatan"
   },
   {
     "id": 129,
-    "title": "Penyusunan Formasi Barisan Senam",
+    "day": 23,
     "date": "11 Agustus 2026",
-    "desc": "Memperbaiki formasi barisan agar tampilan senam semakin rapi dan memukau.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_23_3.jpg"
+    "image": "/images/galeri/kkn_day_23_3.jpg",
+    "title": "Kekompakan Senam Sehat Bersama",
+    "desc": "Momen olahraga rutin mempererat silaturahmi antara mahasiswa KKN dan warga setempat.",
+    "category": "Kesehatan"
   },
   {
     "id": 130,
-    "title": "Canda Tawa Warga di Sela Latihan",
+    "day": 23,
     "date": "11 Agustus 2026",
-    "desc": "Suasana santai penuh keakraban saat mengulang gerakan yang lucu dan menghibur.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_23_4.jpg"
+    "image": "/images/galeri/kkn_day_23_4.jpg",
+    "title": "Pembuatan Tugu HUT RI Garuda Pancasila",
+    "desc": "Gotong royong mengecat dan mendirikan tugu monumen HUT RI lambang Garuda bersama Bu Lurah dan warga.",
+    "category": "Lingkungan"
   },
   {
     "id": 131,
-    "title": "Fasilitasi Latihan oleh Pihak Kelurahan",
+    "day": 23,
     "date": "11 Agustus 2026",
-    "desc": "Staf kelurahan turut memberikan semangat dan fasilitas terbaik demi kesuksesan agenda warga.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_23_5.jpg"
+    "image": "/images/galeri/kkn_day_23_5.jpg",
+    "title": "Pengecatan Ornamen Api Merah Putih",
+    "desc": "Mahasiswa KKN dan pemuda mengecat motif kobaran api merah putih pada tugu kemerdekaan kelurahan.",
+    "category": "Lingkungan"
   },
   {
     "id": 132,
-    "title": "Kesiapan Mengikuti Lomba Senam",
+    "day": 23,
     "date": "11 Agustus 2026",
-    "desc": "Optimisme tim senam kelurahan untuk menampilkan yang terbaik pada puncak perayaan kemerdekaan.",
-    "category": "Sosial & Budaya",
-    "url": "/images/galeri/kkn_day_23_6.jpg"
+    "image": "/images/galeri/kkn_day_23_6.jpg",
+    "title": "Finishing Monumen Gapura Kemerdekaan",
+    "desc": "Hasil karya gotong royong tugu HUT RI berdiri megah di gerbang masuk kantor kelurahan.",
+    "category": "Lingkungan"
   },
   {
     "id": 133,
-    "title": "Fitting Gaun Megah Daur Ulang SDN 008",
+    "day": 24,
     "date": "12 Agustus 2026",
-    "desc": "Mahasiswi KKN memperagakan karya gaun karnaval bersayap yang terbuat dari bahan kardus dan foil bekas.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_24_1.jpg"
+    "image": "/images/galeri/kkn_day_24_1.jpg",
+    "title": "Fitting Gaun Daur Ulang SDN 008",
+    "desc": "Mahasiswi KKN memperagakan karya gaun karnaval bersayap dari kardus dan foil bekas SDN 008.",
+    "category": "Kreativitas"
   },
   {
     "id": 134,
-    "title": "Detail Mahkota & Sayap Bunga Daur Ulang",
+    "day": 24,
     "date": "12 Agustus 2026",
-    "desc": "Kerajinan tangan detail kelopak bunga daur ulang yang dirangkai teliti menjadi mahkota dan sayap artistik.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_24_2.jpg"
+    "image": "/images/galeri/kkn_day_24_2.jpg",
+    "title": "Mahkota & Sayap Daur Ulang Megah",
+    "desc": "Detail gaun karnaval kreatif berbahan ramah lingkungan buatan siswa SDN 008 dan tim KKN.",
+    "category": "Kreativitas"
   },
   {
     "id": 135,
-    "title": "Proses Pembuatan Kostum Daur Ulang",
+    "day": 24,
     "date": "12 Agustus 2026",
-    "desc": "Mahasiswa KKN bersama siswa merangkai lembaran koran, kardus bekas, dan bungkus kopi menjadi pakaian megah.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_24_3.jpg"
+    "image": "/images/galeri/kkn_day_24_3.jpg",
+    "title": "Pose Ceria Kostum Karnaval di Posko",
+    "desc": "Uji coba fitting kostum daur ulang di ruang tamu posko sebelum pawai kemerdekaan.",
+    "category": "Kreativitas"
   },
   {
     "id": 136,
-    "title": "Pemasangan Selempang SDN 008",
+    "day": 24,
     "date": "12 Agustus 2026",
-    "desc": "Menempelkan aksen identitas sekolah SDN 008 pada bagian depan busana karnaval ramah lingkungan.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_24_4.jpg"
+    "image": "/images/galeri/kkn_day_24_4.jpg",
+    "title": "Karya Busana Ramah Lingkungan",
+    "desc": "Kreativitas memanfaatkan kardus dan kertas foil bekas menjadi gaun festival yang bernilai seni tinggi.",
+    "category": "Kreativitas"
   },
   {
     "id": 137,
-    "title": "Edukasi Mengubah Sampah Menjadi Karya Seni",
+    "day": 24,
     "date": "12 Agustus 2026",
-    "desc": "Mengajarkan nilai edukasi bahwa barang bekas dapat diubah menjadi karya seni bernilai estetika tinggi.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_24_5.jpg"
+    "image": "/images/galeri/kkn_day_24_5.jpg",
+    "title": "Pengajian Kaum Ibu Berbusana Putih",
+    "desc": "Pengajian akbar dan wirid rutin kaum ibu berbusana mukena putih di dalam masjid Tanjung Gading.",
+    "category": "Keagamaan"
   },
   {
     "id": 138,
-    "title": "Dokumentasi Tim Kreator Busana Karnaval",
+    "day": 24,
     "date": "12 Agustus 2026",
-    "desc": "Dokumentasi rasa syukur atas selesainya rancangan kostum yang siap dipakai pada parade kemerdekaan.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_24_6.jpg"
+    "image": "/images/galeri/kkn_day_24_6.jpg",
+    "title": "Doa Bersama Jemaah Ibu-Ibu Masjid",
+    "desc": "Suasana khusyuk jemaah pengajian wanita berdoa bersama di atas karpet hijau masjid.",
+    "category": "Keagamaan"
   },
   {
     "id": 139,
-    "title": "Mengambil Spanduk Resmi KKN di Percetakan",
+    "day": 25,
     "date": "13 Agustus 2026",
-    "desc": "Mahasiswa mengambil gulungan banner resmi KKN UIN Suska yang baru selesai dicetak di percetakan.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_25_1.jpg"
+    "image": "/images/galeri/kkn_day_25_1.jpg",
+    "title": "Pawai Karnaval Budaya Kemerdekaan RI",
+    "desc": "Kemeriahan pawai karnaval budaya menyusuri jalan raya protokol menyambut HUT RI.",
+    "category": "Kebudayaan"
   },
   {
     "id": 140,
-    "title": "Pengecekan Kualitas Cetak & Banner",
+    "day": 25,
     "date": "13 Agustus 2026",
-    "desc": "Memastikan hasil cetak warna dan teks nama program kerja tercetak jelas dan tajam.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_25_2.jpg"
+    "image": "/images/galeri/kkn_day_25_2.jpg",
+    "title": "Foto Bersama Bu Lurah di Pawai Karnaval",
+    "desc": "Mahasiswa KKN berfoto bersama Ibu Lurah dan rombongan pawai berhias kembang manggar warna-warni.",
+    "category": "Kebudayaan"
   },
   {
     "id": 141,
-    "title": "Persiapan Perlengkapan Acara Puncak",
+    "day": 25,
     "date": "13 Agustus 2026",
-    "desc": "Inventarisasi perlengkapan hadiah lomba, tenda, sound system, dan dekorasi panggung penutupan.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_25_3.jpg"
+    "image": "/images/galeri/kkn_day_25_3.jpg",
+    "title": "Keceriaan Rombongan Pawai Jalanan",
+    "desc": "Warga dan pelajar antusias mengenakan pakaian adat, seragam kerja, dan atribut unik.",
+    "category": "Kebudayaan"
   },
   {
     "id": 142,
-    "title": "Koordinasi Rundown Bersama Pemuda Desa",
+    "day": 25,
     "date": "13 Agustus 2026",
-    "desc": "Rapat pematangan rundown acara perayaan kemerdekaan dan malam keakraban perpisahan.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_25_4.jpg"
+    "image": "/images/galeri/kkn_day_25_4.jpg",
+    "title": "Parade Gaun Daur Ulang SDN 008",
+    "desc": "Siswi-siswi SDN 008 tampil memukau dengan gaun botol plastik, gaun koran, dan gaun kresek merah putih.",
+    "category": "Kreativitas"
   },
   {
     "id": 143,
-    "title": "Distribusi Undangan Tokoh Masyarakat",
+    "day": 25,
     "date": "13 Agustus 2026",
-    "desc": "Menyiapkan surat undangan resmi untuk Ibu Lurah, kepala lingkungan, dan warga Tanjung Gading.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_25_5.jpg"
+    "image": "/images/galeri/kkn_day_25_5.jpg",
+    "title": "Pameran Busana Daur Ulang di Sekolah",
+    "desc": "Penampilan kreasi busana ramah lingkungan karya siswa-siswi SDN 008 di halaman sekolah.",
+    "category": "Kreativitas"
   },
   {
     "id": 144,
-    "title": "Kesiapan Menjelang Hari Puncak KKN",
+    "day": 25,
     "date": "13 Agustus 2026",
-    "desc": "Antusiasme seluruh anggota menyelesaikan tahapan akhir pengabdian dengan hasil terbaik.",
-    "category": "Sosialisasi",
-    "url": "/images/galeri/kkn_day_25_6.jpg"
+    "image": "/images/galeri/kkn_day_25_6.jpg",
+    "title": "Potret Bangga Siswi Bergaun Daur Ulang",
+    "desc": "Foto bersama adik-adik SDN 008 peraga gaun daur ulang kreatif yang memukau penonton.",
+    "category": "Kreativitas"
   },
   {
     "id": 145,
-    "title": "Parade Kostum Daur Ulang SDN 008",
+    "day": 26,
     "date": "14 Agustus 2026",
-    "desc": "Foto bersama para guru berbusana pink ceria dan siswa-siswi yang mengenakan aneka gaun megah daur ulang.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_26_1.jpg"
+    "image": "/images/galeri/kkn_day_26_1.jpg",
+    "title": "Pramuka SDN 008 Ikut Pawai HUT RI",
+    "desc": "Barisan kontingen Pramuka dan siswa SDN 008 Tanjung Gading bersiap memulai pawai HUT RI.",
+    "category": "Kebudayaan"
   },
   {
     "id": 146,
-    "title": "Kreasi Gaun Rok Botol Mineral Bekas",
+    "day": 26,
     "date": "14 Agustus 2026",
-    "desc": "Siswa memperagakan gaun menakjubkan dengan rok bertingkat dari ratusan botol mineral bekas.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_26_2.jpg"
+    "image": "/images/galeri/kkn_day_26_2.jpg",
+    "title": "Spanduk Dirgahayu RI Kontingen SD 008",
+    "desc": "Murid-murid membentangkan spanduk Dirgahayu RI diiringi kembang manggar merah putih.",
+    "category": "Kebudayaan"
   },
   {
     "id": 147,
-    "title": "Gaun Mekar Koran Bekas & Plastik Kresek",
+    "day": 26,
     "date": "14 Agustus 2026",
-    "desc": "Kreativitas tingkat tinggi merangkai koran bekas menjadi gaun mekar anggun layaknya gaun pesta.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_26_3.jpg"
+    "image": "/images/galeri/kkn_day_26_3.jpg",
+    "title": "Aksi Teatrikal Pawai Tikus Kantor",
+    "desc": "Kontingen siswa membawakan tema teatrikal antikorupsi berbusana jas hitam dan toga hakim.",
+    "category": "Kebudayaan"
   },
   {
     "id": 148,
-    "title": "Apresiasi Dewan Guru & Wali Murid",
+    "day": 26,
     "date": "14 Agustus 2026",
-    "desc": "Para guru SDN 008 memberikan apresiasi setinggi-tingginya atas bimbingan inovatif mahasiswa KKN.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_26_4.jpg"
+    "image": "/images/galeri/kkn_day_26_4.jpg",
+    "title": "Foto Bersama Kontingen Tikus Kantor",
+    "desc": "Tim KKN berfoto bersama kontingen teatrikal siswa berselempang anti korupsi dan replika koper uang.",
+    "category": "Kebudayaan"
   },
   {
     "id": 149,
-    "title": "Penyerahan Selempang Juara Busana Kreatif",
+    "day": 26,
     "date": "14 Agustus 2026",
-    "desc": "Momen pengumuman dan penyerahan penghargaan untuk karya busana daur ulang paling unik dan kreatif.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_26_5.jpg"
+    "image": "/images/galeri/kkn_day_26_5.jpg",
+    "title": "Pose Heboh Teatrikal Anti-Korupsi",
+    "desc": "Pose seru siswa memegang poster 'Serendah-rendahnya mata kaki lebih rendah KORUPSI!' di jalan raya.",
+    "category": "Kebudayaan"
   },
   {
     "id": 150,
-    "title": "Foto Bersama Juara & Tim KKN UIN Suska",
+    "day": 26,
     "date": "14 Agustus 2026",
-    "desc": "Dokumentasi penuh kebanggaan dan haru mengabadikan momen puncak kreativitas anak bangsa di SDN 008.",
-    "category": "Edukasi",
-    "url": "/images/galeri/kkn_day_26_6.jpg"
+    "image": "/images/galeri/kkn_day_26_6.jpg",
+    "title": "Edukasi Hukum di Pawai Kemerdekaan",
+    "desc": "Penampilan kreatif siswa dan tim KKN mengkampanyekan integritas hukum pada pawai kemerdekaan.",
+    "category": "Kebudayaan"
   }
 ]
